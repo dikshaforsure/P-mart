@@ -2,6 +2,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import PuppyProfilePage from './PuppyProfilePage';
+import { contentService } from '../services/contentService';
 import { allPuppies, availablePuppies, goneHomePuppies } from '../data/puppyData';
 
 function renderProfile(slug) {
@@ -128,6 +129,19 @@ describe('PuppyProfilePage', () => {
     expect(await screen.findByRole('heading', { level: 1, name: displayName(puppy) })).toBeInTheDocument();
     expect(screen.getByText('Imported for you')).toBeInTheDocument();
     expect(screen.getByText('Coming home from abroad')).toBeInTheDocument();
+  });
+
+  it('selects the local journey for an available puppy whose origin is local', async () => {
+    const puppy = { ...availablePuppies[0], origin: { ...availablePuppies[0].origin, slug: 'local', name: 'Dubai' } };
+    vi.spyOn(contentService, 'getPuppyBySlug').mockResolvedValue(puppy);
+    vi.spyOn(contentService, 'getAdjacentAvailablePuppies').mockResolvedValue({ previous: null, next: null });
+
+    renderProfile(puppy.slug);
+
+    expect(await screen.findByRole('heading', { level: 1, name: displayName(puppy) })).toBeInTheDocument();
+    expect(screen.getByText('Meet them in Dubai')).toBeInTheDocument();
+    expect(screen.getByText('Come and meet')).toBeInTheDocument();
+    expect(screen.getByText(displayName(puppy) + '’s way home')).toBeInTheDocument();
   });
 
   it('cleans up profile ribbon listeners and a pending animation frame', async () => {
