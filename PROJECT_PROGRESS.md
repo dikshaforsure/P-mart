@@ -157,3 +157,35 @@ A documentation branch `docs/phase-0-analysis` was created from main. Main was n
 ## 10. Phase 0 completion record
 
 Phase 0 is complete only when the five docs are committed and fetched/verified. No app source, dependencies, database, application tests or deployment have been created/run in this phase.
+
+
+## Phase 1 — Frontend foundation and homepage (24 November 2026)
+
+**Status:** Source implementation prepared; runtime/build verification blocked by npm registry DNS from the current execution environment.
+
+### Implemented in `frontend/`
+- Vite + React JavaScript application configured with React Router DOM and Tailwind CSS v4's Vite plugin.
+- Shared app layout, responsive header/mobile menu and footer.
+- Routes established for all planned public pages and `/puppies/:slug`; all non-home routes remain deliberate placeholders.
+- Homepage split into independent sections: hero, moving breed strip, puppy preview, two ways to meet, journey steps, WhatsApp-style enquiry illustration, trust highlights, family preview, FAQ preview and final CTA.
+- Local fixture data accessed through `contentService.js`; components do not import the fixture module directly.
+- Reference-host media paths recorded in `frontend/ASSET_SOURCES.md` and `src/data/referenceAssets.js`. Media is currently hotlinked from the reference host; usage rights and local/CDN transfer remain to be confirmed.
+- Frontend README and local `.gitignore` / `.env.example` added.
+
+### Source checks executed
+- Node.js version: v22.16.0; npm: 10.9.2.
+- `node --check` passed for the plain JavaScript configuration/data/service/helper/hook files.
+- TypeScript's parser (`transpileModule`, JSX emit) parsed all 25 JavaScript/JSX files with zero syntax errors. This was used only as a syntax parser; it is not an application dependency and no TypeScript source was added.
+- Custom static check confirmed all relative source imports resolve.
+- Custom static check confirmed no .ts/.tsx files.
+- CSS opening/closing brace counts matched (326 each).
+
+### Blocked verification
+- `npm create vite@latest . -- --template react --no-interactive` timed out before creating files; the scaffold was then written explicitly.
+- `npm install --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000` failed with `EAI_AGAIN` resolving `registry.npmjs.org`.
+- No `node_modules` or package lockfile was created.
+- Consequently, `npm run dev`, `npm run build`, browser/viewport checks and browser-console verification were **not run**.
+- GitHub commit/push status for Phase 1 must be recorded after the changes are committed and fetched back.
+
+### Scope boundary
+No puppy catalogue, profile detail implementation, other public page content, backend, API, database, enquiry persistence or admin panel was developed in this phase.
