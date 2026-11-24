@@ -25,7 +25,7 @@ describe('PuppyProfilePage', () => {
 
     expect(await screen.findByRole('heading', { level: 1, name: displayName(puppy) })).toBeInTheDocument();
     expect(screen.getByText('Available', { exact: true })).toBeInTheDocument();
-    expect(screen.getByText(puppy.breed, { exact: true })).toBeInTheDocument();
+    expect(screen.getAllByText(puppy.breed, { exact: true })).toHaveLength(2);
     expect(await screen.findByText('1 / ' + (puppy.media.length || 1))).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Ask about ' + displayName(puppy) })).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Browse other available puppies' })).toBeInTheDocument();
