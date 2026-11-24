@@ -24,3 +24,10 @@ The current homepage uses images whose media paths were exposed by the supplied 
 ## Contact-link verification note
 
 The visible reference phone is `+971 50 000 0000`. The supplied page's WhatsApp anchor was inspected separately and resolved to a prefilled `wa.me` URL for `919898124987` with unrelated “Insta Biz Web” text. That appears to be a template/provider destination rather than a TeddyPups contact, so it is not copied into this app. Current WhatsApp links are generated from the phone number visibly printed on the site (`971500000000`); confirm that displayed number is the intended live WhatsApp destination before production use. The email address is obscured in the accessible page extract and is therefore not linked in the footer.
+
+
+## Phase 2 puppy profile media
+
+The catalogue and profile components read cover/gallery records from `src/data/puppies.json`. URLs remain direct remote references to the `puppy.instabizweb.com/media/...` host. Image and video items are selected by `kind`; videos use their poster object where present. Metadata such as dimensions, alt, caption, duration and focal points is kept in the dataset and used by the UI.
+
+No binary files were downloaded or added to the repository. Direct network verification of each media URL could not complete in this environment, so do not treat media reachability as confirmed. The currently crawlable `teddypups.ae` profile pages show matching gallery counts but are a separate hostname from the requested media source. Confirm asset rights and actual media responses before deployment.

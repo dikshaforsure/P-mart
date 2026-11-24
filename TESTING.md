@@ -163,3 +163,56 @@ This is not a passing application build. Re-run dependency installation, dev ser
 Additional Phase 1 command outcomes:
 - `npm run dev -- --host 0.0.0.0` — BLOCKED, exit 127: `sh: 1: vite: not found` (dependencies were not installed).
 - `npm run build` — BLOCKED, exit 127: `sh: 1: vite: not found` (dependencies were not installed).
+
+
+## 15. Phase 2 execution record — puppy catalogue and profiles (24 November 2026)
+
+### Dataset and reference checks
+| Check | Result | Evidence / caveat |
+|---|---|---|
+| Parse all six JSON files | PASS | All six JSON sources parsed from the current `develop` branch |
+| Puppy records/statuses | PASS | 42 total; 15 available; 27 sold |
+| Puppy slug uniqueness | PASS | 42 unique slugs; no duplicates |
+| Available profile route coverage | PASS | All 15 available slugs match exact `/puppies/<slug>` keys in `pages.json` |
+| Supporting dataset counts | PASS | 8 breeds, 9 FAQs, 64 `families.json` entries, 64 `home-families.json` entries |
+| Available media metadata | PASS | 51 image records and 6 video records across 15 available puppies |
+| Current listing/profile comparison | PASS WITH HOST CAVEAT | The accessible `teddypups.ae` host lists 15; all 15 corresponding profile paths were opened. Display name, breed, gender, age and gallery item count matched the JSON snapshot for the accessible crawl |
+| Exact supplied host comparison | BLOCKED | `puppy.instabizweb.com` catalogue/profile paths could not be fetched directly in this run. Do not claim that the alternate hostname is identical |
+| Origin/location reconciliation | UNRESOLVED | `puppies.json` marks all 15 available origins as imported; the alternate live host labels all 15 In Dubai. No JSON origin correction was made because the requested host could not be verified |
+| Direct media binary loading | NOT VERIFIED | No successful per-URL image/video network test was completed; external DNS/network resolution failed in this environment |
+
+### Profile routes inspected on accessible alternate hostname
+These are 15/15 exact slugs opened on `teddypups.ae`, not on the specified `puppy.instabizweb.com` hostname:
+1. `maltipoo-max-male`
+2. `korean-teacup-maltipoo-female`
+3. `korean-teacup-poodle-female`
+4. `maltipoo-cavapoo-male`
+5. `toy-poodle-male-female`
+6. `maltipoo-female-2`
+7. `pomeranian-female`
+8. `copper-male`
+9. `shitzu-female`
+10. `shitzu-male`
+11. `maltipoo-female-1`
+12. `maltipoo-female`
+13. `korean-teacup-pomeranian-1`
+14. `korean-teacup-pomeranian`
+15. `korean-teacup-pomeranian-male`
+
+The accessible alternate-host profile media counts were 2, 11, 4, 3, 3, 7, 3, 4, 2, 2, 4, 4, 2, 2 and 4 respectively, matching the JSON gallery lengths. This validates the data-to-page slug and gallery-size relationship for that alternate crawl, not the requested host's current availability or asset response status.
+
+### Runtime and UI checks
+| Check/command | Result | Evidence |
+|---|---|---|
+| Node version | PASS | v22.16.0 |
+| npm version | PASS | 10.9.2 |
+| `npm install --no-audit --no-fund --fetch-retries=0 --fetch-timeout=12000` | BLOCKED | `EAI_AGAIN` resolving `registry.npmjs.org` |
+| `npm run build` | BLOCKED | `vite: not found`; dependencies could not be installed |
+| `npm run dev` | NOT RUN | Vite unavailable |
+| Browser smoke tests for all routes | NOT RUN | No running dev server/browser session |
+| Gallery interactive navigation and native video playback | NOT RUN | No browser runtime; external media fetch not verified |
+| Desktop/tablet/mobile viewport review | NOT RUN | Requires a running browser |
+| Browser console and failed media request review | NOT RUN | No browser session |
+| Keyboard/assistive technology test | NOT RUN | Semantic list, labels, visible focus and native controls are in source; manual execution remains required |
+
+No production build, dev server or browser test is marked passed. The app needs an npm-network-enabled install/build and real-browser smoke test before acceptance/deployment.

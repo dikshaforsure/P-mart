@@ -82,3 +82,31 @@ The user asked to inspect the current repository, create a self-contained `front
 
 ### Scope boundary
 No backend, MongoDB, API, catalogue, individual profile, gone-home, happy-families, how-it-works, FAQ or contact-page implementation was started. These routes are placeholders only.
+
+
+## Session 3 — Phase 2 puppy catalogue and profiles
+
+**Date:** 24 November 2026  
+**Branch:** `develop`
+
+### User request summary
+Inspect existing source and all six JSON datasets; verify puppy availability, slugs and media; implement the actual catalogue and one reusable profile route; support mixed variable-length galleries and WhatsApp enquiry; preserve the Phase 1 homepage/design; update documentation; commit directly to `develop` without branching.
+
+### Changes delivered
+- Added `puppyData.js` as the JSON-backed puppy/breed mapping layer and extended the existing `contentService.js`.
+- Removed the duplicate 15-record JS puppy fixture. Homepage featured cards and the catalogue now use the JSON data source.
+- Implemented `/puppies` with loading, error, empty and failed-image states; added semantic list roles and keyboard-focusable profile links.
+- Implemented reusable `/puppies/:slug` profile lookup for current and historical records; unknown slugs render an in-app not-found state.
+- Added variable image/video gallery with native controls, poster, dimensions, caption, duration, focal-point metadata, thumbnail selection and failed-media fallback.
+- Added profile-specific WhatsApp actions and locally validating note form; no backend request or persistence is present.
+- Added responsive Phase 2 CSS scoped to the existing design tokens.
+
+### Source reconciliation
+- Parsed all six JSON files: 42 puppies (15 available, 27 sold), 8 breeds, 9 FAQs and 64 entries in each family snapshot.
+- All 15 available slugs match the profile route keys in `pages.json`; all 42 puppy slugs are unique.
+- Opened all 15 corresponding puppy profiles on the currently accessible `teddypups.ae` hostname. Display names, breeds, gender, age and gallery counts matched the JSON snapshot.
+- The user-specified `puppy.instabizweb.com` host was not directly accessible. The current alternate hostname labels all 15 as In Dubai, while the committed JSON labels all 15 Imported. No origin change was made; the discrepancy remains explicit.
+- No media binaries were downloaded. Direct media loading was not verified.
+
+### Verification
+npm install was blocked by `EAI_AGAIN` to the npm registry. `npm run build` was attempted and is blocked because Vite is not installed. No browser, responsive, playback or console tests were run. These are not recorded as passed.
