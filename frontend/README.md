@@ -62,7 +62,7 @@ Media URLs remain remote references to the source host. No image/video binaries 
 
 ## Verification and limitations
 
-Phase 2 does not add TypeScript, dependencies, backend/API/database code, catalogue filters, sorting or search controls. The npm registry could not be resolved in this environment, so dependencies were not installed and the Vite production build could not run. Media reachability and browser/mobile layout still need verification in a network-enabled browser. See the root `TESTING.md` and `PROJECT_PROGRESS.md` for the execution record.
+Phase 2 does not add TypeScript, runtime dependencies, backend/API/database code, catalogue filters, sorting or search controls. Test-only development dependencies (Vitest, jsdom and React Testing Library) are added for automated verification. The npm registry could not be resolved in this environment, so dependencies were not installed and the Vite production build could not run. Media reachability and browser/mobile layout still need verification in a network-enabled browser. See the root `TESTING.md` and `PROJECT_PROGRESS.md` for the execution record.
 
 
 ## Phase 2 automated tests
@@ -88,3 +88,6 @@ These tests exercise application logic and DOM behavior in jsdom. They do not re
 
 
 GitHub Actions runs this same suite on every push to `develop`, on pull requests targeting `develop`, and on manual workflow dispatch. Workflow definition: `.github/workflows/phase2-tests.yml`.
+
+
+Latest recorded CI result: GitHub Actions run [#1](https://github.com/dikshaforsure/P-mart/actions/runs/45453480755) passed all 10 test files and 41 tests on 24 November 2026. See the execution record in the root `TESTING.md`.
