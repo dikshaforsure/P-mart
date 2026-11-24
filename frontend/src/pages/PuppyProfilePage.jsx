@@ -8,8 +8,8 @@ import { getWhatsAppUrl } from '../utils/whatsapp';
 const careItems = [
   'Vaccinated',
   'Dewormed',
-  'Health certificate from licensed vets',
-  'Checked before joining your family',
+  'Verified health certificate from licensed vets',
+  'Thoroughly checked before joining your family',
 ];
 
 const localJourney = [
@@ -20,10 +20,10 @@ const localJourney = [
 ];
 
 const importedJourney = [
-  { number: '01', title: 'Tell us what you love', description: 'Message us about this puppy and our team will explain the reservation process.' },
-  { number: '02', title: 'Photos and health details', description: 'Review photos, videos and health documentation before the puppy travels.' },
-  { number: '03', title: 'Import and arrival', description: 'TeddyPups coordinates health checks, travel arrangements and the required documents.' },
-  { number: '04', title: 'Welcome home', description: 'We help you prepare for arrival and remain available after your puppy comes home.' },
+  { number: '01', title: 'Reserve your puppy', description: 'Tell us which puppy has captured your heart.' },
+  { number: '02', title: 'Personalized consultation', description: 'We finalize details with you and share updates on your puppy’s journey.' },
+  { number: '03', title: 'Import and arrival', description: 'We manage health checks, travel arrangements, and documentation.' },
+  { number: '04', title: 'Welcome home', description: 'We help your new puppy settle in and ensure a smooth transition into your home.' },
 ];
 
 export default function PuppyProfilePage() {
@@ -69,7 +69,7 @@ export default function PuppyProfilePage() {
   const gender = puppy.genderLabel || puppy.gender || 'Not specified';
   const location = puppy.origin?.name || (isAvailable ? 'Location to be confirmed' : 'Previously homed');
   const journey = isImported ? importedJourney : localJourney;
-  const whatsappMessage = `Hi TeddyPups! I'd love to know more about ${name} (${puppy.slug}) — ${puppy.breed || 'puppy'}, ${gender}, ${puppy.age || 'age to be confirmed'}. Please share current photos, videos and details.`;
+  const whatsappMessage = 'Hi TeddyPups! I\'d love to know more about ' + name + ' (' + puppy.slug + ') — ' + (puppy.breed || 'puppy') + ', ' + gender + ', ' + (puppy.age || 'age to be confirmed') + '. Please share current photos, videos and details.';
 
   return (
     <article className="puppy-profile-page">
@@ -84,13 +84,14 @@ export default function PuppyProfilePage() {
           <PuppyGallery puppy={puppy} />
           <div className="puppy-profile-copy">
             <p className="eyebrow">{isAvailable ? 'hello, it’s me' : 'a little story from teddy’s sketchbook'}</p>
-            <p className={`puppy-profile-status ${isAvailable ? 'is-available' : 'is-homed'}`}>
+            <p className={'puppy-profile-status ' + (isAvailable ? 'is-available' : 'is-homed')}>
               {isAvailable ? 'Available' : 'Gone home'}
             </p>
             <h1>{name}</h1>
             <p className="puppy-profile-breed">{puppy.breed}</p>
 
             <dl className="puppy-profile-facts">
+              <div><dt>Breed</dt><dd>{puppy.breed || 'To be confirmed'}</dd></div>
               <div><dt>Gender</dt><dd>{gender}</dd></div>
               <div><dt>Age</dt><dd>{puppy.age || 'To be confirmed'}</dd></div>
               <div><dt>Location</dt><dd>{location}</dd></div>
@@ -102,10 +103,10 @@ export default function PuppyProfilePage() {
             {isAvailable ? (
               <div className="puppy-profile-actions">
                 <a className="button button-dark" href={getWhatsAppUrl(whatsappMessage)} target="_blank" rel="noreferrer">
-                  Ask about {name} <span aria-hidden="true">↗</span>
+                  Ask about {name} on WhatsApp <span aria-hidden="true">↗</span>
                 </a>
-                <a className="button button-outline" href={getWhatsAppUrl(`Hi TeddyPups! I'd like to arrange a visit or consultation about ${name} (${puppy.slug}).`)} target="_blank" rel="noreferrer">
-                  Make an enquiry <span aria-hidden="true">↗</span>
+                <a className="button button-outline" href="#puppy-note">
+                  Send an enquiry <span aria-hidden="true">↓</span>
                 </a>
               </div>
             ) : (
@@ -119,8 +120,8 @@ export default function PuppyProfilePage() {
       <section className="puppy-care-section">
         <div className="page-shell puppy-care-layout">
           <div>
-            <p className="eyebrow">With every TeddyPups puppy</p>
-            <h2>What comes with {name}</h2>
+            <p className="eyebrow">What comes with {name}</p>
+            <h2>Every Teddy Pup comes</h2>
             <p>Every TeddyPups puppy is described as vaccinated, dewormed and checked before going home. Ask the team for this puppy’s individual health records.</p>
           </div>
           <ul>
@@ -132,7 +133,7 @@ export default function PuppyProfilePage() {
       <section className="puppy-journey-section page-shell">
         <div className="puppy-journey-heading">
           <p className="eyebrow">{isImported ? 'Imported for you' : 'Meet them in Dubai'}</p>
-          <h2>{name}’s way home</h2>
+          <h2>{isImported ? 'Coming home from abroad' : name + '’s way home'}</h2>
           <p>{isImported
             ? 'From your first message to arrival in Dubai, TeddyPups coordinates the import journey and keeps you informed.'
             : 'From your first visit to the first day at home, we’ll help you through each step.'}</p>
@@ -154,7 +155,7 @@ export default function PuppyProfilePage() {
         <nav className="puppy-adjacent-nav page-shell" aria-label="Browse other available puppies">
           <div>
             {adjacent.previous && (
-              <Link to={`/puppies/${adjacent.previous.slug}`}>
+              <Link to={'/puppies/' + adjacent.previous.slug}>
                 <span>← Previous little one</span>
                 <strong>{adjacent.previous.displayName || adjacent.previous.name || adjacent.previous.breed}</strong>
               </Link>
@@ -163,7 +164,7 @@ export default function PuppyProfilePage() {
           <Link className="button button-outline" to="/puppies">See every puppy <span aria-hidden="true">↗</span></Link>
           <div className="puppy-adjacent-next">
             {adjacent.next && (
-              <Link to={`/puppies/${adjacent.next.slug}`}>
+              <Link to={'/puppies/' + adjacent.next.slug}>
                 <span>Next little one →</span>
                 <strong>{adjacent.next.displayName || adjacent.next.name || adjacent.next.breed}</strong>
               </Link>

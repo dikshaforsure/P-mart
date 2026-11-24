@@ -34,6 +34,10 @@ describe('PuppyProfilePage', () => {
     expect(askLink.getAttribute('href')).toContain('wa.me/');
     expect(new URL(askLink.href).searchParams.get('text')).toContain(puppy.slug);
     expect(screen.getByText('Imported for you')).toBeInTheDocument();
+
+    const enquiryLink = screen.getByRole('link', { name: /Send an enquiry/ });
+    expect(enquiryLink).toHaveAttribute('href', '#puppy-note');
+    expect(document.getElementById('puppy-note')).toBeInTheDocument();
   });
 
   it('keeps sold puppies accessible as historical profiles without an enquiry form', async () => {

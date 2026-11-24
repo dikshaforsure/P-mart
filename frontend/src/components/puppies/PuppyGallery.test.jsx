@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import PuppyGallery from './PuppyGallery';
 
@@ -71,6 +71,21 @@ describe('PuppyGallery', () => {
     expect(thirdThumbnail).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByRole('img', { name: 'Luna photo three' })).toBeInTheDocument();
     expect(screen.getByText('3 / 3')).toBeInTheDocument();
+  });
+
+  it('opens the full-screen viewer and supports keyboard navigation', () => {
+    render(<PuppyGallery puppy={makePuppy()} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Open Luna, photo 1 of 3, full screen' }));
+
+    const dialog = screen.getByRole('dialog', { name: 'Luna photos and videos' });
+    expect(dialog).toHaveAttribute('open');
+    expect(within(dialog).getByRole('img', { name: 'Luna photo one' })).toHaveAttribute('src', '/luna-one.jpg');
+
+    fireEvent.keyDown(dialog, { key: 'ArrowRight' });
+    expect(within(dialog).getByRole('img', { name: 'Luna photo two' })).toHaveAttribute('src', '/luna-two.jpg');
+
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Close full-screen gallery' }));
+    expect(screen.queryByRole('dialog', { name: 'Luna photos and videos' })).not.toBeInTheDocument();
   });
 
   it('renders video controls, poster and duration in the gallery', () => {

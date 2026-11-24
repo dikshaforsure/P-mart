@@ -46,7 +46,7 @@ export default function PuppyNoteForm({ puppy }) {
   };
 
   return (
-    <section className="puppy-note-section" aria-labelledby="puppy-note-title">
+    <section id="puppy-note" className="puppy-note-section" aria-labelledby="puppy-note-title">
       <div>
         <p className="eyebrow">A little note</p>
         <h2 id="puppy-note-title">A note about {puppyName}</h2>

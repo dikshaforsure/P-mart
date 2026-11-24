@@ -1,12 +1,16 @@
 import { MemoryRouter } from 'react-router-dom';
-import { act, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { contentService } from '../services/contentService';
 import { availablePuppies } from '../data/puppyData';
 import PuppiesPage from './PuppiesPage';
 
-function renderPage() {
-  return render(<MemoryRouter><PuppiesPage /></MemoryRouter>);
+function renderPage(initialEntries = ['/']) {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <PuppiesPage />
+    </MemoryRouter>
+  );
 }
 
 afterEach(() => {
@@ -24,6 +28,30 @@ describe('PuppiesPage catalogue', () => {
     expect(profileLinks.map((link) => link.getAttribute('href'))).toEqual(
       availablePuppies.map((puppy) => '/puppies/' + puppy.slug)
     );
+  });
+
+  it('filters by breed and includes puppies tagged with multiple breeds', async () => {
+    renderPage(['/puppies']);
+    await screen.findByRole('list', { name: 'Available puppies' });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Filter by Poodle' }));
+    const list = screen.getByRole('list', { name: 'Available puppies' });
+    const links = within(list).getAllByRole('link');
+
+    expect(links.map((link) => link.getAttribute('href'))).toEqual([
+      '/puppies/korean-teacup-poodle-female',
+      '/puppies/toy-poodle-male-female',
+    ]);
+    expect(screen.getByText('2 puppies match your filters')).toBeInTheDocument();
+  });
+
+  it('filters the catalogue by the Korean Teacup collection from the URL', async () => {
+    renderPage(['/puppies?collection=korean-teacup']);
+    const list = await screen.findByRole('list', { name: 'Available puppies' });
+    const links = within(list).getAllByRole('link');
+
+    expect(links).toHaveLength(5);
+    expect(links.every((link) => link.getAttribute('href').includes('korean-teacup'))).toBe(true);
   });
 
   it('shows loading and then the empty-catalogue state', async () => {
