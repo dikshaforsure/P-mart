@@ -7,24 +7,6 @@ export const siteSettings = {
   whatsappNumber: '971500000000',
 };
 
-export const availablePuppies = [
-  { id: 'max', slug: 'maltipoo-max-male', name: 'Max', breed: 'Maltipoo', sex: 'boy', age: '3 months', hasVideo: true, status: 'Available' },
-  { id: 'korean-teacup-maltipoo', slug: 'korean-teacup-maltipoo-female', name: 'Korean Teacup Maltipoo', breed: 'Korean Teacup Maltipoo', sex: 'girl', age: '2 months', hasVideo: true, status: 'Available' },
-  { id: 'korean-teacup-poodle', slug: 'korean-teacup-poodle-female', name: 'Korean Teacup Poodle', breed: 'Korean Teacup Poodle', sex: 'girl', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'maltipoo-cavapoo', slug: 'maltipoo-cavapoo-male', name: 'Maltipoo & Cavapoo', breed: 'Maltipoo & Cavapoo', sex: 'boy', age: '3 months Maltipoo & 2 months Cavapoo', hasVideo: true, status: 'Available' },
-  { id: 'toy-poodle', slug: 'toy-poodle-male-female', name: 'Toy Poodle', breed: 'Toy Poodle', sex: 'boy & girl', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'maltipoo-girl-3m', slug: 'maltipoo-female-2', name: 'Maltipoo', breed: 'Maltipoo', sex: 'girl', age: '3 months', hasVideo: true, status: 'Available' },
-  { id: 'pomeranian-girl', slug: 'pomeranian-female-3-months', name: 'Pomeranian', breed: 'Pomeranian', sex: 'girl', age: '3 months', hasVideo: false, status: 'Available' },
-  { id: 'copper', slug: 'cavapoo-copper-male', name: 'Copper', breed: 'Cavapoo', sex: 'boy', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'shih-tzu-girl', slug: 'shih-tzu-female', name: 'Shih Tzu', breed: 'Shih Tzu', sex: 'girl', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'shih-tzu-boy', slug: 'shih-tzu-male', name: 'Shih Tzu', breed: 'Shih Tzu', sex: 'boy', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'maltipoo-girl-25', slug: 'maltipoo-female-2-5-months', name: 'Maltipoo', breed: 'Maltipoo', sex: 'girl', age: '2.5 months', hasVideo: false, status: 'Available' },
-  { id: 'maltipoo-girl-2', slug: 'maltipoo-female-2-months', name: 'Maltipoo', breed: 'Maltipoo', sex: 'girl', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'korean-pomeranian-1', slug: 'korean-teacup-pomeranian-female-1', name: 'Korean Teacup Pomeranian', breed: 'Korean Teacup Pomeranian', sex: 'girl', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'korean-pomeranian-2', slug: 'korean-teacup-pomeranian-female-2', name: 'Korean Teacup Pomeranian', breed: 'Korean Teacup Pomeranian', sex: 'girl', age: '2 months', hasVideo: false, status: 'Available' },
-  { id: 'korean-pomeranian-boy', slug: 'korean-teacup-pomeranian-male', name: 'Korean Teacup Pomeranian', breed: 'Korean Teacup Pomeranian', sex: 'boy', age: '2 months', hasVideo: false, status: 'Available' },
-];
-
 export const waysToMeet = [
   {
     id: 'dubai',
