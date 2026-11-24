@@ -28,8 +28,8 @@ jobs:
           node-version: 22
       - name: Install frontend dependencies
         run: npm install --no-audit --no-fund
-      - name: Run focused puppy profile tests
-        run: npx vitest run src/pages/PuppyProfilePage.test.jsx src/components/puppies/PuppyNoteForm.test.jsx src/components/puppies/PuppyGallery.test.jsx
+      - name: Run focused Phase 4 page and shell tests
+        run: npx vitest run src/pages/HowItWorksPage.test.jsx src/pages/FaqPage.test.jsx src/components/layout/SiteHeader.test.jsx src/components/layout/SiteFooter.test.jsx
       - name: Run complete frontend test suite
         run: npm run test
       - name: Build frontend for production

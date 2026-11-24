@@ -28,6 +28,22 @@ describe('application puppy routes', () => {
     })).toBeInTheDocument();
   });
 
+  it('connects /how-it-works to the complete journey page', async () => {
+    renderAt('/how-it-works');
+    expect(await screen.findByRole('heading', { level: 1, name: 'How it works' })).toBeInTheDocument();
+    expect(screen.getByRole('tablist', { name: 'Ways to bring your puppy home' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+  });
+
+  it('connects /faq to the searchable FAQ page', async () => {
+    renderAt('/faq');
+    expect(await screen.findByRole('heading', { level: 1, name: 'Questions & answers' })).toBeInTheDocument();
+    expect(screen.getByRole('searchbox', { name: 'sniff out a question' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+  });
+
   it('keeps the application not-found route for unmatched paths', async () => {
     renderAt('/this-route-does-not-exist');
     expect(await screen.findByRole('heading', { name: 'This page wandered off.' })).toBeInTheDocument();
