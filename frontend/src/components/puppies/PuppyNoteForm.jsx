@@ -23,8 +23,6 @@ export default function PuppyNoteForm({ puppy }) {
     if (fields.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.trim())) {
       nextErrors.email = 'Please enter a valid email address.';
     }
-    if (fields.message.length > 1200) nextErrors.message = 'Please keep your note under 1,200 characters.';
-
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) {
       setNotice('Please check the highlighted fields.');
@@ -56,29 +54,27 @@ export default function PuppyNoteForm({ puppy }) {
       </div>
       <form className="puppy-note-form" onSubmit={submit} noValidate>
         <div className="puppy-form-row">
-          <label htmlFor="puppy-enquiry-name">Your name <span aria-hidden="true">*</span></label>
-          <div>
+          <label htmlFor="puppy-enquiry-name">Your name <span aria-hidden="true">*</span>
             <input id="puppy-enquiry-name" name="name" autoComplete="name" value={fields.name} onChange={update} required aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'puppy-name-error' : undefined} />
             {errors.name && <small id="puppy-name-error" className="puppy-field-error">{errors.name}</small>}
-          </div>
-          <label htmlFor="puppy-enquiry-phone">Phone number <span aria-hidden="true">*</span></label>
-          <div>
+          </label>
+          <label htmlFor="puppy-enquiry-phone">Phone number <span aria-hidden="true">*</span>
             <input id="puppy-enquiry-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={update} required aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? 'puppy-phone-error' : undefined} />
             {errors.phone && <small id="puppy-phone-error" className="puppy-field-error">{errors.phone}</small>}
-          </div>
+          </label>
         </div>
         <div className="puppy-form-row">
-          <label htmlFor="puppy-enquiry-email">Email address</label>
-          <div>
+          <label htmlFor="puppy-enquiry-email">Email address
             <input id="puppy-enquiry-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={update} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'puppy-email-error' : undefined} />
             {errors.email && <small id="puppy-email-error" className="puppy-field-error">{errors.email}</small>}
-          </div>
-          <label htmlFor="puppy-enquiry-area">Your area</label>
-          <div><input id="puppy-enquiry-area" name="area" autoComplete="address-level2" value={fields.area} onChange={update} /></div>
+          </label>
+          <label htmlFor="puppy-enquiry-area">Your area
+            <input id="puppy-enquiry-area" name="area" autoComplete="address-level2" value={fields.area} onChange={update} />
+          </label>
         </div>
-        <label htmlFor="puppy-enquiry-message">Your note</label>
-        <textarea id="puppy-enquiry-message" name="message" rows="4" value={fields.message} onChange={update} maxLength="1200" aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? 'puppy-message-error' : undefined} />
-        {errors.message && <small id="puppy-message-error" className="puppy-field-error">{errors.message}</small>}
+        <label htmlFor="puppy-enquiry-message">Your note
+          <textarea id="puppy-enquiry-message" name="message" rows="4" value={fields.message} onChange={update} maxLength="1200" />
+        </label>
         <div className="puppy-note-submit">
           <button type="submit" className="button button-dark">Prepare WhatsApp note <span aria-hidden="true">↗</span></button>
           <span>Required fields are marked *</span>
