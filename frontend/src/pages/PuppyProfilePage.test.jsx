@@ -69,7 +69,7 @@ describe('PuppyProfilePage', () => {
     const puppy = allPuppies.find((record) => record.status === 'sold');
     renderProfile(puppy.slug);
     expect(await screen.findByRole('heading', { level: 1, name: displayName(puppy) })).toBeInTheDocument();
-    expect(screen.getByText('Gone home', { exact: true })).toBeInTheDocument();
+    expect(document.querySelector('.tp-profile-status')).toHaveTextContent('Gone home');
     expect(screen.getByText('the day they went home')).toBeInTheDocument();
     expect(screen.getByText(new RegExp('what comes with ' + displayName(puppy)))).toBeInTheDocument();
     expect(screen.getByText('dear TeddyPups…')).toBeInTheDocument();
