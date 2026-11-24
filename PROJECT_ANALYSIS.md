@@ -281,3 +281,13 @@ The alternate-host profiles exposed this common structure: gallery with media co
 
 ### Network/media caveat
 The JSON media host remains `puppy.instabizweb.com/media/...`. Direct media URL checks could not complete because external DNS resolution failed. The browser-visible galleries on the alternate host expose different media counts, but successful direct loading of every original JSON image/video URL was not verified.
+
+
+### Expanded accessible-host profile verification
+After the initial profile review, the remaining available puppy profile paths were opened on `teddypups.ae`, completing 15/15 profile path checks on that alternate hostname. The complete accessible-host gallery-count sequence in dataset order is:
+
+`2, 11, 4, 3, 3, 7, 3, 4, 2, 2, 4, 4, 2, 2, 4`
+
+This matches the media-array lengths in `puppies.json` for all 15 currently available slugs. The additional paths opened were `maltipoo-cavapoo-male`, `toy-poodle-male-female`, `maltipoo-female-2`, `pomeranian-female`, `shitzu-female`, `shitzu-male`, `maltipoo-female-1`, `maltipoo-female`, `korean-teacup-pomeranian-1`, `korean-teacup-pomeranian` and `korean-teacup-pomeranian-male`.
+
+All 15 of these accessible-host profile pages label the puppies as In Dubai. That does not resolve the original-host conflict: no profile on the specified `puppy.instabizweb.com` host was re-opened successfully in this phase, and the existing JSON continues to mark the 15 origins Imported. Keep this source/hostname distinction visible in future data corrections.
