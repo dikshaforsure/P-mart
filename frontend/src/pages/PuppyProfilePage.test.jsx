@@ -137,6 +137,7 @@ describe('PuppyProfilePage', () => {
     const cancelFrame = vi.fn();
     window.requestAnimationFrame = requestFrame;
     window.cancelAnimationFrame = cancelFrame;
+    vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: false })));
     const addSpy = vi.spyOn(window, 'addEventListener');
     const removeSpy = vi.spyOn(window, 'removeEventListener');
 
