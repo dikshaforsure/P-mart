@@ -1,8 +1,8 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 24 November 2026  
-**Current phase:** Phase 0 — Analysis and documentation  
-**Status:** Planning baseline prepared; implementation not started.
+**Current phase:** Phase 2 — Puppy catalogue and reusable profiles  
+**Status:** Phase 2 source is committed on `develop`; production build and browser verification remain blocked by unavailable network/dependencies.
 
 ## 1. Objectives
 
@@ -189,3 +189,30 @@ Phase 0 is complete only when the five docs are committed and fetched/verified. 
 
 ### Scope boundary
 No puppy catalogue, profile detail implementation, other public page content, backend, API, database, enquiry persistence or admin panel was developed in this phase.
+
+
+## Phase 2 — Puppy catalogue and reusable profiles (24 November 2026)
+
+**Branch:** `develop`  
+**Scope:** `/puppies` and `/puppies/:slug` only. The Phase 1 homepage, shared layout and navigation remain in place.
+
+### Implemented
+- `/puppies` now renders the records filtered from `puppies.json` where `status === "available"` and `published !== false`. The current snapshot contains 15 available and 27 sold records.
+- Every card uses that record's cover URL and metadata, displays name, breed, gender, age and its current data-source location, and links using the exact stored slug.
+- `/puppies/:slug` uses one reusable page and exact-slug lookup for all 42 records. Available profiles show enquiry actions and previous/next available navigation. Historical sold profiles remain addressable and show a gone-home state; unknown slugs get a profile-specific not-found state.
+- Galleries read variable `media[]` arrays. Images render as images; videos render as controlled native video with their own poster, dimensions, duration, focal point and error fallback. Thumbnails, previous/next controls, captions and active-media count are included.
+- Existing `contentService.js` now exposes available records, slug lookup, adjacent available puppies and breeds through `puppyData.js`. The duplicate Phase 1 JavaScript puppy list was removed; the homepage teaser now uses the same JSON puppy records.
+- Profile-specific WhatsApp messages reuse the existing helper. The note form validates locally and opens WhatsApp with the note; no backend persistence or successful enquiry submission is claimed.
+- Added scoped responsive styling and keyboard/semantic catalogue list treatment without replacing Phase 1 design tokens.
+
+### Data reconciliation
+- All six existing JSON datasets were preserved. Puppy history remains 42 records, including the 27 sold entries.
+- All 15 available record slugs match the 15 available puppy route keys in `pages.json`. No slug was generated or renamed.
+- The committed snapshot marks all 15 available puppies as `origin.slug: "imported"`. A current crawl on a different TeddyPups hostname (`teddypups.ae`) lists the same 15 as “In Dubai”, while the supplied `puppy.instabizweb.com` host could not be inspected directly in this session. This conflict is recorded and no origin values were changed: the requested host remains the authority and its current origin labels need reconfirmation.
+- Puppy media URLs remain external and no binaries were added.
+
+### Verification limits
+- JSON counts, uniqueness and available-slug coverage were checked from the remote source.
+- npm installation failed with `EAI_AGAIN` resolving `registry.npmjs.org`; `npm run build` consequently fails because Vite is not installed. No production build or dev server success is claimed.
+- Exact-host catalogue/profile checks, direct media load tests, browser route tests, responsive viewport checks and browser-console checks remain incomplete. The alternative host crawl is recorded separately in `PROJECT_ANALYSIS.md` and `TESTING.md`.
+- Backend, authentication, database, the full FAQ/family/contact/How It Works pages and catalogue filtering/search/sort were not started.
