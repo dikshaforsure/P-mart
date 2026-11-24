@@ -135,3 +135,26 @@ Verify HTTPS frontend/API, direct route refresh, production CORS, MongoDB connec
 ## 13. Evidence rule
 
 For every executed test record exact command/manual steps, tested commit, environment (Node/browser/database), expected and actual result, pass/fail/skip counts and remaining issues. Do not label proposed tests as passed.
+
+
+## 14. Phase 1 execution record — frontend foundation
+
+**Date:** 24 November 2026
+
+| Command/check | Result | Evidence / limitation |
+|---|---|---|
+| `node -v` | PASS | v22.16.0 |
+| `npm -v` | PASS | 10.9.2 |
+| `node --check` on Vite config, data, service, helper and hook JS files | PASS | All selected plain JS files parsed |
+| TypeScript compiler parser via `transpileModule` over all `.js`/`.jsx` source files | PASS | 25 files parsed; 0 syntax diagnostics. Parser only; not included in app dependencies |
+| Custom relative-import resolution scan | PASS | All relative imports resolve to local files |
+| Custom TypeScript-file scan | PASS | No .ts or .tsx files found |
+| CSS brace balance | PASS | 326 opening and 326 closing braces |
+| `npm create vite@latest . -- --template react --no-interactive` | BLOCKED | Command timed out before creating files; scaffold then written explicitly |
+| `npm install --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000` | BLOCKED | npm returned EAI_AGAIN while resolving registry.npmjs.org |
+| `npm run dev` | NOT RUN | Dependencies unavailable |
+| `npm run build` | NOT RUN | Dependencies unavailable |
+| Browser visual/mobile checks | NOT RUN | No development server or browser automation available |
+| Browser console checks | NOT RUN | No running app |
+
+This is not a passing application build. Re-run dependency installation, dev server and production build locally once npm registry access is available. Manual visual checks remain required at 360, 390, 768, 1024 and 1440px.
