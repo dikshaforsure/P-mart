@@ -88,7 +88,6 @@ export default function PuppyProfilePage() {
               {isAvailable ? 'Available' : 'Gone home'}
             </p>
             <h1>{name}</h1>
-            <p className="puppy-profile-breed">{puppy.breed}</p>
 
             <dl className="puppy-profile-facts">
               <div><dt>Breed</dt><dd>{puppy.breed || 'To be confirmed'}</dd></div>
