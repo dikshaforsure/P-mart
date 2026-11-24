@@ -30,6 +30,8 @@ describe('PuppyProfilePage', () => {
     renderProfile(puppy.slug);
     expect(await screen.findByRole('heading', { level: 1, name: displayName(puppy) })).toBeInTheDocument();
     expect(screen.getByText('Available', { exact: true })).toBeInTheDocument();
+    expect(screen.getAllByText(puppy.breed, { exact: true })).toHaveLength(2);
+    expect(await screen.findByText('1 / ' + (puppy.media.length || 1))).toBeInTheDocument();
     expect(screen.getByText('hello, it’s me')).toBeInTheDocument();
     expect(screen.getByText(new RegExp('what comes with ' + displayName(puppy)))).toBeInTheDocument();
     expect(screen.getByText('the way home')).toBeInTheDocument();
@@ -42,12 +44,21 @@ describe('PuppyProfilePage', () => {
     expect(screen.getByText('Imported for you')).toBeInTheDocument();
 
     const board = document.querySelector('.tp-profile-info-board');
+    const carePanel = document.querySelector('.tp-profile-paper');
+    expect(board).toContainElement(screen.getByRole('heading', { level: 1, name: displayName(puppy) }));
+    expect(document.querySelector('.tp-profile-copy')).toContainElement(carePanel);
     expect(board.querySelector('.tp-profile-tag-ring')).toBeInTheDocument();
     expect(board.querySelector('.pup-buddy svg')).toHaveAccessibleName(/Teddy, the TeddyPups puppy/);
     expect(document.querySelector('#puppy-note .tp-profile-letter-stamp')).toHaveAttribute('aria-hidden', 'true');
     const askLink = screen.getByRole('link', { name: new RegExp('Ask about ' + displayName(puppy)) });
+    expect(askLink.getAttribute('href')).toContain('wa.me/');
     expect(new URL(askLink.href).searchParams.get('text')).toContain(puppy.slug);
     expect(screen.getByRole('link', { name: /Send an enquiry/ })).toHaveAttribute('href', '#puppy-note');
+    expect(document.getElementById('puppy-note')).toBeInTheDocument();
+    const availableNav = screen.getByRole('navigation', { name: 'Browse other available puppies' });
+    const cards = adjacentCards(availableNav);
+    expect(cards).toHaveLength(2);
+    expect(cards.every((card) => card.querySelector('img') || card.querySelector('.tp-profile-adjacent-image'))).toBe(true);
   });
 
   it('preserves available previous/next catalogue ordering and wrap-around', async () => {
@@ -144,5 +155,6 @@ describe('PuppyProfilePage', () => {
   it('shows the existing not-found state for an unknown slug', async () => {
     renderProfile('this-puppy-does-not-exist');
     expect(await screen.findByRole('heading', { level: 1, name: 'We couldn’t find this TeddyPup.' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /See available puppies/ })).toHaveAttribute('href', '/puppies');
   });
 });
