@@ -237,11 +237,11 @@ Vitest 5 requires Node.js 22.12 or newer. The existing application runtime engin
 | `src/data/puppyData.test.js` | Complete dataset counts, slug uniqueness, available/published filtering, available and sold slug lookup, unknown/case-mismatched slugs, adjacent navigation wrapping, card mapping, safe limits and sparse-record fallbacks |
 | `src/services/contentService.test.js` | Available records, featured-card limits, exact and sold slug lookup, adjacent records and breed data |
 | `src/components/puppies/PuppyCard.test.jsx` | Image metadata/focal point, puppy facts, exact profile URL, missing cover and image-error fallback |
-| `src/components/puppies/PuppyGallery.test.jsx` | Empty/cover fallback, next/previous wrapping, thumbnail selection, video controls/poster/duration, missing URLs and image/video error states |
+| `src/components/puppies/PuppyGallery.test.jsx` | Empty/cover fallback, next/previous wrapping, thumbnail selection, video controls/poster/duration, full-screen viewer and keyboard navigation, missing URLs and image/video error states |
 | `src/components/puppies/PuppyNoteForm.test.jsx` | Required fields, phone/email validation, puppy-specific WhatsApp message, optional details, popup blocked state and opener isolation |
 | `src/components/home/FeaturedPuppies.test.jsx` | Homepage featured card/profile route, source photo, video indicator, catalogue CTA and image-error fallback |
-| `src/pages/PuppiesPage.test.jsx` | Catalogue population and correct links, loading state, empty state and rejected service state |
-| `src/pages/PuppyProfilePage.test.jsx` | Available profile facts/gallery/actions, imported journey, historical sold profile, local journey copy and unknown-slug not-found state |
+| `src/pages/PuppiesPage.test.jsx` | Catalogue population and correct links, breed and Korean Teacup collection filtering, loading state, empty state and rejected service state |
+| `src/pages/PuppyProfilePage.test.jsx` | Available profile facts/gallery/actions, enquiry-form anchor, imported journey, historical sold profile, local journey copy and unknown-slug not-found state |
 | `src/app/App.test.jsx` | Actual BrowserRouter wiring for catalogue, parameterized profile and application not-found route |
 | `src/utils/whatsapp.test.js` | Configured WhatsApp number, message encoding and default enquiry message |
 
@@ -255,6 +255,7 @@ The tests use the repository JSON records for representative available and sold 
 | Test source and configuration | ADDED | 10 test files, Vitest configuration and shared setup |
 | Assistant container `npm run test` | BLOCKED — NOT EXECUTED | Dependency installation in this container was blocked by `EAI_AGAIN` resolving `registry.npmjs.org`; no local pass count is claimed |
 | GitHub Actions `npm run test` | **PASS — 10 files, 41 tests** | Run #1 on commit `a797ca038ae4bcea1573e3364aa620d34bcaa3ea`; Node v22.23.5, npm 10.9.9, Vitest 5.1.1; all 10 test files and 41 assertions passed |
+| GitHub Actions comparison regression suite | **PASS — 10 files, 44 tests** | Run #2 on commit `5c4870e8667376dcfce9634e77b2a28f8d02053f`; all 44 tests passed, 0 failed |
 | Developer local execution | PENDING | From `frontend/`, run `npm install` then `npm run test` to verify the same suite in the local IDE |
 | Production build and browser checks | SEPARATE | The CI job runs automated jsdom tests only; it does not validate the production build, remote image/video availability, real native video playback or responsive layouts |
 
@@ -264,5 +265,7 @@ A test is considered passed only after the runner executes it successfully. The 
 ## 17. GitHub Actions execution for Phase 2
 
 The workflow `.github/workflows/phase2-tests.yml` runs on pushes to `develop`, pull requests targeting `develop`, and manual dispatch. It installs the frontend dependencies with Node.js 22 and runs `npm run test` from `frontend/`. This provides a network-enabled CI runner in addition to the developer's local test command.
+
+**Latest comparison regression execution: PASS.** GitHub Actions run [#2](https://github.com/dikshaforsure/P-mart/actions/runs/45454988634) completed successfully on `develop` at commit `5c4870e8667376dcfce9634e77b2a28f8d02053f`. It passed all **10 test files and 44 tests**, with **0 failures**. The earlier 41-test run remains recorded as historical evidence.
 
 **Execution result: PASS.** GitHub Actions run [#1](https://github.com/dikshaforsure/P-mart/actions/runs/45453480755) completed successfully for commit `a797ca038ae4bcea1573e3364aa620d34bcaa3ea` on `develop`. Dependency installation completed, then `npm run test` executed with **10 test files passed and 41 tests passed; 0 failed**. Runtime: Node v22.23.5, npm 10.9.9, Vitest 5.1.1.

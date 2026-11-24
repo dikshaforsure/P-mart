@@ -79,9 +79,9 @@ npm run test
 The automated suite covers:
 - JSON-backed puppy filtering, unique/exact slugs, historical records, adjacent navigation and card mapping.
 - The puppy content-service methods and homepage featured-puppy links.
-- Catalogue loading, populated, empty and failed states.
+- Catalogue loading, populated, empty and failed states, plus URL-backed origin, breed, gender and collection filters.
 - Reusable profile rendering for available, sold, local-origin and unknown-slug records, plus real application route wiring.
-- Gallery image/video rendering, thumbnail selection, previous/next wrapping, captions/metadata and failed/missing-media fallbacks.
+- Gallery image/video rendering, thumbnail selection, previous/next wrapping, full-screen photo/video viewing with keyboard navigation, captions/metadata and failed/missing-media fallbacks.
 - Enquiry form required fields, phone/email validation, prefilled puppy-specific WhatsApp URL, popup handling and safe opener behaviour.
 
 These tests exercise application logic and DOM behavior in jsdom. They do not replace the production build, real-browser responsive checks, external media reachability, native video playback, or manual WhatsApp handoff verification.
@@ -90,4 +90,4 @@ These tests exercise application logic and DOM behavior in jsdom. They do not re
 GitHub Actions runs this same suite on every push to `develop`, on pull requests targeting `develop`, and on manual workflow dispatch. Workflow definition: `.github/workflows/phase2-tests.yml`.
 
 
-Latest recorded CI result: GitHub Actions run [#1](https://github.com/dikshaforsure/P-mart/actions/runs/45453480755) passed all 10 test files and 41 tests on 24 November 2026. See the execution record in the root `TESTING.md`.
+Latest recorded CI result: GitHub Actions run [#2](https://github.com/dikshaforsure/P-mart/actions/runs/45454988634) passed all 10 test files and 44 tests on 24 November 2026. See the execution record in the root `TESTING.md`.
