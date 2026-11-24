@@ -46,11 +46,10 @@ export default function PuppyNoteForm({ puppy }) {
   };
 
   return (
-    <section id="puppy-note" className="puppy-note-section" aria-labelledby="puppy-note-title">
-      <div>
-        <p className="eyebrow">A little note</p>
-        <h2 id="puppy-note-title">A note about {puppyName}</h2>
-        <p>Leave your details and we’ll prepare a WhatsApp message about this puppy. Nothing is sent until you send the message in WhatsApp.</p>
+    <section id="puppy-note" className="puppy-note-section tp-profile-letter" aria-labelledby="puppy-note-title">
+      <div className="tp-profile-letter-copy">
+        <h2 id="puppy-note-title">Ask about {puppyName}</h2>
+        <p>Leave your details and we’ll prepare a personal WhatsApp message about this puppy. Nothing is sent until you send the message in WhatsApp.</p>
       </div>
       <form className="puppy-note-form" onSubmit={submit} noValidate>
         <div className="puppy-form-row">

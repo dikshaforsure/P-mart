@@ -14,6 +14,12 @@ function fillRequiredFields() {
 }
 
 describe('PuppyNoteForm', () => {
+  it('labels the form as a puppy-specific enquiry', () => {
+    render(<PuppyNoteForm puppy={puppy} />);
+    expect(screen.getByRole('heading', { level: 2, name: 'Ask about Luna' })).toBeInTheDocument();
+    expect(screen.getByText(/Nothing is sent until you send the message in WhatsApp/)).toBeInTheDocument();
+  });
+
   it('validates required name and phone fields without opening WhatsApp', () => {
     const openSpy = vi.spyOn(window, 'open').mockReturnValue(null);
     render(<PuppyNoteForm puppy={puppy} />);

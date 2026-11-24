@@ -617,3 +617,553 @@ img, video { display: block; max-width: 100%; }
  .puppy-filter-clear{margin-left:0}
 }
 @media(prefers-reduced-motion:reduce){.tp-buddy-doodle svg{animation:none}.tp-sketch__frame,.tp-sketch__photo img,.tp-sticker-chip{transition:none}}
+
+
+/* Phase 3 — storybook-style puppy profile presentation.
+   These selectors are intentionally scoped to profile routes; catalogue styles remain untouched. */
+.tp-profile-storybook {
+  --tp-cocoa: #2a170e;
+  --tp-toffee: #a24a1a;
+  --tp-paper: #fff8ea;
+  --tp-honey: #fbe3b4;
+  position: relative;
+  isolation: isolate;
+  color: var(--tp-cocoa);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(42,23,14,.075) 1px, transparent 1.6px) 0 0 / 26px 26px,
+    linear-gradient(180deg, #fff5e4 0%, #fffaf0 48%, #f7eddb 100%);
+}
+.tp-profile-ribbon {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: clamp(10px, calc((100vw - 1240px) / 2 - 22px), 48px);
+  width: 11px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #8e3f15, #c2622b 55%, #a24a1a);
+  opacity: .88;
+}
+.tp-profile-ribbon span {
+  position: sticky;
+  top: 12vh;
+  display: block;
+  width: 11px;
+  height: 28vh;
+  background: linear-gradient(180deg, #f2be6b, #c2622b);
+  clip-path: polygon(0 0,100% 0,100% 100%,50% calc(100% - 12px),0 100%);
+}
+.tp-profile-shell { position: relative; z-index: 1; padding-block: 30px 86px; }
+.tp-profile-breadcrumbs {
+  margin-bottom: 32px;
+  color: #806c5b;
+  font: 650 13px/1.5 var(--sans);
+}
+.tp-profile-breadcrumbs a {
+  color: #8a4d26;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.tp-profile-chapter {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0;
+  color: #9a5934;
+  font: italic 18px/1.2 var(--serif);
+}
+.tp-profile-chapter-number {
+  display: grid;
+  width: 36px;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 2.5px solid currentColor;
+  border-radius: 52% 46% 50% 48%;
+  color: #9a5934;
+  font: 700 17px/1 var(--serif);
+  rotate: -6deg;
+}
+.tp-profile-main {
+  grid-template-columns: minmax(0,1.08fr) minmax(300px,.92fr);
+  align-items: center;
+  gap: clamp(34px,5.5vw,76px);
+  margin-top: 25px;
+}
+.tp-profile-storybook .puppy-gallery-stage {
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  border: 3px solid var(--tp-cocoa);
+  border-radius: 19px;
+  background: #f2d9ad;
+  box-shadow:
+    6px 6px 0 -2px var(--tp-paper), 6px 6px 0 1px var(--tp-cocoa),
+    13px 13px 0 -2px var(--tp-paper), 13px 13px 0 1px var(--tp-cocoa);
+}
+.tp-profile-storybook .puppy-gallery-stage > img,
+.tp-profile-storybook .puppy-gallery-stage > video {
+  background: #f2d9ad;
+  object-fit: cover;
+}
+.tp-profile-storybook .puppy-gallery-count {
+  top: 14px;
+  right: 14px;
+  padding: 7px 12px;
+  border: 2px solid var(--tp-cocoa);
+  border-radius: 999px;
+  background: #fffdf8;
+  color: var(--tp-cocoa);
+  font: 700 12px/1 var(--sans);
+  letter-spacing: .02em;
+}
+.tp-profile-storybook .puppy-gallery-arrow {
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--tp-cocoa);
+  background: rgba(255,253,248,.96);
+  color: var(--tp-cocoa);
+  box-shadow: 2px 3px rgba(42,23,14,.18);
+  font-size: 26px;
+}
+.tp-profile-storybook .puppy-gallery-arrow:hover { background: #fbe3b4; }
+.tp-profile-storybook .puppy-gallery-thumbnail {
+  aspect-ratio: 4 / 5;
+  border: 3px solid rgba(42,23,14,.38);
+  border-radius: 14px;
+  background: #f2d9ad;
+  box-shadow: 2px 3px rgba(42,23,14,.1);
+  transition: border-color .2s ease, rotate .25s ease, translate .25s ease;
+}
+.tp-profile-storybook .puppy-gallery-thumbnail:nth-child(2n) { rotate: 2deg; }
+.tp-profile-storybook .puppy-gallery-thumbnail:nth-child(2n + 1) { rotate: -1.5deg; }
+.tp-profile-storybook .puppy-gallery-thumbnail.is-active {
+  border: 3px solid var(--tp-cocoa);
+  box-shadow: 3px 4px rgba(42,23,14,.2);
+  translate: 0 -4px;
+  rotate: -3deg;
+}
+.tp-profile-storybook .puppy-gallery-thumbnail:hover { border-color: var(--tp-toffee); translate: 0 -2px; }
+.tp-profile-storybook .puppy-gallery-expand {
+  border: 2px solid var(--tp-cocoa);
+  background: #fffdf8;
+  color: var(--tp-cocoa);
+}
+.tp-profile-storybook .puppy-gallery-lightbox { z-index: 130; }
+.tp-profile-copy {
+  position: relative;
+  top: auto;
+  padding: clamp(8px,2vw,22px) 0 8px;
+}
+.tp-profile-handwritten {
+  margin: 0 0 14px;
+  color: #9a5934;
+  font: italic clamp(18px,2.1vw,24px)/1.3 var(--serif);
+}
+.tp-profile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 16px;
+  padding: 8px 14px;
+  border: 2px solid var(--tp-cocoa);
+  border-radius: 999px;
+  background: #fffdf8;
+  color: var(--tp-cocoa);
+  box-shadow: 2px 3px rgba(42,23,14,.16);
+  font: 700 12px/1 var(--sans);
+  letter-spacing: .02em;
+  text-transform: none;
+}
+.tp-profile-status.is-available { background: #e9eddf; color: #3d5738; }
+.tp-profile-status.is-homed { background: #f1e4d6; color: #806c5b; }
+.tp-profile-status-mark { font-size: 15px; }
+.tp-profile-copy h1 {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding-bottom: .12em;
+  color: var(--tp-cocoa);
+  font: 400 clamp(45px,5.3vw,76px)/.98 var(--serif);
+  letter-spacing: -.05em;
+}
+.tp-profile-copy h1::after {
+  position: absolute;
+  right: 1%;
+  bottom: 0;
+  left: 0;
+  height: 7px;
+  border-radius: 50%;
+  background: #c77c43;
+  content: "";
+  opacity: .72;
+  rotate: -1deg;
+}
+.tp-profile-breed {
+  margin: 13px 0 25px;
+  color: #806c5b;
+  font: italic 18px/1.3 var(--serif);
+}
+.tp-profile-facts {
+  border-top: 2px solid rgba(42,23,14,.35);
+}
+.tp-profile-facts > div {
+  padding: 15px 12px 15px 0;
+  border-bottom: 1px dashed rgba(42,23,14,.25);
+}
+.tp-profile-facts dt {
+  margin-bottom: 5px;
+  color: #9a5934;
+  font: italic 14px/1.2 var(--serif);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.tp-profile-facts dd {
+  color: var(--tp-cocoa);
+  font: 600 18px/1.3 var(--sans);
+}
+.tp-profile-actions { flex-direction: column; align-items: stretch; gap: 11px; margin-top: 28px; }
+.tp-profile-actions .button {
+  width: 100%;
+  min-height: 54px;
+  border: 2px solid var(--tp-cocoa);
+  border-radius: 999px;
+  letter-spacing: 0;
+}
+.tp-profile-actions .button-dark { background: var(--tp-cocoa); box-shadow: 3px 4px rgba(42,23,14,.15); }
+.tp-profile-actions .button-dark:hover { background: #56331f; }
+.tp-profile-actions .button-outline { background: #fffdf8; }
+.tp-profile-homed-note { color: #806c5b; font: italic 17px/1.65 var(--serif); }
+.tp-profile-or-send { color: #806c5b; font: italic 15px/1.5 var(--serif); }
+
+/* A printed paper panel for the puppy-care promise. */
+.tp-profile-care { padding-block: 42px 84px; background: transparent; }
+.tp-profile-paper {
+  position: relative;
+  padding: clamp(25px,4vw,48px);
+  border: 3px solid var(--tp-cocoa);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 0 0, transparent 0 17px, rgba(194,98,43,.08) 17px 18.5px, transparent 18.5px) 0 0/36px 36px,
+    radial-gradient(circle at 18px 18px, transparent 0 17px, rgba(194,98,43,.06) 17px 18.5px, transparent 18.5px) 0 0/36px 36px,
+    #fff8ea;
+  box-shadow: 7px 9px rgba(42,23,14,.14);
+  rotate: -.5deg;
+}
+.tp-profile-paper::before {
+  position: absolute;
+  top: -13px;
+  left: 12%;
+  width: 92px;
+  height: 25px;
+  background: rgba(242,190,107,.75);
+  content: "";
+  rotate: -4deg;
+  box-shadow: 0 1px 3px rgba(42,23,14,.12);
+}
+.tp-profile-paper-content {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  align-items: center;
+  gap: clamp(25px,5vw,65px);
+  margin-top: 24px;
+}
+.tp-profile-paper-content h2 {
+  margin: 0;
+  color: var(--tp-cocoa);
+  font: 400 clamp(30px,4vw,47px)/1.02 var(--serif);
+}
+.tp-profile-paper-content p {
+  max-width: 420px;
+  margin: 15px 0 0;
+  color: #806c5b;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.tp-profile-paper-content ul {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 16px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tp-profile-paper-content li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--tp-cocoa);
+  font: 600 16px/1.45 var(--sans);
+}
+.tp-profile-paper-content li span { flex: 0 0 auto; color: var(--tp-toffee); font-weight: 800; }
+.tp-profile-paper-note {
+  position: absolute;
+  right: 25px;
+  bottom: 12px;
+  color: #9a5934;
+  font: italic 13px var(--serif);
+  rotate: -3deg;
+}
+
+/* Dotted journey trail, horizontal on desktop and vertical on narrow screens. */
+.tp-profile-journey { padding-block: 34px 86px; }
+.tp-profile-journey-heading { max-width: 680px; margin: 20px 0 36px; }
+.tp-profile-journey-heading h2 {
+  margin: 0;
+  color: var(--tp-cocoa);
+  font: 400 clamp(36px,4.5vw,58px)/1 var(--serif);
+  letter-spacing: -.035em;
+}
+.tp-profile-journey-heading > p {
+  max-width: 530px;
+  margin: 15px 0 0;
+  color: #806c5b;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.tp-profile-trail {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: clamp(16px,2.5vw,34px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+}
+.tp-profile-trail .puppy-journey-step {
+  position: relative;
+  min-width: 0;
+  padding: 76px 8px 8px 0;
+}
+.tp-profile-trail .puppy-journey-step + .puppy-journey-step { padding-left: 8px; border: 0; }
+.tp-profile-trail .puppy-journey-step:not(:last-child)::after {
+  position: absolute;
+  top: 24px;
+  right: calc(-1 * clamp(16px,2.5vw,34px));
+  left: 68px;
+  border-top: 3px dotted rgba(162,74,26,.45);
+  content: "";
+}
+.tp-profile-trail-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 3px solid var(--tp-cocoa);
+  border-radius: 50%;
+  background: #fffdf8;
+  color: var(--tp-cocoa);
+  font: 700 21px/1 var(--serif);
+}
+.tp-profile-trail .puppy-journey-step h3 {
+  margin: 0 0 9px;
+  color: var(--tp-cocoa);
+  font: 700 19px/1.2 var(--sans);
+}
+.tp-profile-trail .puppy-journey-step p {
+  max-width: 250px;
+  margin: 0;
+  color: #806c5b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Letter-style note form. The existing validated WhatsApp handoff is retained. */
+.tp-profile-letter-wrap {
+  position: relative;
+  padding-block: 24px 76px;
+}
+.tp-profile-letter-wrap > .tp-profile-chapter { margin-bottom: 20px; }
+.tp-profile-letter-stamp {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: clamp(8px,4vw,46px);
+  display: grid;
+  width: 68px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 3px dashed #a24a1a;
+  border-radius: 9px;
+  background: #fbe3b4;
+  color: #a24a1a;
+  rotate: 7deg;
+}
+.tp-profile-letter-stamp svg { width: 42px; height: 42px; fill: currentColor; }
+.tp-profile-letter {
+  position: relative;
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: clamp(22px,5vw,64px);
+  padding: clamp(25px,4vw,48px);
+  border: 3px solid var(--tp-cocoa);
+  border-radius: 24px;
+  background:
+    linear-gradient(90deg, transparent 0 31px, rgba(194,98,43,.23) 31px 34px, transparent 34px),
+    repeating-linear-gradient(180deg, transparent 0 34px, rgba(42,23,14,.055) 34px 35px),
+    #fffdf8;
+  box-shadow: 8px 10px rgba(42,23,14,.15);
+}
+.tp-profile-letter-copy h2 {
+  margin: 0;
+  color: var(--tp-cocoa);
+  font: 400 clamp(32px,4vw,48px)/1 var(--serif);
+  letter-spacing: -.035em;
+}
+.tp-profile-letter-copy p {
+  max-width: 370px;
+  margin: 16px 0 0;
+  color: #806c5b;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.tp-profile-letter .puppy-note-form { gap: 17px; }
+.tp-profile-letter .puppy-note-form label {
+  color: var(--tp-cocoa);
+  font: 700 12px/1.4 var(--sans);
+}
+.tp-profile-letter .puppy-note-form input,
+.tp-profile-letter .puppy-note-form textarea {
+  min-height: 48px;
+  border: 2px solid rgba(42,23,14,.55);
+  border-radius: 13px;
+  background: #fff8ea;
+  color: var(--tp-cocoa);
+  font: 400 14px/1.5 var(--sans);
+}
+.tp-profile-letter .puppy-note-form input:focus,
+.tp-profile-letter .puppy-note-form textarea:focus {
+  outline: 3px solid rgba(242,190,107,.65);
+  outline-offset: 2px;
+  border-color: var(--tp-cocoa);
+}
+.tp-profile-letter .puppy-note-submit { gap: 14px; }
+.tp-profile-letter .puppy-note-submit .button {
+  min-height: 50px;
+  border: 2px solid var(--tp-cocoa);
+  border-radius: 999px;
+  background: var(--tp-cocoa);
+}
+.tp-profile-letter .puppy-note-submit .button:hover { background: #56331f; }
+
+/* Illustrated previous/next puppy previews. */
+.tp-profile-neighbours {
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  align-items: stretch;
+  gap: 15px;
+  padding-block: 27px 78px;
+  border-top: 2px dashed rgba(42,23,14,.28);
+}
+.tp-profile-adjacent-card {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border: 3px solid var(--tp-cocoa);
+  border-radius: 22px;
+  background: #fff8ea;
+  box-shadow: 3px 4px rgba(42,23,14,.12);
+  transition: rotate .25s ease, translate .25s ease, box-shadow .25s ease;
+}
+.tp-profile-adjacent-card--previous { rotate: -1deg; }
+.tp-profile-adjacent-card--next { flex-direction: row-reverse; text-align: right; rotate: 1deg; }
+.tp-profile-adjacent-card:hover {
+  translate: 0 -3px;
+  rotate: 0deg;
+  box-shadow: 5px 7px rgba(42,23,14,.17);
+}
+.tp-profile-adjacent-image {
+  display: grid;
+  width: 72px;
+  height: 82px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  place-items: center;
+  border: 2px solid var(--tp-cocoa);
+  border-radius: 48% 48% 12px 12px;
+  background: #f2d9ad;
+  color: #a24a1a;
+  font: 28px var(--serif);
+}
+.tp-profile-adjacent-image img { width: 100%; height: 100%; object-fit: cover; }
+.tp-profile-adjacent-copy { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 6px; }
+.tp-profile-adjacent-label { color: #9a5934; font: italic 14px var(--serif); }
+.tp-profile-adjacent-copy strong {
+  overflow-wrap: anywhere;
+  color: var(--tp-cocoa);
+  font: 400 clamp(17px,2vw,23px)/1.1 var(--serif);
+}
+.tp-profile-adjacent-arrow { color: #9a5934; font-size: 20px; }
+.tp-profile-all-puppies {
+  align-self: center;
+  border: 2px solid var(--tp-cocoa);
+  border-radius: 999px;
+  background: #fffdf8;
+  white-space: nowrap;
+}
+.tp-profile-adjacent-empty { min-height: 1px; }
+
+@media (max-width: 900px) {
+  .tp-profile-main { grid-template-columns: minmax(0,1fr) minmax(270px,.9fr); gap: 30px; }
+  .tp-profile-paper-content { grid-template-columns: 1fr; gap: 22px; }
+  .tp-profile-paper-content ul { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .tp-profile-trail { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 26px; }
+  .tp-profile-trail .puppy-journey-step:nth-child(2)::after { display: none; }
+  .tp-profile-neighbours { grid-template-columns: 1fr 1fr; }
+  .tp-profile-all-puppies { grid-column: 1/-1; grid-row: 1; justify-self: center; }
+}
+@media (max-width: 720px) {
+  .tp-profile-ribbon { display: none; }
+  .tp-profile-shell { padding-block: 22px 62px; }
+  .tp-profile-breadcrumbs { margin-bottom: 24px; font-size: 12px; }
+  .tp-profile-main { grid-template-columns: 1fr; gap: 34px; }
+  .tp-profile-copy { padding-top: 5px; }
+  .tp-profile-copy h1 { font-size: clamp(43px,11vw,62px); }
+  .tp-profile-care { padding-block: 22px 58px; }
+  .tp-profile-paper { rotate: 0deg; }
+  .tp-profile-paper-content ul { grid-template-columns: 1fr; gap: 12px; }
+  .tp-profile-paper-note { right: 15px; bottom: 9px; font-size: 11px; }
+  .tp-profile-journey { padding-block: 16px 58px; }
+  .tp-profile-trail { grid-template-columns: 1fr; gap: 12px; }
+  .tp-profile-trail .puppy-journey-step,
+  .tp-profile-trail .puppy-journey-step + .puppy-journey-step {
+    min-height: 78px;
+    padding: 7px 0 18px 70px;
+  }
+  .tp-profile-trail .puppy-journey-step:not(:last-child)::after {
+    top: 54px;
+    bottom: -8px;
+    left: 24px;
+    right: auto;
+    height: auto;
+    border-top: 0;
+    border-left: 3px dotted rgba(162,74,26,.45);
+  }
+  .tp-profile-trail-number { width: 48px; height: 48px; }
+  .tp-profile-letter-wrap { padding-block: 14px 54px; }
+  .tp-profile-letter-stamp { top: 4px; right: 14px; width: 54px; }
+  .tp-profile-letter-stamp svg { width: 33px; height: 33px; }
+  .tp-profile-letter {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 27px 20px;
+  }
+  .tp-profile-letter-copy { padding-right: 30px; }
+  .tp-profile-neighbours { grid-template-columns: 1fr 1fr; gap: 9px; padding-block: 20px 58px; }
+  .tp-profile-adjacent-card { gap: 9px; padding: 8px; border-radius: 16px; }
+  .tp-profile-adjacent-image { width: 52px; height: 63px; }
+  .tp-profile-adjacent-copy strong { font-size: 15px; }
+  .tp-profile-adjacent-label { font-size: 12px; }
+  .tp-profile-adjacent-arrow { display: none; }
+  .tp-profile-all-puppies { grid-column: 1/-1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tp-profile-ribbon span,
+  .tp-profile-adjacent-card,
+  .tp-profile-storybook .puppy-gallery-thumbnail { transition: none; }
+}
