@@ -1,0 +1,84 @@
+# AI-Assisted Development Log
+
+This log records AI-assisted work with factual limits. Add actual prompts, tools/models (only when known), changed files and verifiable outcomes after each phase. Do not fabricate model identity, tool usage, commits or test results.
+
+## Session 1 — Phase 0 research and documentation
+
+**Date:** 24 November 2026  
+**Phase:** 0 — Analysis and planning  
+**Assistant:** ChatGPT. A precise model/version identifier was not captured in the available execution metadata, so none is asserted.
+
+### Tools actually used
+- GitHub connector: repository metadata, tree, README, commit history/details and documentation branch creation.
+- Web browser: opened the supplied reference routes and representative puppy profiles.
+- No local terminal, IDE, package manager, database, browser automation or application runtime was used.
+
+### User prompt (faithful summary, not verbatim)
+
+The user requested Phase 0 only: analyse the supplied TeddyPups site and repository, document page/listing/profile differences, interactions, animations, responsive gaps, propose MERN architecture and API/data models, create five Markdown documents, commit/push them, preserve existing content/history, install no dependencies and write no app code, then stop for review.
+
+### Verified observations
+- Repository `dikshaforsure/P-mart`: default branch `main`; tracked tree initially contained only README.md; README had two duplicate `# P-mart` headings; two visible commits both titled `first commit`.
+- Connected `dikshaforsure` account reported admin/maintain/push permissions.
+- Created branch `docs/phase-0-analysis` from `main`.
+- Inspected homepage, `/puppies`, `/gone-home`, `/happy-families`, `/how-it-works`, `/faq`, `/contact`, plus representative Max, Korean Teacup Maltipoo and Korean Teacup Poodle profiles.
+- Supplied-host snapshot: 15 available, 27 gone-home, FAQ count 9, family gallery label “64 moments and counting”.
+- Separate `teddypups.ae` domain has conflicting indexed values and was excluded.
+
+### Documentation outputs
+- PROJECT_ANALYSIS.md
+- TECHNICAL_DOCUMENTATION.md
+- PROJECT_PROGRESS.md
+- TESTING.md
+- AI_PROMPT_LOG.md
+
+### Implementation/test state
+No application code, components, services, API routes, models, dependencies, lockfiles, tests or deployments were created or run in this session.
+
+**GitHub write status:** Documentation branch created. Record commit SHA and successful post-write file verification only after the documentation commit exists and is checked.
+
+### Future log accuracy rules
+- Label prompt summaries as summaries unless exact prompt text is recorded.
+- Record a specific model only when execution metadata or user-provided evidence shows it.
+- List only tools/actions actually used and files actually changed.
+- Keep tests NOT RUN until executed with evidence.
+- Distinguish proposals from implemented behaviour.
+
+
+## Session 2 — Phase 1 frontend foundation and homepage
+
+**Date:** 24 November 2026  
+**Phase:** 1 — Frontend setup, shared layout, routes and homepage  
+**Assistant:** ChatGPT. A precise model/version identifier was not captured in the available execution metadata, so none is asserted.
+
+### User prompt (faithful summary, not verbatim)
+The user asked to inspect the current repository, create a self-contained `frontend/` folder with Vite, React, JavaScript/JSX, Tailwind CSS and React Router DOM, establish all public routes and shared layout, implement the homepage section-by-section, keep data access behind service functions for later Express integration, organise animation logic, test responsive behaviour/build and update project docs without starting catalogue/profile/other-page/backend implementation.
+
+### Tools and actions actually used
+- GitHub connector to re-inspect the Phase 0 branch, tracked tree, README and existing documentation.
+- Web browser to revisit the live homepage and inspect the supplied-host linked images and selected puppy-profile image links.
+- Local container filesystem to write frontend source files and documentation.
+- Node.js syntax checks and globally available TypeScript compiler parser for JavaScript/JSX syntax validation.
+- npm install was attempted but failed because the environment could not resolve registry.npmjs.org.
+
+### Files and work added
+- Created a self-contained Vite React app under `frontend/`.
+- Added router, shared header/mobile nav/footer/layout, route placeholders and not-found page.
+- Added homepage sections as separate components.
+- Added local content fixtures, a service adapter boundary, WhatsApp URL helper and scroll-reveal hook.
+- Added source-host reference media mapping and asset source register; these are external URLs, not downloaded local binaries.
+- Added frontend README, `.gitignore` and `.env.example`.
+- Added the Phase 1 progress and test evidence sections to existing root documentation.
+
+### Verification
+- Node v22.16.0 and npm 10.9.2 observed.
+- Plain JS `node --check`: passed.
+- 25 JS/JSX files parsed with 0 syntax diagnostics via the TypeScript compiler parser (used only for source validation; no TypeScript files/dependency added).
+- Relative import scan: passed.
+- No TypeScript source files: confirmed.
+- CSS brace balance: passed.
+- npm install: failed with EAI_AGAIN on registry.npmjs.org.
+- Vite development server, production build, browser interactions and responsive viewport checks: NOT RUN.
+
+### Scope boundary
+No backend, MongoDB, API, catalogue, individual profile, gone-home, happy-families, how-it-works, FAQ or contact-page implementation was started. These routes are placeholders only.
