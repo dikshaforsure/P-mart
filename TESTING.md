@@ -158,3 +158,8 @@ For every executed test record exact command/manual steps, tested commit, enviro
 | Browser console checks | NOT RUN | No running app |
 
 This is not a passing application build. Re-run dependency installation, dev server and production build locally once npm registry access is available. Manual visual checks remain required at 360, 390, 768, 1024 and 1440px.
+
+
+Additional Phase 1 command outcomes:
+- `npm run dev -- --host 0.0.0.0` — BLOCKED, exit 127: `sh: 1: vite: not found` (dependencies were not installed).
+- `npm run build` — BLOCKED, exit 127: `sh: 1: vite: not found` (dependencies were not installed).
