@@ -317,3 +317,27 @@ These were corrected in implementation commit [`02be169`](https://github.com/dik
 The data lookup, available/sold handling, exact slugs, origin-based journey choice, adjacency service, gallery/lightbox, form validation and WhatsApp destination/message construction were preserved. The reference's API-backed envelope submission/animation was not copied: this project still explicitly prepares a WhatsApp handoff and does not claim an enquiry was sent. Existing React sold-profile journey rendering was also retained rather than changing the current origin-driven page behavior to match the sold template's shorter content hierarchy.
 
 GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378), on the implementation commit, passed 3 focused files / 19 tests, the complete 10-file / 47-test suite and the production build. Real-browser comparison at desktop, tablet and mobile breakpoints, live image/video network checks and browser-console inspection remain unverified. The other placeholder routes, homepage and shared header/footer remain broader project work and were not included in this profile pass.
+
+
+## Phase 4 reference comparison — shared shell, How It Works and FAQ
+
+The destination baseline at `984652e8fde64cb715e063d556fbbebe96689dd0` was inspected against the reference shell templates, `how-it-works.html`, `faq.html`, `components.tsx`, `Template.tsx`, `types.ts`, `app.css` and `reference.css`.
+
+### Verified existing content and reuse
+- The destination FAQ JSON contains nine question/answer strings matching the reference FAQ's nine notes. The JSON remains the source of truth and is not duplicated in JSX.
+- The destination header already had React Router links, route-close behavior, Escape handling, focus return and a keyboard focus loop for its mobile menu. These behaviors were retained while updating its presentation and active route marker.
+- The destination content service/site content already had a three-step journey used on the homepage. The reference How It Works page has different local/imported sequences of four steps each, so the new route uses its own page content data and leaves the homepage content/service alone.
+- The reference footer provides the email, Dubai location, social destinations and WhatsApp links. The new footer uses the verified email/location/social references, but keeps the destination WhatsApp helper and its configured destination unchanged. No phone number was newly introduced into the UI.
+
+### New page behavior
+`/how-it-works` implements local/imported tabs with a selected-state thumb, separate four-step journeys, keyboard tab navigation, in-page section links, paper-style promise content, delivery/collection cards, why-choose-us details and links back to puppies/FAQ/WhatsApp.
+
+`/faq` parses each existing `faq.json` string at its first question mark, then searches both resulting question and answer fields. It displays live note counts, supports clear-to-reset, and provides independent semantic accordion buttons with explicit region IDs and ARIA relationships. The no-result state retains a WhatsApp path for follow-up.
+
+### Content accuracy decisions
+Some reference language describes health guarantees, ethical sourcing and reservation-only arrangements. Those claims were not elevated into new blanket business promises. Page copy was qualified, and existing FAQ content remains unchanged. Delivery wording points users to confirm the arrangements relevant to their destination with the team rather than presenting every reference statement as a verified policy.
+
+### Scope and verification
+The shared shell was updated, but the homepage was not redesigned. `/gone-home`, `/happy-families` and `/contact` remain untouched placeholders. The catalogue, puppy profile, gallery, note form, puppy data/services and WhatsApp helper remain unchanged.
+
+Implementation commit [`86ae5779`](https://github.com/dikshaforsure/P-mart/commit/86ae5779f79f51c14c09de950393d34c6660c7bc) was verified by GitHub Actions [run #15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254): 4 focused files / 15 tests, 14 full-suite files / 64 tests, and a successful Vite 8.3.8 production build. Real-browser desktop/tablet/mobile comparison, overflow inspection, console/network checks and manual social/WhatsApp handoff were not performed.

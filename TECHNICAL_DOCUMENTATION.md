@@ -346,3 +346,32 @@ The refinement makes the gallery thumbnails a horizontally scrollable strip, use
 `PuppyNoteForm.jsx` retains the field names, required-name/phone validation, phone/email checks, puppy-specific message construction, current WhatsApp URL helper, popup handling and explicit user-initiated handoff. No API, persistence or automatic-send behavior was introduced. The existing health-record disclaimer and shared care copy are unchanged.
 
 GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378) passed the three focused profile/form/gallery files (19 tests), the complete frontend suite (10 files, 47 tests) and `npm run build`. Browser-level responsive comparison, native media playback, external asset reachability and pixel-level parity remain unverified.
+
+
+## Phase 4 — Shared Shell, How It Works and FAQ
+
+**Implementation:** [`86ae5779f79f51c14c09de950393d34c6660c7bc`](https://github.com/dikshaforsure/P-mart/commit/86ae5779f79f51c14c09de950393d34c6660c7bc)
+
+### Routes and components
+| Route/component | Responsibility |
+|---|---|
+| `/how-it-works` — `HowItWorksPage.jsx` | Local/imported tabs, two separate four-step journeys, promise, delivery/collection and why-choose-us sections |
+| `/faq` — `FaqPage.jsx` | Runtime rendering from `data/faq.json`, combined question/answer search, live count, empty state and accessible accordion |
+| `PageIntro.jsx` | Reusable page-level eyebrow, heading and description |
+| `SectionHeading.jsx` | Reusable numbered/eyebrow section heading |
+| `JourneyStep.jsx` | Reusable numbered journey card |
+| `PawMark.jsx` | Small reusable brand/paw SVG for shared shell and page details |
+
+### State and accessibility
+- The journey selection is local React state in `HowItWorksPage`. Tabs use `role=tablist`, `role=tab`, `aria-selected`, `aria-controls`, roving `tabIndex` and Home/End/arrow-key handling. Each panel is connected through `aria-labelledby`.
+- FAQ entries are parsed from existing single-string `question?answer` JSON records at the first question mark. Search is case-insensitive across both fields. The count is announced using `aria-live`, and the clear button resets the controlled search.
+- Each FAQ note has a semantic button, `aria-expanded`, `aria-controls` and an associated labeled answer region. Search and accordion state are independent.
+- Shared mobile navigation retains its body-scroll lock, focus return, Escape and tab-loop behavior. `NavLink` active matching includes nested puppy profile paths under `/puppies`.
+
+### Content and dependencies
+No new package or framework was introduced. The FAQ data was not changed. Page journey/promise/delivery content is in `data/howItWorksContent.js`; the existing homepage `journeySteps` data remains untouched. The footer references the email, location and social links from the source shell while retaining the destination WhatsApp helper configuration.
+
+CSS for the new routes uses `how-*` and `faq-*` selectors. Shared shell and page-heading selectors intentionally apply across existing routes. Responsive styles include a stacked tablet layout, mobile journey cards/search layout and reduced-motion handling.
+
+### Verification
+Run [#15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) passed the four focused test files (15 tests), full frontend suite (14 files / 64 tests) and production build (Vite 8.3.8). No browser-level responsive inspection or visual snapshot comparison was run; jsdom and build results do not verify actual viewport rendering.

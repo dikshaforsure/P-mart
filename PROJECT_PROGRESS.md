@@ -268,3 +268,47 @@ GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45
 Run [#11](https://github.com/dikshaforsure/P-mart/actions/runs/45461978023) remains the correct evidence for the earlier Phase 3 implementation/fix commit `3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837` (10 files / 45 tests). Run [#12](https://github.com/dikshaforsure/P-mart/actions/runs/45462331819) corresponds to the documentation-only commit `77a808f947d674d9bfddf9af6872b67a9433a646`; it also ran the test suite and passed 10 files / 45 tests, but is not substituted for run #11 as the original implementation evidence.
 
 No real-browser visual comparison, desktop/tablet/mobile overflow inspection, browser-console/network inspection or live native-media playback check was performed. The build and jsdom test results do not establish pixel-level parity.
+
+
+## Phase 4 — Shared Shell, How It Works and FAQ
+
+**Date:** 25 November 2026  
+**Baseline `develop` commit:** `984652e8fde64cb715e063d556fbbebe96689dd0`  
+**Implementation commit:** `86ae5779f79f51c14c09de950393d34c6660c7bc`  
+**Verification:** [GitHub Actions run #15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254)
+
+### Initial state and reference audit
+- The current header and footer were functional shared components, but their visual treatment was simpler than the reference shell.
+- `/how-it-works` and `/faq` still rendered `PlaceholderPage`.
+- The existing `frontend/src/data/faq.json` already contained the same nine question/answer records as the reference FAQ data. It was kept unchanged and remains the runtime content source.
+- The reference How It Works page contains local and imported journey tabs, two distinct four-step panels, a puppy-promise section, delivery/collection and a why-choose-us section. The homepage's existing three-step `journeySteps` data was not repurposed for these separate page panels.
+
+### Delivered
+- Refined the shared header brand/navigation/active paw marker, desktop CTA and mobile menu presentation. The existing focus return, Escape handling, focus loop, route-close and body scroll-lock behavior were preserved.
+- Replaced the footer's placeholder contact/social treatment with verified reference-source email, location and social links. The existing WhatsApp helper was retained; its configured destination was not changed and no additional phone number was introduced.
+- Implemented `/how-it-works` with four anchored sections: two-way journey, puppy promise, delivery/collection and why choose us. The In Dubai/Imported tabs switch between distinct four-step panels and support arrow/Home/End keyboard navigation with tab semantics.
+- Implemented `/faq` from `faq.json`. Search matches question and answer text, result count updates, clear restores all nine notes, answers expand/collapse with `aria-expanded`/`aria-controls`, and the no-result state offers a WhatsApp follow-up.
+- Added small shared `PageIntro`, `SectionHeading`, `JourneyStep` and `PawMark` components. Page-specific styles are namespaced under `how-*` and `faq-*`; common shell styling is intentionally shared.
+
+### Content and preservation decisions
+- Reference copy that could read as a new business guarantee, medical promise, reservation policy or delivery commitment was not introduced as an unconditional destination-site claim. Journey and delivery copy is phrased with the existing FAQ as the support source and asks customers to confirm arrangements with the team.
+- `faq.json`, `siteContent.js`, `puppyData.js`, `contentService.js`, the WhatsApp helper and the homepage implementation were not modified.
+- `/gone-home`, `/happy-families` and `/contact` remain placeholders. No homepage redesign was started.
+
+### Changed files
+Implementation commit changed 17 files: `.github/workflows/phase2-tests.yml`, `frontend/src/app/App.jsx`, `frontend/src/app/App.test.jsx`, `frontend/src/components/layout/SiteHeader.jsx`, `SiteHeader.test.jsx`, `SiteFooter.jsx`, `SiteFooter.test.jsx`, new shared `PageIntro.jsx`, `SectionHeading.jsx`, `JourneyStep.jsx`, `PawMark.jsx`, new `data/howItWorksContent.js`, new `pages/HowItWorksPage.jsx` and its test, new `pages/FaqPage.jsx` and its test, and `styles/index.css`.
+
+The catalogue components, catalogue filters/data, puppy profiles, gallery/lightbox, enquiry form, WhatsApp configuration, and homepage components were not altered.
+
+### Verification
+GitHub Actions run [#15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) passed for the exact implementation commit:
+- Focused Phase 4 tests: **4 files / 15 tests passed**.
+- Complete frontend test suite: **14 files / 64 tests passed, 0 failures**.
+- Production build: **passed** with Vite 8.3.8.
+
+Baseline run [#14](https://github.com/dikshaforsure/P-mart/actions/runs/45466221520), at the baseline commit above, passed 10 files / 47 tests and its production build. These are separate executions; run #15 is the Phase 4 verification.
+
+No real-browser viewport testing, screenshots, manual mobile/tablet interaction, browser console inspection or network request inspection was performed in this phase. CI jsdom tests and a production build do not establish pixel-perfect visual parity.
+
+### Remaining work
+Next implementation phase: Gone Home, Happy Families and Contact. Homepage refinement and the final site-wide visual/responsive audit remain outstanding.

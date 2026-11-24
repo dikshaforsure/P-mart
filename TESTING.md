@@ -313,3 +313,24 @@ The workflow completed successfully on `develop` at the exact code implementatio
 - Run [#11](https://github.com/dikshaforsure/P-mart/actions/runs/45461978023) tested the earlier profile implementation/fix commit `3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837` and passed 10 files / 45 tests.
 - Run [#12](https://github.com/dikshaforsure/P-mart/actions/runs/45462331819) tested the subsequent documentation-only commit `77a808f947d674d9bfddf9af6872b67a9433a646`. That run also executed the test suite and passed 10 files / 45 tests, but it is not the original code-implementation evidence.
 - Run #13 is the verification for the reference-fidelity audit/refinement implementation commit and also includes the production build step.
+
+
+## 20. Phase 4 — Shared Shell, How It Works and FAQ
+
+**Baseline commit:** `984652e8fde64cb715e063d556fbbebe96689dd0`  
+**Implementation commit:** [`86ae5779f79f51c14c09de950393d34c6660c7bc`](https://github.com/dikshaforsure/P-mart/commit/86ae5779f79f51c14c09de950393d34c6660c7bc)  
+**CI evidence:** [GitHub Actions run #15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254)
+
+| Command/check | Result | Evidence |
+|---|---|---|
+| Focused How It Works / FAQ / header / footer tests | **PASS — 4 files, 15 tests** | SiteHeader 3, SiteFooter 3, HowItWorksPage 4, FaqPage 5 |
+| Complete frontend test suite (`npm run test`) | **PASS — 14 files, 64 tests, 0 failures** | Run #15 logs |
+| Production build (`npm run build`) | **PASS** | Vite 8.3.8; output generated successfully |
+| Manual desktop/laptop/tablet/mobile browser checks | **NOT RUN** | Browser preview/viewport inspection was unavailable |
+| Browser console/network inspection | **NOT RUN** | No live application browser session in this pass |
+| Manual social/WhatsApp handoff | **NOT RUN** | Link destinations are covered in component tests; external handoff itself was not performed |
+
+### Baseline comparison
+Before implementation, run [#14](https://github.com/dikshaforsure/P-mart/actions/runs/45466221520) passed at baseline commit `984652e8fde64cb715e063d556fbbebe96689dd0`: 10 files / 47 tests, plus a production build. Run #15 tests the new Phase 4 implementation commit and passed 4 focused files / 15 tests, 14 full-suite files / 64 tests and the production build.
+
+The full suite continues to include existing catalogue, profile, gallery, enquiry-form and route coverage. It now also contains the Phase 4 route/shell/page tests. Automated jsdom coverage does not establish pixel-level reference parity, actual responsive layout, or successful third-party network handoffs.

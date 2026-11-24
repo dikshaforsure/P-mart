@@ -217,3 +217,36 @@ Historical run #11 is the earlier code implementation's test evidence (10 files 
 
 ### Remaining verification
 No real-browser desktop/tablet/mobile comparison, overflow inspection, console/network inspection or direct remote media/native playback check was performed. Do not claim pixel-perfect parity from the automated results. Other placeholder routes, homepage and shared-shell work remain outside this profile-only follow-up.
+
+
+## Session 7 — Phase 4 shared shell, How It Works and FAQ
+
+**Date:** 25 November 2026  
+**Branch:** `develop`  
+**Baseline:** `984652e8fde64cb715e063d556fbbebe96689dd0`  
+**Implementation:** `86ae5779f79f51c14c09de950393d34c6660c7bc`
+
+### User request summary
+Implement the shared header/footer, How It Works and FAQ as a self-contained milestone. Preserve homepage/catalogue/profile behavior, use the existing FAQ JSON, build real local/imported journey interactions, avoid inventing business promises or contact details, test and build, and leave Gone Home, Happy Families, Contact and homepage redesign for a later phase.
+
+### Reference and destination inspection
+Inspected the reference shell templates, mascot, How It Works/FAQ templates, component/Template source, types and reference/app styles. Inspected the destination routes, header/footer, placeholder page, FAQ/site/puppy data, content service, styles, package/workflow, existing route tests and six project documents.
+
+### Implementation
+- Refined header brand/nav/active paw treatment, CTA and mobile presentation while retaining Escape, focus return/loop, route-close and scroll-lock behavior.
+- Implemented a source-informed dark footer with verified email, Downtown Dubai location and social links. Reused the existing WhatsApp helper without changing its configuration or adding a phone number.
+- Implemented `/how-it-works` with four in-page sections, distinct four-step local/imported journey panels, accessible tab state and keyboard navigation, promise/delivery cards and relevant CTAs.
+- Implemented `/faq` from the unchanged nine-record `faq.json` runtime source, with search across question and answer text, live result count, clear, accessible expandable notes and no-results WhatsApp path.
+- Added shared PageIntro, SectionHeading, JourneyStep and PawMark components. Page-specific style selectors are namespaced.
+- Kept homepage, catalogue, puppy data/services, profile/gallery/enquiry code and all non-Phase4 routes intact.
+
+### Verification
+GitHub Actions [run #15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) passed on the exact implementation commit:
+- Focused checks: 4 files / 15 tests.
+- Full suite: 14 files / 64 tests, 0 failures.
+- Production build: passed with Vite 8.3.8.
+
+The baseline run #14 on `984652e8fde64cb715e063d556fbbebe96689dd0` passed 10 files / 47 tests and build. No real-browser desktop/tablet/mobile comparison, console/network inspection or manual external contact handoff was performed. No pixel-parity claim is made.
+
+### Remaining work
+Next phase: Gone Home, Happy Families and Contact. Homepage refinement and final site-wide visual consistency/responsive audit remain outstanding.
