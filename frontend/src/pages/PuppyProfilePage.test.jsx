@@ -77,7 +77,7 @@ describe('PuppyProfilePage', () => {
     expect(document.querySelector('.tp-profile-journey')).not.toBeInTheDocument();
     expect(document.querySelector('.tp-profile-trail')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Looking for a puppy like this?' })).toBeInTheDocument();
-    expect(screen.getByText(/This puppy has already found a home/)).toHaveTextContent(/similar puppies that may currently be available/);
+    expect(document.querySelector('.tp-profile-homed-note')).toHaveTextContent(/similar puppies that may currently be available/);
     expect(screen.getByRole('navigation', { name: 'Browse other gone-home puppies' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Gone home' })).toHaveAttribute('href', '/gone-home');
   });
