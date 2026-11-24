@@ -85,3 +85,6 @@ The automated suite covers:
 - Enquiry form required fields, phone/email validation, prefilled puppy-specific WhatsApp URL, popup handling and safe opener behaviour.
 
 These tests exercise application logic and DOM behavior in jsdom. They do not replace the production build, real-browser responsive checks, external media reachability, native video playback, or manual WhatsApp handoff verification.
+
+
+GitHub Actions runs this same suite on every push to `develop`, on pull requests targeting `develop`, and on manual workflow dispatch. Workflow definition: `.github/workflows/phase2-tests.yml`.

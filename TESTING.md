@@ -257,3 +257,10 @@ The tests use the repository JSON records for representative available and sold 
 | Production build and browser checks | SEPARATE | Automated jsdom tests do not validate a production build, remote image/video availability, real native video playback or responsive layouts |
 
 A test is considered passed only after the runner executes it successfully. The addition of test files is not evidence that the suite itself has passed.
+
+
+## 17. GitHub Actions execution for Phase 2
+
+The workflow `.github/workflows/phase2-tests.yml` runs on pushes to `develop`, pull requests targeting `develop`, and manual dispatch. It installs the frontend dependencies with Node.js 22 and runs `npm run test` from `frontend/`. This provides a network-enabled CI runner in addition to the developer's local test command.
+
+The workflow has been added to the branch. Its result must be read from the GitHub Actions run for the workflow commit; the workflow definition itself is not evidence of a passing run. Until that run reports success, the suite remains **ADDED — EXECUTION PENDING**.

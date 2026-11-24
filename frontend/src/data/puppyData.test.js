@@ -21,6 +21,17 @@ describe('puppy data catalogue', () => {
     expect(availablePuppies.some((puppy) => puppy.status === 'sold')).toBe(false);
   });
 
+  it('has valid image/video metadata for the available puppy galleries', () => {
+    const media = availablePuppies.flatMap((puppy) => Array.isArray(puppy.media) ? puppy.media : []);
+
+    expect(media).toHaveLength(57);
+    expect(media.filter((item) => item.kind === 'image')).toHaveLength(51);
+    expect(media.filter((item) => item.kind === 'video')).toHaveLength(6);
+    expect(media.every((item) =>
+      typeof item.url === 'string' && item.url.length > 0 && ['image', 'video'].includes(item.kind)
+    )).toBe(true);
+  });
+
   it('finds both available and sold records by exact slug', () => {
     const available = availablePuppies[0];
     const sold = allPuppies.find((puppy) => puppy.status === 'sold');

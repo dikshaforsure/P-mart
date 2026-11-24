@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import PuppyNoteForm from './PuppyNoteForm';
 
 const puppy = {
@@ -14,21 +14,19 @@ function fillRequiredFields() {
 }
 
 describe('PuppyNoteForm', () => {
-  beforeEach(() => {
-    vi.spyOn(window, 'open').mockReturnValue(null);
-  });
-
   it('validates required name and phone fields without opening WhatsApp', () => {
+    const openSpy = vi.spyOn(window, 'open').mockReturnValue(null);
     render(<PuppyNoteForm puppy={puppy} />);
     fireEvent.click(screen.getByRole('button', { name: /Send my note in WhatsApp/i }));
 
     expect(screen.getByText('Please enter your name.')).toBeInTheDocument();
     expect(screen.getByText('Please enter your phone number.')).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveAttribute('aria-invalid', 'true');
-    expect(window.open).not.toHaveBeenCalled();
+    expect(openSpy).not.toHaveBeenCalled();
   });
 
   it('validates malformed phone numbers and optional email addresses', () => {
+    const openSpy = vi.spyOn(window, 'open').mockReturnValue(null);
     render(<PuppyNoteForm puppy={puppy} />);
     fireEvent.change(screen.getByLabelText(/Your name/), { target: { value: 'Aarav' } });
     fireEvent.change(screen.getByLabelText(/Phone number/), { target: { value: '123' } });
@@ -37,7 +35,7 @@ describe('PuppyNoteForm', () => {
 
     expect(screen.getByText('Please enter a valid phone number.')).toBeInTheDocument();
     expect(screen.getByText('Please enter a valid email address.')).toBeInTheDocument();
-    expect(window.open).not.toHaveBeenCalled();
+    expect(openSpy).not.toHaveBeenCalled();
   });
 
   it('opens a prefilled puppy-specific WhatsApp message after valid input', () => {
@@ -65,11 +63,12 @@ describe('PuppyNoteForm', () => {
   });
 
   it('explains when the browser blocks the WhatsApp tab', () => {
+    const openSpy = vi.spyOn(window, 'open').mockReturnValue(null);
     render(<PuppyNoteForm puppy={puppy} />);
     fillRequiredFields();
     fireEvent.click(screen.getByRole('button', { name: /Send my note in WhatsApp/i }));
 
     expect(screen.getByRole('status')).toHaveTextContent('the browser blocked the new tab');
-    expect(window.open).toHaveBeenCalledTimes(1);
+    expect(openSpy).toHaveBeenCalledTimes(1);
   });
 });
