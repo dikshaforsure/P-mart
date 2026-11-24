@@ -30,9 +30,9 @@ describe('PuppiesPage catalogue', () => {
     );
   });
 
-  it('filters by breed and includes puppies tagged with multiple breeds', async () => {
+  it('shows the visible filter board and filters by breed, including multi-breed puppies', async () => {
     renderPage(['/puppies']);
-    await screen.findByRole('list', { name: 'Available puppies' });
+    expect(await screen.findByRole('heading', { name: 'Who are you looking for?' })).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Filter by Poodle' }));
     const list = screen.getByRole('list', { name: 'Available puppies' });
@@ -42,7 +42,7 @@ describe('PuppiesPage catalogue', () => {
       '/puppies/korean-teacup-poodle-female',
       '/puppies/toy-poodle-male-female',
     ]);
-    expect(screen.getByText('2 puppies match your filters')).toBeInTheDocument();
+    expect(screen.getByLabelText('Catalogue results')).toHaveTextContent('2 puppies match your filters');
   });
 
   it('filters the catalogue by the Korean Teacup collection from the URL', async () => {
@@ -52,6 +52,7 @@ describe('PuppiesPage catalogue', () => {
 
     expect(links).toHaveLength(5);
     expect(links.every((link) => link.getAttribute('href').includes('korean-teacup'))).toBe(true);
+    expect(screen.getByRole('button', { name: 'Filter by Korean Teacup collection' })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('shows loading and then the empty-catalogue state', async () => {

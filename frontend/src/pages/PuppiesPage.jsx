@@ -1,63 +1,63 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SectionHeading from '../components/common/SectionHeading';
 import PuppyCard from '../components/puppies/PuppyCard';
 import { contentService } from '../services/contentService';
 
-function slugify(value = '') {
-  return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
-
 function puppyHasBreed(puppy, breedSlug) {
-  if (Array.isArray(puppy.breeds) && puppy.breeds.length) {
-    return puppy.breeds.some((breed) => breed.slug === breedSlug);
-  }
-  return slugify(puppy.breed) === breedSlug;
+  return Array.isArray(puppy.breeds) && puppy.breeds.length
+    ? puppy.breeds.some((breed) => breed.slug === breedSlug)
+    : puppy.breed?.toLowerCase().replace(/[^a-z0-9]+/g, '-') === breedSlug;
 }
 
-function puppyHasCollection(puppy, collectionSlug) {
-  return Array.isArray(puppy.collections)
-    && puppy.collections.some((collection) => collection.slug === collectionSlug);
-}
-
-function FilterChip({ active, children, onClick, label }) {
+function StickerChip({ active, children, onClick, label }) {
   return (
-    <button
-      type="button"
-      className={
-        'rounded-full border px-4 py-2 text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sage-dark)] ' +
-        (active
-          ? 'border-[var(--ink)] bg-[var(--ink)] text-white'
-          : 'border-[var(--line)] bg-[var(--paper)] text-[var(--ink)] hover:border-[var(--sage-dark)]')
-      }
-      aria-pressed={active}
-      aria-label={label}
-      onClick={onClick}
-    >
+    <button type="button" className="tp-sticker-chip" aria-pressed={active} aria-label={label} onClick={onClick}>
       {children}
     </button>
   );
 }
 
+function FilterRow({ label, children }) {
+  return (
+    <div className="puppy-filter-row" role="group" aria-label={'Filter by ' + label}>
+      <span className="puppy-filter-label">{label}</span>
+      <div className="puppy-filter-options">{children}</div>
+    </div>
+  );
+}
+
+function SketchbookBuddy() {
+  return (
+    <div className="tp-sketchbook__self" aria-label="Teddy, our little mascot">
+      <div className="tp-buddy-doodle">
+        <svg viewBox="0 0 180 170" role="img" aria-label="A little doodle of Teddy the puppy">
+          <ellipse cx="90" cy="151" rx="53" ry="7" fill="#2a170e" opacity=".1" />
+          <path d="M44 106c-8-18-3-39 10-49 11-10 23-12 36-12s26 2 37 12c13 10 18 31 10 49-5 21-23 32-48 32s-43-11-45-32Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round"/>
+          <path d="M54 59C34 35 31 19 44 18c17-2 29 20 32 40M126 59c20-24 23-40 10-41-17-2-29 20-32 40" fill="#e4a352" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round"/>
+          <ellipse cx="73" cy="91" rx="5" ry="7" fill="#2a170e"/><ellipse cx="107" cy="91" rx="5" ry="7" fill="#2a170e"/>
+          <circle cx="75" cy="88" r="1.8" fill="white"/><circle cx="109" cy="88" r="1.8" fill="white"/>
+          <path d="M82 106q8-8 16 0-1 10-8 10t-8-10Z" fill="#2a170e"/>
+          <path d="M90 115v7m0 0q-8 8-14 0m14 0q8 8 14 0" fill="none" stroke="#2a170e" strokeWidth="3" strokeLinecap="round"/>
+          <path d="M68 115q-9 6-15 0m74 0q-9 6-15 0" fill="none" stroke="#c2622b" strokeWidth="3" strokeLinecap="round" opacity=".8"/>
+          <path d="M42 132q-20 4-19-15" fill="none" stroke="#2a170e" strokeWidth="5" strokeLinecap="round"/>
+          <path d="M22 117q-11-11-2-18 12-5 16 8" fill="#f2be6b" stroke="#2a170e" strokeWidth="3"/>
+        </svg>
+      </div>
+      <span className="tp-sketchbook__caption">Teddy says hello</span>
+    </div>
+  );
+}
+
 export default function PuppiesPage() {
   const [puppies, setPuppies] = useState(null);
-  const [breeds, setBreeds] = useState([]);
   const [failed, setFailed] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     let active = true;
-    Promise.all([
-      contentService.getAvailablePuppies(),
-      contentService.getBreeds(),
-    ]).then(([puppyItems, breedItems]) => {
-      if (active) {
-        setPuppies(puppyItems);
-        setBreeds(breedItems);
-      }
-    }).catch(() => {
-      if (active) setFailed(true);
-    });
+    contentService.getAvailablePuppies()
+      .then((items) => { if (active) setPuppies(items); })
+      .catch(() => { if (active) setFailed(true); });
     return () => { active = false; };
   }, []);
 
@@ -67,64 +67,46 @@ export default function PuppiesPage() {
   const collectionFilter = searchParams.get('collection') || '';
   const hasFilters = Boolean(originFilter || breedFilter || genderFilter || collectionFilter);
 
-  const origins = useMemo(() => {
+  const originOptions = useMemo(() => {
     if (!puppies) return [];
-    const unique = new Map();
-    puppies.forEach((puppy) => {
-      if (puppy.origin?.slug) {
-        unique.set(puppy.origin.slug, {
-          slug: puppy.origin.slug,
-          name: puppy.origin.name || puppy.origin.slug,
-        });
-      }
-    });
-    return Array.from(unique.values());
+    const hasLocal = puppies.some((puppy) => puppy.origin?.slug === 'local');
+    return [
+      ...(hasLocal ? [{ value: 'local', label: 'In Dubai' }] : []),
+      ...(puppies.some((puppy) => puppy.origin?.slug === 'imported') ? [{ value: 'imported', label: 'Imported' }] : []),
+    ];
   }, [puppies]);
 
-  const availableBreeds = useMemo(() => {
+  const breedOptions = useMemo(() => {
     if (!puppies) return [];
-    return breeds.filter((breed) => puppies.some((puppy) => puppyHasBreed(puppy, breed.slug)));
-  }, [puppies, breeds]);
-
-  const availableCollections = useMemo(() => {
-    if (!puppies) return [];
-    const unique = new Map();
-    puppies.forEach((puppy) => {
-      (puppy.collections || []).forEach((collection) => {
-        if (collection?.slug) {
-          unique.set(collection.slug, {
-            slug: collection.slug,
-            name: collection.name || collection.slug,
-          });
-        }
-      });
-    });
-    return Array.from(unique.values());
+    const ordered = [
+      ['maltipoo', 'Maltipoo'],
+      ['pomeranian', 'Pomeranian'],
+      ['poodle', 'Poodle'],
+      ['cavapoo', 'Cavapoo'],
+      ['shih-tzu', 'Shih Tzu'],
+    ];
+    return ordered.filter(([slug]) => puppies.some((puppy) => puppyHasBreed(puppy, slug)));
   }, [puppies]);
 
   const genderOptions = useMemo(() => {
     if (!puppies) return [];
-    const options = [
-      { value: 'male', label: 'Boys' },
-      { value: 'female', label: 'Girls' },
+    return [
+      ...(puppies.some((puppy) => puppy.gender === 'male' || puppy.gender === 'male-female') ? [{ value: 'male', label: 'Boys' }] : []),
+      ...(puppies.some((puppy) => puppy.gender === 'female' || puppy.gender === 'male-female') ? [{ value: 'female', label: 'Girls' }] : []),
     ];
-    return options.filter(({ value }) => puppies.some((puppy) =>
-      puppy.gender === value || puppy.gender === 'male-female'
-    ));
   }, [puppies]);
 
   const filteredPuppies = useMemo(() => {
     if (!puppies) return [];
-    return puppies.filter((puppy) => {
-      const matchesOrigin = !originFilter || puppy.origin?.slug === originFilter;
-      const matchesBreed = !breedFilter || puppyHasBreed(puppy, breedFilter);
-      const matchesGender = !genderFilter || puppy.gender === genderFilter || puppy.gender === 'male-female';
-      const matchesCollection = !collectionFilter || puppyHasCollection(puppy, collectionFilter);
-      return matchesOrigin && matchesBreed && matchesGender && matchesCollection;
-    });
+    return puppies.filter((puppy) =>
+      (!originFilter || puppy.origin?.slug === originFilter)
+      && (!breedFilter || puppyHasBreed(puppy, breedFilter))
+      && (!genderFilter || puppy.gender === genderFilter || puppy.gender === 'male-female')
+      && (!collectionFilter || puppy.collections?.some((collection) => collection.slug === collectionFilter))
+    );
   }, [puppies, originFilter, breedFilter, genderFilter, collectionFilter]);
 
-  const toggleFilter = (key, value) => {
+  const setFilter = (key, value) => {
     const next = new URLSearchParams(searchParams);
     if (next.get(key) === value) next.delete(key);
     else next.set(key, value);
@@ -132,113 +114,101 @@ export default function PuppiesPage() {
   };
 
   const clearFilters = () => setSearchParams(new URLSearchParams());
+  const collectionActive = collectionFilter === 'korean-teacup';
 
   return (
-    <section className="puppies-page page-shell">
-      <div className="puppies-page-topline"><span>FROM TEDDY’S SKETCHBOOK</span><span>REAL PUPPIES · REAL PHOTOS</span></div>
-      <SectionHeading eyebrow="a little hello from us" title="Available puppies" description="Meet the little ones who are ready to find their people. Every puppy has their own story, and it might just begin with you." />
-      {puppies === null && !failed ? <div className="puppy-state" role="status" aria-live="polite">Finding the little ones…</div>
-        : failed ? <div className="puppy-state" role="alert">We couldn’t load the puppy list. Please refresh the page or contact us on WhatsApp.</div>
-        : puppies.length === 0 ? <div className="puppy-state" role="status">No puppies are listed as available right now. Please check back soon.</div>
-        : (
-          <>
-            <div className="mt-8 grid gap-4 rounded-3xl border border-[var(--line)] bg-[#eee9e0] p-5 md:p-6" aria-label="Filter available puppies">
-              <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by location">
-                <span className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Where</span>
-                <FilterChip active={!originFilter && !collectionFilter} onClick={clearFilters} label="Show puppies from everywhere">Everywhere</FilterChip>
-                {origins.map((origin) => (
-                  <FilterChip
-                    key={origin.slug}
-                    active={originFilter === origin.slug}
-                    onClick={() => toggleFilter('origin', origin.slug)}
-                    label={'Filter by ' + origin.name}
-                  >
-                    {origin.name}
-                  </FilterChip>
-                ))}
+    <section className="puppies-page tp-sketchbook">
+      <div className="page-shell">
+        <div className="puppies-page-topline">
+          <span>FROM TEDDY’S SKETCHBOOK</span>
+          <span>REAL PUPPIES · REAL PHOTOS</span>
+        </div>
+
+        <div className="tp-sketchbook__head">
+          <div className="tp-sketchbook__words">
+            <p className="tp-sketchbook__eyebrow">from Teddy's sketchbook</p>
+            <h1 className="tp-sketchbook__title">
+              Available puppies
+              <svg aria-hidden="true" viewBox="0 0 400 24" preserveAspectRatio="none" className="tp-sketchbook__underline">
+                <path d="M4 15c40-9 70 5 112-2s70-9 112 0 74 8 116-1 38-4 52 1" />
+              </svg>
+            </h1>
+            <p className="tp-sketchbook__lede">Every listing shows real photos of the actual puppy. Open a profile to see them all, then ask us about them on WhatsApp.</p>
+          </div>
+          <SketchbookBuddy />
+        </div>
+
+        {puppies === null && !failed ? (
+          <div className="puppy-state" role="status">Finding the little ones…</div>
+        ) : failed ? (
+          <div className="puppy-state" role="alert">We couldn’t load the puppy list. Please refresh the page or contact us on WhatsApp.</div>
+        ) : puppies.length === 0 ? (
+          <div className="puppy-state" role="status">No puppies are listed as available right now. Please check back soon.</div>
+        ) : (
+          <div className="puppy-catalogue">
+            <div className="tp-sketchpad puppy-filter-board" aria-label="Filter available puppies">
+              <div className="puppy-filter-board-heading">
+                <span className="puppy-filter-board-spark" aria-hidden="true">✳</span>
+                <div>
+                  <p className="puppy-filter-board-kicker">Find your little friend</p>
+                  <h2>Who are you looking for?</h2>
+                </div>
+                <span className="puppy-filter-board-note">tap a sticker to filter</span>
               </div>
 
-              {availableBreeds.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 border-t border-[var(--line)] pt-4" role="group" aria-label="Filter by breed">
-                  <span className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Breed</span>
-                  {availableBreeds.map((breed) => (
-                    <FilterChip
-                      key={breed.slug}
-                      active={breedFilter === breed.slug}
-                      onClick={() => toggleFilter('breed', breed.slug)}
-                      label={'Filter by ' + breed.name}
-                    >
-                      {breed.name}
-                    </FilterChip>
-                  ))}
-                </div>
-              )}
+              <FilterRow label="where">
+                <StickerChip active={!originFilter && !collectionActive} onClick={clearFilters}>Everywhere</StickerChip>
+                {originOptions.map((option) => (
+                  <StickerChip key={option.value} active={originFilter === option.value} onClick={() => setFilter('origin', option.value)} label={'Filter by ' + option.label}>
+                    {option.label}
+                  </StickerChip>
+                ))}
+                <StickerChip active={collectionActive} onClick={() => setFilter('collection', 'korean-teacup')} label="Filter by Korean Teacup collection">Korean Teacup</StickerChip>
+              </FilterRow>
 
-              {genderOptions.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 border-t border-[var(--line)] pt-4" role="group" aria-label="Filter by gender">
-                  <span className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Boy or girl</span>
-                  {genderOptions.map((gender) => (
-                    <FilterChip
-                      key={gender.value}
-                      active={genderFilter === gender.value}
-                      onClick={() => toggleFilter('gender', gender.value)}
-                      label={'Show ' + gender.label.toLowerCase()}
-                    >
-                      {gender.label}
-                    </FilterChip>
-                  ))}
-                </div>
-              )}
+              <FilterRow label="breed">
+                {breedOptions.map(([value, label]) => (
+                  <StickerChip key={value} active={breedFilter === value} onClick={() => setFilter('breed', value)} label={'Filter by ' + label}>
+                    {label}
+                  </StickerChip>
+                ))}
+              </FilterRow>
 
-              {availableCollections.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 border-t border-[var(--line)] pt-4" role="group" aria-label="Filter by collection">
-                  <span className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Collection</span>
-                  {availableCollections.map((collection) => (
-                    <FilterChip
-                      key={collection.slug}
-                      active={collectionFilter === collection.slug}
-                      onClick={() => toggleFilter('collection', collection.slug)}
-                      label={'Filter by ' + collection.name}
-                    >
-                      {collection.name}
-                    </FilterChip>
-                  ))}
-                </div>
-              )}
-
-              {hasFilters && (
-                <div className="flex justify-end border-t border-[var(--line)] pt-3">
-                  <button
-                    type="button"
-                    className="text-xs font-semibold text-[var(--sage-dark)] underline underline-offset-4 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
-                    onClick={clearFilters}
-                  >
-                    Clear filters
+              <FilterRow label="boy or girl">
+                {genderOptions.map((option) => (
+                  <StickerChip key={option.value} active={genderFilter === option.value} onClick={() => setFilter('gender', option.value)} label={'Show ' + option.label.toLowerCase()}>
+                    {option.label}
+                  </StickerChip>
+                ))}
+                {hasFilters && (
+                  <button type="button" className="puppy-filter-clear" onClick={clearFilters}>
+                    Clear filters <span aria-hidden="true">↺</span>
                   </button>
-                </div>
-              )}
+                )}
+              </FilterRow>
             </div>
 
-            <p className="mt-8 text-sm text-[var(--muted)]" role="status" aria-live="polite">
-              {filteredPuppies.length} {filteredPuppies.length === 1 ? 'puppy' : 'puppies'} {hasFilters ? 'match your filters' : 'looking for a home'}
+            <p className="puppy-catalogue-count mt-8 text-sm" aria-label="Catalogue results" role="status" aria-live="polite">
+              <span>{filteredPuppies.length}</span> {filteredPuppies.length === 1 ? 'puppy' : 'puppies'} {hasFilters ? 'match your filters' : 'looking for a home'}
             </p>
 
-            {filteredPuppies.length > 0 ? (
-              <>
-                <div className="puppy-catalogue-grid mt-6" role="list" aria-label="Available puppies">
-                  {filteredPuppies.map((puppy) => <PuppyCard puppy={puppy} key={puppy.id || puppy.slug} />)}
-                </div>
-                <p className="puppy-catalogue-note">Each little one is unique. Contact us for current photos, videos and details.</p>
-              </>
+            {filteredPuppies.length ? (
+              <ul className="puppy-catalogue-grid mt-6" aria-label="Available puppies">
+                {filteredPuppies.map((puppy, index) => (
+                  <PuppyCard key={puppy.id || puppy.slug} puppy={puppy} index={index} />
+                ))}
+              </ul>
             ) : (
-              <div className="mt-8 rounded-3xl border border-[var(--line)] bg-[#eee9e0] px-6 py-10 text-center">
-                <h2 className="font-[var(--serif)] text-2xl">No puppies match just now.</h2>
-                <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-[var(--muted)]">Try a different combination or clear the filters to see all available puppies.</p>
-                <button type="button" className="button button-dark mt-6" onClick={clearFilters}>Show all puppies</button>
+              <div className="puppy-filter-empty">
+                <span aria-hidden="true">♡</span>
+                <h2>No puppies match just now.</h2>
+                <p>Try another little combination or clear the stickers to see everyone again.</p>
+                <button type="button" className="puppy-filter-empty-button" onClick={clearFilters}>Show all puppies</button>
               </div>
             )}
-          </>
+          </div>
         )}
+      </div>
     </section>
   );
 }

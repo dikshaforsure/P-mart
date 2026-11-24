@@ -509,3 +509,111 @@ img, video { display: block; max-width: 100%; }
   .puppy-adjacent-nav > .button { grid-column:1/-1; grid-row:1; }
   .puppy-adjacent-nav > div { grid-row:2; }
 }
+
+
+
+/* Sketchbook catalogue style inspired by the reference */
+.puppies-page.tp-sketchbook{padding-block:0 7rem;background:radial-gradient(circle at 1px 1px,rgba(42,23,14,.09) 1px,transparent 1.6px) 0 0/26px 26px,linear-gradient(180deg,#fff8ec,var(--paper) 62%)}
+.puppies-page .page-shell{width:min(110rem,calc(100% - 96px))}
+.puppies-page-topline{padding-top:2rem;border-bottom-color:rgba(42,23,14,.22);color:#70533d}
+.tp-sketchbook__head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:2rem 3rem;padding-block:clamp(2.6rem,6vw,5rem) 3rem}
+.tp-sketchbook__words{min-width:0}
+.tp-sketchbook__eyebrow{margin:0 0 .6rem;color:#9a5934;font:italic 1.35rem/1.2 var(--serif)}
+.tp-sketchbook__title{position:relative;display:inline-block;margin:0;padding-bottom:.2em;color:#2a170e;font:400 clamp(3.25rem,7.2vw,7.4rem)/.92 var(--serif);letter-spacing:-.055em}
+.tp-sketchbook__underline{position:absolute;bottom:-.04em;left:0;width:100%;height:.24em;overflow:visible}
+.tp-sketchbook__underline path{fill:none;stroke:#b87843;stroke-width:7px;stroke-linecap:round}
+.tp-sketchbook__lede{max-width:46ch;margin:1.35rem 0 0;color:#76614f;font:400 clamp(1rem,1.3vw,1.2rem)/1.75 var(--sans)}
+.tp-sketchbook__self{position:relative;justify-self:end;width:clamp(9rem,20vw,13rem);aspect-ratio:1;padding:1rem;border:3px solid #2a170e;border-radius:52% 48% 50% 50%/50% 52% 48% 50%;background:#f8e7c5}
+.tp-sketchbook__self:after{position:absolute;inset:-7px -4px -5px -6px;border:2px solid rgba(42,23,14,.45);border-radius:48% 52% 47% 53%/53% 47%;content:"";rotate:-6deg;pointer-events:none}
+.tp-buddy-doodle{display:grid;width:100%;height:100%;place-items:center}
+.tp-buddy-doodle svg{width:100%;height:100%;overflow:visible;animation:tp-buddy-breathe 3.8s ease-in-out infinite;transform-origin:center bottom}
+.tp-sketchbook__caption{position:absolute;bottom:-2rem;left:50%;color:#80634b;font:italic .9rem var(--serif);white-space:nowrap;translate:-50%}
+@keyframes tp-buddy-breathe{50%{scale:1 1.025}}
+/* Taped paper filter board and sticker controls */
+.tp-sketchpad{position:relative;display:flex;flex-direction:column;gap:1.15rem;padding:clamp(1.2rem,2.6vw,1.7rem) clamp(1.15rem,2.8vw,1.9rem);border:3px solid #2a170e;border-radius:1.2rem 1.6rem 1.3rem 1.5rem;background:#fffdf8;box-shadow:5px 7px rgba(42,23,14,.12);rotate:-.25deg}
+.tp-sketchpad:before{position:absolute;top:-.82rem;left:2.2rem;width:5.5rem;height:1.5rem;background:#f5dba9;box-shadow:0 1px 2px rgba(42,23,14,.15);content:"";opacity:.9;rotate:-4deg}
+.puppy-filter-board{margin-top:.6rem}
+.puppy-filter-board-heading{display:flex;align-items:center;gap:.85rem;padding-bottom:.75rem;border-bottom:1px dashed rgba(42,23,14,.25)}
+.puppy-filter-board-spark{color:#b86f38;font-size:1.8rem}
+.puppy-filter-board-kicker{margin:0 0 .2rem;color:#9a5934;font:italic 1rem var(--serif)}
+.puppy-filter-board-heading h2{margin:0;color:#2a170e;font:400 clamp(1.55rem,2.5vw,2.1rem)/1 var(--serif)}
+.puppy-filter-board-note{margin-left:auto;color:#806c5b;font:italic .9rem var(--serif);white-space:nowrap}
+.puppy-filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem .8rem}
+.puppy-filter-label{flex:0 0 7.4rem;color:#8a6145;font:italic 1.1rem var(--serif);text-transform:lowercase}
+.puppy-filter-options{display:flex;flex:1 1 0;flex-wrap:wrap;align-items:center;gap:.6rem .7rem}
+.tp-sticker-chip{min-height:2.7rem;padding:.45rem 1rem;border:2px solid #2a170e;border-radius:999px;background:#fffdf8;color:#2a170e;box-shadow:2px 3px rgba(42,23,14,.14);font:650 .94rem/1.1 var(--sans);transition:background-color .22s,color .22s,rotate .3s cubic-bezier(.2,.9,.2,1),translate .3s cubic-bezier(.2,.9,.2,1),box-shadow .22s}
+.tp-sticker-chip:hover{background:#f8eddb;translate:0 -2px}
+.tp-sticker-chip:active{translate:0 1px;box-shadow:none}
+.tp-sticker-chip[aria-pressed=true]{background:#2a170e;color:#fffdf8;rotate:-2deg;box-shadow:1px 2px rgba(42,23,14,.3)}
+.tp-sticker-chip:focus-visible,.puppy-filter-clear:focus-visible,.puppy-filter-empty-button:focus-visible{outline:3px solid #b87843;outline-offset:3px}
+.puppy-filter-clear{margin-left:auto;padding:.4rem .2rem;border:0;background:transparent;color:#855331;font:650 .9rem var(--sans);text-decoration:underline;text-underline-offset:4px}
+.puppy-filter-clear:hover{color:#2a170e}
+.puppy-catalogue-results{padding-top:1.7rem}
+.puppy-catalogue-count{margin:0 0 1.4rem;color:#806c5b;font:italic 1.25rem var(--serif)}
+.puppy-catalogue-count span{color:#9a5934;font-weight:700}
+/* Irregular puppy sketches with inked outlines, pastel washes and stickers */
+.puppy-catalogue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(14.5rem,40vw),1fr));gap:3.25rem clamp(1.1rem,3vw,2.5rem);padding:0 .4rem 2.4rem;margin:0;list-style:none}
+.puppy-catalogue-grid>li:nth-child(2n){translate:0 2.4rem}
+.tp-sketch-card{min-width:0}
+.tp-sketch{position:relative;display:block;border-radius:1rem;color:#2a170e;text-align:center;text-decoration:none;outline:none}
+.tp-sketch__frame{position:relative;display:block;aspect-ratio:1;rotate:var(--tilt,0deg);transition:rotate .6s cubic-bezier(.2,.9,.2,1),scale .35s cubic-bezier(.2,.9,.2,1)}
+.tp-sketch__wash{position:absolute;inset:0;width:100%;height:100%;fill:var(--wash,#f2be6b);opacity:.55;transition:opacity .6s ease,scale .8s ease}
+.tp-sketch__photo{position:absolute;inset:4.5%;display:block;overflow:hidden;background:#f2e4d1;clip-path:polygon(50% 2%,64% 4%,78% 9%,90% 21%,97% 37%,96% 56%,90% 72%,78% 86%,62% 95%,44% 97%,27% 91%,13% 80%,5% 65%,3% 48%,7% 31%,18% 16%,34% 6%);border-radius:48% 52% 50% 47%}
+.tp-sketch__photo img{width:100%;height:100%;object-fit:cover;transition:scale .45s ease}
+.tp-sketch__fallback{display:flex;width:100%;height:100%;min-height:160px;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:#826650;font:italic 1rem var(--serif)}
+.tp-sketch__fallback>span{color:#b86f38;font-size:2.7rem}
+.tp-sketch__ink{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.tp-sketch__line{fill:none;stroke:#2a170e;stroke-width:1.9px;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s ease var(--d),stroke .3s}
+.tp-sketch__line--retrace{stroke-width:1.2px;opacity:.55}
+.tp-sketch__doodle{transform-box:fill-box;transform-origin:50%;transition:scale .5s cubic-bezier(.2,.9,.2,1) calc(var(--d) + .52s),opacity .3s calc(var(--d) + .52s)}
+.tp-sketch__sticker{position:absolute;z-index:2;top:8%;right:-.2rem;padding:.05rem .7rem .15rem;border:2px solid #2a170e;border-radius:999px;background:#fffdf8;color:#2a170e;box-shadow:2px 3px rgba(42,23,14,.2);font:italic .95rem var(--serif);rotate:8deg}
+.tp-sketch__video{position:absolute;z-index:2;bottom:9%;left:9%;padding:.2rem .65rem;border-radius:999px;background:rgba(42,23,14,.88);color:#fffdf8;font:700 .75rem var(--sans)}
+.tp-sketch__paw{position:absolute;right:1%;bottom:-3%;width:3.1rem;height:3.1rem;opacity:.9;rotate:12deg}
+.tp-sketch__name{display:block;margin-top:1rem;color:#2a170e;font:400 clamp(1.35rem,2vw,1.85rem)/1.02 var(--serif);transition:color .25s}
+.tp-sketch__meta{display:block;margin-top:.35rem;color:#806c5b;font:600 .9rem/1.45 var(--sans)}
+.tp-sketch:hover .tp-sketch__frame,.tp-sketch:focus-visible .tp-sketch__frame{rotate:calc(var(--tilt,0deg)*-1)}
+.tp-sketch:hover .tp-sketch__photo img,.tp-sketch:focus-visible .tp-sketch__photo img{scale:1.06}
+.tp-sketch:hover .tp-sketch__line,.tp-sketch:focus-visible .tp-sketch__line{stroke:#a24a1a}
+.tp-sketch:hover .tp-sketch__name,.tp-sketch:focus-visible .tp-sketch__name{color:#a24a1a}
+.tp-sketch:focus-visible .tp-sketch__line{stroke-width:3px}
+.tp-sketch:active .tp-sketch__frame{scale:.96}
+.puppy-filter-empty{margin-top:1.5rem;padding:clamp(2rem,5vw,3.5rem);border:3px solid #2a170e;border-radius:1.3rem 1.6rem 1.2rem 1.5rem;background:#fffdf8;box-shadow:5px 6px rgba(42,23,14,.1);text-align:center}
+.puppy-filter-empty>span{color:#b87843;font-size:2.8rem}
+.puppy-filter-empty h2{margin:.5rem 0 0;color:#2a170e;font:400 clamp(1.8rem,4vw,2.6rem) var(--serif)}
+.puppy-filter-empty p{max-width:32rem;margin:.8rem auto 1.2rem;color:#806c5b;line-height:1.7}
+.puppy-filter-empty-button{padding:.7rem 1.2rem;border:2px solid #2a170e;border-radius:999px;background:#2a170e;color:#fffdf8;font-weight:700}
+.puppy-catalogue-note{margin:4rem 0 0;color:#806c5b;text-align:center;font:italic 1.05rem var(--serif)}
+@media(max-width:767px){
+ .puppies-page .page-shell{width:calc(100% - 40px)}
+ .tp-sketchbook__head{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 1rem;padding-block:2.3rem 2rem}
+ .tp-sketchbook__self{width:clamp(7.5rem,31vw,9.5rem);margin-top:1rem;padding:.8rem}
+ .tp-sketchbook__title{font-size:clamp(2.7rem,10vw,4.7rem)}
+ .tp-sketchbook__lede{font-size:1rem}
+ .tp-sketchbook__words{display:contents}
+ .tp-sketchbook__words>*{grid-column:1/-1}
+ .tp-sketchbook__words>.tp-sketchbook__lede{grid-column:1}
+ .puppy-filter-row{align-items:flex-start;flex-direction:column;gap:.55rem}
+ .puppy-filter-label{flex-basis:auto}
+ .puppy-filter-options{width:100%;flex-basis:auto}
+ .tp-sticker-chip{min-height:2.5rem;padding:.4rem .85rem;font-size:.9rem}
+ .puppy-filter-board-note{font-size:.78rem}
+ .puppy-catalogue-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2.8rem 1rem}
+ .puppy-catalogue-grid>li:nth-child(2n){translate:0 1.5rem}
+ .tp-sketch__name{font-size:clamp(1.08rem,4.2vw,1.45rem)}
+ .tp-sketch__meta{font-size:.76rem}
+ .tp-sketch__video{font-size:.65rem}
+ .tp-sketch__paw{width:2.3rem;height:2.3rem}
+}
+@media(max-width:420px){
+ .puppies-page .page-shell{width:calc(100% - 32px)}
+ .puppies-page-topline{font-size:6px;letter-spacing:.07em}
+ .tp-sketchbook__self{width:6.8rem}
+ .tp-sketchbook__title{font-size:clamp(2.4rem,10.8vw,3.5rem)}
+ .tp-sketchbook__lede{grid-column:1/-1!important}
+ .puppy-filter-board-heading{align-items:flex-start}
+ .puppy-filter-board-heading h2{font-size:1.45rem}
+ .puppy-filter-board-note{display:none}
+ .puppy-catalogue-grid{grid-template-columns:1fr 1fr;gap:2.4rem .75rem}
+ .puppy-filter-clear{margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){.tp-buddy-doodle svg{animation:none}.tp-sketch__frame,.tp-sketch__photo img,.tp-sticker-chip{transition:none}}

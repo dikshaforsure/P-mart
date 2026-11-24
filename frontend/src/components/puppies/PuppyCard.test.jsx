@@ -21,6 +21,7 @@ const puppy = {
     focalX: 0.25,
     focalY: 0.4,
   },
+  media: [{ kind: 'video', url: '/luna.mp4' }],
 };
 
 function renderCard(record = puppy) {
@@ -28,10 +29,10 @@ function renderCard(record = puppy) {
 }
 
 describe('PuppyCard', () => {
-  it('renders the puppy image, facts and exact profile destination', () => {
+  it('renders the sketch card image, visible puppy facts and exact profile destination', () => {
     renderCard();
 
-    const link = screen.getByRole('link', { name: /Luna/i });
+    const link = screen.getByRole('link', { name: /Luna, Maltipoo, Girl, 3 months, available/i });
     const image = screen.getByRole('img', { name: 'Luna sitting in the garden' });
 
     expect(link).toHaveAttribute('href', '/puppies/luna-maltipoo-girl');
@@ -40,14 +41,13 @@ describe('PuppyCard', () => {
     expect(image).toHaveAttribute('width', '600');
     expect(image).toHaveAttribute('height', '800');
     expect(image).toHaveStyle({ objectPosition: '25% 40%' });
-    expect(screen.getByText('Maltipoo')).toBeInTheDocument();
-    expect(screen.getByText('Girl')).toBeInTheDocument();
-    expect(screen.getByText('3 months')).toBeInTheDocument();
-    expect(screen.getByText('Imported')).toBeInTheDocument();
+    expect(screen.getByText('Maltipoo · Girl · 3 months')).toBeInTheDocument();
+    expect(screen.getByText('Available')).toBeInTheDocument();
+    expect(screen.getByText('▶ video')).toBeInTheDocument();
   });
 
   it('shows a photo-coming-soon fallback when no cover exists', () => {
-    renderCard({ ...puppy, cover: null });
+    renderCard({ ...puppy, cover: null, media: [] });
 
     expect(screen.getByText('Photo coming soon')).toBeInTheDocument();
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
