@@ -226,3 +226,58 @@ Public reads are needed for available puppies, individual profiles, gone-home en
 - https://puppy.instabizweb.com/puppies/korean-teacup-poodle-female
 
 **Phase 0 status:** Planning only. No application code was created, dependencies installed or tests executed.
+
+
+## 12. Phase 2 — puppy catalogue and profile reconciliation (24 November 2026)
+
+### Structured dataset audit
+- `puppies.json` contains 42 records: 15 marked `available`, 27 marked `sold`. There are 42 unique slugs.
+- `breeds.json` contains 8 breed records.
+- `pages.json` contains 42 puppy profile route keys. All 15 available puppy slugs have exact matching `/puppies/<slug>` route keys; no slugs were generated or renamed.
+- `faq.json`, `families.json` and `home-families.json` remain preserved and are not used to render Phase 2 pages.
+- The earlier Phase 1 JavaScript list of 15 puppies contained outdated duplicate slug values. It has been removed from the puppy data flow; `puppies.json` is now the sole puppy record source.
+
+### Current available snapshot in JSON order
+| # | Canonical slug | Display name | Breed | Gender | Age | Media items |
+|---:|---|---|---|---|---|---:|
+| 1 | `maltipoo-max-male` | Max | Maltipoo | Boy | 3 months | 2 |
+| 2 | `korean-teacup-maltipoo-female` | Korean Teacup Maltipoo | Korean Teacup Maltipoo | Girl | 2 months | 11 |
+| 3 | `korean-teacup-poodle-female` | Korean Teacup Poodle | Korean Teacup Poodle | Girl | 2 months | 4 |
+| 4 | `maltipoo-cavapoo-male` | Maltipoo & Cavapoo | Maltipoo & Cavapoo | Boy | 3 months Maltipoo & 2 months Cavapoo | 3 |
+| 5 | `toy-poodle-male-female` | Toy Poodle | Toy Poodle | Boy & girl | 2 months | 3 |
+| 6 | `maltipoo-female-2` | Maltipoo | Maltipoo | Girl | 3 months | 7 |
+| 7 | `pomeranian-female` | Pomeranian | Pomeranian | Girl | 3 months | 3 |
+| 8 | `copper-male` | Copper | Cavapoo | Boy | 2 months | 4 |
+| 9 | `shitzu-female` | Shih Tzu | Shih Tzu | Girl | 2 months | 2 |
+| 10 | `shitzu-male` | Shih Tzu | Shih Tzu | Boy | 2 months | 2 |
+| 11 | `maltipoo-female-1` | Maltipoo | Maltipoo | Girl | 2.5 months | 4 |
+| 12 | `maltipoo-female` | Maltipoo | Maltipoo | Girl | 2 months | 4 |
+| 13 | `korean-teacup-pomeranian-1` | Korean Teacup Pomeranian | Korean Teacup Pomeranian | Girl | 2 months | 2 |
+| 14 | `korean-teacup-pomeranian` | Korean Teacup Pomeranian | Korean Teacup Pomeranian | Girl | 2 months | 2 |
+| 15 | `korean-teacup-pomeranian-male` | Korean Teacup Pomeranian | Korean Teacup Pomeranian | Boy | 2 months | 4 |
+
+The available media arrays include 51 images and 6 videos across these 15 records. The variable item counts are retained as source metadata.
+
+### Live-source comparison and unresolved origin conflict
+The supplied reference URL remains `https://puppy.instabizweb.com/`. Direct page access to its catalogue and profile paths was unavailable in this execution session. A current, accessible TeddyPups crawl exists on `https://www.teddypups.ae/`, which is a different hostname.
+
+The alternate-host catalogue crawl lists the same 15 puppy names/breeds/genders/ages and reports “In Dubai 15 / Imported 0”. The accessible alternate-host profiles opened during this phase were:
+- `https://www.teddypups.ae/puppies/maltipoo-max-male` — gallery 2/2; Max, Maltipoo, boy, 3 months; In Dubai.
+- `https://www.teddypups.ae/puppies/korean-teacup-maltipoo-female` — gallery 1/11; Korean Teacup Maltipoo, girl, 2 months; In Dubai.
+- `https://www.teddypups.ae/puppies/korean-teacup-poodle-female` — gallery 1/4; Korean Teacup Poodle, girl, 2 months; In Dubai.
+- `https://www.teddypups.ae/puppies/copper-male` — gallery 1/4; Copper, Cavapoo, boy, 2 months; In Dubai.
+
+The committed `puppies.json` snapshot marks all 15 available entries as `origin.slug: "imported"`. Phase 0 inspection of the supplied `puppy.instabizweb.com` profile also showed Max as imported. Because the exact target host could not be fetched now and the current alternative host is not the requested URL, this phase does **not** overwrite those origin fields. The catalogue/profile display the origin retained in the committed JSON. The 11 other profile contents were not independently opened on the alternate host, and none of the 15 profiles was reverified from the exact supplied host in this session. Recheck origins against the requested domain before treating this discrepancy as resolved.
+
+### Profile page structure observed on accessible current profiles
+The alternate-host profiles exposed this common structure: gallery with media count and thumbnails; breadcrumbs; availability; name and breed; gender, age and location; WhatsApp enquiry/visit actions; “What comes with” care details; a four-step “way home” journey; profile note form; previous/next puppy links; footer. The implementation follows this hierarchy with one reusable React profile component. Imported/local journey copy is selected from the JSON origin field. Generic health/care copy is shared across profiles; the JSON does not contain individual veterinary records.
+
+### Phase 2 data and UI decisions
+- `puppyData.js` is a pure mapping/filtering/lookup layer over `puppies.json` and `breeds.json`.
+- `contentService.js` is the existing service boundary used by catalogue/profile routes and the Phase 1 homepage feature section.
+- The catalogue only renders records marked available and published; sold records remain in the complete dataset and can still be resolved by direct slug.
+- Media is referenced directly from each JSON URL; no local binary copies or new asset transformations are introduced.
+- Catalogue filters, search and sorting were not added because they were not requested and must be confirmed on the exact supplied host.
+
+### Network/media caveat
+The JSON media host remains `puppy.instabizweb.com/media/...`. Direct media URL checks could not complete because external DNS resolution failed. The browser-visible galleries on the alternate host expose different media counts, but successful direct loading of every original JSON image/video URL was not verified.

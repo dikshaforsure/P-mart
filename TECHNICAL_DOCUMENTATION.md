@@ -1,6 +1,6 @@
 # TeddyPups — Technical Documentation
 
-**Status:** Proposed design; implementation has not started.  
+**Status:** Phase 1 frontend foundation and Phase 2 puppy catalogue/profile UI are implemented in `frontend/`. Backend/API/database remain proposed and are not started. Production build verification is currently blocked by npm registry DNS.  
 **Required stack:** React, JavaScript/JSX, Tailwind CSS, React Router, Node.js, Express, MongoDB, Mongoose and REST APIs. No TypeScript or Angular.
 
 ## 1. Architecture
@@ -289,3 +289,42 @@ frontend/
 The current homepage uses `contentService.js` as its data-access contract and `siteContent.js` as local fixtures. UI components consume service results and do not import fixture data directly. Reference image URLs are centralised in `data/referenceAssets.js`; they are currently remote URLs from the supplied reference domain and must be moved to approved project-owned assets/CDN after reuse permission is confirmed.
 
 Current package versions are pinned by compatible semver ranges in `frontend/package.json`: React 19.3, React DOM 19.3, React Router DOM 7.18, Vite 8.3, React plugin 6.3 and Tailwind CSS/Vite plugin 4.3. The manifest declares Node.js >=20.19. Dependency installation was not completed in the execution environment due npm registry DNS failure, so compatibility has not been proven by an install/build here.
+
+
+## Phase 2 implementation — puppy catalogue and profiles (24 November 2026)
+
+### Data modules and service contract
+- `data/puppies.json` remains the complete 42-record puppy snapshot; it is not replaced by JSX data.
+- `data/breeds.json` provides breed reference values. `data/pages.json` is retained for route metadata. `faq.json`, `families.json` and `home-families.json` remain for later phases.
+- `data/puppyData.js` exports all records, the available/published filter, exact-slug lookup, previous/next available lookup and a card mapping helper.
+- `services/contentService.js` exposes available records, slug lookup, neighbours and breeds, while retaining the Phase 1 homepage service functions.
+- The duplicate puppy array in `siteContent.js` was removed. Homepage featured puppies and the catalogue now read from the same JSON source.
+
+### Route/component map
+| Route/component | Responsibility |
+|---|---|
+| `/puppies` — `PuppiesPage` | Current available records, loading/error/empty states and responsive card grid |
+| `/puppies/:slug` — `PuppyProfilePage` | Exact slug lookup for available and historical sold records |
+| `PuppyCard` | Accessible card with source cover, name, breed, gender, age and data origin |
+| `PuppyGallery` | Variable image/video collection, active count, thumbnails, previous/next and failed-media states |
+| `PuppyNoteForm` | Local input validation and profile-specific WhatsApp handoff |
+| `puppyData.js` | Filtering, mapping, lookup and adjacency; no component-level puppy fixture duplication |
+
+Unknown profile slugs return a profile not-found state. Sold records remain resolvable and are not included in the available catalogue.
+
+### Gallery media handling
+- Gallery selection uses the `media[]` array, with the cover as a fallback only when the array is empty.
+- `kind === "video"` renders a native controlled `video` element with an optional poster; all other known image records render as `img`. Image URLs are never used as video sources.
+- Source `url`, `poster`, `width`, `height`, `alt`, `caption`, `durationS`, `focalX` and `focalY` are retained. Video duration is presented on video thumbnails where available.
+- Missing or failed URLs show clear unavailable-media fallbacks. No binaries are downloaded into Git.
+- Catalogue and profile images use lazy loading and source dimensions where present.
+
+### Profile and enquiry behaviour
+- Puppy details use source `displayName/name`, breed, `genderLabel/gender`, age, origin and description/colour fields.
+- Shared care content reflects common TeddyPups copy; users are directed to ask for the individual puppy’s records. It does not fabricate individual health certificates.
+- Journey content is selected from `origin.slug` (`local` or `imported`) and uses the corresponding showroom or import steps.
+- WhatsApp links include the selected puppy's name and slug and reuse the Phase 1 helper.
+- The note form validates required name/phone and optional email, then prepares a WhatsApp message. There is no server call, persistence or false success acknowledgement.
+
+### Styling/accessibility
+Phase 2 styling is appended to the existing `index.css` and uses the Phase 1 warm-paper/ink/sage/serif tokens. The catalogue is three columns at wide desktop and two on mobile; profiles use a desktop gallery/details split and stack at narrower widths. Gallery thumbnails/arrows, list semantics, labels, status messages, visible focus and input error descriptions are implemented. Browser-level accessibility and responsive checks remain pending.
