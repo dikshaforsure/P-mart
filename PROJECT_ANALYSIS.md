@@ -346,8 +346,8 @@ Implementation commit [`86ae5779`](https://github.com/dikshaforsure/P-mart/commi
 ## Phase 3 close-out — source-accurate available and sold profile behavior (25 November 2026)
 
 **Destination baseline:** \`4c2ad275b707139fdcfdee37cede3c36462f6d8c\`  
-**Final verified code commit:** \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`  
-**CI:** [GitHub Actions run #22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897)
+**Final verified code commit:** \`610ae3c4e703daeb199a5a8494cc644bf8f91194\`  
+**CI:** [GitHub Actions run #24](https://github.com/dikshaforsure/P-mart/actions/runs/45481254438)
 
 ### Reference files re-inspected
 
@@ -366,15 +366,15 @@ Both source types have previous/next links. Available adjacency continues to fol
 
 ### Corrections and preserved functionality
 
-The sold journey is removed, the enquiry form appears on both statuses with correct chapter numbering, and sold-specific enquiry wording makes clear that the profile puppy has already found a home. Existing required name/phone checks, optional email validation and manual WhatsApp send handoff remain. The source mascot's SVG groups/parts are converted to JSX and animated locally with reduced-motion support and observer cleanup. The profile journey connector uses a repeating paw mask. The active gallery stage uses a keyed 0.42-second page wrapper without changing lightbox state or native video controls. The ribbon uses a rAF-throttled scroll progress update with cleanup for listeners, frames and optional ResizeObserver.
+The sold journey is removed, the enquiry form appears on both statuses with correct chapter numbering, sold-specific enquiry wording makes clear that the profile puppy has already found a home, and mocked-service coverage exercises the local-origin available journey branch without changing dataset values. Existing required name/phone checks, optional email validation and manual WhatsApp send handoff remain. The source mascot's SVG groups/parts are converted to JSX and animated locally with reduced-motion support and observer cleanup. The profile journey connector uses a repeating paw mask. The active gallery stage uses a keyed 0.42-second page wrapper without changing lightbox state or native video controls. The ribbon uses a rAF-throttled scroll progress update with cleanup for listeners, frames and optional ResizeObserver.
 
 The Phase 4 shared shell, How It Works, FAQ, homepage, catalogue, data JSON, route table and WhatsApp utility/config are unchanged. No TypeScript, additional runtime, external motion library or dependency was added.
 
 ### Verification
 
 Run #22 on the exact code commit passed:
-- Focused: **5 files / 37 tests passed**.
-- Full suite: **15 files / 73 tests passed**.
+- Focused: **5 files / 38 tests passed**.
+- Full suite: **15 files / 74 tests passed**.
 - Production build: **passed** (Vite 8.3.8).
 
 No manual viewport checks, screenshot capture, browser-console inspection or live image/video request validation were performed. Responsive CSS and reduced-motion rules were added and unit-tested where applicable, but their visual behavior remains unverified at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 and 375×812.

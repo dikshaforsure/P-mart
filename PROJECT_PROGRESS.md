@@ -2,7 +2,7 @@
 
 **Last updated:** 25 November 2026  
 **Current phase:** Phase 3 — Puppy profile reference-fidelity close-out (correction)  
-**Status:** Phase 4 (shared shell, How It Works and FAQ) is complete. The Phase 3 profile close-out implementation is committed on `develop` at `6e2ee141efbaf884cd015ac318dadcef5727f7f9` and verified by GitHub Actions run [#22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897): 5 focused files / 37 tests, 15 full-suite files / 73 tests, and production build all passed. Real-browser viewport checks remain outstanding. Next planned implementation phase: Gone Home, Happy Families and Contact.
+**Status:** Phase 4 (shared shell, How It Works and FAQ) is complete. The Phase 3 profile close-out implementation is committed on `develop` at `610ae3c4e703daeb199a5a8494cc644bf8f91194` and verified by GitHub Actions run [#22](https://github.com/dikshaforsure/P-mart/actions/runs/45481254438): 5 focused files / 38 tests, 15 full-suite files / 74 tests, and production build all passed. Real-browser viewport checks remain outstanding. Next planned implementation phase: Gone Home, Happy Families and Contact.
 
 ## 1. Objectives
 
@@ -317,7 +317,7 @@ Next implementation phase: Gone Home, Happy Families and Contact. Homepage refin
 ## Phase 3 close-out — source-accurate puppy profile hierarchy and interactions (25 November 2026)
 
 **Baseline inspected:** \`4c2ad275b707139fdcfdee37cede3c36462f6d8c\`  
-**Final code commit on \`develop\`:** \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`  
+**Final code commit on \`develop\`:** \`610ae3c4e703daeb199a5a8494cc644bf8f91194\`  
 **Phase 4 status:** Complete; this close-out corrects the earlier Phase 3 profile interpretation and does not change the Phase 4 shell, How It Works or FAQ.
 
 ### Source re-check and corrected hierarchy
@@ -333,7 +333,7 @@ Both types retain previous/next puppy links. Available adjacency still follows t
 
 - Made the enquiry letter a numbered chapter on both profile types. Sold profiles now render the existing validated note form with sold-specific copy and message content explaining that the puppy already found a home and visitors can ask about TeddyPups or similar puppies that may currently be available.
 - Preserved the local validation and explicit WhatsApp handoff. The form prepares a message; it does not send automatically, make an API request or claim an enquiry was delivered.
-- Added the reusable \`PuppyMascot.jsx\` using the reference inline SVG structure and \`data-p\` parts for ears, eyes/blink and other artwork, with an accessible label, speech bubble, hanging ring and an IntersectionObserver reveal/swing. The observer is disconnected during cleanup and reduced motion bypasses the reveal animation.
+- Added the reusable \`PuppyMascot.jsx\` using the reference inline SVG structure and \`data-p\` parts for ears, eyes/blink and other artwork, with an accessible label, speech bubble, hanging ring and an IntersectionObserver reveal/swing. The observer is disconnected during cleanup and reduced motion bypasses the reveal animation. A mocked-service test also covers the local-origin journey branch without altering the all-imported available puppy records.
 - Replaced the profile journey's dotted connector with a profile-scoped paw-print mask that runs horizontally on desktop and vertically at narrower widths.
 - Wrapped only the active gallery stage media in a keyed \`.clone-gallery-page\` element and added the short 0.42-second page-turn animation. The existing media selection, video controls, thumbnails, dialog/lightbox, keyboard/touch behavior and cleanup logic remain in place.
 - Replaced the static ribbon band with a profile-only scroll-progress fill updated through a requestAnimationFrame-throttled handler. Scroll/resize listeners, pending frames and the optional ResizeObserver are cleaned up; reduced motion uses a static ribbon.
@@ -348,14 +348,14 @@ No dependency was added. The homepage, catalogue page/components/styles, Phase 4
 
 ### Automated verification
 
-GitHub Actions [run #22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897) passed against the exact final code commit \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`:
+GitHub Actions [run #24](https://github.com/dikshaforsure/P-mart/actions/runs/45481254438) passed against the exact final code commit \`610ae3c4e703daeb199a5a8494cc644bf8f91194\`:
 
-- Focused command: \`npx vitest run src/pages/PuppyProfilePage.test.jsx src/components/puppies/PuppyGallery.test.jsx src/components/puppies/PuppyNoteForm.test.jsx src/components/puppies/PuppyMascot.test.jsx src/data/puppyData.test.js\` — **5 files / 37 tests passed**.
-- Full command: \`npm test\` — **15 files / 73 tests passed, 0 failures**.
+- Focused command: \`npx vitest run src/pages/PuppyProfilePage.test.jsx src/components/puppies/PuppyGallery.test.jsx src/components/puppies/PuppyNoteForm.test.jsx src/components/puppies/PuppyMascot.test.jsx src/data/puppyData.test.js\` — **5 files / 38 tests passed**.
+- Full command: \`npm test\` — **15 files / 74 tests passed, 0 failures**.
 - Production command: \`npm run build\` — **passed** with Vite 8.3.8.
 - CI dependency installation: \`npm install --no-audit --no-fund\` — passed.
 
-The older Phase 3 run #13 and Phase 4 runs #15/#16 listed above are retained as historical evidence for their original commits; run #22 is the close-out verification.
+The older Phase 3 run #13 and Phase 4 runs #15/#16 listed above are retained as historical evidence for their original commits; run #24 is the close-out verification.
 
 ### Manual verification and remaining work
 

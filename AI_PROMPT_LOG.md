@@ -257,7 +257,7 @@ Next phase: Gone Home, Happy Families and Contact. Homepage refinement and final
 **Date:** 25 November 2026  
 **Branch:** \`develop\`  
 **Baseline:** \`4c2ad275b707139fdcfdee37cede3c36462f6d8c\`  
-**Final verified code commit:** \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`
+**Final verified code commit:** \`610ae3c4e703daeb199a5a8494cc644bf8f91194\`
 
 ### User request summary
 
@@ -276,15 +276,15 @@ Re-read the four individual puppy templates (available Max and Korean Teacup Mal
 
 ### Implementation and scope
 
-Added the source mascot SVG as a reusable JSX component with local breathing/blinking/ear effects and an IntersectionObserver reveal/cleanup. Added a masked paw-print connector on the available-only journey, a keyed 0.42-second wrapper around active gallery media only, and a requestAnimationFrame-throttled progress band with scroll/resize/ResizeObserver cleanup. Reduced-motion rules simplify each nonessential animation. Added an explicit sold-profile adjacency helper using verified source order without editing the 42-record JSON snapshot. The gallery lightbox, video controls, keyboard/touch behavior, form validation, configured WhatsApp destination, media metadata and source profile data remain intact.
+Added the source mascot SVG as a reusable JSX component with local breathing/blinking/ear effects and an IntersectionObserver reveal/cleanup. Added a masked paw-print connector on the available-only journey, a keyed 0.42-second wrapper around active gallery media only, and a requestAnimationFrame-throttled progress band with scroll/resize/ResizeObserver cleanup. Reduced-motion rules simplify each nonessential animation. Added an explicit sold-profile adjacency helper using verified source order without editing the 42-record JSON snapshot. A mocked-service profile test covers the local-origin journey branch even though all published available entries in the unchanged JSON are imported. The gallery lightbox, video controls, keyboard/touch behavior, form validation, configured WhatsApp destination, media metadata and source profile data remain intact.
 
 Code files changed: \`PuppyProfilePage.jsx/.test.jsx\`, \`PuppyMascot.jsx/.test.jsx\`, \`PuppyGallery.jsx/.test.jsx\`, \`PuppyNoteForm.jsx/.test.jsx\`, \`puppyData.js/.test.js\`, \`contentService.js\`, \`styles/index.css\` and \`.github/workflows/phase2-tests.yml\`. No new dependencies or package/lockfile edits.
 
 ### Verification
 
-GitHub Actions [run #22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897) passed for the exact final code commit:
-- Focused Vitest command: 5 files / 37 tests passed.
-- \`npm test\`: 15 files / 73 tests passed.
+GitHub Actions [run #24](https://github.com/dikshaforsure/P-mart/actions/runs/45481254438) passed for the exact final code commit:
+- Focused Vitest command: 5 files / 38 tests passed.
+- \`npm test\`: 15 files / 74 tests passed.
 - \`npm run build\`: passed with Vite 8.3.8.
 - Existing CI install step \`npm install --no-audit --no-fund\`: passed.
 
