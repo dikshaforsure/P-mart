@@ -216,3 +216,44 @@ The accessible alternate-host profile media counts were 2, 11, 4, 3, 3, 7, 3, 4,
 | Keyboard/assistive technology test | NOT RUN | Semantic list, labels, visible focus and native controls are in source; manual execution remains required |
 
 No production build, dev server or browser test is marked passed. The app needs an npm-network-enabled install/build and real-browser smoke test before acceptance/deployment.
+
+
+## 16. Phase 2 automated frontend test suite — added 24 November 2026
+
+### Tooling added
+
+- Vitest 5 for one-shot and watch-mode test execution.
+- jsdom for a browser-like DOM environment.
+- React Testing Library and `@testing-library/jest-dom` for component and accessibility-oriented DOM assertions.
+- The test configuration merges the existing Vite configuration, so the React and Tailwind plugins are reused rather than replaced.
+- `npm run test` runs `vitest run` (one-shot, suitable for local verification); `npm run test:watch` starts Vitest watch mode.
+
+Vitest 5 requires Node.js 22.12 or newer. The existing application runtime engine declaration has not been changed.
+
+### Test files and coverage
+
+| Test file | Coverage |
+|---|---|
+| `src/data/puppyData.test.js` | Complete dataset counts, slug uniqueness, available/published filtering, available and sold slug lookup, unknown/case-mismatched slugs, adjacent navigation wrapping, card mapping, safe limits and sparse-record fallbacks |
+| `src/services/contentService.test.js` | Available records, featured-card limits, exact and sold slug lookup, adjacent records and breed data |
+| `src/components/puppies/PuppyCard.test.jsx` | Image metadata/focal point, puppy facts, exact profile URL, missing cover and image-error fallback |
+| `src/components/puppies/PuppyGallery.test.jsx` | Empty/cover fallback, next/previous wrapping, thumbnail selection, video controls/poster/duration, missing URLs and image/video error states |
+| `src/components/puppies/PuppyNoteForm.test.jsx` | Required fields, phone/email validation, puppy-specific WhatsApp message, optional details, popup blocked state and opener isolation |
+| `src/components/home/FeaturedPuppies.test.jsx` | Homepage featured card/profile route, source photo, video indicator, catalogue CTA and image-error fallback |
+| `src/pages/PuppiesPage.test.jsx` | Catalogue population and correct links, loading state, empty state and rejected service state |
+| `src/pages/PuppyProfilePage.test.jsx` | Available profile facts/gallery/actions, imported journey, historical sold profile, local journey copy and unknown-slug not-found state |
+| `src/app/App.test.jsx` | Actual BrowserRouter wiring for catalogue, parameterized profile and application not-found route |
+| `src/utils/whatsapp.test.js` | Configured WhatsApp number, message encoding and default enquiry message |
+
+The tests use the repository JSON records for representative available and sold puppies, not live network requests or production contact data.
+
+### Execution record
+
+| Command/check | Result | Evidence / limitation |
+|---|---|---|
+| Test source and configuration added | ADDED | 10 test files plus Vitest configuration and shared setup |
+| `npm run test` in this environment | BLOCKED — NOT EXECUTED | The environment could not resolve `registry.npmjs.org` during the Phase 2 dependency-install attempt; test packages are not installed here. No test pass count is claimed |
+| Local execution requested | PENDING | From `frontend/`, run `npm install` then `npm run test`; share the complete output so any failures can be diagnosed against this commit |
+| Production build and browser checks | SEPARATE | Automated jsdom tests do not validate a production build, remote image/video availability, real native video playback or responsive layouts |
+
+A test is considered passed only after the runner executes it successfully. The addition of test files is not evidence that the suite itself has passed.

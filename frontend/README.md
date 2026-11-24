@@ -63,3 +63,25 @@ Media URLs remain remote references to the source host. No image/video binaries 
 ## Verification and limitations
 
 Phase 2 does not add TypeScript, dependencies, backend/API/database code, catalogue filters, sorting or search controls. The npm registry could not be resolved in this environment, so dependencies were not installed and the Vite production build could not run. Media reachability and browser/mobile layout still need verification in a network-enabled browser. See the root `TESTING.md` and `PROJECT_PROGRESS.md` for the execution record.
+
+
+## Phase 2 automated tests
+
+The frontend test suite uses Vitest, jsdom and React Testing Library. From this directory:
+
+```bash
+npm install
+npm run test
+```
+
+`npm run test` runs once and exits with a pass/fail result. Use `npm run test:watch` for interactive watch mode. The current Vitest 5 runner requires Node.js 22.12 or newer.
+
+The automated suite covers:
+- JSON-backed puppy filtering, unique/exact slugs, historical records, adjacent navigation and card mapping.
+- The puppy content-service methods and homepage featured-puppy links.
+- Catalogue loading, populated, empty and failed states.
+- Reusable profile rendering for available, sold, local-origin and unknown-slug records, plus real application route wiring.
+- Gallery image/video rendering, thumbnail selection, previous/next wrapping, captions/metadata and failed/missing-media fallbacks.
+- Enquiry form required fields, phone/email validation, prefilled puppy-specific WhatsApp URL, popup handling and safe opener behaviour.
+
+These tests exercise application logic and DOM behavior in jsdom. They do not replace the production build, real-browser responsive checks, external media reachability, native video playback, or manual WhatsApp handoff verification.
