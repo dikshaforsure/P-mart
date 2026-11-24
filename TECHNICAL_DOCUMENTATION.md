@@ -256,3 +256,36 @@ Never commit .env or credentials; .env.example contains placeholders only.
 4. Confirm asset reuse permissions and storage provider.
 5. Select monorepo scripts and deployment host in Phase 1.
 6. Use one Enquiry model/POST API with source discriminator for both forms (recommended).
+
+
+## Phase 1 frontend implementation note (24 November 2026)
+
+The repository implementation uses a root-level `frontend/` directory (rather than the earlier proposed `client/` name) to reserve the repository root for a future sibling `backend/` directory. The application source currently follows this structure:
+
+```text
+frontend/
+├── index.html
+├── package.json
+├── vite.config.js
+├── README.md
+├── ASSET_SOURCES.md
+└── src/
+    ├── app/
+    ├── animations/
+    ├── assets/images/
+    ├── assets/videos/
+    ├── components/common/
+    ├── components/home/
+    ├── components/layout/
+    ├── data/
+    ├── hooks/
+    ├── pages/
+    ├── services/
+    ├── styles/
+    ├── utils/
+    └── main.jsx
+```
+
+The current homepage uses `contentService.js` as its data-access contract and `siteContent.js` as local fixtures. UI components consume service results and do not import fixture data directly. Reference image URLs are centralised in `data/referenceAssets.js`; they are currently remote URLs from the supplied reference domain and must be moved to approved project-owned assets/CDN after reuse permission is confirmed.
+
+Current package versions are pinned by compatible semver ranges in `frontend/package.json`: React 19.3, React DOM 19.3, React Router DOM 7.18, Vite 8.3, React plugin 6.3 and Tailwind CSS/Vite plugin 4.3. The manifest declares Node.js >=20.19. Dependency installation was not completed in the execution environment due npm registry DNS failure, so compatibility has not been proven by an install/build here.
