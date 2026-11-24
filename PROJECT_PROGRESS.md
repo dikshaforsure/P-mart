@@ -1,8 +1,8 @@
 # TeddyPups Clone — Project Progress
 
-**Last updated:** 24 November 2026  
-**Current phase:** Phase 2 — Puppy catalogue and reusable profiles  
-**Status:** Phase 2 source is committed on `develop`; production build and browser verification remain blocked by unavailable network/dependencies.
+**Last updated:** 25 November 2026  
+**Current phase:** Phase 3 — Puppy profile reference-fidelity close-out (correction)  
+**Status:** Phase 4 (shared shell, How It Works and FAQ) is complete. The Phase 3 profile close-out implementation is committed on `develop` at `6e2ee141efbaf884cd015ac318dadcef5727f7f9` and verified by GitHub Actions run [#22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897): 5 focused files / 37 tests, 15 full-suite files / 73 tests, and production build all passed. Real-browser viewport checks remain outstanding. Next planned implementation phase: Gone Home, Happy Families and Contact.
 
 ## 1. Objectives
 
@@ -238,8 +238,8 @@ No puppy catalogue, profile detail implementation, other public page content, ba
 - The first two CI attempts exposed a dropped local-origin label and a stale single-match breed assertion. Both were corrected before the passing run.
 - Manual browser comparison, responsive viewport inspection, live media fetch verification and production-build verification were not performed in this phase.
 
-### Remaining work
-The profile visual refinement is one page-level step, not a site-wide completion claim. The generic placeholder routes for Gone home, Happy families, How it works, FAQ and Contact still need their own source-grounded implementation. The homepage, shared header/footer and mascots/interactions also need a separate visual review.
+### Remaining work at the end of Phase 2 (historical snapshot)
+This status predates the later Phase 3 and Phase 4 work. Phase 4 subsequently completed the shared shell, How It Works and FAQ. Gone Home, Happy Families and Contact remain the next planned implementation phase; homepage refinement and the final site-wide visual/responsive review remain outstanding.
 
 
 ### Phase 3 audit/refinement follow-up — 25 November 2026
@@ -249,7 +249,7 @@ The profile visual refinement is one page-level step, not a site-wide completion
 
 The reference-fidelity audit confirmed that the storybook profile, mixed-media gallery, care copy, origin-specific journey, letter form and adjacent-puppy links were already present. The verified remaining structure/layout gaps were corrected without changing their underlying application logic:
 
-- Restored the reference's three numbered chapters. The enquiry remains an unnumbered letter section; the paw stamp is now part of that letter.
+- The chapter-count statement in this earlier record was incorrect: it described one shared three-chapter hierarchy and an unnumbered enquiry. Direct template verification in the Phase 3 close-out below establishes four numbered chapters for available profiles and three for sold profiles; the enquiry letter is numbered in both. The paw-stamp placement correction itself remains valid.
 - Grouped the existing puppy facts, status and actions in a framed information board, with the existing care paper immediately beneath it in the same right-hand column.
 - Matched the reference gallery stage ratio at larger widths and changed the thumbnail list from a wrapping grid to a horizontally scrollable strip.
 - Matched the reference's tablet stack/vertical journey transition at 1024px and retained a sticky information column only at desktop widths.
@@ -312,3 +312,53 @@ No real-browser viewport testing, screenshots, manual mobile/tablet interaction,
 
 ### Remaining work
 Next implementation phase: Gone Home, Happy Families and Contact. Homepage refinement and the final site-wide visual/responsive audit remain outstanding.
+
+
+## Phase 3 close-out — source-accurate puppy profile hierarchy and interactions (25 November 2026)
+
+**Baseline inspected:** \`4c2ad275b707139fdcfdee37cede3c36462f6d8c\`  
+**Final code commit on \`develop\`:** \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`  
+**Phase 4 status:** Complete; this close-out corrects the earlier Phase 3 profile interpretation and does not change the Phase 4 shell, How It Works or FAQ.
+
+### Source re-check and corrected hierarchy
+
+The available Max and Korean Teacup Maltipoo templates and sold Buddy and Bailey templates were re-read directly alongside the Gone Home archive and the source mascot/motion modules. The earlier Phase 3 note incorrectly generalized the profile sequence. The reference has two distinct structures:
+
+- **Available:** Chapter 1 “hello, it's me”; Chapter 2 “what comes with [name]”; Chapter 3 “the way home” with the journey trail; Chapter 4 “dear TeddyPups…” enquiry letter.
+- **Sold:** Chapter 1 “the day they went home”; Chapter 2 “what comes with [name]”; Chapter 3 “dear TeddyPups…” enquiry letter. Sold profiles do not render the way-home chapter or journey trail.
+
+Both types retain previous/next puppy links. Available adjacency still follows the existing available catalogue sequence and wrap-around. Sold adjacency now follows the exact 27-card order in the reference Gone Home page, using an explicit slug order in the mapping layer. The 42-record \`puppies.json\` file, statuses, slugs, media URLs, origin values and record ordering were not changed.
+
+### Implementation
+
+- Made the enquiry letter a numbered chapter on both profile types. Sold profiles now render the existing validated note form with sold-specific copy and message content explaining that the puppy already found a home and visitors can ask about TeddyPups or similar puppies that may currently be available.
+- Preserved the local validation and explicit WhatsApp handoff. The form prepares a message; it does not send automatically, make an API request or claim an enquiry was delivered.
+- Added the reusable \`PuppyMascot.jsx\` using the reference inline SVG structure and \`data-p\` parts for ears, eyes/blink and other artwork, with an accessible label, speech bubble, hanging ring and an IntersectionObserver reveal/swing. The observer is disconnected during cleanup and reduced motion bypasses the reveal animation.
+- Replaced the profile journey's dotted connector with a profile-scoped paw-print mask that runs horizontally on desktop and vertically at narrower widths.
+- Wrapped only the active gallery stage media in a keyed \`.clone-gallery-page\` element and added the short 0.42-second page-turn animation. The existing media selection, video controls, thumbnails, dialog/lightbox, keyboard/touch behavior and cleanup logic remain in place.
+- Replaced the static ribbon band with a profile-only scroll-progress fill updated through a requestAnimationFrame-throttled handler. Scroll/resize listeners, pending frames and the optional ResizeObserver are cleaned up; reduced motion uses a static ribbon.
+- Kept the source animation boundary: no homepage \`ReferencePuppyJourney\`, \`PuppyDriver\` or global pointer \`PawTrail\` was mounted/copied onto individual profile routes.
+
+### Files changed
+
+Code and test changes are limited to:
+\`frontend/src/pages/PuppyProfilePage.jsx\`, \`frontend/src/pages/PuppyProfilePage.test.jsx\`, \`frontend/src/components/puppies/PuppyMascot.jsx\`, \`frontend/src/components/puppies/PuppyMascot.test.jsx\`, \`frontend/src/components/puppies/PuppyGallery.jsx\`, \`frontend/src/components/puppies/PuppyGallery.test.jsx\`, \`frontend/src/components/puppies/PuppyNoteForm.jsx\`, \`frontend/src/components/puppies/PuppyNoteForm.test.jsx\`, \`frontend/src/data/puppyData.js\`, \`frontend/src/data/puppyData.test.js\`, \`frontend/src/services/contentService.js\`, \`frontend/src/styles/index.css\` and \`.github/workflows/phase2-tests.yml\`.
+
+No dependency was added. The homepage, catalogue page/components/styles, Phase 4 pages and shell, FAQ source data, puppy JSON dataset, WhatsApp helper/config and route definitions remain outside this change.
+
+### Automated verification
+
+GitHub Actions [run #22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897) passed against the exact final code commit \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`:
+
+- Focused command: \`npx vitest run src/pages/PuppyProfilePage.test.jsx src/components/puppies/PuppyGallery.test.jsx src/components/puppies/PuppyNoteForm.test.jsx src/components/puppies/PuppyMascot.test.jsx src/data/puppyData.test.js\` — **5 files / 37 tests passed**.
+- Full command: \`npm test\` — **15 files / 73 tests passed, 0 failures**.
+- Production command: \`npm run build\` — **passed** with Vite 8.3.8.
+- CI dependency installation: \`npm install --no-audit --no-fund\` — passed.
+
+The older Phase 3 run #13 and Phase 4 runs #15/#16 listed above are retained as historical evidence for their original commits; run #22 is the close-out verification.
+
+### Manual verification and remaining work
+
+The requested viewport checks at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 and 375×812 were **not performed in a real browser** in this session. No screenshots, live media/network validation, browser-console inspection or direct WhatsApp send were performed. Automated jsdom coverage and a production build do not prove visual parity, media availability or absence of viewport overflow; no pixel-perfect claim is made.
+
+Next implementation phase: **Gone Home, Happy Families and Contact**. Those pages are not implemented by this close-out. Homepage refinement and the broader site-wide responsive/browser audit also remain outstanding.

@@ -194,7 +194,7 @@ Audit the existing Phase 3 profile implementation against the individual puppy t
 The existing chapter/storybook direction, mixed-media gallery and lightbox, facts, care copy, origin-based journey, WhatsApp note form, and previous/next service were already implemented. The material gaps found were the extra numbered enquiry chapter, care panel position, missing framed facts board, wrapping thumbnail grid, gallery responsive ratio/breakpoint differences, and stamp placement. The available Max/Korean Teacup and sold Buddy/Bailey templates were checked to distinguish available and sold profile wording.
 
 ### Implementation
-- Restored three numbered profile chapters; the enquiry remains a separate unnumbered letter.
+- The earlier record described one shared three-chapter hierarchy and an unnumbered enquiry letter. That chapter conclusion was later found to be incorrect after a direct side-by-side re-check of the individual available and sold templates; Session 8 below records the source-accurate correction.
 - Grouped the current facts/status/actions in a framed information board and moved the unchanged care paper below it in the same profile column.
 - Refined only scoped profile CSS for sticky desktop information, tablet stacking, gallery ratios and horizontal thumbnail scrolling.
 - Moved the existing decorative paw stamp inside the letter panel.
@@ -250,3 +250,46 @@ The baseline run #14 on `984652e8fde64cb715e063d556fbbebe96689dd0` passed 10 fil
 
 ### Remaining work
 Next phase: Gone Home, Happy Families and Contact. Homepage refinement and final site-wide visual consistency/responsive audit remain outstanding.
+
+
+## Session 8 — Phase 3 puppy-profile reference-fidelity close-out
+
+**Date:** 25 November 2026  
+**Branch:** \`develop\`  
+**Baseline:** \`4c2ad275b707139fdcfdee37cede3c36462f6d8c\`  
+**Final verified code commit:** \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`
+
+### User request summary
+
+Correct the remaining profile-template discrepancies using the original available and sold templates, preserve all unrelated Phase 4/catalogue/homepage behavior, add the source puppy mascot, paw-print journey connector, keyed gallery page-turn and profile ribbon scroll progress, restore sold enquiry/navigation behavior, and correct stale Phase 3 documentation.
+
+### Source audit
+
+Re-read the four individual puppy templates (available Max and Korean Teacup Maltipoo; sold Buddy and Bailey), Gone Home archive, mascot template, ScrollPuppy, LivePagePuppies, PawTrail, reference motion module, animations and reference/app CSS. The original route integration places ReferencePuppyJourney on the homepage and PuppyDriver on selected site pages, not individual puppy detail routes; global PawTrail is a separate pointer effect. None of these full runtimes was copied to profile pages.
+
+### Source-corrected behavior
+
+- Available profiles have four numbered chapters: hello, care, way home + four-step origin-specific journey, and the enquiry letter.
+- Sold profiles have three numbered chapters: day they went home, care and enquiry letter. They do not render the way-home chapter/trail.
+- Both statuses have previous/next links. Available links preserve current available-record order and wrap behavior; sold links follow the exact 27-slug order from the source Gone Home archive.
+- Sold enquiries explain that the featured puppy already found a home and are for TeddyPups or similar puppies that may currently be available. Validation and explicit “open WhatsApp, then send the message yourself” behavior are retained.
+
+### Implementation and scope
+
+Added the source mascot SVG as a reusable JSX component with local breathing/blinking/ear effects and an IntersectionObserver reveal/cleanup. Added a masked paw-print connector on the available-only journey, a keyed 0.42-second wrapper around active gallery media only, and a requestAnimationFrame-throttled progress band with scroll/resize/ResizeObserver cleanup. Reduced-motion rules simplify each nonessential animation. Added an explicit sold-profile adjacency helper using verified source order without editing the 42-record JSON snapshot. The gallery lightbox, video controls, keyboard/touch behavior, form validation, configured WhatsApp destination, media metadata and source profile data remain intact.
+
+Code files changed: \`PuppyProfilePage.jsx/.test.jsx\`, \`PuppyMascot.jsx/.test.jsx\`, \`PuppyGallery.jsx/.test.jsx\`, \`PuppyNoteForm.jsx/.test.jsx\`, \`puppyData.js/.test.js\`, \`contentService.js\`, \`styles/index.css\` and \`.github/workflows/phase2-tests.yml\`. No new dependencies or package/lockfile edits.
+
+### Verification
+
+GitHub Actions [run #22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897) passed for the exact final code commit:
+- Focused Vitest command: 5 files / 37 tests passed.
+- \`npm test\`: 15 files / 73 tests passed.
+- \`npm run build\`: passed with Vite 8.3.8.
+- Existing CI install step \`npm install --no-audit --no-fund\`: passed.
+
+No real-browser check at the six requested viewport sizes, visual screenshots, live media request check, console inspection or manual WhatsApp send was performed. The code remains subject to that visual verification; no pixel-perfect parity claim is made.
+
+### Remaining work
+
+Phase 4 remains complete. Next implementation phase: Gone Home, Happy Families and Contact. Homepage refinement and the final site-wide responsive/browser audit are still outstanding.

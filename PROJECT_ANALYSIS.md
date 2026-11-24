@@ -310,11 +310,11 @@ The profile still reads the existing JSON record by exact slug, retains sold pup
 
 ### Phase 3 audit/refinement follow-up
 
-The follow-up audit compared the live React profile against the available-puppy Max and Korean Teacup Maltipoo templates and the sold Buddy/Bailey templates, plus the reference component and CSS sources. It verified that the core profile interactions were already present. The remaining material gaps were structural rather than missing features: the enquiry had an extra numbered chapter, the care paper was detached from the facts board, the facts board lacked the reference card enclosure, thumbnails wrapped as a grid, the larger gallery ratio and tablet breakpoint differed, and the paw stamp sat outside the enquiry letter.
+The follow-up audit compared the live React profile against the available-puppy Max and Korean Teacup Maltipoo templates and the sold Buddy/Bailey templates, plus the reference component and CSS sources. It correctly identified the care-paper position, facts-board enclosure, thumbnail wrapping, gallery ratio/tablet breakpoint and paw-stamp placement as refinement areas. However, its interpretation of the chapter sequence was incomplete: it treated available and sold pages as one hierarchy and described the available enquiry letter as unnumbered. The Phase 3 close-out below supersedes that structural conclusion.
 
-These were corrected in implementation commit [`02be169`](https://github.com/dikshaforsure/P-mart/commit/02be169ed8dd690840934f3994322683f6df9e49). The available profile now follows the reference's three numbered chapters, with an unnumbered enquiry letter. The facts/status/actions are framed together, the existing care paper sits directly below in the same column, the desktop information column is sticky while narrower screens stack, and the thumbnail strip scrolls horizontally. Sold profiles use the source template's “the day they went home” Chapter 1 label.
+The historical implementation commit [`02be169`](https://github.com/dikshaforsure/P-mart/commit/02be169ed8dd690840934f3994322683f6df9e49) delivered the facts/status/actions board, preserved the care paper below it in the same column, refined desktop/tablet stacking and the thumbnail strip, and used the sold template's “the day they went home” Chapter 1 label. Its earlier chapter-count note was not correct: later direct template verification establishes **four** chapters for available profiles (hello, care, journey, enquiry letter) and **three** for sold profiles (day they went home, care, enquiry letter). The enquiry letter is numbered for both; only available profiles have the way-home journey section.
 
-The data lookup, available/sold handling, exact slugs, origin-based journey choice, adjacency service, gallery/lightbox, form validation and WhatsApp destination/message construction were preserved. The reference's API-backed envelope submission/animation was not copied: this project still explicitly prepares a WhatsApp handoff and does not claim an enquiry was sent. Existing React sold-profile journey rendering was also retained rather than changing the current origin-driven page behavior to match the sold template's shorter content hierarchy.
+The data lookup, exact slugs, origin-based available journey selection, available adjacency, gallery/lightbox, form validation and WhatsApp destination/message construction were preserved. The sold-profile journey rendering mentioned in the previous note did not match the sold source template; the Phase 3 close-out removes it and gives sold profiles their source-ordered previous/next links using the Gone Home archive slug order. The reference's API-backed envelope submission/animation was not copied: both forms still prepare an explicit WhatsApp handoff and do not claim an enquiry was sent.
 
 GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378), on the implementation commit, passed 3 focused files / 19 tests, the complete 10-file / 47-test suite and the production build. Real-browser comparison at desktop, tablet and mobile breakpoints, live image/video network checks and browser-console inspection remain unverified. The other placeholder routes, homepage and shared header/footer remain broader project work and were not included in this profile pass.
 
@@ -341,3 +341,42 @@ Some reference language describes health guarantees, ethical sourcing and reserv
 The shared shell was updated, but the homepage was not redesigned. `/gone-home`, `/happy-families` and `/contact` remain untouched placeholders. The catalogue, puppy profile, gallery, note form, puppy data/services and WhatsApp helper remain unchanged.
 
 Implementation commit [`86ae5779`](https://github.com/dikshaforsure/P-mart/commit/86ae5779f79f51c14c09de950393d34c6660c7bc) was verified by GitHub Actions [run #15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254): 4 focused files / 15 tests, 14 full-suite files / 64 tests, and a successful Vite 8.3.8 production build. Real-browser desktop/tablet/mobile comparison, overflow inspection, console/network checks and manual social/WhatsApp handoff were not performed.
+
+
+## Phase 3 close-out — source-accurate available and sold profile behavior (25 November 2026)
+
+**Destination baseline:** \`4c2ad275b707139fdcfdee37cede3c36462f6d8c\`  
+**Final verified code commit:** \`6e2ee141efbaf884cd015ac318dadcef5727f7f9\`  
+**CI:** [GitHub Actions run #22](https://github.com/dikshaforsure/P-mart/actions/runs/45480570897)
+
+### Reference files re-inspected
+
+Compared \`puppies__maltipoo-max-male.html\`, \`puppies__korean-teacup-maltipoo-female.html\`, \`puppies__maltese-buddy-male.html\`, \`puppies__bichon-bailey-boy.html\`, \`gone-home.html\`, \`mascot.html\`, \`ScrollPuppy.tsx\`, \`LivePagePuppies.ts\`, \`PawTrail.tsx\`, \`motion/reference-motion.js\`, \`animations.ts\`, \`app.css\` and \`reference.css\`. The route integration confirms that the homepage journey and global pointer PawTrail are distinct effects and are not to be mounted on individual puppy profiles.
+
+### Correct source hierarchy
+
+| Available profile | Sold profile |
+|---|---|
+| 1. hello, it's me | 1. the day they went home |
+| 2. what comes with [name] | 2. what comes with [name] |
+| 3. the way home + journey | 3. dear TeddyPups… + enquiry |
+| 4. dear TeddyPups… + enquiry | No journey chapter |
+
+Both source types have previous/next links. Available adjacency continues to follow the current available-record order with wrap-around. Sold adjacency is now resolved through a separate ordered slug list matching the 27 cards in the source Gone Home archive; the destination puppy JSON and record order were not modified.
+
+### Corrections and preserved functionality
+
+The sold journey is removed, the enquiry form appears on both statuses with correct chapter numbering, and sold-specific enquiry wording makes clear that the profile puppy has already found a home. Existing required name/phone checks, optional email validation and manual WhatsApp send handoff remain. The source mascot's SVG groups/parts are converted to JSX and animated locally with reduced-motion support and observer cleanup. The profile journey connector uses a repeating paw mask. The active gallery stage uses a keyed 0.42-second page wrapper without changing lightbox state or native video controls. The ribbon uses a rAF-throttled scroll progress update with cleanup for listeners, frames and optional ResizeObserver.
+
+The Phase 4 shared shell, How It Works, FAQ, homepage, catalogue, data JSON, route table and WhatsApp utility/config are unchanged. No TypeScript, additional runtime, external motion library or dependency was added.
+
+### Verification
+
+Run #22 on the exact code commit passed:
+- Focused: **5 files / 37 tests passed**.
+- Full suite: **15 files / 73 tests passed**.
+- Production build: **passed** (Vite 8.3.8).
+
+No manual viewport checks, screenshot capture, browser-console inspection or live image/video request validation were performed. Responsive CSS and reduced-motion rules were added and unit-tested where applicable, but their visual behavior remains unverified at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 and 375×812.
+
+Next implementation phase: **Gone Home, Happy Families and Contact**; these routes remain outside this close-out.
