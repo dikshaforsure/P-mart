@@ -93,10 +93,14 @@ GitHub Actions runs this same suite on every push to `develop`, on pull requests
 Latest recorded CI result: GitHub Actions run [#2](https://github.com/dikshaforsure/P-mart/actions/runs/45454988634) passed all 10 test files and 44 tests on 24 November 2026. See the execution record in the root `TESTING.md`.
 
 
-## Phase 3 profile visual refinement
+## Phase 3 profile reference-fidelity audit follow-up
 
-The reusable puppy profile now follows the reference's chapter-based storybook direction with a framed gallery, paper care section, journey trail, letter-style enquiry area and image-backed previous/next cards. The underlying profile data, gallery/lightbox behaviour and WhatsApp handoff were preserved.
+The existing reusable puppy profile was audited against the individual available and sold reference templates. The follow-up aligns the page with the reference's three numbered chapters, framed puppy-information board, care paper nested below the board, dotted origin journey and separate unnumbered enquiry letter. The paw stamp now sits on the letter itself.
 
-The profile-specific CSS is scoped separately from the catalogue filters and sketchbook card styles. Remaining placeholder routes (Gone home, Happy families, How it works, FAQ and Contact), plus the fuller homepage and shared header/footer treatment, remain future implementation work.
+Profile-only CSS remains scoped under `.tp-profile-storybook` and `.tp-profile-*`. The gallery thumbnail strip now scrolls horizontally, its stage uses the reference ratios at mobile and wider widths, and the desktop information column/tablet layout follows the reference breakpoints.
 
-The final Phase 3 GitHub Actions run passed **10 test files / 45 tests**. See the root `TESTING.md` for the run link and limitations.
+The existing profile data, exact-slug lookup, available/sold handling, origin-driven journey, adjacency service, gallery/lightbox behavior and puppy-specific WhatsApp enquiry remain intact. No catalogue files, data/services, route definitions, gallery component or gallery tests were changed.
+
+GitHub Actions [run #13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378) passed the focused profile/form/gallery checks (**3 files / 19 tests**), the complete frontend suite (**10 files / 47 tests**) and the Vite production build. Real-browser desktop/tablet/mobile visual validation and external media playback/network checks have not yet been performed; see root `TESTING.md`.
+
+The five placeholder routes (Gone home, Happy families, How it works, FAQ and Contact), homepage refinement and shared header/footer work remain in the broader project backlog.

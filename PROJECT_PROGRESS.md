@@ -240,3 +240,31 @@ No puppy catalogue, profile detail implementation, other public page content, ba
 
 ### Remaining work
 The profile visual refinement is one page-level step, not a site-wide completion claim. The generic placeholder routes for Gone home, Happy families, How it works, FAQ and Contact still need their own source-grounded implementation. The homepage, shared header/footer and mascots/interactions also need a separate visual review.
+
+
+### Phase 3 audit/refinement follow-up — 25 November 2026
+
+**Baseline inspected:** `77a808f947d674d9bfddf9af6872b67a9433a646`  
+**Implementation commit:** `02be169ed8dd690840934f3994322683f6df9e49`
+
+The reference-fidelity audit confirmed that the storybook profile, mixed-media gallery, care copy, origin-specific journey, letter form and adjacent-puppy links were already present. The verified remaining structure/layout gaps were corrected without changing their underlying application logic:
+
+- Restored the reference's three numbered chapters. The enquiry remains an unnumbered letter section; the paw stamp is now part of that letter.
+- Grouped the existing puppy facts, status and actions in a framed information board, with the existing care paper immediately beneath it in the same right-hand column.
+- Matched the reference gallery stage ratio at larger widths and changed the thumbnail list from a wrapping grid to a horizontally scrollable strip.
+- Matched the reference's tablet stack/vertical journey transition at 1024px and retained a sticky information column only at desktop widths.
+- Matched the sold-profile Chapter 1 wording to the reference's “the day they went home”.
+
+The code change touched only `PuppyProfilePage.jsx`, `PuppyProfilePage.test.jsx`, `PuppyNoteForm.jsx`, `styles/index.css` and the frontend CI workflow. The gallery component/tests, catalogue implementation and tests, puppy JSON/data services, WhatsApp utility and route definitions were left unchanged. The note form still validates locally and opens a prefilled WhatsApp message only after explicit user submission; no backend or persistence was added.
+
+### Verification for the audit/refinement
+
+GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378) passed against the implementation commit `02be169ed8dd690840934f3994322683f6df9e49`:
+
+- Focused profile, enquiry-form and gallery tests: **3 files, 19 tests passed**.
+- Full frontend suite: **10 files, 47 tests passed**.
+- Production build: **passed** with Vite 8.3.8 (52 modules transformed).
+
+Run [#11](https://github.com/dikshaforsure/P-mart/actions/runs/45461978023) remains the correct evidence for the earlier Phase 3 implementation/fix commit `3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837` (10 files / 45 tests). Run [#12](https://github.com/dikshaforsure/P-mart/actions/runs/45462331819) corresponds to the documentation-only commit `77a808f947d674d9bfddf9af6872b67a9433a646`; it also ran the test suite and passed 10 files / 45 tests, but is not substituted for run #11 as the original implementation evidence.
+
+No real-browser visual comparison, desktop/tablet/mobile overflow inspection, browser-console/network inspection or live native-media playback check was performed. The build and jsdom test results do not establish pixel-level parity.

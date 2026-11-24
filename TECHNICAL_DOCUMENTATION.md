@@ -332,12 +332,17 @@ Phase 2 styling is appended to the existing `index.css` and uses the Phase 1 war
 
 ## Phase 3 — Storybook profile presentation
 
-The reusable `PuppyProfilePage.jsx` keeps its existing data-loading, exact slug lookup, available/sold states, WhatsApp CTA, journey data and adjacent-navigation service. Presentation has been reorganized into four numbered chapters:
+The reusable `PuppyProfilePage.jsx` retains its existing data loading, exact-slug lookup, available/sold states, WhatsApp CTA, origin-driven journey data and adjacent-available-puppy service. The reference-fidelity follow-up is recorded in implementation commit [`02be169`](https://github.com/dikshaforsure/P-mart/commit/02be169ed8dd690840934f3994322683f6df9e49).
+
+The profile uses three numbered storybook chapters:
 1. Puppy introduction, gallery, status and facts.
-2. Paper-style care promise.
-3. Imported/local home journey with numbered trail.
-4. Letter-style puppy enquiry.
+2. Puppy care paper, nested beneath the framed information board in the right-hand profile column.
+3. Imported/local journey with a numbered dotted trail.
 
-The profile uses `.tp-profile-storybook` and `.tp-profile-*` selectors appended to `styles/index.css`. These selectors are scoped to the profile route and do not replace or override the catalogue's separate styling system.
+The enquiry is a separate, unnumbered letter panel. Its paw stamp is rendered inside the existing `.tp-profile-letter` section. The profile CSS remains scoped under `.tp-profile-storybook` and `.tp-profile-*`; catalogue selectors and catalogue behavior are not changed.
 
-`PuppyNoteForm.jsx` retains the existing validation and prefilled WhatsApp flow. The visible copy clarifies that nothing is sent until the user sends the prepared message in WhatsApp. Profile gallery behaviour remains in `PuppyGallery.jsx`; this phase did not rewrite its existing lightbox implementation.
+The refinement makes the gallery thumbnails a horizontally scrollable strip, uses a 4:5 stage on narrow screens and 5:6 from 768px, and stacks the main profile layout and journey trail below 1024px. The information column is sticky only at desktop widths. These are presentation changes; `PuppyGallery.jsx` and its keyboard/touch/video/lightbox logic are unchanged.
+
+`PuppyNoteForm.jsx` retains the field names, required-name/phone validation, phone/email checks, puppy-specific message construction, current WhatsApp URL helper, popup handling and explicit user-initiated handoff. No API, persistence or automatic-send behavior was introduced. The existing health-record disclaimer and shared care copy are unchanged.
+
+GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378) passed the three focused profile/form/gallery files (19 tests), the complete frontend suite (10 files, 47 tests) and `npm run build`. Browser-level responsive comparison, native media playback, external asset reachability and pixel-level parity remain unverified.

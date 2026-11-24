@@ -178,3 +178,42 @@ Compared the React profile and supporting components with:
 
 ### Outstanding scope
 The generic placeholder routes and the remaining homepage/shared-shell comparison are still incomplete. Do not describe the overall website as visually complete until those pages are implemented and manually checked.
+
+
+## Session 6 — Puppy profile reference-fidelity audit follow-up
+
+**Date:** 25 November 2026  
+**Branch:** `develop`  
+**Baseline:** `77a808f947d674d9bfddf9af6872b67a9433a646`  
+**Implementation:** `02be169ed8dd690840934f3994322683f6df9e49`
+
+### User request summary
+Audit the existing Phase 3 profile implementation against the individual puppy templates and reference styling before editing. Preserve existing profile behavior, keep the catalogue and unrelated routes untouched, report verified gaps first, run focused and full tests plus a production build, and update the project records without duplicating Phase 3 as a newly created feature.
+
+### Reference audit findings
+The existing chapter/storybook direction, mixed-media gallery and lightbox, facts, care copy, origin-based journey, WhatsApp note form, and previous/next service were already implemented. The material gaps found were the extra numbered enquiry chapter, care panel position, missing framed facts board, wrapping thumbnail grid, gallery responsive ratio/breakpoint differences, and stamp placement. The available Max/Korean Teacup and sold Buddy/Bailey templates were checked to distinguish available and sold profile wording.
+
+### Implementation
+- Restored three numbered profile chapters; the enquiry remains a separate unnumbered letter.
+- Grouped the current facts/status/actions in a framed information board and moved the unchanged care paper below it in the same profile column.
+- Refined only scoped profile CSS for sticky desktop information, tablet stacking, gallery ratios and horizontal thumbnail scrolling.
+- Moved the existing decorative paw stamp inside the letter panel.
+- Matched the sold-profile first chapter wording to “the day they went home”.
+- Added tests for the chapter/hierarchy and first/last available-puppy adjacency boundaries.
+- Extended the existing CI workflow to run focused profile/form/gallery tests, the complete frontend suite and the production build.
+
+### Files changed by the implementation commit
+`frontend/src/pages/PuppyProfilePage.jsx`, `frontend/src/pages/PuppyProfilePage.test.jsx`, `frontend/src/components/puppies/PuppyNoteForm.jsx`, `frontend/src/styles/index.css`, and `.github/workflows/phase2-tests.yml`.
+
+The gallery component and tests, puppy data and services, WhatsApp helper, route definitions, catalogue page/card/data/filter tests and catalogue styling were deliberately not changed. The note form's validation and explicit WhatsApp handoff remain as before; no API or persistence was introduced.
+
+### Verification
+GitHub Actions [run #13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378) passed for the exact implementation commit:
+- Focused tests: 3 files / 19 tests passed.
+- Full suite: 10 files / 47 tests passed, 0 failures.
+- Production build: passed (Vite 8.3.8, 52 modules transformed).
+
+Historical run #11 is the earlier code implementation's test evidence (10 files / 45 tests). Run #12 followed the documentation-only commit and also passed 10 files / 45 tests; it is not substituted for run #11.
+
+### Remaining verification
+No real-browser desktop/tablet/mobile comparison, overflow inspection, console/network inspection or direct remote media/native playback check was performed. Do not claim pixel-perfect parity from the automated results. Other placeholder routes, homepage and shared-shell work remain outside this profile-only follow-up.

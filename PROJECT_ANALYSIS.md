@@ -306,3 +306,14 @@ The profile still reads the existing JSON record by exact slug, retains sold pup
 - The homepage section set exists, but its compositions and mascot/scene interactions remain less complete than the reference's illustrated homepage.
 - Shared header/footer still use the earlier minimal treatment rather than the reference shell's full decorative treatment.
 - Manual browser validation at desktop, tablet and mobile sizes is still pending. This pass did not claim pixel-perfect equivalence.
+
+
+### Phase 3 audit/refinement follow-up
+
+The follow-up audit compared the live React profile against the available-puppy Max and Korean Teacup Maltipoo templates and the sold Buddy/Bailey templates, plus the reference component and CSS sources. It verified that the core profile interactions were already present. The remaining material gaps were structural rather than missing features: the enquiry had an extra numbered chapter, the care paper was detached from the facts board, the facts board lacked the reference card enclosure, thumbnails wrapped as a grid, the larger gallery ratio and tablet breakpoint differed, and the paw stamp sat outside the enquiry letter.
+
+These were corrected in implementation commit [`02be169`](https://github.com/dikshaforsure/P-mart/commit/02be169ed8dd690840934f3994322683f6df9e49). The available profile now follows the reference's three numbered chapters, with an unnumbered enquiry letter. The facts/status/actions are framed together, the existing care paper sits directly below in the same column, the desktop information column is sticky while narrower screens stack, and the thumbnail strip scrolls horizontally. Sold profiles use the source template's “the day they went home” Chapter 1 label.
+
+The data lookup, available/sold handling, exact slugs, origin-based journey choice, adjacency service, gallery/lightbox, form validation and WhatsApp destination/message construction were preserved. The reference's API-backed envelope submission/animation was not copied: this project still explicitly prepares a WhatsApp handoff and does not claim an enquiry was sent. Existing React sold-profile journey rendering was also retained rather than changing the current origin-driven page behavior to match the sold template's shorter content hierarchy.
+
+GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378), on the implementation commit, passed 3 focused files / 19 tests, the complete 10-file / 47-test suite and the production build. Real-browser comparison at desktop, tablet and mobile breakpoints, live image/video network checks and browser-console inspection remain unverified. The other placeholder routes, homepage and shared header/footer remain broader project work and were not included in this profile pass.
