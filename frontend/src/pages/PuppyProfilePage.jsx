@@ -120,8 +120,8 @@ export default function PuppyProfilePage() {
         <div className="page-shell puppy-care-layout">
           <div>
             <p className="eyebrow">With every TeddyPups puppy</p>
-            <h2>Little details, thoughtfully cared for.</h2>
-            <p>These are the shared care details described by TeddyPups. Ask the team for this puppy’s individual records.</p>
+            <h2>What comes with {name}</h2>
+            <p>Every TeddyPups puppy is described as vaccinated, dewormed and checked before going home. Ask the team for this puppy’s individual health records.</p>
           </div>
           <ul>
             {careItems.map((item) => <li key={item}><span aria-hidden="true">✳</span>{item}</li>)}

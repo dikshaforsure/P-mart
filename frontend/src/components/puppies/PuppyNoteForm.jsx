@@ -49,8 +49,8 @@ export default function PuppyNoteForm({ puppy }) {
     <section className="puppy-note-section" aria-labelledby="puppy-note-title">
       <div>
         <p className="eyebrow">A little note</p>
-        <h2 id="puppy-note-title">Tell us what’s on your mind.</h2>
-        <p>Share your details and we’ll prepare a puppy-specific WhatsApp note for you.</p>
+        <h2 id="puppy-note-title">A note about {puppyName}</h2>
+        <p>Leave your details and we’ll prepare a WhatsApp message about this puppy. Nothing is sent until you send the message in WhatsApp.</p>
       </div>
       <form className="puppy-note-form" onSubmit={submit} noValidate>
         <div className="puppy-form-row">
@@ -76,7 +76,7 @@ export default function PuppyNoteForm({ puppy }) {
           <textarea id="puppy-enquiry-message" name="message" rows="4" value={fields.message} onChange={update} maxLength="1200" />
         </label>
         <div className="puppy-note-submit">
-          <button type="submit" className="button button-dark">Prepare WhatsApp note <span aria-hidden="true">↗</span></button>
+          <button type="submit" className="button button-dark">Send my note in WhatsApp <span aria-hidden="true">↗</span></button>
           <span>Required fields are marked *</span>
         </div>
         {notice && <p className="puppy-form-notice" role="status" aria-live="polite">{notice}</p>}
