@@ -110,3 +110,41 @@ Inspect existing source and all six JSON datasets; verify puppy availability, sl
 
 ### Verification
 npm install was blocked by `EAI_AGAIN` to the npm registry. `npm run build` was attempted and is blocked because Vite is not installed. No browser, responsive, playback or console tests were run. These are not recorded as passed.
+
+## Session 4 — Puppy catalogue filters and sketchbook visual refinement
+
+**Date:** 24 November 2026  
+**Branch:** \`develop\`  
+**UI implementation commit:** \`0a1720104729a40fa770a7a849ee9ae7d9dcaa15\`
+
+### Reconstructed design brief (illustrative, not a historical verbatim prompt)
+
+The following prompt is a retrospective reconstruction written to explain the implemented work. It is not presented as the exact text of an earlier user message.
+
+> Review the current puppy catalogue in my React application and compare its UI and interactions with the source implementation in \`Khushiii720/TeddyPups-Clone\`, particularly the catalogue-related components and reference styles under \`src/\`. The catalogue must make it obvious that visitors can filter puppies; do not leave the filter controls hidden or visually indistinguishable from ordinary text.
+>
+> Rework the catalogue presentation to follow the source site's playful sketchbook direction: warm paper-like background, hand-drawn outlines, doodle details, pastel card surfaces, slightly irregular/tilted puppy cards, sticker-like labels and a filter board that looks like part of the same visual system. Keep the implementation native to this project's existing React + JavaScript/JSX + Tailwind/CSS stack; do not copy the source TypeScript architecture.
+>
+> Add accessible, visibly interactive filters for the available data: origin/location where records support it, puppy breed, collection (including Korean Teacup), and gender. Filters should combine rather than overwrite one another, update the URL query string so selections can be shared or refreshed, and show an accurate result count. Derive available choices from the real puppy dataset; do not invent local puppies or unsupported filter options just to fill the UI.
+>
+> Keep the existing data flow and routes intact, make the cards responsive, preserve meaningful image text and keyboard accessibility, and add/update focused component tests for filtering and card presentation. Do not redesign unrelated pages as part of this catalogue-only task.
+
+### Implementation actually committed
+
+- Reworked \`frontend/src/pages/PuppiesPage.jsx\` to present the catalogue heading, sketchbook treatment, visible filter board, filter chips and result count.
+- Filter selections are represented in URL search parameters. Updating one filter preserves the other active selections.
+- Filter categories cover available origin values, breeds, the Korean Teacup collection and gender. Choice availability is based on the current puppy data rather than fabricated records.
+- In the current snapshot, all 15 available puppies are marked imported. Therefore the UI should not offer a misleading “Local/In Dubai” option when there are no matching local records.
+- Updated \`frontend/src/components/puppies/PuppyCard.jsx\` with sketch-inspired framing, pastel card treatments, hand-drawn SVG decoration and sticker-style availability/video labels while retaining puppy metadata and profile navigation.
+- Added/updated \`frontend/src/pages/PuppiesPage.test.jsx\` and \`frontend/src/components/puppies/PuppyCard.test.jsx\` for the filter and card behaviour.
+- Appended catalogue-specific styling to \`frontend/src/styles/index.css\`; unrelated homepage and profile styles were not intentionally redesigned in this pass.
+
+### Verification recorded
+
+- The branch head was \`0a1720104729a40fa770a7a849ee9ae7d9dcaa15\` when this log entry was prepared.
+- GitHub Actions workflow **Phase 2 frontend tests**, run \`45458699475\`, completed with conclusion \`success\` for that implementation commit. The dependency-install and test-suite steps both completed successfully.
+- This CI result verifies the automated test workflow only. A manual visual/browser comparison at desktop and mobile sizes was not performed in this session.
+
+### Scope boundary
+
+This pass concerns the available-puppy catalogue and its cards. It does not complete a site-wide visual port: the individual puppy profile, homepage, archive, family gallery, How It Works, FAQ and contact pages still require their own source-grounded review and implementation.
