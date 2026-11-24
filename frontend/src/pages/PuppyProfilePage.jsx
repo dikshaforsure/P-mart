@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PuppyGallery from '../components/puppies/PuppyGallery';
+import PuppyMascot from '../components/puppies/PuppyMascot';
 import PuppyNoteForm from '../components/puppies/PuppyNoteForm';
 import { contentService } from '../services/contentService';
 import { getWhatsAppUrl } from '../utils/whatsapp';
@@ -50,6 +51,7 @@ function AdjacentPuppyCard({ puppy, direction }) {
     <Link
       className={'tp-profile-adjacent-card tp-profile-adjacent-card--' + direction}
       to={'/puppies/' + puppy.slug}
+      aria-label={label + ': ' + name}
     >
       <span className="tp-profile-adjacent-image">
         {image
@@ -77,23 +79,77 @@ export default function PuppyProfilePage() {
   const { slug } = useParams();
   const [puppy, setPuppy] = useState(undefined);
   const [adjacent, setAdjacent] = useState({ previous: null, next: null });
+  const profileRef = useRef(null);
+  const ribbonBandRef = useRef(null);
+  const infoBoardRef = useRef(null);
 
   useEffect(() => {
     let active = true;
     setPuppy(undefined);
-    Promise.all([
-      contentService.getPuppyBySlug(slug),
-      contentService.getAdjacentAvailablePuppies(slug),
-    ]).then(([record, neighbours]) => {
+    setAdjacent({ previous: null, next: null });
+
+    contentService.getPuppyBySlug(slug).then(async (record) => {
+      if (!record) return { record: null, neighbours: { previous: null, next: null } };
+      const neighbours = record.status === 'sold'
+        ? await contentService.getAdjacentSoldPuppies(slug)
+        : await contentService.getAdjacentAvailablePuppies(slug);
+      return { record, neighbours };
+    }).then(({ record, neighbours }) => {
       if (active) {
         setPuppy(record);
         setAdjacent(neighbours);
       }
     }).catch(() => {
-      if (active) setPuppy(null);
+      if (active) {
+        setAdjacent({ previous: null, next: null });
+        setPuppy(null);
+      }
     });
+
     return () => { active = false; };
   }, [slug]);
+
+  useEffect(() => {
+    const profile = profileRef.current;
+    const band = ribbonBandRef.current;
+    if (!puppy || !profile || !band) return undefined;
+
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    if (reducedMotion) {
+      band.style.transform = 'scaleY(1)';
+      return undefined;
+    }
+
+    const requestFrame = window.requestAnimationFrame?.bind(window)
+      || ((callback) => window.setTimeout(callback, 16));
+    const cancelFrame = window.cancelAnimationFrame?.bind(window) || window.clearTimeout.bind(window);
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const profileTop = window.scrollY + profile.getBoundingClientRect().top;
+      const scrollRange = Math.max(1, profile.scrollHeight - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, (window.scrollY - profileTop) / scrollRange));
+      band.style.transform = 'scaleY(' + progress + ')';
+    };
+    const schedule = () => {
+      if (!frame) frame = requestFrame(update);
+    };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+
+    const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(schedule);
+    resizeObserver?.observe(profile);
+    schedule();
+
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      resizeObserver?.disconnect();
+      if (frame) cancelFrame(frame);
+    };
+  }, [puppy?.slug]);
 
   if (puppy === undefined) {
     return <div className="puppy-profile-state page-shell" role="status" aria-live="polite">Opening this little story…</div>;
@@ -119,11 +175,15 @@ export default function PuppyProfilePage() {
   const whatsappMessage = 'Hi TeddyPups! I\'d love to know more about ' + name + ' (' + puppy.slug + ') — ' + (puppy.breed || 'puppy') + ', ' + gender + ', ' + (puppy.age || 'age to be confirmed') + '. Please share current photos, videos and details.';
 
   return (
-    <article className="puppy-profile-page tp-profile-storybook">
-      <div className="tp-profile-ribbon" aria-hidden="true"><span /></div>
+    <article ref={profileRef} className="puppy-profile-page tp-profile-storybook">
+      <div className="tp-profile-ribbon" aria-hidden="true">
+        <span className="tp-profile-ribbon-track">
+          <span ref={ribbonBandRef} className="tp-profile-ribbon-band" />
+        </span>
+      </div>
       <div className="puppy-profile-shell page-shell tp-profile-shell">
         <nav className="puppy-breadcrumbs tp-profile-breadcrumbs" aria-label="Breadcrumb">
-          <Link to="/puppies">Available puppies</Link>
+          <Link to={isAvailable ? '/puppies' : '/gone-home'}>{isAvailable ? 'Available puppies' : 'Gone home'}</Link>
           <span aria-hidden="true">/</span>
           <span aria-current="page">{name}</span>
         </nav>
@@ -133,7 +193,8 @@ export default function PuppyProfilePage() {
         <div className="puppy-profile-main tp-profile-main">
           <PuppyGallery puppy={puppy} />
           <div className="puppy-profile-copy tp-profile-copy">
-            <div className="tp-profile-info-board">
+            <div ref={infoBoardRef} className="tp-profile-info-board" data-tag-armed="true" data-revealed="false">
+              <PuppyMascot boardRef={infoBoardRef} puppyName={name} />
               <p className="tp-profile-handwritten">{isAvailable ? 'A little friend, a big new chapter' : 'A happy ending, kept in our sketchbook'}</p>
               <p className={'puppy-profile-status tp-profile-status ' + (isAvailable ? 'is-available' : 'is-homed')}>
                 <span className="tp-profile-status-mark" aria-hidden="true">{isAvailable ? '✳' : '♡'}</span>
@@ -141,17 +202,14 @@ export default function PuppyProfilePage() {
               </p>
               <h1>{name}</h1>
               <p className="puppy-profile-breed tp-profile-breed">{puppy.breed || 'A little TeddyPup'}</p>
-
               <dl className="puppy-profile-facts tp-profile-facts">
                 <div><dt>Breed</dt><dd>{puppy.breed || 'To be confirmed'}</dd></div>
                 <div><dt>Boy or girl</dt><dd>{gender}</dd></div>
                 <div><dt>Age</dt><dd>{puppy.age || 'To be confirmed'}</dd></div>
                 <div><dt>Where</dt><dd>{location}</dd></div>
               </dl>
-
               {puppy.description && <p className="puppy-profile-description">{puppy.description}</p>}
               {puppy.colour && <p className="puppy-profile-colour">Colour · {puppy.colour}</p>}
-
               {isAvailable ? (
                 <div className="puppy-profile-actions tp-profile-actions">
                   <a className="button button-dark" href={getWhatsAppUrl(whatsappMessage)} target="_blank" rel="noreferrer">
@@ -162,7 +220,7 @@ export default function PuppyProfilePage() {
                   </a>
                 </div>
               ) : (
-                <p className="puppy-homed-note tp-profile-homed-note">This puppy has already found a home. Have a look at the little ones currently available.</p>
+                <p className="puppy-homed-note tp-profile-homed-note">This puppy has already found a home. You can still ask our team about TeddyPups or similar puppies that may currently be available.</p>
               )}
               {isAvailable && <p className="puppy-or-send-note tp-profile-or-send">Or send us a note below ♡</p>}
             </div>
@@ -184,42 +242,46 @@ export default function PuppyProfilePage() {
         </div>
       </div>
 
-      <section className="puppy-journey-section page-shell tp-profile-journey">
-        <ChapterHeading number="3">the way home</ChapterHeading>
-        <div className="puppy-journey-heading tp-profile-journey-heading">
-          <p className="tp-profile-journey-eyebrow">{isImported ? 'Imported for you' : 'Meet them in Dubai'}</p>
-          <h2>{isImported ? 'Coming home from abroad' : name + '’s way home'}</h2>
-          <p>{isImported
-            ? 'From your first message to arrival in Dubai, TeddyPups coordinates the import journey and keeps you informed.'
-            : 'From your first visit to the first day at home, we’ll help you through each step.'}</p>
-        </div>
-        <ol className="puppy-journey-steps tp-profile-trail">
-          {journey.map((step) => (
-            <li className="puppy-journey-step" key={step.number}>
-              <span className="tp-profile-trail-number">{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {isAvailable && (
-        <div className="page-shell tp-profile-letter-wrap">
-          <PuppyNoteForm
-            puppy={puppy}
-            stamp={<span className="tp-profile-letter-stamp" aria-hidden="true"><PawStamp /></span>}
-          />
-        </div>
+        <section className="puppy-journey-section page-shell tp-profile-journey" aria-labelledby="tp-profile-journey-title">
+          <ChapterHeading number="3">the way home</ChapterHeading>
+          <div className="puppy-journey-heading tp-profile-journey-heading">
+            <p className="tp-profile-journey-eyebrow">{isImported ? 'Imported for you' : 'Meet them in Dubai'}</p>
+            <h2 id="tp-profile-journey-title">{isImported ? 'Coming home from abroad' : name + '’s way home'}</h2>
+            <p>{isImported
+              ? 'From your first message to arrival in Dubai, TeddyPups coordinates the import journey and keeps you informed.'
+              : 'From your first visit to the first day at home, we’ll help you through each step.'}</p>
+          </div>
+          <ol className="puppy-journey-steps tp-profile-trail">
+            {journey.map((step) => (
+              <li className="puppy-journey-step" key={step.number}>
+                <span className="tp-profile-trail-number" aria-hidden="true">{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
       )}
 
-      {isAvailable && (
-        <nav className="puppy-adjacent-nav page-shell tp-profile-neighbours" aria-label="Browse other available puppies">
-          <AdjacentPuppyCard puppy={adjacent.previous} direction="previous" />
-          <Link className="button button-outline tp-profile-all-puppies" to="/puppies">See every puppy <span aria-hidden="true">↗</span></Link>
-          <AdjacentPuppyCard puppy={adjacent.next} direction="next" />
-        </nav>
-      )}
+      <div className="page-shell tp-profile-letter-wrap">
+        <ChapterHeading number={isAvailable ? '4' : '3'}>dear TeddyPups…</ChapterHeading>
+        <PuppyNoteForm
+          puppy={puppy}
+          stamp={<span className="tp-profile-letter-stamp" aria-hidden="true"><PawStamp /></span>}
+        />
+      </div>
+
+      <nav
+        className="puppy-adjacent-nav page-shell tp-profile-neighbours"
+        aria-label={isAvailable ? 'Browse other available puppies' : 'Browse other gone-home puppies'}
+      >
+        <AdjacentPuppyCard puppy={adjacent.previous} direction="previous" />
+        <Link className="button button-outline tp-profile-all-puppies" to={isAvailable ? '/puppies' : '/gone-home'}>
+          {isAvailable ? 'See every puppy' : 'See more gone-home pups'} <span aria-hidden="true">↗</span>
+        </Link>
+        <AdjacentPuppyCard puppy={adjacent.next} direction="next" />
+      </nav>
     </article>
   );
 }

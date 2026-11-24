@@ -133,4 +133,20 @@ describe('PuppyGallery', () => {
     render(<PuppyGallery puppy={makePuppy({ media: [{ id: 'missing-url', kind: 'image' }] })} />);
     expect(screen.getByText('This photo is unavailable right now.')).toBeInTheDocument();
   });
+
+  it('keys the page-turn wrapper to the active media identity', () => {
+    const { container } = render(<PuppyGallery puppy={makePuppy()} />);
+    const firstPage = container.querySelector('.clone-gallery-page');
+
+    expect(firstPage).toHaveAttribute('data-media-key', 'luna-maltipoo-girl:one');
+    expect(firstPage).toHaveClass('clone-gallery-page');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next photo or video' }));
+
+    const secondPage = container.querySelector('.clone-gallery-page');
+    expect(secondPage).not.toBe(firstPage);
+    expect(secondPage).toHaveAttribute('data-media-key', 'luna-maltipoo-girl:two');
+    expect(screen.getByRole('img', { name: 'Luna photo two' })).toBeInTheDocument();
+  });
+
 });

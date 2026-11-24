@@ -6,6 +6,7 @@ export default function PuppyNoteForm({ puppy, stamp }) {
   const [errors, setErrors] = useState({});
   const [notice, setNotice] = useState('');
   const puppyName = puppy.displayName || puppy.name || puppy.breed || 'this puppy';
+  const isSold = puppy.status === 'sold';
 
   const update = (event) => {
     const { name, value } = event.target;
@@ -31,7 +32,9 @@ export default function PuppyNoteForm({ puppy, stamp }) {
 
     const message = [
       `Hello TeddyPups, my name is ${fields.name.trim()}.`,
-      `I would like to enquire about ${puppyName} (${puppy.slug}).`,
+      isSold
+        ? `I saw ${puppyName}'s story (${puppy.slug}) and understand that this puppy has already found a home. I would like to enquire about TeddyPups or similar puppies that may currently be available.`
+        : `I would like to enquire about ${puppyName} (${puppy.slug}).`,
       `Phone: ${fields.phone.trim()}`,
       fields.email.trim() ? `Email: ${fields.email.trim()}` : '',
       fields.area.trim() ? `Area: ${fields.area.trim()}` : '',
@@ -49,8 +52,10 @@ export default function PuppyNoteForm({ puppy, stamp }) {
     <section id="puppy-note" className="puppy-note-section tp-profile-letter" aria-labelledby="puppy-note-title">
       {stamp}
       <div className="tp-profile-letter-copy">
-        <h2 id="puppy-note-title">Ask about {puppyName}</h2>
-        <p>Leave your details and we’ll prepare a personal WhatsApp message about this puppy. Nothing is sent until you send the message in WhatsApp.</p>
+        <h2 id="puppy-note-title">{isSold ? 'Looking for a puppy like this?' : 'Ask about ' + puppyName}</h2>
+        <p>{isSold
+          ? 'This puppy has already found a home. Leave your details and we’ll prepare a WhatsApp message so you can ask about TeddyPups or similar puppies that may currently be available. Nothing is sent until you send the message in WhatsApp.'
+          : 'Leave your details and we’ll prepare a personal WhatsApp message about this puppy. Nothing is sent until you send the message in WhatsApp.'}</p>
       </div>
       <form className="puppy-note-form" onSubmit={submit} noValidate>
         <div className="puppy-form-row">

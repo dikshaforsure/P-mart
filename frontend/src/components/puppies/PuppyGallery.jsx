@@ -90,59 +90,65 @@ export default function PuppyGallery({ puppy }) {
     <section className="puppy-gallery" aria-label={puppyName + ' photo and video gallery'}>
       <div className="puppy-gallery-stage">
         <span className="puppy-gallery-count" aria-live="polite">{index + 1} / {media.length}</span>
-        {active.kind === 'video' ? (
-          !hasActiveUrl || failedActive ? (
-            <div className="puppy-gallery-fallback" role="status">This video is unavailable right now.</div>
+        <div
+          key={puppy.slug + ':' + mediaKey}
+          className="clone-gallery-page"
+          data-media-key={puppy.slug + ':' + mediaKey}
+        >
+          {active.kind === 'video' ? (
+            !hasActiveUrl || failedActive ? (
+              <div className="puppy-gallery-fallback" role="status">This video is unavailable right now.</div>
+            ) : (
+              <>
+                <video
+                  ref={stageVideoRef}
+                  key={mediaKey}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={active.poster?.url || undefined}
+                  width={active.width || undefined}
+                  height={active.height || undefined}
+                  style={{ ...focalStyle, width: '100%', height: '100%', objectFit: 'cover' }}
+                  aria-label={active.alt || 'Video of ' + puppyName}
+                  onError={() => setFailed((current) => ({ ...current, [mediaKey]: true }))}
+                >
+                  <source src={active.url} type="video/mp4" />
+                  Your browser does not support this video.
+                </video>
+                <button
+                  type="button"
+                  className="puppy-gallery-expand absolute bottom-4 right-4 z-10 grid size-10 place-items-center rounded-full bg-[var(--paper)]/90 text-xl text-[var(--ink)] shadow-md hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sage-dark)]"
+                  onClick={openLightbox}
+                  aria-label={'Open ' + puppyName + ' video full screen'}
+                >
+                  ⛶
+                </button>
+              </>
+            )
           ) : (
-            <>
-              <video
-                ref={stageVideoRef}
-                key={mediaKey}
-                controls
-                playsInline
-                preload="metadata"
-                poster={active.poster?.url || undefined}
-                width={active.width || undefined}
-                height={active.height || undefined}
-                style={{ ...focalStyle, width: '100%', height: '100%', objectFit: 'cover' }}
-                aria-label={active.alt || 'Video of ' + puppyName}
-                onError={() => setFailed((current) => ({ ...current, [mediaKey]: true }))}
-              >
-                <source src={active.url} type="video/mp4" />
-                Your browser does not support this video.
-              </video>
+            !hasActiveUrl || failedActive ? (
+              <div className="puppy-gallery-fallback" role="status">This photo is unavailable right now.</div>
+            ) : (
               <button
                 type="button"
-                className="puppy-gallery-expand absolute bottom-4 right-4 z-10 grid size-10 place-items-center rounded-full bg-[var(--paper)]/90 text-xl text-[var(--ink)] shadow-md hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sage-dark)]"
+                className="puppy-gallery-image-trigger absolute inset-0 block h-full w-full cursor-zoom-in border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--sage-dark)]"
                 onClick={openLightbox}
-                aria-label={'Open ' + puppyName + ' video full screen'}
+                aria-label={'Open ' + puppyName + ', photo ' + (index + 1) + ' of ' + media.length + ', full screen'}
               >
-                ⛶
+                <img
+                  key={mediaKey}
+                  src={active.url}
+                  alt={active.alt || puppyName + ', ' + (puppy.breed || '')}
+                  width={active.width || undefined}
+                  height={active.height || undefined}
+                  style={{ ...focalStyle, width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={() => setFailed((current) => ({ ...current, [mediaKey]: true }))}
+                />
               </button>
-            </>
-          )
-        ) : (
-          !hasActiveUrl || failedActive ? (
-            <div className="puppy-gallery-fallback" role="status">This photo is unavailable right now.</div>
-          ) : (
-            <button
-              type="button"
-              className="puppy-gallery-image-trigger absolute inset-0 block h-full w-full cursor-zoom-in border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--sage-dark)]"
-              onClick={openLightbox}
-              aria-label={'Open ' + puppyName + ', photo ' + (index + 1) + ' of ' + media.length + ', full screen'}
-            >
-              <img
-                key={mediaKey}
-                src={active.url}
-                alt={active.alt || puppyName + ', ' + (puppy.breed || '')}
-                width={active.width || undefined}
-                height={active.height || undefined}
-                style={{ ...focalStyle, width: '100%', height: '100%', objectFit: 'cover' }}
-                onError={() => setFailed((current) => ({ ...current, [mediaKey]: true }))}
-              />
-            </button>
-          )
-        )}
+            )
+          )}
+        </div>
         {media.length > 1 && (
           <>
             <button type="button" className="puppy-gallery-arrow puppy-gallery-previous" onClick={() => move(-1)} aria-label="Previous photo or video">←</button>

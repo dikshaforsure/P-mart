@@ -1,4 +1,4 @@
-name: Phase 2 frontend tests
+name: TeddyPups frontend tests
 
 on:
   push:
@@ -28,9 +28,9 @@ jobs:
           node-version: 22
       - name: Install frontend dependencies
         run: npm install --no-audit --no-fund
-      - name: Run focused Phase 4 page and shell tests
-        run: npx vitest run src/pages/HowItWorksPage.test.jsx src/pages/FaqPage.test.jsx src/components/layout/SiteHeader.test.jsx src/components/layout/SiteFooter.test.jsx
+      - name: Run focused Phase 3 puppy-profile tests
+        run: npx vitest run src/pages/PuppyProfilePage.test.jsx src/components/puppies/PuppyGallery.test.jsx src/components/puppies/PuppyNoteForm.test.jsx src/components/puppies/PuppyMascot.test.jsx src/data/puppyData.test.js
       - name: Run complete frontend test suite
-        run: npm run test
+        run: npm test
       - name: Build frontend for production
         run: npm run build

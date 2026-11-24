@@ -77,4 +77,24 @@ describe('PuppyNoteForm', () => {
     expect(screen.getByRole('status')).toHaveTextContent('the browser blocked the new tab');
     expect(openSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('uses sold-profile wording and prepares a truthful similar-puppy enquiry', () => {
+    const soldPuppy = { ...puppy, status: 'sold' };
+    const openSpy = vi.spyOn(window, 'open').mockReturnValue({ opener: window });
+    render(<PuppyNoteForm puppy={soldPuppy} />);
+
+    expect(screen.getByRole('heading', { level: 2, name: 'Looking for a puppy like this?' })).toBeInTheDocument();
+    expect(screen.getByText(/This puppy has already found a home/)).toHaveTextContent(/similar puppies that may currently be available/);
+
+    fillRequiredFields();
+    fireEvent.click(screen.getByRole('button', { name: /Send my note in WhatsApp/i }));
+
+    const message = new URL(openSpy.mock.calls[0][0]).searchParams.get('text');
+    expect(message).toContain("I saw Luna's story (luna-maltipoo-girl)");
+    expect(message).toContain('this puppy has already found a home');
+    expect(message).toContain('similar puppies that may currently be available');
+    expect(message).not.toContain('I would like to enquire about Luna (luna-maltipoo-girl).');
+    expect(screen.getByRole('status')).toHaveTextContent('Please send the message there to contact TeddyPups.');
+  });
+
 });
