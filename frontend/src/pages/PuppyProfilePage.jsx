@@ -128,63 +128,61 @@ export default function PuppyProfilePage() {
           <span aria-current="page">{name}</span>
         </nav>
 
-        <ChapterHeading number="1">{isAvailable ? 'hello, it’s me' : 'a little story from teddy’s sketchbook'}</ChapterHeading>
+        <ChapterHeading number="1">{isAvailable ? 'hello, it’s me' : 'the day they went home'}</ChapterHeading>
 
         <div className="puppy-profile-main tp-profile-main">
           <PuppyGallery puppy={puppy} />
           <div className="puppy-profile-copy tp-profile-copy">
-            <p className="tp-profile-handwritten">{isAvailable ? 'A little friend, a big new chapter' : 'A happy ending, kept in our sketchbook'}</p>
-            <p className={'puppy-profile-status tp-profile-status ' + (isAvailable ? 'is-available' : 'is-homed')}>
-              <span className="tp-profile-status-mark" aria-hidden="true">{isAvailable ? '✳' : '♡'}</span>
-              {isAvailable ? 'Available' : 'Gone home'}
-            </p>
-            <h1>{name}</h1>
-            <p className="puppy-profile-breed tp-profile-breed">{puppy.breed || 'A little TeddyPup'}</p>
+            <div className="tp-profile-info-board">
+              <p className="tp-profile-handwritten">{isAvailable ? 'A little friend, a big new chapter' : 'A happy ending, kept in our sketchbook'}</p>
+              <p className={'puppy-profile-status tp-profile-status ' + (isAvailable ? 'is-available' : 'is-homed')}>
+                <span className="tp-profile-status-mark" aria-hidden="true">{isAvailable ? '✳' : '♡'}</span>
+                {isAvailable ? 'Available' : 'Gone home'}
+              </p>
+              <h1>{name}</h1>
+              <p className="puppy-profile-breed tp-profile-breed">{puppy.breed || 'A little TeddyPup'}</p>
 
-            <dl className="puppy-profile-facts tp-profile-facts">
-              <div><dt>Breed</dt><dd>{puppy.breed || 'To be confirmed'}</dd></div>
-              <div><dt>Boy or girl</dt><dd>{gender}</dd></div>
-              <div><dt>Age</dt><dd>{puppy.age || 'To be confirmed'}</dd></div>
-              <div><dt>Where</dt><dd>{location}</dd></div>
-            </dl>
+              <dl className="puppy-profile-facts tp-profile-facts">
+                <div><dt>Breed</dt><dd>{puppy.breed || 'To be confirmed'}</dd></div>
+                <div><dt>Boy or girl</dt><dd>{gender}</dd></div>
+                <div><dt>Age</dt><dd>{puppy.age || 'To be confirmed'}</dd></div>
+                <div><dt>Where</dt><dd>{location}</dd></div>
+              </dl>
 
-            {puppy.description && <p className="puppy-profile-description">{puppy.description}</p>}
-            {puppy.colour && <p className="puppy-profile-colour">Colour · {puppy.colour}</p>}
+              {puppy.description && <p className="puppy-profile-description">{puppy.description}</p>}
+              {puppy.colour && <p className="puppy-profile-colour">Colour · {puppy.colour}</p>}
 
-            {isAvailable ? (
-              <div className="puppy-profile-actions tp-profile-actions">
-                <a className="button button-dark" href={getWhatsAppUrl(whatsappMessage)} target="_blank" rel="noreferrer">
-                  Ask about {name} on WhatsApp <span aria-hidden="true">↗</span>
-                </a>
-                <a className="button button-outline" href="#puppy-note">
-                  Send an enquiry <span aria-hidden="true">↓</span>
-                </a>
+              {isAvailable ? (
+                <div className="puppy-profile-actions tp-profile-actions">
+                  <a className="button button-dark" href={getWhatsAppUrl(whatsappMessage)} target="_blank" rel="noreferrer">
+                    Ask about {name} on WhatsApp <span aria-hidden="true">↗</span>
+                  </a>
+                  <a className="button button-outline" href="#puppy-note">
+                    Send an enquiry <span aria-hidden="true">↓</span>
+                  </a>
+                </div>
+              ) : (
+                <p className="puppy-homed-note tp-profile-homed-note">This puppy has already found a home. Have a look at the little ones currently available.</p>
+              )}
+              {isAvailable && <p className="puppy-or-send-note tp-profile-or-send">Or send us a note below ♡</p>}
+            </div>
+
+            <div className="tp-profile-paper">
+              <ChapterHeading number="2">what comes with {name}</ChapterHeading>
+              <div className="tp-profile-paper-content">
+                <div>
+                  <h2>Every Teddy Pup comes</h2>
+                  <p>Every TeddyPups puppy is described as vaccinated, dewormed and checked before going home. Ask the team for this puppy’s individual health records.</p>
+                </div>
+                <ul>
+                  {careItems.map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
+                </ul>
               </div>
-            ) : (
-              <p className="puppy-homed-note tp-profile-homed-note">This puppy has already found a home. Have a look at the little ones currently available.</p>
-            )}
-            {isAvailable && <p className="puppy-or-send-note tp-profile-or-send">Or send us a note below ♡</p>}
+              <span className="tp-profile-paper-note" aria-hidden="true">a little promise from us ♡</span>
+            </div>
           </div>
         </div>
       </div>
-
-      <section className="puppy-care-section tp-profile-care">
-        <div className="page-shell">
-          <div className="tp-profile-paper">
-            <ChapterHeading number="2">what comes with {name}</ChapterHeading>
-            <div className="tp-profile-paper-content">
-              <div>
-                <h2>Every Teddy Pup comes</h2>
-                <p>Every TeddyPups puppy is described as vaccinated, dewormed and checked before going home. Ask the team for this puppy’s individual health records.</p>
-              </div>
-              <ul>
-                {careItems.map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
-              </ul>
-            </div>
-            <span className="tp-profile-paper-note" aria-hidden="true">a little promise from us ♡</span>
-          </div>
-        </div>
-      </section>
 
       <section className="puppy-journey-section page-shell tp-profile-journey">
         <ChapterHeading number="3">the way home</ChapterHeading>
@@ -208,9 +206,10 @@ export default function PuppyProfilePage() {
 
       {isAvailable && (
         <div className="page-shell tp-profile-letter-wrap">
-          <div className="tp-profile-letter-stamp" aria-hidden="true"><PawStamp /></div>
-          <ChapterHeading number="4">dear TeddyPups…</ChapterHeading>
-          <PuppyNoteForm puppy={puppy} />
+          <PuppyNoteForm
+            puppy={puppy}
+            stamp={<span className="tp-profile-letter-stamp" aria-hidden="true"><PawStamp /></span>}
+          />
         </div>
       )}
 

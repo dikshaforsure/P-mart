@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getWhatsAppUrl } from '../../utils/whatsapp';
 
-export default function PuppyNoteForm({ puppy }) {
+export default function PuppyNoteForm({ puppy, stamp }) {
   const [fields, setFields] = useState({ name: '', phone: '', email: '', area: '', message: '' });
   const [errors, setErrors] = useState({});
   const [notice, setNotice] = useState('');
@@ -47,6 +47,7 @@ export default function PuppyNoteForm({ puppy }) {
 
   return (
     <section id="puppy-note" className="puppy-note-section tp-profile-letter" aria-labelledby="puppy-note-title">
+      {stamp}
       <div className="tp-profile-letter-copy">
         <h2 id="puppy-note-title">Ask about {puppyName}</h2>
         <p>Leave your details and we’ll prepare a personal WhatsApp message about this puppy. Nothing is sent until you send the message in WhatsApp.</p>
