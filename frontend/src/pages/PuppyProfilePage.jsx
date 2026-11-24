@@ -189,6 +189,7 @@ export default function PuppyProfilePage() {
       <section className="puppy-journey-section page-shell tp-profile-journey">
         <ChapterHeading number="3">the way home</ChapterHeading>
         <div className="puppy-journey-heading tp-profile-journey-heading">
+          <p className="tp-profile-journey-eyebrow">{isImported ? 'Imported for you' : 'Meet them in Dubai'}</p>
           <h2>{isImported ? 'Coming home from abroad' : name + '’s way home'}</h2>
           <p>{isImported
             ? 'From your first message to arrival in Dubai, TeddyPups coordinates the import journey and keeps you informed.'

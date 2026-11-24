@@ -1167,3 +1167,9 @@ img, video { display: block; max-width: 100%; }
   .tp-profile-adjacent-card,
   .tp-profile-storybook .puppy-gallery-thumbnail { transition: none; }
 }
+
+.tp-profile-journey-eyebrow {
+  margin: 0 0 12px;
+  color: #9a5934;
+  font: italic 16px/1.25 var(--serif);
+}
