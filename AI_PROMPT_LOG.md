@@ -43,3 +43,42 @@ No application code, components, services, API routes, models, dependencies, loc
 - List only tools/actions actually used and files actually changed.
 - Keep tests NOT RUN until executed with evidence.
 - Distinguish proposals from implemented behaviour.
+
+
+## Session 2 — Phase 1 frontend foundation and homepage
+
+**Date:** 24 November 2026  
+**Phase:** 1 — Frontend setup, shared layout, routes and homepage  
+**Assistant:** ChatGPT. A precise model/version identifier was not captured in the available execution metadata, so none is asserted.
+
+### User prompt (faithful summary, not verbatim)
+The user asked to inspect the current repository, create a self-contained `frontend/` folder with Vite, React, JavaScript/JSX, Tailwind CSS and React Router DOM, establish all public routes and shared layout, implement the homepage section-by-section, keep data access behind service functions for later Express integration, organise animation logic, test responsive behaviour/build and update project docs without starting catalogue/profile/other-page/backend implementation.
+
+### Tools and actions actually used
+- GitHub connector to re-inspect the Phase 0 branch, tracked tree, README and existing documentation.
+- Web browser to revisit the live homepage and inspect the supplied-host linked images and selected puppy-profile image links.
+- Local container filesystem to write frontend source files and documentation.
+- Node.js syntax checks and globally available TypeScript compiler parser for JavaScript/JSX syntax validation.
+- npm install was attempted but failed because the environment could not resolve registry.npmjs.org.
+
+### Files and work added
+- Created a self-contained Vite React app under `frontend/`.
+- Added router, shared header/mobile nav/footer/layout, route placeholders and not-found page.
+- Added homepage sections as separate components.
+- Added local content fixtures, a service adapter boundary, WhatsApp URL helper and scroll-reveal hook.
+- Added source-host reference media mapping and asset source register; these are external URLs, not downloaded local binaries.
+- Added frontend README, `.gitignore` and `.env.example`.
+- Added the Phase 1 progress and test evidence sections to existing root documentation.
+
+### Verification
+- Node v22.16.0 and npm 10.9.2 observed.
+- Plain JS `node --check`: passed.
+- 25 JS/JSX files parsed with 0 syntax diagnostics via the TypeScript compiler parser (used only for source validation; no TypeScript files/dependency added).
+- Relative import scan: passed.
+- No TypeScript source files: confirmed.
+- CSS brace balance: passed.
+- npm install: failed with EAI_AGAIN on registry.npmjs.org.
+- Vite development server, production build, browser interactions and responsive viewport checks: NOT RUN.
+
+### Scope boundary
+No backend, MongoDB, API, catalogue, individual profile, gone-home, happy-families, how-it-works, FAQ or contact-page implementation was started. These routes are placeholders only.
