@@ -91,3 +91,12 @@ GitHub Actions runs this same suite on every push to `develop`, on pull requests
 
 
 Latest recorded CI result: GitHub Actions run [#2](https://github.com/dikshaforsure/P-mart/actions/runs/45454988634) passed all 10 test files and 44 tests on 24 November 2026. See the execution record in the root `TESTING.md`.
+
+
+## Phase 3 profile visual refinement
+
+The reusable puppy profile now follows the reference's chapter-based storybook direction with a framed gallery, paper care section, journey trail, letter-style enquiry area and image-backed previous/next cards. The underlying profile data, gallery/lightbox behaviour and WhatsApp handoff were preserved.
+
+The profile-specific CSS is scoped separately from the catalogue filters and sketchbook card styles. Remaining placeholder routes (Gone home, Happy families, How it works, FAQ and Contact), plus the fuller homepage and shared header/footer treatment, remain future implementation work.
+
+The final Phase 3 GitHub Actions run passed **10 test files / 45 tests**. See the root `TESTING.md` for the run link and limitations.

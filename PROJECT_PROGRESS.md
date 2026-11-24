@@ -216,3 +216,27 @@ No puppy catalogue, profile detail implementation, other public page content, ba
 - npm installation failed with `EAI_AGAIN` resolving `registry.npmjs.org`; `npm run build` consequently fails because Vite is not installed. No production build or dev server success is claimed.
 - Exact-host catalogue/profile checks, direct media load tests, browser route tests, responsive viewport checks and browser-console checks remain incomplete. The alternative host crawl is recorded separately in `PROJECT_ANALYSIS.md` and `TESTING.md`.
 - Backend, authentication, database, the full FAQ/family/contact/How It Works pages and catalogue filtering/search/sort were not started.
+
+
+## Phase 3 — Puppy profile storybook refinement
+
+**Date:** 25 November 2026  
+**Branch:** `develop`  
+**Implementation:** `309cb4bae695b43bef91e74f1d38c2fb2341a81a`  
+**Follow-up fixes:** `f689f9c27421b129f5c3c4797574c36d5683cee5`, `3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837`
+
+### Completed
+- Refined the reusable `/puppies/:slug` page into a TeddyPups-inspired storybook layout with numbered chapter headings, warm paper background, decorative ribbon, framed gallery treatment, paper-style care panel, numbered journey trail, letter-style enquiry panel and adjacent puppy preview cards.
+- Retained exact-slug lookup and data-driven available/sold profiles; the same page continues to render the existing dataset records.
+- Preserved the gallery's existing image/video switching, full-screen viewer, keyboard navigation, touch swipe, native video controls, and missing-media fallbacks.
+- Preserved the profile WhatsApp CTA and the note form's local validation and explicit user-initiated WhatsApp handoff. No enquiry API or database persistence was introduced.
+- Kept profile-only CSS selectors scoped under `.tp-profile-storybook`; the catalogue's new sketchbook styling and query-param filters were not modified.
+- Extended profile and note-form tests to cover the chapter structure, enquiry heading and adjacent puppy previews.
+
+### Verification
+- GitHub Actions run [#11](https://github.com/dikshaforsure/P-mart/actions/runs/45461978023) passed for commit `3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837`: **10 test files, 45 tests passed, 0 failed**.
+- The first two CI attempts exposed a dropped local-origin label and a stale single-match breed assertion. Both were corrected before the passing run.
+- Manual browser comparison, responsive viewport inspection, live media fetch verification and production-build verification were not performed in this phase.
+
+### Remaining work
+The profile visual refinement is one page-level step, not a site-wide completion claim. The generic placeholder routes for Gone home, Happy families, How it works, FAQ and Contact still need their own source-grounded implementation. The homepage, shared header/footer and mascots/interactions also need a separate visual review.

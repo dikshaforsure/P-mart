@@ -291,3 +291,18 @@ After the initial profile review, the remaining available puppy profile paths we
 This matches the media-array lengths in `puppies.json` for all 15 currently available slugs. The additional paths opened were `maltipoo-cavapoo-male`, `toy-poodle-male-female`, `maltipoo-female-2`, `pomeranian-female`, `shitzu-female`, `shitzu-male`, `maltipoo-female-1`, `maltipoo-female`, `korean-teacup-pomeranian-1`, `korean-teacup-pomeranian` and `korean-teacup-pomeranian-male`.
 
 All 15 of these accessible-host profile pages label the puppies as In Dubai. That does not resolve the original-host conflict: no profile on the specified `puppy.instabizweb.com` host was re-opened successfully in this phase, and the existing JSON continues to mark the 15 origins Imported. Keep this source/hostname distinction visible in future data corrections.
+
+
+## Phase 3 reference comparison — profile page and remaining site gaps
+
+### Profile page comparison
+The reference profile template `src/templates/puppies__maltipoo-max-male.html` was compared with the existing reusable React profile. The reference structure uses a numbered chapter sequence, storybook media frame, paper care panel, dotted paw-trail journey, letter-style enquiry and image-backed previous/next puppy links. These elements are now represented in `PuppyProfilePage.jsx`, `PuppyNoteForm.jsx` and scoped additions to `styles/index.css`.
+
+### Behaviour deliberately retained
+The profile still reads the existing JSON record by exact slug, retains sold puppy records as historical profiles, uses the existing available-puppy adjacency service, renders mixed image/video media from `media[]`, and uses the current WhatsApp helper for contact. The full-screen gallery dialog and navigation were already implemented before this refinement and were preserved.
+
+### Remaining comparison gaps
+- `/gone-home`, `/happy-families`, `/how-it-works`, `/faq` and `/contact` are still generic placeholder routes in the React application despite corresponding source templates being available.
+- The homepage section set exists, but its compositions and mascot/scene interactions remain less complete than the reference's illustrated homepage.
+- Shared header/footer still use the earlier minimal treatment rather than the reference shell's full decorative treatment.
+- Manual browser validation at desktop, tablet and mobile sizes is still pending. This pass did not claim pixel-perfect equivalence.

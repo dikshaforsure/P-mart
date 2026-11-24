@@ -269,3 +269,22 @@ The workflow `.github/workflows/phase2-tests.yml` runs on pushes to `develop`, p
 **Latest comparison regression execution: PASS.** GitHub Actions run [#2](https://github.com/dikshaforsure/P-mart/actions/runs/45454988634) completed successfully on `develop` at commit `5c4870e8667376dcfce9634e77b2a28f8d02053f`. It passed all **10 test files and 44 tests**, with **0 failures**. The earlier 41-test run remains recorded as historical evidence.
 
 **Execution result: PASS.** GitHub Actions run [#1](https://github.com/dikshaforsure/P-mart/actions/runs/45453480755) completed successfully for commit `a797ca038ae4bcea1573e3364aa620d34bcaa3ea` on `develop`. Dependency installation completed, then `npm run test` executed with **10 test files passed and 41 tests passed; 0 failed**. Runtime: Node v22.23.5, npm 10.9.9, Vitest 5.1.1.
+
+
+## 18. Phase 3 — profile storybook regression coverage
+
+**Tested commit:** `3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837`
+
+The existing suite was extended for the storybook profile treatment and puppy-specific enquiry heading. Existing tests continue to cover data lookup, available/sold profiles, gallery/lightbox interactions, note validation, WhatsApp URL construction, catalogue filters/cards and router wiring.
+
+| Command/check | Result | Evidence |
+|---|---|---|
+| `npm run test` in GitHub Actions | **PASS** | Run [#11](https://github.com/dikshaforsure/P-mart/actions/runs/45461978023) |
+| Test files | **10 passed** | Vitest 5.1.1 |
+| Individual tests | **45 passed, 0 failed** | Run #11 logs |
+| Initial profile CI attempt | FAIL, corrected | The local-origin journey label was not present in the redesigned heading |
+| Follow-up profile CI attempt | FAIL, corrected | The breed is intentionally shown twice (subtitle and facts); assertion was updated to check both |
+| Production build | NOT RUN in this phase | The workflow executes the automated test suite only |
+| Manual visual/browser comparison | NOT RUN | Desktop/tablet/mobile validation remains a manual step |
+
+The successful run verifies component/data behaviour in jsdom. It does not prove pixel-level visual parity, remote media availability, native video playback in a real browser or production build output.

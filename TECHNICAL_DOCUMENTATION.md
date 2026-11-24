@@ -328,3 +328,16 @@ Unknown profile slugs return a profile not-found state. Sold records remain reso
 
 ### Styling/accessibility
 Phase 2 styling is appended to the existing `index.css` and uses the Phase 1 warm-paper/ink/sage/serif tokens. The catalogue is three columns at wide desktop and two on mobile; profiles use a desktop gallery/details split and stack at narrower widths. Gallery thumbnails/arrows, list semantics, labels, status messages, visible focus and input error descriptions are implemented. Browser-level accessibility and responsive checks remain pending.
+
+
+## Phase 3 — Storybook profile presentation
+
+The reusable `PuppyProfilePage.jsx` keeps its existing data-loading, exact slug lookup, available/sold states, WhatsApp CTA, journey data and adjacent-navigation service. Presentation has been reorganized into four numbered chapters:
+1. Puppy introduction, gallery, status and facts.
+2. Paper-style care promise.
+3. Imported/local home journey with numbered trail.
+4. Letter-style puppy enquiry.
+
+The profile uses `.tp-profile-storybook` and `.tp-profile-*` selectors appended to `styles/index.css`. These selectors are scoped to the profile route and do not replace or override the catalogue's separate styling system.
+
+`PuppyNoteForm.jsx` retains the existing validation and prefilled WhatsApp flow. The visible copy clarifies that nothing is sent until the user sends the prepared message in WhatsApp. Profile gallery behaviour remains in `PuppyGallery.jsx`; this phase did not rewrite its existing lightbox implementation.

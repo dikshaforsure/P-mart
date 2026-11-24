@@ -148,3 +148,33 @@ The following prompt is a retrospective reconstruction written to explain the im
 ### Scope boundary
 
 This pass concerns the available-puppy catalogue and its cards. It does not complete a site-wide visual port: the individual puppy profile, homepage, archive, family gallery, How It Works, FAQ and contact pages still require their own source-grounded review and implementation.
+
+
+## Session 5 — Puppy profile storybook visual refinement
+
+**Date:** 25 November 2026  
+**Branch:** `develop`
+
+### User request summary
+Inspect the latest `develop` branch and the matching reference source, treat the user's newly implemented catalogue filters/cards as completed, identify gaps on the remaining pages, report inspected files and proposed changes first, then implement the next phase incrementally with appropriate tests and without unrelated refactoring.
+
+### Reference comparison
+Compared the React profile and supporting components with:
+- Reference `src/templates/puppies__maltipoo-max-male.html`
+- `src/components.tsx` and `src/Template.tsx` for gallery, full-screen viewer and enquiry patterns
+- `src/reference.css` and `src/app.css` for storybook profile styling
+- Reference `home.html`, `how-it-works.html`, `faq.html`, `contact.html`, `gone-home.html`, `happy-families.html` and shared shell templates to document the remaining site-wide gaps.
+
+### Implementation
+- Added a profile-only storybook presentation: chapter markers, paper-style care promise, journey trail, letter-style enquiry treatment and previous/next puppy image cards.
+- Preserved existing data lookup, available/sold behaviour, WhatsApp contact, gallery/lightbox and adjacency service logic.
+- Extended `PuppyProfilePage.test.jsx` and `PuppyNoteForm.test.jsx`.
+- Appended profile-only style rules to `frontend/src/styles/index.css`; catalogue page/card styles and URL query filter logic were not modified.
+
+### Verification
+- Final GitHub Actions run [#11](https://github.com/dikshaforsure/P-mart/actions/runs/45461978023) passed: 10 test files and 45 tests, zero failures.
+- Two earlier runs exposed test regressions and were corrected; the successful run is the final verification evidence.
+- Manual visual browser checks and a production build were not performed here.
+
+### Outstanding scope
+The generic placeholder routes and the remaining homepage/shared-shell comparison are still incomplete. Do not describe the overall website as visually complete until those pages are implemented and manually checked.
