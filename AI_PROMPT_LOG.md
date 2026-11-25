@@ -102,8 +102,39 @@ No application code, components, services, API routes, models, dependencies, loc
 **Phase:** 1 — Frontend setup, shared layout, routes and homepage  
 **Assistant:** ChatGPT. A precise model/version identifier was not captured in the available execution metadata, so none is asserted.
 
-### User prompt (faithful summary, not verbatim)
-The user asked to inspect the current repository, create a self-contained `frontend/` folder with Vite, React, JavaScript/JSX, Tailwind CSS and React Router DOM, establish all public routes and shared layout, implement the homepage section-by-section, keep data access behind service functions for later Express integration, organise animation logic, test responsive behaviour/build and update project docs without starting catalogue/profile/other-page/backend implementation.
+### Filtered user prompt summary (structured; not verbatim)
+
+The user issued a Phase 1 delivery and repository-branch instruction after the frontend implementation had been completed. The task was to publish the existing Phase 1 source code to the repository's existing `develop` branch and establish that branch as the canonical working branch for all future project development.
+
+**1. Source preservation and delivery**
+
+- Use the already completed Phase 1 frontend files. Do not recreate the application, regenerate the source from scratch or provide only a ZIP archive.
+- Add the complete `frontend/` directory and its source/configuration/assets to the repository so the implementation is available directly on GitHub.
+- Preserve the Phase 0 documentation and all existing repository history and content. Avoid unrelated deletions, rewrites or restructuring.
+
+**2. Canonical branch policy**
+
+- Use the existing `develop` branch as the primary working branch for the project from this point forward.
+- Treat `develop` as the core branch for every subsequent development phase and related documentation changes.
+- Do not create additional branches for this workflow and do not push Phase 1 work to `main`.
+
+**3. Commit and push requirements**
+
+- Work directly on the existing `develop` branch and publish the complete Phase 1 frontend implementation to `origin/develop`.
+- Create a meaningful commit containing the Phase 1 source and required supporting files.
+- Do not force-push, rewrite history or require the user to perform manual Git operations.
+- The user authorized reasonable implementation and repository-handling decisions needed to complete this delivery.
+
+**4. Remote verification and completion report**
+
+- After the push, verify on GitHub that the expected frontend files and folder structure are present on `develop`.
+- Report the resulting commit SHA and provide the direct repository/branch link.
+- Be explicit about any permission, GitHub or verification blocker. Do not claim a successful push or remote file verification without evidence.
+
+**Scope boundary**
+
+- This instruction concerns delivery of the already completed Phase 1 frontend and future branch governance. It does not authorize recreating the frontend or expanding into later application phases.
+- Preserve the Phase 0 documentation and existing implementation records while making only the changes required for the Phase 1 branch delivery.
 
 ### Tools and actions actually used
 - GitHub connector to re-inspect the Phase 0 branch, tracked tree, README and existing documentation.
