@@ -504,3 +504,20 @@ Implementation commit 34185b01a587ebdfef6172cba304ad09600f2309. CI run #62 passe
 The first transition implementation used fixed CSS delays. A follow-up changed the six print delays to derive from viewport width and the runner width (the same clamp used by the CSS at the target viewport), calculating the time at which the dog has traversed each print's horizontal position and adding a short trailing offset. This keeps the marks behind the runner at different viewport widths. The six positions, runner movement and phase durations are unchanged.
 
 Follow-up commit `ce8028e8929694ae5014416c6c34b985f9a63fc1`. CI run #64 passed 5 focused files / 33 tests, full suite 24 files / 121 tests and production build (68 modules transformed).
+## Teddy runner likeness and visible paw-trail correction — 25 November 2026
+
+### Screenshot findings
+
+The owner supplied a current loader screenshot (471 × 169) and the original reference loading screenshot (1918 × 1053). The interim dog used a separately drawn angular head with pointed side shapes, rather than the site's round, curly poodle mascot. The current runner also crossed the full viewport in 1480ms, then ended at the far-right edge. The fixed paw-delay calculation was multiplying an already-millisecond value by 1000, so prints were scheduled far outside the transition and were effectively invisible.
+
+### Runner art
+
+Reused the existing brand artwork in `frontend/src/components/puppies/PuppyMascot.jsx`. In `TeddyRunner.jsx`, exposed its full-body/haunch and all four original legs, kept the fluffy poodle head and original closed happy-eye shapes, blush, brown collar and heart tag, and removed the ledge-paws group. This keeps the loader in the established mascot style and avoids an unrelated cartoon asset.
+
+### Motion and paws
+
+Runner width: `clamp(100px, 8.5vw, 172px)`. Its horizontal endpoint is `58vw` after entering at `-110%`, placing Teddy right-of-centre. Run duration: `3000ms` (was `1480ms`). Entrance/exit remain `440ms` / `540ms`. Five pawprints are placed at 31%, 36.5%, 42%, 47.5% and 53% width. Each appears after Teddy passes that point, fades in over `280ms` to 88% opacity and stays visible through the rest of the run.
+
+`getPawDelay()` now keeps its unit in milliseconds: it adds an 80ms trailing offset and returns `Math.round(passedPositionTime + 80) + 'ms'`. The previous multiplication by 1000 scheduled prints thousands of seconds too late. The CSS runner width/route and JS delay calculation use matching responsive bounds.
+
+Tests cover the five positions, ascending positive delays within the 3000ms run, the transition state sequence and reduced-motion/timer behavior. GitHub Actions run #68 passed 5 focused files / 33 tests, full 24 files / 122 tests and Vite 8.3.8 production build (68 modules transformed). Browser animation/visual likeness remains unverified in Chrome.

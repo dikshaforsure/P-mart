@@ -505,3 +505,20 @@ Transition duration is approximately 2460ms total: 440ms curtain drop, 1480ms do
 | Production build | **PASS — Vite 8.3.8; 68 modules transformed** |
 
 The six print delays are calculated from viewport width and responsive runner width so each pawprint appears after Teddy has passed that position. Route behavior and animation phase durations remain unchanged.
+## Teddy runner likeness and paw-trail correction — 25 November 2026
+
+**Implementation commit:** https://github.com/dikshaforsure/P-mart/commit/7690301400560391de04932073ad0a175c690356
+**GitHub Actions:** https://github.com/dikshaforsure/P-mart/actions/runs/45600190889
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 24 files / 122 tests** |
+| PageTransition lifecycle and paw placement | **PASS — 6 tests** |
+| Five reference-position pawprints | **PASS — 31%, 36.5%, 42%, 47.5%, 53%** |
+| Paw delay order and 3000ms run bounds | **PASS** |
+| Reduced motion and transition timer cleanup | **PASS** |
+| Production build | **PASS — Vite 8.3.8; 68 modules transformed** |
+| Real-browser mascot/gait/paw-visibility inspection | **NOT RUN** |
+
+The 3-second runner phase is preceded by a 440ms curtain entrance and followed by a 540ms upward exit. CSS motion is not rendered by jsdom.

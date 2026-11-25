@@ -58,3 +58,12 @@ No binary files were downloaded or added to the repository. Direct network verif
 | Warm quilt/diamond curtain background | frontend/src/styles/index.css | CSS gradients only; no raster or external asset. |
 
 The running-dog SVG is local authored artwork for the transition only; it does not replace any of the reference site's puppy/family photography or the existing mascot used on other pages.
+## Cross-route loading runner asset update
+
+| Usage | Destination component | Notes |
+|---|---|---|
+| Full-body TeddyPups runner in page-transition curtain | `frontend/src/components/layout/TeddyRunner.jsx` | Reuses existing local vector path data from `frontend/src/components/puppies/PuppyMascot.jsx`; the original poodle head, body, four legs, tail, collar and heart tag are retained. The hidden body/haunch groups are revealed and the ledge-paws are omitted for the running pose. No third-party or remote image. |
+| Pawprint trail | `frontend/src/components/shared/PawMark.jsx` | Existing local SVG reused for five sequential marks. |
+| Quilt/diamond curtain | `frontend/src/styles/index.css` | CSS gradients only. |
+
+The first transition revision used a temporary separately drawn dog. It was replaced by the existing brand mascot vector paths in the follow-up so the loader matches the project's established puppy artwork. No external asset was downloaded or added.

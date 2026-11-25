@@ -136,7 +136,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
 | 6 | Homepage reference-fidelity refinement | Implemented on develop; interactive mascot, slower paw trail, scalloped shared header and route scroll reset committed; CI run #56 green; real-browser visual QA outstanding |
-| 7 | Integrated browser/responsive QA across all public routes | In progress — shared route-transition curtain implemented; browser/responsive visual QA remains open |
+| 7 | Integrated browser/responsive QA across all public routes | In progress — mascot-matched runner, slower 3-second run and visible five-print trail implemented; browser/responsive visual QA remains open |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
 
@@ -403,7 +403,7 @@ Phase 6 homepage implementation is complete and committed. Do not restart or rei
 
 **Verified Phase 6 code commit:** `184424063be64b111b6c7bf763acff9a7a99075a`  
 **Phase 6 implementation CI:** [run #36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) — passed focused public-page/route tests, full frontend suite and production build.  
-**Latest verified cross-route transition implementation:** ce8028e8929694ae5014416c6c34b985f9a63fc1; CI run #64 passed on that exact code revision. Fetch the live develop head before continuing.
+**Latest verified cross-route transition implementation:** 7690301400560391de04932073ad0a175c690356; CI run #68 passed on that exact code revision. Fetch the live develop head before continuing.
 
 ### Phase 7 objective
 
@@ -670,3 +670,16 @@ When starting a new chat, provide this message together with repository access:
 - Follow-up code commit: `ce8028e8929694ae5014416c6c34b985f9a63fc1`.
 - GitHub Actions [run #64](https://github.com/dikshaforsure/P-mart/actions/runs/45597269508) passed against that exact code commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
 - Final verified transition code HEAD: `ce8028e8929694ae5014416c6c34b985f9a63fc1`. The docs follow-up after the initial loader commit was recorded separately in commit `a87dd3d95bd638c1206e77aaec3d3e1bb47eedd1`.
+
+### Teddy runner artwork and paw-trail timing refinement — 25 November 2026
+
+- Owner screenshot comparison showed the interim hand-drawn runner looked too angular/lion-like and the dog crossed too quickly; the paw trail was not visible during the transition.
+- Replaced the interim illustration with the existing PuppyMascot SVG artwork from `frontend/src/components/puppies/PuppyMascot.jsx`. `TeddyRunner.jsx` now reveals the original full-body group/haunch and four legs, keeps the rounded curly poodle head, curved happy eyes, blush, collar and heart tag, and removes the paws-over-a-ledge layer. This reuses the site's own brand illustration rather than creating a second cartoon style.
+- The runner width is responsive (`clamp(100px, 8.5vw, 172px)`) and travels from `translateX(-110%)` to `58vw`, leaving Teddy right-of-centre like the supplied reference instead of running completely off the right edge.
+- Increased the running phase from 1480ms to 3000ms (about 4× slower movement across the shorter path). Entrance remains 440ms; upward curtain exit remains 540ms.
+- Changed the trail from six widely spread marks to five compact pawprints at 31%, 36.5%, 42%, 47.5% and 53% of viewport width. Their vertical positions alternate slightly, each stamp fades in over 280ms to 88% opacity and then remains visible while the dog completes the run.
+- Paw delays are derived from actual viewport width, responsive runner width, route endpoint and the 3000ms run. Fixed a units bug: `passedPositionTime` is already milliseconds, so the trailing offset is now added as 80ms without multiplying the result by 1000. Previously this made prints occur thousands of seconds too late.
+- Added a regression assertion for exactly five reference-position pawprints and monotonically increasing in-run millisecond delays. The delay is exposed in a data attribute for deterministic testing while the same value is used by CSS.
+- Intermediate CI runs #66 and #67 detected the out-of-range delay values; the unit correction is committed in `7690301400560391de04932073ad0a175c690356`.
+- GitHub Actions [run #68](https://github.com/dikshaforsure/P-mart/actions/runs/45600190889) passed against that exact implementation commit: focused checks 5 files / 33 tests; complete frontend suite 24 files / 122 tests; Vite 8.3.8 production build passed (68 modules transformed).
+- Real-browser verification of the mascot likeness, gait, paw visibility and visual timing remains outstanding; automated tests do not render the CSS animation.

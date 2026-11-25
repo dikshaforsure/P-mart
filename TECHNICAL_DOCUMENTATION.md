@@ -425,3 +425,11 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - CI run #62 passed 5 focused files / 33 tests; full suite 24 files / 121 tests; Vite 8.3.8 build with 68 modules.
 - Real-browser SVG/animation visual inspection remains outstanding.
 - Pawprint delays are computed per viewport using the runner's CSS-clamped width, viewport width, total horizontal travel distance and RUN_DURATION, with a 45ms trailing offset. This ensures each fixed paw location is stamped after the dog passes it on desktop and mobile. Follow-up commit ce8028e8929694ae5014416c6c34b985f9a63fc1 passed CI run #64 (24 files/121 tests and production build).
+### Transition runner art and motion — current settings
+
+- `TeddyRunner.jsx` reuses the site's local PuppyMascot SVG path data. It reveals the full-body and haunch groups, retains the existing poodle head, happy closed eyes, blush, collar and heart tag, animates the four original legs, and omits the paws-over-a-ledge layer.
+- Responsive runner width: `clamp(100px, 8.5vw, 172px)`. Movement starts at `-110%` and ends at `58vw`, keeping the runner right-of-centre.
+- Timing: entrance 440ms, runner/paw phase 3000ms, upward exit 540ms.
+- Five trail stamps at 31%, 36.5%, 42%, 47.5% and 53% width. Fade in for 280ms to 88% opacity, then hold. Their delay is calculated from viewport width, runner width and its route endpoint.
+- `getPawDelay()` uses milliseconds end-to-end: `Math.round(passedPositionTime + 80) + 'ms'`. Do not multiply by 1000; the travel calculation already returns milliseconds.
+- CI run #68 passed 5 focused files/33 tests, full suite 24 files/122 tests and Vite 8.3.8 build (68 modules). Browser animation verification is still outstanding.
