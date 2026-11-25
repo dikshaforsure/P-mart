@@ -451,3 +451,12 @@ Trail feedback was that the 30px/42ms marks looked dense and too fast. The new t
 Code commit: 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. Test correction: ca41cfeb3c5337f4f578351378e8e3c1284f5c26.
 
 CI run #51 focused step passed (5 files / 33 tests); full suite had 112 pass and one HomeHero test failure caused by raw DOM .click(), then the test was corrected. CI run #52 attempts 1 and 2 failed during npm installation with ETARGET for tldts-core@^7.5.6, before tests/build. The frontend has no committed package lock and no dependency changes were made. Real-browser rendering/animation/layering remains unverified.
+## Shared header scallop and route scroll behavior — 25 November 2026
+
+Reference comparison: the owner-provided original screenshot shows a repeating downward scalloped/cloud edge under the shared navigation bar, whereas the destination header previously ended in a straight border. The live reference page was opened and confirms the same primary navigation destinations and WhatsApp action; its text extraction does not expose CSS/visual geometry. The scallop geometry is therefore based on the actual owner-provided screenshot, not an unsupported claim about extracted source CSS.
+
+Destination inspection found the header is centralized in SiteHeader.jsx and styled by a later .site-header override in index.css. The shared header now uses a repeating 60px radial-gradient ellipse decoration on ::after and a subtle drop shadow; the straight border is removed. Sticky positioning and existing header content/navigation are retained.
+
+The app uses BrowserRouter nested around the shared AppLayout but had no route scroll manager. Since client-side route transitions reuse one document, the viewport was not being reset after pathname changes. Added ScrollToTop to AppLayout: history scroll restoration is set to manual; pathname changes jump to (0,0); hash links target their element; query-only changes are ignored so catalogue filter state doesn't bounce the visitor to the top.
+
+ScrollToTop tests cover initial load/path changes, search/filter query changes and hash targets. CI run #56 passed 5 focused files / 33 tests and 23 full-suite files / 116 tests, plus Vite 8.3.8 production build (66 modules transformed). Visual browser geometry and actual browser back/forward behavior remain outstanding for Phase 7.

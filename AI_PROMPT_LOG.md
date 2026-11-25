@@ -432,3 +432,11 @@ Compared the owner-provided destination/reference screenshots and inspected the 
 The mascot desktop maximum was raised to 360px and its anchor lowered so its paws are tucked behind the existing higher-z-index quilt; responsive overrides were added. The global paw trail now requires both 84px pointer travel and 220ms between footprints, caps the displayed set at five and fades each over 1.8 seconds. Existing touch/coarse-pointer/reduced-motion behavior remains.
 
 Code commit: 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. The first focused CI step passed (5 files / 33 tests); the full suite had 112 pass and 1 HomeHero test failure caused by a raw DOM click. Test correction commit ca41cfeb3c5337f4f578351378e8e3c1284f5c26 uses RTL fireEvent.click(). CI run #52 attempts 1 and 2 then failed at npm install with ETARGET for tldts-core@^7.5.6; tests and build were skipped. No dependency update/lockfile was made, and browser verification remains outstanding.
+ 
+### Shared header scallop and route scroll restoration — 25 November 2026
+
+Owner screenshot comparison showed the reference header has a repeating cloud/scalloped lower edge, while the destination had a straight border. Added a shared ::after radial-gradient scallop and subtle drop shadow to .site-header; removed the straight border while retaining sticky positioning and all navigation content.
+
+Found that AppLayout had no route scroll handling. Added ScrollToTop once at layout level: browser native history scroll restoration is set to manual, pathname changes jump to the top, hash navigation scrolls to its target, and query-only changes do not reset the viewport (important for catalogue filters). Added tests for all three cases.
+
+Implementation commit 392a440feb845edc6e6da016c4598e53f4fa4a21; regression-test follow-ups b7c70dd6a8992ebd33920db07ef781a141babfa4 and 5d3d4e310258b1edeff4d4532f10329c4dc572c0. CI run #56 passed 5 focused files / 33 tests, all 23 frontend test files / 116 tests, and Vite 8.3.8 build (66 modules). Manual browser visual/scroll checks remain outstanding.

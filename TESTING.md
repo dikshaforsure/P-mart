@@ -420,3 +420,23 @@ The lightbox dialog now separates toolbar, image stage and optional caption usin
 | Real-browser mascot/trail visual check | **NOT RUN** | no browser evidence |
 
 The two install attempts logged ETARGET No matching version found for tldts-core@^7.5.6. frontend/package.json was inspected; there is no committed frontend/package-lock.json, and no package manifest/dependency change was made for this UI-only task. The exact test correction is on develop; rerun full tests/build after dependency resolution succeeds. Do not report the code as fully CI-verified.
+ 
+## Shared scalloped header and route scroll reset — 25 November 2026
+
+**Implementation commit:** 392a440feb845edc6e6da016c4598e53f4fa4a21  
+**Test corrections:** b7c70dd6a8992ebd33920db07ef781a141babfa4 and 5d3d4e310258b1edeff4d4532f10329c4dc572c0  
+**GitHub Actions:** [run #56](https://github.com/dikshaforsure/P-mart/actions/runs/45588040638)
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 23 files / 116 tests** |
+| ScrollToTop tests | **PASS — 3 tests** |
+| Production build | **PASS — Vite 8.3.8; 66 modules transformed** |
+| Path change scroll reset | **PASS in jsdom — initial load and pathname change** |
+| Query-only filter change | **PASS in jsdom — no scroll reset** |
+| Valid hash target | **PASS in jsdom — target receives scrollIntoView** |
+| Scallop geometry and shadow in a real browser | **NOT RUN** |
+| Actual browser back/forward scroll behavior | **NOT RUN** |
+
+The header decoration is a shared CSS pseudo-element and appears on all routes. ScrollToTop is mounted once in AppLayout, sets history.scrollRestoration to manual, scrolls to the top for pathname changes and honors hash targets. Search/filter query-only updates do not change the pathname and do not reset scroll.

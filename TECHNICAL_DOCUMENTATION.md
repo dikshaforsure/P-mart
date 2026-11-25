@@ -391,3 +391,10 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - PawTrail.jsx uses 84px distance AND 220ms time thresholds, at most five active footprints, and 1.8s fade. Existing fine-pointer and reduced-motion handling remains.
 - Tests exist in HomeHero.test.jsx, PuppyMascot.test.jsx and PawTrail.test.jsx. The HomeHero interaction test uses RTL fireEvent.click() after correction.
 - CI verification is blocked after test correction by npm installation of tldts-core@^7.5.6 (ETARGET). No dependency or lockfile changes were introduced.
+ 
+### Shared header edge and route scrolling
+
+- The shared .site-header retains sticky positioning and existing navigation. Its straight bottom border is replaced by a repeating radial-gradient ::after scallop with subtle drop shadow to match the reference screenshot.
+- frontend/src/components/layout/ScrollToTop.jsx is mounted once in AppLayout. It switches history.scrollRestoration to manual for the SPA, jumps to the top on pathname changes, scrolls to valid hash targets, and ignores query-only changes.
+- ScrollToTop.test.jsx covers initial and route-change top resets, query-only navigation retention and hash target scrolling.
+- Visual shape/depth of the header in a real browser and actual browser back/forward behavior remain part of integrated Phase 7 QA.

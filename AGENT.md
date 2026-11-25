@@ -135,7 +135,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
-| 6 | Homepage reference-fidelity refinement | Implemented on develop; interactive Teddy mascot and slower five-print paw trail code committed; test harness corrected; latest CI retry blocked during npm dependency resolution; real-browser visual QA outstanding |
+| 6 | Homepage reference-fidelity refinement | Implemented on develop; interactive mascot, slower paw trail, scalloped shared header and route scroll reset committed; CI run #56 green; real-browser visual QA outstanding |
 | 7 | Integrated browser/responsive QA across all public routes | Not completed |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
@@ -262,7 +262,7 @@ Run #31 completed successfully on the latest Phase 5 documentation HEAD. The det
 - frontend/src/main.jsx — application entry.
 - frontend/src/app/App.jsx — React Router routes.
 - frontend/src/app/App.test.jsx — route integration tests.
-- frontend/src/components/layout/ — shared app layout, header and footer.
+- frontend/src/components/layout/ — shared app layout, header/footer, PawTrail and ScrollToTop.
 
 Implemented public routes:
 - /
@@ -403,7 +403,7 @@ Phase 6 homepage implementation is complete and committed. Do not restart or rei
 
 **Verified Phase 6 code commit:** `184424063be64b111b6c7bf763acff9a7a99075a`  
 **Phase 6 implementation CI:** [run #36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) — passed focused public-page/route tests, full frontend suite and production build.  
-**Latest mascot/trail implementation commit:** 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. **Latest test-harness correction:** ca41cfeb3c5337f4f578351378e8e3c1284f5c26. Fetch the live develop head before continuing.
+**Latest verified homepage/header/scroll implementation:** 392a440feb845edc6e6da016c4598e53f4fa4a21. **Latest regression-test corrections:** b7c70dd6a8992ebd33920db07ef781a141babfa4 and 5d3d4e310258b1edeff4d4532f10329c4dc572c0. CI run #56 passed on the latest test revision. Fetch the live develop head before continuing.
 
 ### Phase 7 objective
 
@@ -621,3 +621,12 @@ When starting a new chat, provide this message together with repository access:
 - First workflow attempt #51: focused checks passed (5 files / 33 tests); full suite reached 112 passed and 1 failed. Failure was the new HomeHero test using direct DOM .click() instead of RTL fireEvent.click(). The test was corrected in commit ca41cfeb3c5337f4f578351378e8e3c1284f5c26.
 - Workflow #52, attempts 1 and 2, failed in npm install before any tests/build with ETARGET No matching version found for tldts-core@^7.5.6. No production-build result exists after the test correction. Do not change dependencies to mask this external resolution failure without checking the dependency tree and confirming a compatible version.
 - Real-browser mascot scale/layering, hover blink, click wave and trail cadence have not been visually inspected. jsdom can assert state/timers but does not validate rendered animation or layering.
+### Shared scalloped header edge and route scroll reset — 25 November 2026
+
+- Owner compared the destination's straight lower header edge with the supplied original screenshot, which shows a repeated scalloped/cloud edge. The shared .site-header now removes its straight border and renders a repeated radial-gradient scallop in ::after, with a subtle drop shadow. The decoration spans all routes because it is applied to the shared header; nav content, sticky positioning and mobile menu behavior remain unchanged.
+- Added frontend/src/components/layout/ScrollToTop.jsx to the shared AppLayout. It sets browser history scroll restoration to manual, then jumps to the top on pathname changes. Valid hash destinations are scrolled into view instead; query-only changes (including catalogue filters) do not trigger a reset.
+- Added ScrollToTop.test.jsx covering initial/path navigation reset, query-only state retention and hash-target navigation. SiteHeader.test.jsx now confirms the shared banner retains its header class.
+- No route, content, contact, data, package or dependency changes.
+- Implementation commit: 392a440feb845edc6e6da016c4598e53f4fa4a21. Scroll-test isolation correction: b7c70dd6a8992ebd33920db07ef781a141babfa4. Mascot visible-bubble assertion correction: 5d3d4e310258b1edeff4d4532f10329c4dc572c0.
+- GitHub Actions run #56 (https://github.com/dikshaforsure/P-mart/actions/runs/45588040638) passed against 5d3d4e310258b1edeff4d4532f10329c4dc572c0: focused checks 5 files / 33 tests; full suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
+- Real-browser visual inspection of the scallop depth/shadow across desktop/mobile and real navigation scroll behavior has not been performed. jsdom confirms scroll calls and branch behavior but cannot measure rendered header geometry.

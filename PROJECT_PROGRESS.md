@@ -1,7 +1,7 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 25 November 2026  
-**Current phase:** Phase 6 — Homepage interaction polish (global paw cursor and movement trail implemented; CI run #43 passed; manual browser QA pending)  
+**Current phase:** Phase 6 — Homepage/shared-shell refinement (scalloped header and route scroll reset implemented; CI run #56 passed; visual browser QA pending)  
 **Status:** Public-frontend implementation milestones Phases 0–6 are implemented on `develop`. Latest hero refinement commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036` passed GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674): focused public-page/route checks (5 files / 31 tests), complete frontend suite (21 files / 103 tests) and Vite 8.3.8 production build. The follow-up centers the visible mascot, evens the hero ears, adds reduced-motion-aware random puppy portrait dips, changes the hero display font and increases shared header typography. Real-browser screenshot comparison, live animation inspection, custom cursor/trail appearance and integrated responsive QA across all public routes remain outstanding. This is frontend scope only: no enquiry API/database persistence, deployment or production asset rights approval is claimed. Next work: integrated browser/responsive QA across all public routes; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
@@ -502,3 +502,12 @@ The hero mascot is enlarged and lowered so the quilt covers the lower paws; the 
 Implementation code commit: 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. Test-harness correction: ca41cfeb3c5337f4f578351378e8e3c1284f5c26.
 
 Verification note: CI run #51 passed the focused workflow step (5 files / 33 tests), but the full suite reached 112 passed / 1 failed because the new interaction test used a raw DOM .click(). That test was corrected to fireEvent.click() in the follow-up commit. CI run #52 (attempts 1 and 2) then failed during npm install, before tests/build, with ETARGET No matching version found for tldts-core@^7.5.6. The repository has no committed frontend package lock; no dependencies were changed. Full-suite/build verification on the corrected test revision remains blocked pending a successful dependency install. Real-browser visual behavior remains unverified.
+### Shared scalloped header edge and route scroll reset — 25 November 2026
+
+- Owner compared the destination's straight lower header edge with the supplied original screenshot, which shows a repeated scalloped/cloud edge. The shared .site-header now removes its straight border and renders a repeated radial-gradient scallop in ::after, with a subtle drop shadow. The decoration spans all routes because it is applied to the shared header; nav content, sticky positioning and mobile menu behavior remain unchanged.
+- Added frontend/src/components/layout/ScrollToTop.jsx to the shared AppLayout. It sets browser history scroll restoration to manual, then jumps to the top on pathname changes. Valid hash destinations are scrolled into view instead; query-only changes (including catalogue filters) do not trigger a reset.
+- Added ScrollToTop.test.jsx covering initial/path navigation reset, query-only state retention and hash-target navigation. SiteHeader.test.jsx now confirms the shared banner retains its header class.
+- No route, content, contact, data, package or dependency changes.
+- Implementation commit: 392a440feb845edc6e6da016c4598e53f4fa4a21. Scroll-test isolation correction: b7c70dd6a8992ebd33920db07ef781a141babfa4. Mascot visible-bubble assertion correction: 5d3d4e310258b1edeff4d4532f10329c4dc572c0.
+- GitHub Actions run #56 (https://github.com/dikshaforsure/P-mart/actions/runs/45588040638) passed against 5d3d4e310258b1edeff4d4532f10329c4dc572c0: focused checks 5 files / 33 tests; full suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
+- Real-browser visual inspection of the scallop depth/shadow across desktop/mobile and real navigation scroll behavior has not been performed. jsdom confirms scroll calls and branch behavior but cannot measure rendered header geometry.
