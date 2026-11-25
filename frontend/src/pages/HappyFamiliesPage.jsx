@@ -162,17 +162,25 @@ export default function HappyFamiliesPage() {
             className="happy-families-intro"
           />
           <p className="happy-families-count">{familyMoments.length} moments and counting</p>
+        </header>
+
+        <section className="happy-families-feature" aria-label="Family testimonial and featured photographs">
           <figure className="happy-families-testimonial">
             <span className="happy-families-testimonial__tape" aria-hidden="true" />
             <blockquote>“{familyPreview.quote}”</blockquote>
             <figcaption>{familyPreview.author}</figcaption>
           </figure>
-        </header>
+          <ul className="happy-families-feature-wall" aria-label="Featured photos from TeddyPups families">
+            {familyMoments.slice(0, 4).map((item, index) => (
+              <FamilyMomentCard key={item.id} item={item} index={index} onOpen={openViewer} />
+            ))}
+          </ul>
+        </section>
 
         <section className="happy-families-gallery" aria-label="Family and puppy photo gallery">
-          <ul className="happy-families-wall" aria-label="Photos from TeddyPups families">
-            {familyMoments.map((item, index) => (
-              <FamilyMomentCard key={item.id} item={item} index={index} onOpen={openViewer} />
+          <ul className="happy-families-wall" aria-label="More photos from TeddyPups families">
+            {familyMoments.slice(4).map((item, index) => (
+              <FamilyMomentCard key={item.id} item={item} index={index + 4} onOpen={openViewer} />
             ))}
           </ul>
         </section>

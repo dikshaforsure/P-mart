@@ -15,6 +15,16 @@ describe('HappyFamiliesPage', () => {
     expect(screen.getByText('every one of them was a Teddy Pup once')).toBeInTheDocument();
   });
 
+  it('balances the testimonial with four featured photos and keeps the remaining records in the gallery', () => {
+    const { container } = render(<HappyFamiliesPage />);
+
+    const feature = container.querySelector('.happy-families-feature');
+    expect(feature).toBeInTheDocument();
+    expect(feature.querySelector('.happy-families-testimonial')).toBeInTheDocument();
+    expect(feature.querySelectorAll('.happy-families-feature-wall > li')).toHaveLength(4);
+    expect(container.querySelectorAll('.happy-families-wall > li')).toHaveLength(60);
+  });
+
   it('uses the existing verified testimonial and its attribution', () => {
     render(<HappyFamiliesPage />);
 
@@ -26,26 +36,33 @@ describe('HappyFamiliesPage', () => {
   it('renders all 64 gallery records in source order with the supplied captions and alt text', () => {
     render(<HappyFamiliesPage />);
 
-    const gallery = screen.getByRole('list', { name: 'Photos from TeddyPups families' });
-    const buttons = within(gallery).getAllByRole('button', { name: /Open photo/ });
+    const featured = screen.getByRole('list', { name: 'Featured photos from TeddyPups families' });
+    const gallery = screen.getByRole('list', { name: 'More photos from TeddyPups families' });
+    const buttons = [
+      ...within(featured).getAllByRole('button', { name: /Open photo/ }),
+      ...within(gallery).getAllByRole('button', { name: /Open photo/ }),
+    ];
     expect(familyMoments).toHaveLength(64);
+    expect(within(featured).getAllByRole('button', { name: /Open photo/ })).toHaveLength(4);
+    expect(within(gallery).getAllByRole('button', { name: /Open photo/ })).toHaveLength(60);
     expect(buttons).toHaveLength(64);
     expect(buttons.map((button) => button.dataset.momentId)).toEqual(familyMoments.map((item) => item.id));
     expect(within(gallery).getByText(familyMoments[45].caption)).toBeInTheDocument();
     expect(within(gallery).getByText(familyMoments[58].caption)).toBeInTheDocument();
-    expect(within(gallery).getAllByRole('img').filter((item) => item.tagName === 'IMG')).toHaveLength(64);
-    expect(within(gallery).getAllByRole('img').find((item) => item.tagName === 'IMG')).toHaveAttribute('alt', familyMoments[0].alt);
+    const images = [...within(featured).getAllByRole('img'), ...within(gallery).getAllByRole('img')].filter((item) => item.tagName === 'IMG');
+    expect(images).toHaveLength(64);
+    expect(images[0]).toHaveAttribute('alt', familyMoments[0].alt);
   });
 
   it('replaces a failed family photo with a stable placeholder and keeps the gallery intact', () => {
     render(<HappyFamiliesPage />);
 
-    const gallery = screen.getByRole('list', { name: 'Photos from TeddyPups families' });
-    const image = gallery.querySelector('img');
-    fireEvent.error(image);
+    const featured = screen.getByRole('list', { name: 'Featured photos from TeddyPups families' });
+    const gallery = screen.getByRole('list', { name: 'More photos from TeddyPups families' });
+    fireEvent.error(featured.querySelector('img'));
 
-    expect(gallery.querySelector('.happy-families-photo-fallback')).toBeInTheDocument();
-    expect(gallery.querySelectorAll('li')).toHaveLength(64);
+    expect(featured.querySelector('.happy-families-photo-fallback')).toBeInTheDocument();
+    expect(featured.querySelectorAll('li').length + gallery.querySelectorAll('li').length).toBe(64);
   });
 
   it('opens the source photo viewer and navigates with the keyboard', () => {
