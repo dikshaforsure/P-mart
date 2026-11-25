@@ -14,7 +14,7 @@ describe('GoneHomePage', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: 'Gone home' })).toBeInTheDocument();
     expect(screen.getByText(/Every puppy here has already joined a loving family/)).toBeInTheDocument();
-    expect(screen.getAllByText('one ticket home')).toHaveLength(27);
+    expect(within(screen.getByRole('list', { name: 'Puppies who have gone home' })).getAllByText('one ticket home')).toHaveLength(27);
     expect(screen.getByText('tickets home')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /See available puppies/ })).toHaveAttribute('href', '/puppies');
   });
