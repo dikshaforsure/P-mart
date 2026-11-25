@@ -1,8 +1,8 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 25 November 2026  
-**Current phase:** Phase 3 — Puppy profile reference-fidelity close-out (correction)  
-**Status:** Phase 4 (shared shell, How It Works and FAQ) is complete. The Phase 3 profile close-out implementation is committed on `develop` at `610ae3c4e703daeb199a5a8494cc644bf8f91194` and verified by GitHub Actions run [#22](https://github.com/dikshaforsure/P-mart/actions/runs/45481254438): 5 focused files / 38 tests, 15 full-suite files / 74 tests, and production build all passed. Real-browser viewport checks remain outstanding. Next planned implementation phase: Gone Home, Happy Families and Contact.
+**Current phase:** Phase 5 — Gone Home, Happy Families and Contact (public-page implementation complete)  
+**Status:** Public-frontend implementation milestones Phases 0–5 are complete on `develop`: research/documentation, catalogue/profile experiences, the Phase 3 profile close-out, the Phase 4 shared shell/How It Works/FAQ, and these three Phase 5 pages. Final Phase 5 code commit: `0fec72305c72b09915fb4d453bacc205e38d9469`; GitHub Actions run [#27](https://github.com/dikshaforsure/P-mart/actions/runs/45543194059) passed 4 focused files / 26 tests, 18 full-suite files / 95 tests, and the Vite production build. This is frontend scope only: no enquiry API/database persistence, deployment, production asset rights approval or real-browser visual QA is claimed. Next work: homepage visual refinement and integrated responsive/browser QA; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
 
@@ -362,3 +362,58 @@ The older Phase 3 run #13 and Phase 4 runs #15/#16 listed above are retained as 
 The requested viewport checks at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 and 375×812 were **not performed in a real browser** in this session. No screenshots, live media/network validation, browser-console inspection or direct WhatsApp send were performed. Automated jsdom coverage and a production build do not prove visual parity, media availability or absence of viewport overflow; no pixel-perfect claim is made.
 
 Next implementation phase: **Gone Home, Happy Families and Contact**. Those pages are not implemented by this close-out. Homepage refinement and the broader site-wide responsive/browser audit also remain outstanding.
+
+
+## Phase 5 — Gone Home, Happy Families and Contact (25 November 2026)
+
+**Starting \`develop\` baseline:** \`2cf2501667568cff3553640b3d4c4840fbde5dfe\`  
+**Page implementation commit:** \`85a5a6fcd45b74aea661ffa57cebe41752d9dd39\`  
+**Test correction commit:** \`0fec72305c72b09915fb4d453bacc205e38d9469\`  
+**Final code verification:** [GitHub Actions run #27](https://github.com/dikshaforsure/P-mart/actions/runs/45543194059)
+
+### Reference and destination audit
+
+Inspected the source templates \`src/templates/gone-home.html\`, \`src/templates/happy-families.html\` and \`src/templates/contact.html\`; source data \`src/data/families.json\` and \`src/data/home-families.json\`; and source modules \`src/components.tsx\`, \`src/Template.tsx\`, \`src/types.ts\`, \`src/app.css\` and \`src/reference.css\`. The destination routes, existing shell/data/services/WhatsApp helper, all relevant page tests, asset source register, CSS and project documentation were inspected before implementation.
+
+### Delivered pages
+
+- **Gone Home — \`/gone-home\`:** replaced the placeholder with the “one ticket home” / “admit one” archive treatment. It renders exactly the 27 existing \`goneHomePuppies\` entries in the verified source order, links each ticket to its puppy profile, uses the existing cover/media and factual breed/sex/origin metadata, and includes the available-puppies CTA. The one sold record without a cover or image media item displays a designed paw fallback rather than an invented image. Generic breed-only labels remain generic; no puppy record was renamed or reordered.
+- **Happy Families — \`/happy-families\`:** replaced the placeholder with the source introduction, “64 moments and counting” label, Sarah M. testimonial, polaroid/masonry family wall and sign-off. Reused the existing \`frontend/src/data/families.json\` (64 items in the exact source order; eight records carry captions) and \`familyPreview.quote/author\`. The eight \`familyPreview.moments\` are homepage-preview content and were not treated as the full page inventory. The native-dialog image viewer supports close, Escape, arrow-key and touch-swipe navigation, previous/next controls, backdrop dismissal, focus restoration and body-scroll cleanup. Image failures leave a stable fallback in the card.
+- **Contact — \`/contact\`:** replaced the placeholder with the letter-style contact form, reference field order, source puppy-choice labels, required name/phone validation, optional email validation, area/message limits and the source \`website\` honeypot. The page reuses the configured \`getWhatsAppUrl()\` helper, includes the existing verified email, Downtown Dubai location, source map link and source showroom photo. No uncertain telephone number is newly displayed.
+
+### Contact delivery limitation
+
+The destination has no verified contact endpoint or backend acknowledgement. The form therefore does **not** send a fake API request or claim a request was received. It composes the form values into the existing configured WhatsApp handoff, opens that link from the submit gesture and exposes the prepared link if the popup is blocked. The visitor is told to review and send the message in WhatsApp. The reference form's visible fields and honeypot intent were preserved; the reference private endpoint/demo envelope animation was not copied. The WhatsApp helper/configuration and footer phone/email settings were not changed.
+
+### Data, asset and preservation notes
+
+The 27-record sold dataset and its verified order were reused from \`goneHomePuppies\`; no second JSX dataset was introduced. Destination \`families.json\` was compared to reference \`src/data/families.json\`: all 64 records, ordering, IDs, captions, alt text, dimensions and focal points match; only the destination's existing absolute reference-host URLs differ from the source JSON's root-relative paths, so those URLs were left untouched. The contact showroom image is referenced from the supplied reference template. No image binaries were downloaded or added. Public access does not establish reuse rights; assignment/client asset permission remains outstanding. The source/usage details were added to \`frontend/ASSET_SOURCES.md\`.
+
+Phase 3 profile behavior, Phase 4 shared shell/How It Works/FAQ, homepage, catalogue, puppy data JSON, family JSON and WhatsApp configuration were preserved. No TypeScript, dependency, package/lockfile or route-path changes were introduced; the three existing route elements now render dedicated components.
+
+### Files changed
+
+- \`frontend/src/pages/GoneHomePage.jsx\` and \`GoneHomePage.test.jsx\`
+- \`frontend/src/pages/HappyFamiliesPage.jsx\` and \`HappyFamiliesPage.test.jsx\`
+- \`frontend/src/pages/ContactPage.jsx\` and \`ContactPage.test.jsx\`
+- \`frontend/src/app/App.jsx\` and \`App.test.jsx\`
+- \`frontend/src/styles/index.css\` (page-scoped Phase 5 selectors)
+- \`frontend/ASSET_SOURCES.md\`
+- \`.github/workflows/phase2-tests.yml\` (focused Phase 5 test command; full suite/build retained)
+
+No puppy/family data JSON, siteContent, contentService, WhatsApp utility, shared header/footer, Phase 3 profile, Phase 4 pages or homepage code was modified.
+
+### Automated verification
+
+GitHub Actions [run #27](https://github.com/dikshaforsure/P-mart/actions/runs/45543194059) passed on the exact tested code commit \`0fec72305c72b09915fb4d453bacc205e38d9469\`:
+
+- Focused: \`npx vitest run src/pages/GoneHomePage.test.jsx src/pages/HappyFamiliesPage.test.jsx src/pages/ContactPage.test.jsx src/app/App.test.jsx\` — **4 files / 26 tests passed**.
+- Full: \`npm test\` — **18 files / 95 tests passed**.
+- Production: \`npm run build\` — **passed**, Vite 8.3.8.
+- CI install: \`npm install --no-audit --no-fund\` — passed.
+
+### Manual verification and next work
+
+No real-browser checks at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 or 375×812 were performed. No screenshot capture, live image request audit, browser-console inspection, manual lightbox/touch testing, or manual WhatsApp send was performed. Automated jsdom coverage and the production build do not establish visual parity, media reachability or production asset permissions; no pixel-perfect claim is made.
+
+**Next planned work:** homepage visual refinement and a final integrated responsive/browser QA pass across all public routes. Backend contact persistence, enquiry notifications/admin tooling, final asset-rights approval and deployment remain separate open scope items and are not implemented by Phase 5.

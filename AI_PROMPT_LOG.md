@@ -293,3 +293,47 @@ No real-browser check at the six requested viewport sizes, visual screenshots, l
 ### Remaining work
 
 Phase 4 remains complete. Next implementation phase: Gone Home, Happy Families and Contact. Homepage refinement and the final site-wide responsive/browser audit are still outstanding.
+
+
+## Session 9 — Phase 5 Gone Home, Happy Families and Contact
+
+**Date:** 25 November 2026  
+**Branch:** \`develop\`  
+**Baseline:** \`2cf2501667568cff3553640b3d4c4840fbde5dfe\`  
+**Implementation commit:** \`85a5a6fcd45b74aea661ffa57cebe41752d9dd39\`  
+**Final code/test commit:** \`0fec72305c72b09915fb4d453bacc205e38d9469\`
+
+### User request summary
+
+Implement the Gone Home, Happy Families and Contact pages using only the supplied \`puppy.instabizweb.com\` reference, preserve Phases 1–4 and the Phase 3 close-out, use existing datasets and utilities, provide accessible interactions and source-backed tests, document provenance/limitations and commit on \`develop\`.
+
+### Reference/destination inspection
+
+Inspected the matching Gone Home, Happy Families and Contact templates, reference family datasets, components/template/types and app/reference CSS. Inspected the destination route/test shell, shared page components, puppy/family/site data, service, WhatsApp helper, styling, test setup, workflow, asset register and project records. Confirmed:
+- Gone Home source order contains 27 sold profile links and matches the existing \`goneHomePuppies\` mapping.
+- Happy Families page contains 64 gallery buttons; destination \`families.json\` already matches the source inventory/order/metadata, including eight captions. \`familyPreview\` is a separate homepage preview and is used only for the testimonial's verified quote/author.
+- Contact form has required name/phone, optional email/area/puppy selector/message and \`website\` honeypot. The destination has no verified enquiry API endpoint.
+
+### Implementation
+
+- Added \`GoneHomePage.jsx\` with admission-ticket cards, source order, profile links, available-puppies CTA, source factual metadata, lazy images and a fallback for the one sold record without destination image media.
+- Added \`HappyFamiliesPage.jsx\` with source introduction/testimonial, all 64 family photos, captions and accessible native-dialog lightbox with close, previous/next, keyboard, Escape, swipe, backdrop, focus and scroll behavior.
+- Added \`ContactPage.jsx\` with source field order/labels/puppy options/honeypot, client-side validation, inline feedback, Downtown Dubai map/showroom information, source contact image, and the existing configured WhatsApp helper.
+- Replaced only the three placeholder routes, extended \`App.test.jsx\`, appended namespaced page CSS, updated the workflow focus command and extended \`ASSET_SOURCES.md\`.
+- No dependency or lockfile changes, no dataset edits, no WhatsApp config change and no backend endpoint invention.
+
+### Contact submission decision
+
+The source React form optionally POSTs to a \`VITE_ENQUIRY_ENDPOINT\`; no equivalent endpoint exists in the destination. The implementation therefore does not mimic the private API/demo success state and does not claim contact delivery. It builds a WhatsApp message, opens the existing configured link from the submit interaction, and instructs the visitor to review and manually send it. The form's source \`website\` anti-spam honeypot remains present and filled values are ignored. Existing footer phone/email/contact values were not changed; the reference phone/WhatsApp discrepancy remains documented, so no new telephone number is displayed.
+
+### Verification
+
+GitHub Actions [run #27](https://github.com/dikshaforsure/P-mart/actions/runs/45543194059) passed on \`0fec72305c72b09915fb4d453bacc205e38d9469\`:
+- Focused Vitest: 4 files / 26 tests passed.
+- \`npm test\`: 18 files / 95 tests passed.
+- \`npm run build\`: passed with Vite 8.3.8.
+- \`npm install --no-audit --no-fund\`: passed.
+
+### Remaining work
+
+No manual QA or browser screenshots at the six requested viewport sizes were completed. Live image/network checks, actual WhatsApp message sending, contact backend persistence, asset-rights approval and deployment remain unverified/open. Next: homepage refinement and integrated responsive/browser QA across all routes; decide separately whether to implement backend enquiry persistence/notifications/admin.

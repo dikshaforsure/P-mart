@@ -380,3 +380,36 @@ Run #22 on the exact code commit passed:
 No manual viewport checks, screenshot capture, browser-console inspection or live image/video request validation were performed. Responsive CSS and reduced-motion rules were added and unit-tested where applicable, but their visual behavior remains unverified at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 and 375×812.
 
 Next implementation phase: **Gone Home, Happy Families and Contact**; these routes remain outside this close-out.
+
+
+## Phase 5 — Gone Home, Happy Families and Contact
+
+**Destination baseline:** \`2cf2501667568cff3553640b3d4c4840fbde5dfe\`  
+**Final tested code commit:** \`0fec72305c72b09915fb4d453bacc205e38d9469\`  
+**CI evidence:** [GitHub Actions run #27](https://github.com/dikshaforsure/P-mart/actions/runs/45543194059)
+
+### Source templates and modules inspected
+
+Compared \`src/templates/gone-home.html\`, \`src/templates/happy-families.html\`, \`src/templates/contact.html\`, \`src/data/families.json\`, \`src/data/home-families.json\`, \`src/components.tsx\`, \`src/Template.tsx\`, \`src/types.ts\`, \`src/app.css\` and \`src/reference.css\` from the supplied reference repository. The destination already carried the 27-entry Gone Home order from the Phase 3 sold-profile navigation work, plus a full 64-record \`frontend/src/data/families.json\`.
+
+### Gone Home
+
+The reference uses admission-ticket cards with a one-ticket-home motif, vertical admit-one stub, circular puppy image, name/breed/sex and source-route cue. The new page renders all 27 sold records through \`goneHomePuppies\` without duplicating data. The ticket links each slug to \`/puppies/:slug\`; the page CTA links to \`/puppies\`. A source record with no cover/media uses a non-breaking paw placeholder. No labels or profile statuses convert a sold record into an available one.
+
+### Happy Families
+
+The page renders the complete 64-item \`families.json\` gallery in source order, not the eight homepage \`familyPreview.moments\`. It uses the existing Sarah M. testimonial quote/attribution from \`siteContent.js\`; eight gallery items retain their source captions and all others remain uncaptained as in the dataset. The photo wall uses a responsive 2/3/4-column masonry layout and a native \`dialog\` viewer with close, previous/next, Escape, arrow-key, touch-swipe, backdrop dismissal, focus restoration and background-scroll locking. Image failure is contained within a stable placeholder. Image records continue to reference the supplied source host; no local copying or permission assumption was made.
+
+### Contact
+
+The source form field sequence is name, phone, email, area, puppy selector, message and off-screen \`website\` honeypot. Name/phone are required; email remains optional; area and message retain source length limits; the puppy selector remains optional with source labels. Name, phone and supplied email are validated client-side and feedback is associated with controls. The honeypot is hidden from ordinary users and assistive technology and filled values are ignored.
+
+No destination contact API/service/endpoint was available in scope. Rather than fabricating a POST endpoint or showing a false success state, submitting valid input composes all provided values and opens the existing \`getWhatsAppUrl()\` destination; the visitor must send the message in WhatsApp. A visible prepared-message link is provided for popup-blocked cases. The existing WhatsApp configuration remains untouched. The source contact page's ambiguous phone/WhatsApp destination is not newly printed; known email and Downtown Dubai location/map link are retained. The showroom image comes from the supplied reference \`contact.html\` and its use remains subject to client asset approval.
+
+### Preservation and changed files
+
+Implemented three dedicated page components and focused tests, replaced only their three placeholder routes, added three route integration checks, added page-scoped styles, updated the workflow's focused Phase 5 test command, and extended \`ASSET_SOURCES.md\` with 64-image and contact-image provenance. Existing catalogue/profile pages, puppy/family JSON, homepage, shared header/footer, Phase 4 How It Works/FAQ, WhatsApp utility/settings and route paths were preserved. No dependencies or package/lockfile changes were made.
+
+### Verification and remaining work
+
+Run #27 on the final tested code commit passed **4 focused files / 26 tests**, the full suite **18 files / 95 tests**, and the Vite 8.3.8 production build. The full browser viewport pass, screenshot comparison, live remote-media request check, browser-console inspection and manual WhatsApp handoff were not performed. Homepage visual refinement, integrated public-route responsive QA, backend enquiry persistence/notifications/admin decisions, asset-rights approval and deployment remain open.
