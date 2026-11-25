@@ -129,11 +129,19 @@ describe('PageTransition', () => {
     for (const part of [
       'body', 'head', 'left-ear', 'right-ear', 'rear-far-leg',
       'front-far-leg', 'rear-near-leg', 'front-near-leg',
-      'tail', 'eyes', 'nose', 'mouth', 'tongue', 'ground-shadow',
+      'tail', 'eyes', 'muzzle', 'nose', 'mouth', 'tongue', 'ground-shadow',
     ]) {
       expect(puppy.querySelector(`[data-part="${part}"]`)).toBeInTheDocument();
     }
     expect(puppy.querySelectorAll('.teddy-runner-leg')).toHaveLength(4);
+    expect(puppy.querySelector('[data-part="head-shape"]')).toBeInTheDocument();
+    expect(puppy.querySelector('[data-part="muzzle"] path')).toBeInTheDocument();
+
+    // A natural diagonal gait moves one front and the opposite rear leg together.
+    expect(puppy.querySelector('[data-part="rear-far-leg"]')).toHaveClass('teddy-runner-leg--diagonal-a');
+    expect(puppy.querySelector('[data-part="front-near-leg"]')).toHaveClass('teddy-runner-leg--diagonal-a');
+    expect(puppy.querySelector('[data-part="front-far-leg"]')).toHaveClass('teddy-runner-leg--diagonal-b');
+    expect(puppy.querySelector('[data-part="rear-near-leg"]')).toHaveClass('teddy-runner-leg--diagonal-b');
   });
 
   it('does not transition query-only or hash-only navigation', () => {
