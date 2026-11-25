@@ -3020,7 +3020,7 @@ img, video { display: block; max-width: 100%; }
 
 /* Homepage hero polish: centred mascot, even ears, gentle portrait carousel and softer type. */
 .home-page-storybook .hero-mascot-anchor .pup-buddy > svg [data-p="root"] {
-  transform: translateX(-78px);
+  transform: translateX(-66px);
 }
 .home-page-storybook .hero-mascot-anchor .pup-buddy [data-p="earR"] {
   animation: none;
@@ -3235,4 +3235,118 @@ img, video { display: block; max-width: 100%; }
   .happy-families-feature-wall .happy-families-wall__item {
     transform: none;
   }
+}
+
+
+/* Homepage hero polish: centred mascot, interactive waving paws, and walking-pace paw trail. */
+.home-page-storybook .hero-mascot-anchor {
+  z-index: 4;
+  bottom: 16px;
+  width: clamp(260px,26vw,360px);
+  height: 250px;
+  pointer-events: none;
+}
+.home-page-storybook .hero-mascot-button {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.home-page-storybook .hero-mascot-button:focus-visible {
+  outline: 2px dashed var(--home-toffee);
+  outline-offset: -5px;
+  border-radius: 44%;
+}
+.home-page-storybook .hero-mascot-button .tp-profile-mascot {
+  pointer-events: none;
+}
+.home-page-storybook .hero-mascot-button .pup-buddy > svg {
+  animation: tp-profile-pup-breathe 3.8s ease-in-out infinite;
+}
+.home-page-storybook .hero-mascot-button:hover .pup-buddy [data-p="open"],
+.home-page-storybook .hero-mascot-button:focus-visible .pup-buddy [data-p="open"] {
+  animation: home-teddy-hover-blink-open .56s ease-in-out both;
+}
+.home-page-storybook .hero-mascot-button:hover .pup-buddy [data-p="shut"],
+.home-page-storybook .hero-mascot-button:focus-visible .pup-buddy [data-p="shut"] {
+  animation: home-teddy-hover-blink-shut .56s ease-in-out both;
+}
+@keyframes home-teddy-hover-blink-open {
+  0%,100% { opacity: 1; }
+  24%,48%,72% { opacity: 0; }
+}
+@keyframes home-teddy-hover-blink-shut {
+  0%,100% { opacity: 0; }
+  24%,48%,72% { opacity: 1; }
+}
+.home-page-storybook .hero-mascot-button.is-waving .pup-buddy [data-p="paw-left"],
+.home-page-storybook .hero-mascot-button.is-waving .pup-buddy [data-p="paw-right"] {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+.home-page-storybook .hero-mascot-button.is-waving .pup-buddy [data-p="paw-left"] {
+  animation: home-teddy-wave-left .38s ease-in-out 2;
+}
+.home-page-storybook .hero-mascot-button.is-waving .pup-buddy [data-p="paw-right"] {
+  animation: home-teddy-wave-right .38s ease-in-out .1s 2;
+}
+@keyframes home-teddy-wave-left {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-12px) rotate(-34deg); }
+  58% { transform: translateY(-5px) rotate(12deg); }
+  82% { transform: translateY(-10px) rotate(-24deg); }
+}
+@keyframes home-teddy-wave-right {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-12px) rotate(34deg); }
+  58% { transform: translateY(-5px) rotate(-12deg); }
+  82% { transform: translateY(-10px) rotate(24deg); }
+}
+.home-page-storybook .hero-mascot-button.is-waving .pup-bubble {
+  animation: home-teddy-bubble-pop .3s cubic-bezier(.2,1.4,.5,1) both;
+}
+@keyframes home-teddy-bubble-pop {
+  from { opacity: .7; scale: .82; }
+  to { opacity: 1; scale: 1; }
+}
+@media (max-width:760px) {
+  .home-page-storybook .hero-mascot-anchor {
+    bottom: 12px;
+    width: clamp(220px,34vw,280px);
+    height: 190px;
+  }
+}
+@media (max-width:520px) {
+  .home-page-storybook .hero-mascot-anchor {
+    bottom: 10px;
+    width: clamp(210px,50vw,250px);
+    height: 180px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page-storybook .hero-mascot-button:hover .pup-buddy [data-p="open"],
+  .home-page-storybook .hero-mascot-button:hover .pup-buddy [data-p="shut"],
+  .home-page-storybook .hero-mascot-button:focus-visible .pup-buddy [data-p="open"],
+  .home-page-storybook .hero-mascot-button:focus-visible .pup-buddy [data-p="shut"],
+  .home-page-storybook .hero-mascot-button.is-waving .pup-buddy [data-p="paw-left"],
+  .home-page-storybook .hero-mascot-button.is-waving .pup-buddy [data-p="paw-right"] {
+    animation: none !important;
+  }
+}
+
+/* Paw trails use fewer, farther-apart prints at a deliberate walking pace. */
+.paw-trail-stamp {
+  width: 24px;
+  height: 24px;
+  animation-duration: 1800ms;
 }

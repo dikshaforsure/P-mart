@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import PawMark from '../shared/PawMark';
 
-const TRAIL_DISTANCE = 30;
-const TRAIL_INTERVAL = 42;
-const TRAIL_LIFETIME = 780;
-const MAX_TRAIL_MARKS = 14;
+const TRAIL_DISTANCE = 84;
+const TRAIL_INTERVAL = 220;
+const TRAIL_LIFETIME = 1800;
+const MAX_TRAIL_MARKS = 5;
 
 export default function PawTrail() {
   const [marks, setMarks] = useState([]);
@@ -28,7 +28,7 @@ export default function PawTrail() {
       const dy = previous ? event.clientY - previous.y : 0;
       const distance = Math.hypot(dx, dy);
 
-      if (previous && distance < TRAIL_DISTANCE && now - previous.time < TRAIL_INTERVAL) return;
+      if (previous && (distance < TRAIL_DISTANCE || now - previous.time < TRAIL_INTERVAL)) return;
 
       lastPoint.current = { x: event.clientX, y: event.clientY, time: now };
       const id = nextId.current + 1;

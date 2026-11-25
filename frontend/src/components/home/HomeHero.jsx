@@ -10,6 +10,29 @@ const puppyPositions = [7, 22, 36, 64, 78, 93];
 export default function HomeHero({ puppies = [] }) {
   const mascotRef = useRef(null);
   const [dippingPuppies, setDippingPuppies] = useState([]);
+  const [mascotMessage, setMascotMessage] = useState('hello!');
+  const [mascotAnnouncement, setMascotAnnouncement] = useState('');
+  const [isMascotWaving, setIsMascotWaving] = useState(false);
+  const mascotPhraseIndex = useRef(-1);
+  const mascotWaveTimer = useRef(null);
+
+  const mascotPhrases = ['woof woof!', 'ruff ruff!', 'yip-yip!', 'arf arf!', 'paw-some to see you!'];
+
+  const greetMascot = () => {
+    mascotPhraseIndex.current = (mascotPhraseIndex.current + 1) % mascotPhrases.length;
+    const phrase = mascotPhrases[mascotPhraseIndex.current];
+    setMascotMessage(phrase);
+    setMascotAnnouncement(phrase);
+    setIsMascotWaving(false);
+    window.clearTimeout(mascotWaveTimer.current);
+    mascotWaveTimer.current = window.setTimeout(() => {
+      setIsMascotWaving(true);
+      mascotWaveTimer.current = window.setTimeout(() => {
+        setIsMascotWaving(false);
+        mascotWaveTimer.current = null;
+      }, 980);
+    }, 16);
+  };
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -42,6 +65,8 @@ export default function HomeHero({ puppies = [] }) {
       window.clearTimeout(dipTimer);
     };
   }, [puppies.length]);
+
+  useEffect(() => () => window.clearTimeout(mascotWaveTimer.current), []);
 
   return (
     <section className="home-hero home-hero-storybook" aria-labelledby="hero-title">
@@ -97,12 +122,21 @@ export default function HomeHero({ puppies = [] }) {
           })}
         </ul>
         <div className="hero-mascot-anchor" ref={mascotRef}>
-          <PuppyMascot
-            boardRef={mascotRef}
-            label="Teddy, the TeddyPups puppy, peeking over the hero blanket"
-            showRing={false}
-            bubbleText="hello!"
-          />
+          <button
+            className={`hero-mascot-button${isMascotWaving ? ' is-waving' : ''}`}
+            type="button"
+            aria-label="Ask Teddy to wave hello"
+            title="Click Teddy to say hello"
+            onClick={greetMascot}
+          >
+            <PuppyMascot
+              boardRef={mascotRef}
+              label="Teddy, the TeddyPups puppy, peeking over the hero blanket"
+              showRing={false}
+              bubbleText={mascotMessage}
+            />
+          </button>
+          <span className="sr-only" aria-live="polite" aria-atomic="true">{mascotAnnouncement}</span>
         </div>
         <div className="hero-quilt" aria-hidden="true">
           <div className="hero-quilt-paws"><PawMark /><PawMark /><PawMark /><PawMark /><PawMark /></div>

@@ -33,6 +33,30 @@ describe('HomeHero', () => {
     ]);
   });
 
+  it('lets visitors click Teddy to wave and cycle through playful greeting bubbles', () => {
+    vi.useFakeTimers();
+    const { container } = render(<BrowserRouter><HomeHero puppies={puppies} /></BrowserRouter>);
+    const teddyButton = screen.getByRole('button', { name: 'Ask Teddy to wave hello' });
+
+    expect(screen.getByText('hello!')).toBeInTheDocument();
+    expect(teddyButton.querySelector('[data-p="paw-left"]')).toBeInTheDocument();
+    expect(teddyButton.querySelector('[data-p="paw-right"]')).toBeInTheDocument();
+
+    teddyButton.click();
+    expect(screen.getByText('woof woof!')).toBeInTheDocument();
+    expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('woof woof!');
+
+    act(() => { vi.advanceTimersByTime(16); });
+    expect(teddyButton).toHaveClass('is-waving');
+
+    act(() => { vi.advanceTimersByTime(980); });
+    expect(teddyButton).not.toHaveClass('is-waving');
+
+    teddyButton.click();
+    expect(screen.getByText('ruff ruff!')).toBeInTheDocument();
+    expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('ruff ruff!');
+  });
+
   it('automatically dips one puppy portrait before bringing it back up', () => {
     vi.useFakeTimers();
     vi.spyOn(Math, 'random').mockReturnValue(0.1);

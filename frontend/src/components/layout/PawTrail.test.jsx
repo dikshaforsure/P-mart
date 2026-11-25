@@ -43,8 +43,45 @@ describe('PawTrail', () => {
     expect(stamp).toHaveStyle({ left: '120px', top: '180px' });
     expect(stamp.querySelector('svg')).toBeInTheDocument();
 
-    act(() => vi.advanceTimersByTime(780));
+    act(() => vi.advanceTimersByTime(1800));
     expect(container.querySelector('.paw-trail-stamp')).not.toBeInTheDocument();
+  });
+
+  it('spaces footprints by both distance and time for a slower walking cadence', () => {
+    vi.useFakeTimers();
+    configurePointer();
+    const { container } = render(<PawTrail />);
+
+    act(() => movePointer(120, 180));
+    expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(1);
+
+    act(() => {
+      vi.advanceTimersByTime(220);
+      movePointer(170, 180);
+    });
+    expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(1);
+
+    act(() => {
+      vi.advanceTimersByTime(20);
+      movePointer(210, 180);
+    });
+    expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(2);
+  });
+
+  it('keeps no more than five visible paw prints', () => {
+    vi.useFakeTimers();
+    configurePointer();
+    const { container } = render(<PawTrail />);
+
+    act(() => movePointer(100, 180));
+    for (let index = 1; index <= 7; index += 1) {
+      act(() => {
+        vi.advanceTimersByTime(220);
+        movePointer(100 + index * 100, 180);
+      });
+    }
+
+    expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(5);
   });
 
   it('does not add a footprint for touch-pointer movement', () => {

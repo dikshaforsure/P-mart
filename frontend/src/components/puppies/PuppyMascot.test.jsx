@@ -14,6 +14,8 @@ describe('PuppyMascot', () => {
     expect(mascot.querySelector('[data-p="open"]')).toBeInTheDocument();
     expect(mascot.querySelector('[data-p="shut"]')).toBeInTheDocument();
     expect(mascot.querySelector('[data-p="blink"]')).toBeInTheDocument();
+    expect(mascot.querySelector('[data-p="paw-left"]')).toBeInTheDocument();
+    expect(mascot.querySelector('[data-p="paw-right"]')).toBeInTheDocument();
     expect(screen.getByText('hello!')).toHaveAttribute('aria-hidden', 'true');
   });
 
