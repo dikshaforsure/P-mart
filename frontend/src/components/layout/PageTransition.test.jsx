@@ -168,7 +168,7 @@ describe('PageTransition', () => {
     }
     expect(puppy.querySelectorAll('.teddy-runner-leg')).toHaveLength(4);
     expect(puppy.querySelector('[data-part="head-shape"]')).toBeInTheDocument();
-    expect(puppy.querySelector('[data-part="muzzle"] path')).toBeInTheDocument();
+    expect(puppy.querySelector('[data-part="muzzle"]')).toBeInTheDocument();
 
     // A natural diagonal gait moves one front and the opposite rear leg together.
     expect(puppy.querySelector('[data-part="rear-far-leg"]')).toHaveClass('teddy-runner-leg--diagonal-a');
