@@ -71,7 +71,14 @@ describe('PageTransition', () => {
     const curtain = screen.getByTestId('page-transition');
     expect(curtain).toHaveAttribute('data-phase', 'entering');
     expect(curtain).toHaveAttribute('aria-hidden', 'true');
-    expect(curtain).toHaveAttribute('data-run-duration-ms', '3200');
+    expect(curtain).toHaveAttribute('data-run-duration-ms', '2700');
+    const runner = screen.getByTestId('page-transition-runner');
+    const startOffset = Number(curtain.getAttribute('data-runner-start-offset-px'));
+    expect(startOffset).toBeGreaterThanOrEqual(18);
+    expect(startOffset).toBeLessThanOrEqual(32);
+    expect(runner.style.getPropertyValue('--runner-start-offset')).toBe(`${startOffset}px`);
+    expect(runner.style.getPropertyValue('--runner-run-duration')).toBe('2700ms');
+    expect(runner.style.getPropertyValue('--runner-stride-duration')).toMatch(/^\\d+ms$/);
     expect(screen.getByTestId('current-path')).toHaveTextContent('/');
     expect(onActiveChange).toHaveBeenLastCalledWith(true);
 
@@ -84,6 +91,31 @@ describe('PageTransition', () => {
     fireAnimationEnd(screen.getByTestId('page-transition'), 'page-transition-lift');
     expect(screen.queryByTestId('page-transition')).not.toBeInTheDocument();
     expect(onActiveChange).toHaveBeenLastCalledWith(false);
+  });
+
+  it('adapts runner duration to browser network hints when available', () => {
+    const originalConnection = Object.getOwnPropertyDescriptor(navigator, 'connection');
+
+    try {
+      Object.defineProperty(navigator, 'connection', {
+        configurable: true,
+        value: { effectiveType: 'slow-2g', downlink: 0.05 },
+      });
+      const slowConnection = renderTransition();
+      expect(screen.getByTestId('page-transition')).toHaveAttribute('data-run-duration-ms', '3200');
+      slowConnection.unmount();
+
+      Object.defineProperty(navigator, 'connection', {
+        configurable: true,
+        value: { effectiveType: '4g', downlink: 10 },
+      });
+      const fastConnection = renderTransition();
+      expect(screen.getByTestId('page-transition')).toHaveAttribute('data-run-duration-ms', '2200');
+      fastConnection.unmount();
+    } finally {
+      if (originalConnection) Object.defineProperty(navigator, 'connection', originalConnection);
+      else delete navigator.connection;
+    }
   });
 
   it('covers the current page before committing an internal link destination', () => {
@@ -116,7 +148,7 @@ describe('PageTransition', () => {
 
     expect(paws).toHaveLength(5);
     expect(paws.every((paw) => paw.querySelector('svg'))).toBe(true);
-    expect(delays.every((delay) => Number.isFinite(delay) && delay > 0 && delay < 3200)).toBe(true);
+    expect(delays.every((delay) => Number.isFinite(delay) && delay > 0 && delay < 2700)).toBe(true);
     expect(delays).toEqual([...delays].sort((a, b) => a - b));
     expect(paws.map((paw) => paw.style.left)).toEqual(['27%', '31.5%', '36%', '40.5%', '45%']);
   });
@@ -130,6 +162,7 @@ describe('PageTransition', () => {
       'body', 'head', 'left-ear', 'right-ear', 'rear-far-leg',
       'front-far-leg', 'rear-near-leg', 'front-near-leg',
       'tail', 'eyes', 'muzzle', 'nose', 'mouth', 'tongue', 'ground-shadow',
+      'collar', 'heart-tag', 'whisker-spots',
     ]) {
       expect(puppy.querySelector(`[data-part="${part}"]`)).toBeInTheDocument();
     }

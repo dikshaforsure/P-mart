@@ -3413,18 +3413,18 @@ img, video { display: block; max-width: 100%; }
   left: 0;
   width: clamp(132px,10vw,190px);
   opacity: 0;
-  transform: translate3d(-150%,0,0);
+  transform: translate3d(var(--runner-start-offset, clamp(18px,2.5vw,32px)),0,0);
 }
 .page-transition-curtain[data-phase="running"] .page-transition-runner {
   opacity: 1;
-  animation: page-transition-run-across 3.2s linear both;
+  animation: page-transition-run-across var(--runner-run-duration, 2700ms) linear both;
 }
 .page-transition-curtain[data-phase="exiting"] .page-transition-runner {
   opacity: 1;
   transform: translate3d(50vw,0,0);
 }
 @keyframes page-transition-run-across {
-  from { transform: translate3d(-150%,0,0); }
+  from { transform: translate3d(var(--runner-start-offset, clamp(18px,2.5vw,32px)),0,0); }
   to { transform: translate3d(50vw,0,0); }
 }
 .teddy-runner-svg {
@@ -3436,66 +3436,66 @@ img, video { display: block; max-width: 100%; }
 .page-transition-curtain[data-phase="running"] .teddy-runner-body {
   transform-box: fill-box;
   transform-origin: center;
-  animation: teddy-runner-bounce .36s ease-in-out infinite alternate;
+  animation: teddy-runner-bounce var(--runner-stride-duration, 140ms) ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-head {
   transform-box: fill-box;
   transform-origin: 50% 68%;
-  animation: teddy-runner-head-bob .42s ease-in-out -.07s infinite alternate;
+  animation: teddy-runner-head-bob var(--runner-stride-duration, 140ms) ease-in-out var(--runner-head-lag, -25ms) infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-tail {
   transform-box: fill-box;
   transform-origin: 96% 90%;
-  animation: teddy-runner-tail-wag .38s ease-in-out infinite alternate;
+  animation: teddy-runner-tail-wag var(--runner-tail-duration, 190ms) ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-ear--left {
   transform-box: fill-box;
   transform-origin: 82% 18%;
-  animation: teddy-runner-ear-flop-left .36s ease-in-out -.04s infinite alternate;
+  animation: teddy-runner-ear-flop-left var(--runner-stride-duration, 140ms) ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-ear--right {
   transform-box: fill-box;
   transform-origin: 18% 18%;
-  animation: teddy-runner-ear-flop-right .36s ease-in-out -.04s infinite alternate;
+  animation: teddy-runner-ear-flop-right var(--runner-stride-duration, 140ms) ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg {
   transform-box: fill-box;
   transform-origin: center 5%;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg--diagonal-a {
-  animation: teddy-runner-leg-cycle .36s ease-in-out infinite alternate;
+  animation: teddy-runner-leg-cycle var(--runner-stride-duration, 140ms) ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg--diagonal-b {
-  animation: teddy-runner-leg-cycle .36s ease-in-out -.36s infinite alternate;
+  animation: teddy-runner-leg-cycle var(--runner-stride-duration, 140ms) ease-in-out var(--runner-diagonal-offset, -140ms) infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-shadow {
   transform-box: fill-box;
   transform-origin: center;
-  animation: teddy-runner-shadow-pulse .36s ease-in-out infinite alternate;
+  animation: teddy-runner-shadow-pulse var(--runner-stride-duration, 140ms) ease-in-out infinite alternate;
 }
 @keyframes teddy-runner-bounce {
-  from { transform: translateY(1px) rotate(-.5deg); }
-  to { transform: translateY(-4px) rotate(.5deg); }
+  from { transform: translateY(1px) rotate(-.35deg); }
+  to { transform: translateY(-3px) rotate(.35deg); }
 }
 @keyframes teddy-runner-head-bob {
-  from { transform: rotate(-1.8deg); }
-  to { transform: rotate(1.8deg); }
+  from { transform: rotate(-1.4deg); }
+  to { transform: rotate(1.4deg); }
 }
 @keyframes teddy-runner-tail-wag {
-  from { transform: rotate(-16deg); }
-  to { transform: rotate(17deg); }
+  from { transform: rotate(-13deg); }
+  to { transform: rotate(15deg); }
 }
 @keyframes teddy-runner-ear-flop-left {
-  from { transform: rotate(-3deg); }
-  to { transform: rotate(4deg); }
+  from { transform: rotate(-4deg); }
+  to { transform: rotate(5deg); }
 }
 @keyframes teddy-runner-ear-flop-right {
-  from { transform: rotate(3deg); }
-  to { transform: rotate(-4deg); }
+  from { transform: rotate(4deg); }
+  to { transform: rotate(-5deg); }
 }
 @keyframes teddy-runner-leg-cycle {
-  from { transform: rotate(-25deg) translateY(1px); }
-  to { transform: rotate(25deg) translateY(-3px); }
+  from { transform: rotate(-18deg) translateY(1px); }
+  to { transform: rotate(18deg) translateY(-2px); }
 }
 @keyframes teddy-runner-shadow-pulse {
   from { transform: scaleX(1.02) scaleY(.9); opacity: .15; }
@@ -3576,7 +3576,7 @@ img, video { display: block; max-width: 100%; }
   }
   .page-transition-curtain[data-phase="running"] .page-transition-runner {
     opacity: 1;
-    transform: translate3d(0,0,0);
+    transform: translate3d(var(--runner-start-offset, clamp(18px,2.5vw,32px)),0,0);
   }
   .page-transition-curtain[data-phase="running"] .page-transition-paw {
     opacity: .88;
