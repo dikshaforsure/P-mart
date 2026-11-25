@@ -2,7 +2,7 @@
 
 **Last updated:** 25 November 2026  
 **Current phase:** Phase 5 — Gone Home, Happy Families and Contact (public-page implementation complete)  
-**Status:** Public-frontend implementation milestones Phases 0–5 are complete on `develop`: research/documentation, catalogue/profile experiences, the Phase 3 profile close-out, the Phase 4 shared shell/How It Works/FAQ, and these three Phase 5 pages. Final Phase 5 code commit: `0fec72305c72b09915fb4d453bacc205e38d9469`; GitHub Actions run [#27](https://github.com/dikshaforsure/P-mart/actions/runs/45543194059) passed 4 focused files / 26 tests, 18 full-suite files / 95 tests, and the Vite production build. This is frontend scope only: no enquiry API/database persistence, deployment, production asset rights approval or real-browser visual QA is claimed. Next work: homepage visual refinement and integrated responsive/browser QA; separately determine whether backend enquiry persistence/admin is in scope.
+**Status:** Public-frontend implementation milestones Phases 0–5 are complete on `develop`: research/documentation, catalogue/profile experiences, the Phase 3 profile close-out, the Phase 4 shared shell/How It Works/FAQ, and the Phase 5 Gone Home, Happy Families and Contact pages. The latest Phase 5 Contact fidelity correction is committed at `bed9eeab2394292462e4dcb2820ddae27a32b59e`; GitHub Actions run [#30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042) passed 5 focused files / 31 tests, 18 full-suite files / 97 tests, and the Vite production build. This is frontend scope only: no enquiry API/database persistence, deployment, production asset rights approval or real-browser visual QA is claimed. Next work: homepage visual refinement and integrated responsive/browser QA; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
 
@@ -417,3 +417,33 @@ GitHub Actions [run #27](https://github.com/dikshaforsure/P-mart/actions/runs/45
 No real-browser checks at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 or 375×812 were performed. No screenshot capture, live image request audit, browser-console inspection, manual lightbox/touch testing, or manual WhatsApp send was performed. Automated jsdom coverage and the production build do not establish visual parity, media reachability or production asset permissions; no pixel-perfect claim is made.
 
 **Next planned work:** homepage visual refinement and a final integrated responsive/browser QA pass across all public routes. Backend contact persistence, enquiry notifications/admin tooling, final asset-rights approval and deployment remain separate open scope items and are not implemented by Phase 5.
+
+
+### Phase 5 Contact fidelity follow-up — mascot, image fallback and tablet order (25 November 2026)
+
+**Initial Phase 5 audit head:** \`0fec72305c72b09915fb4d453bacc205e38d9469\`  
+**Direct parent before this correction:** \`c108eae1ea9f9977aff50a2fc8deb92bfeb1bc48\`  
+**Correction commit:** \`bed9eeab2394292462e4dcb2820ddae27a32b59e\`  
+**Verification:** [GitHub Actions run #30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042)
+
+The Phase 5 pages were already present at the start of this follow-up. A second inspection of the source \`contact.html\` and the current page implementation identified three small fidelity/resilience corrections:
+
+- Reused \`PuppyMascot.jsx\` on Contact with optional label/facing/ring/bubble props. Its defaults preserve the individual puppy-profile presentation; Contact now shows the source-style “Teddy, waiting for your letter” SVG beneath the letter form, facing left.
+- Added a stable placeholder when the remote showroom photograph fails to load. The showroom card, visit details and map link remain available.
+- Corrected the tablet layout below 1024px to one column and made the letter form precede the contact details, matching the source page's narrow-screen flow. Desktop two-column placement is retained.
+- Added tests for the mascot's optional source presentation and Contact's image-error fallback; included the mascot test in the Phase 5 focused workflow command.
+
+No dataset, media URL, WhatsApp helper/configuration, contact details, route, other page or package dependency was changed.
+
+#### Contact source-number discrepancy
+
+A direct inspection of the supplied reference repository's current \`src/templates/contact.html\` shows \`+971 54 167 6733\` in its visible WhatsApp/call links. An earlier reference crawl note in \`frontend/ASSET_SOURCES.md\` recorded \`+971 50 000 0000\` and a provider-style WhatsApp URL. These observations conflict across source snapshots. This follow-up records the direct template evidence but does not change the existing destination WhatsApp helper, footer contact values or display a new phone number. Confirm the intended public number with the assignment owner before changing it.
+
+#### Verification and manual QA
+
+Run #30 passed against the exact correction commit:
+- Focused: **5 files / 31 tests passed**.
+- Full frontend suite: **18 files / 97 tests passed**.
+- Production build: **passed**, Vite 8.3.8.
+
+No browser screenshots or manual checks at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 or 375×812 were performed. Live image reachability, actual WhatsApp sending, asset permission and deployed behavior remain unverified.

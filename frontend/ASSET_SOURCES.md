@@ -23,7 +23,7 @@ The current homepage uses images whose media paths were exposed by the supplied 
 
 ## Contact-link verification note
 
-The visible reference phone is `+971 50 000 0000`. The supplied page's WhatsApp anchor was inspected separately and resolved to a prefilled `wa.me` URL for `919898124987` with unrelated “Insta Biz Web” text. That appears to be a template/provider destination rather than a TeddyPups contact, so it is not copied into this app. Current WhatsApp links are generated from the phone number visibly printed on the site (`971500000000`); confirm that displayed number is the intended live WhatsApp destination before production use. The email address is obscured in the accessible page extract and is therefore not linked in the footer.
+The earlier public-page crawl recorded a visible `+971 50 000 0000` number and a provider-style `wa.me` destination (`919898124987`, with unrelated “Insta Biz Web” text). A later direct inspection of the supplied reference repository's `src/templates/contact.html` shows `+971 54 167 6733` in both the visible call link and the WhatsApp URL; the source component module also exposes this TeddyPups number. These are conflicting observations across snapshots. The destination Contact page does not display either number and continues using the pre-existing `getWhatsAppUrl()` configuration. Confirm the intended public number with the assignment owner before changing the helper or footer. The current Contact template includes `teddypupsadmin@gmail.com`.
 
 
 ## Phase 2 puppy profile media

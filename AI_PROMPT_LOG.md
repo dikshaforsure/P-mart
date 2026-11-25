@@ -324,7 +324,7 @@ Inspected the matching Gone Home, Happy Families and Contact templates, referenc
 
 ### Contact submission decision
 
-The source React form optionally POSTs to a \`VITE_ENQUIRY_ENDPOINT\`; no equivalent endpoint exists in the destination. The implementation therefore does not mimic the private API/demo success state and does not claim contact delivery. It builds a WhatsApp message, opens the existing configured link from the submit interaction, and instructs the visitor to review and manually send it. The form's source \`website\` anti-spam The 15 puppy-choice labels and their order match the source. Because the source option UUIDs belong to an unavailable private backend and the destination has no contact API, the page uses stable local option values and includes the selected visible label in the WhatsApp handoff; it does not submit or persist those option IDs. honeypot remains present and filled values are ignored. Existing footer phone/email/contact values were not changed; the reference phone/WhatsApp discrepancy remains documented, so no new telephone number is displayed.
+The source React form optionally POSTs to a \`VITE_ENQUIRY_ENDPOINT\`; no equivalent endpoint exists in the destination. The implementation therefore does not mimic the private API/demo success state and does not claim contact delivery. It builds a WhatsApp message, opens the existing configured link from the submit interaction, and instructs the visitor to review and manually send it. The source \`website\` anti-spam honeypot remains present and filled values are ignored. The 15 puppy-choice labels and their order match the source. Because the source option UUIDs belong to an unavailable private backend and the destination has no contact API, the page uses stable local option values and includes the selected visible label in the WhatsApp handoff; it does not submit or persist those option IDs. Existing footer phone/email/contact values were not changed; the reference phone/WhatsApp discrepancy remains documented, so no new telephone number is displayed.
 
 ### Verification
 
@@ -337,3 +337,31 @@ GitHub Actions [run #27](https://github.com/dikshaforsure/P-mart/actions/runs/45
 ### Remaining work
 
 No manual QA or browser screenshots at the six requested viewport sizes were completed. Live image/network checks, actual WhatsApp message sending, contact backend persistence, asset-rights approval and deployment remain unverified/open. Next: homepage refinement and integrated responsive/browser QA across all routes; decide separately whether to implement backend enquiry persistence/notifications/admin.
+
+
+## Session 10 — Phase 5 Contact fidelity follow-up
+
+**Date:** 25 November 2026  
+**Branch:** \`develop\`  
+**Initial Phase 5 audit head:** \`0fec72305c72b09915fb4d453bacc205e38d9469\`  
+**Direct parent before correction:** \`c108eae1ea9f9977aff50a2fc8deb92bfeb1bc48\`  
+**Code commit:** \`bed9eeab2394292462e4dcb2820ddae27a32b59e\`
+
+### Changes
+
+A source re-check showed the Contact page's small mascot and narrow-screen order needed to be restored. The reusable \`PuppyMascot\` now accepts optional accessible label, facing, ring and speech-bubble props; its defaults preserve the puppy-profile appearance. Contact uses the same inline SVG with the source label “Teddy, waiting for your letter”. The showroom photo now fails over to a fixed-size accessible placeholder, and the contact letter appears before contact details on widths below 1024px.
+
+Added a mascot variant test and a Contact test for mascot presence/image failure. The focused workflow now includes the mascot suite. No data, route, contact phone, footer value, WhatsApp configuration, dependency or lockfile was changed.
+
+### Verification
+
+GitHub Actions [run #30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042) passed:
+- Focused: 5 files / 31 tests.
+- Full suite: 18 files / 97 tests.
+- \`npm run build\`: passed with Vite 8.3.8.
+
+### Data discrepancy and limitations
+
+The directly inspected \`src/templates/contact.html\` shows \`+971 54 167 6733\` in its call and WhatsApp links; an earlier crawl note recorded \`+971 50 000 0000\` and a different provider-style WhatsApp link. The destination retains its pre-existing WhatsApp helper and does not show a phone number pending confirmation. The form remains an explicit WhatsApp handoff, not API submission or persistent contact delivery.
+
+No real-browser checks at the requested viewport sizes, screenshots, live media validation, manual message send, rights approval or deployment were performed.

@@ -3,7 +3,8 @@
 **Research date:** 24 November 2026  
 **Reference:** https://puppy.instabizweb.com/  
 **Repository:** https://github.com/dikshaforsure/P-mart  
-**Phase:** 0 — Research and planning only
+**Document role:** Phase 0 research baseline, maintained with verified implementation analysis through Phase 5
+**Current frontend status:** Phases 0–5 public-page implementation complete; homepage visual refinement, integrated browser QA, backend enquiry persistence and deployment remain open.
 
 ## 1. Evidence and limits
 
@@ -413,3 +414,14 @@ Implemented three dedicated page components and focused tests, replaced only the
 ### Verification and remaining work
 
 Run #27 on the final tested code commit passed **4 focused files / 26 tests**, the full suite **18 files / 95 tests**, and the Vite 8.3.8 production build. The full browser viewport pass, screenshot comparison, live remote-media request check, browser-console inspection and manual WhatsApp handoff were not performed. Homepage visual refinement, integrated public-route responsive QA, backend enquiry persistence/notifications/admin decisions, asset-rights approval and deployment remain open.
+
+
+## Phase 5 Contact fidelity follow-up — source details and responsive correction
+
+A second inspection of the Contact template confirmed that its mascot is a page-specific use of the shared puppy SVG with the accessible description “Teddy, waiting for your letter”. The destination reuses the existing \`PuppyMascot\` component through optional presentation props, retaining the original profile defaults. Contact also now shows a stable showroom-photo fallback on image error and follows the reference's single-column, letter-first flow below 1024px; desktop columns remain unchanged.
+
+The correction is in commit \`bed9eeab2394292462e4dcb2820ddae27a32b59e\`. It does not change page data, the source-host image URL, WhatsApp helper/configuration, footer values, routes or dependencies. CI run [#30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042) passed 5 focused files / 31 tests, the 18-file / 97-test frontend suite and the Vite 8.3.8 production build.
+
+**Contact-number evidence remains conflicting:** the directly inspected reference \`src/templates/contact.html\` currently contains the \`+971 54 167 6733\` call and WhatsApp links, while the earlier asset crawl note recorded different number/link observations. The destination continues using its already configured WhatsApp helper and does not expose a new phone number. Resolve the intended public contact number with the assignment owner before altering shared contact configuration.
+
+No real-browser viewport QA, screenshots, live image reachability test, manual WhatsApp send, asset-rights approval, API persistence or deployment were completed.
