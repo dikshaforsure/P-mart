@@ -1,6 +1,6 @@
 # TeddyPups — Technical Documentation
 
-**Status:** Proposed design; implementation has not started.  
+**Status:** Phase 1 frontend foundation and Phase 2 puppy catalogue/profile UI are implemented in `frontend/`. Backend/API/database remain proposed and are not started. Production build verification is currently blocked by npm registry DNS.  
 **Required stack:** React, JavaScript/JSX, Tailwind CSS, React Router, Node.js, Express, MongoDB, Mongoose and REST APIs. No TypeScript or Angular.
 
 ## 1. Architecture
@@ -87,7 +87,7 @@ Confirm whether Delivery & collection is a standalone route or section anchor.
 
 ### Component plan
 
-**Shared:** AppLayout, SiteHeader, MobileNavigation, SiteFooter, Breadcrumbs, PageHeading, SectionHeading, Button, ResponsiveImage.
+**Shared:** AppLayout, SiteHeader, MobileNavigation, SiteFooter, PawTrail (global fine-pointer cursor/trail), Breadcrumbs, PageHeading, SectionHeading, Button, ResponsiveImage.
 
 **Home:** HomeHero, FeaturedPuppies, WaysToMeet, PuppyJourneyPreview, TrustFeatures, WhatsAppConversationIllustration (only if confirmed), HappyFamiliesPreview, FaqPreview, FinalCta.
 
@@ -289,3 +289,158 @@ frontend/
 The current homepage uses `contentService.js` as its data-access contract and `siteContent.js` as local fixtures. UI components consume service results and do not import fixture data directly. Reference image URLs are centralised in `data/referenceAssets.js`; they are currently remote URLs from the supplied reference domain and must be moved to approved project-owned assets/CDN after reuse permission is confirmed.
 
 Current package versions are pinned by compatible semver ranges in `frontend/package.json`: React 19.3, React DOM 19.3, React Router DOM 7.18, Vite 8.3, React plugin 6.3 and Tailwind CSS/Vite plugin 4.3. The manifest declares Node.js >=20.19. Dependency installation was not completed in the execution environment due npm registry DNS failure, so compatibility has not been proven by an install/build here.
+
+
+## Phase 2 implementation — puppy catalogue and profiles (24 November 2026)
+
+### Data modules and service contract
+- `data/puppies.json` remains the complete 42-record puppy snapshot; it is not replaced by JSX data.
+- `data/breeds.json` provides breed reference values. `data/pages.json` is retained for route metadata. `faq.json`, `families.json` and `home-families.json` remain for later phases.
+- `data/puppyData.js` exports all records, the available/published filter, exact-slug lookup, previous/next available lookup and a card mapping helper.
+- `services/contentService.js` exposes available records, slug lookup, neighbours and breeds, while retaining the Phase 1 homepage service functions.
+- The duplicate puppy array in `siteContent.js` was removed. Homepage featured puppies and the catalogue now read from the same JSON source.
+
+### Route/component map
+| Route/component | Responsibility |
+|---|---|
+| `/puppies` — `PuppiesPage` | Current available records, loading/error/empty states and responsive card grid |
+| `/puppies/:slug` — `PuppyProfilePage` | Exact slug lookup for available and historical sold records |
+| `PuppyCard` | Accessible card with source cover, name, breed, gender, age and data origin |
+| `PuppyGallery` | Variable image/video collection, active count, thumbnails, previous/next and failed-media states |
+| `PuppyNoteForm` | Local input validation and profile-specific WhatsApp handoff |
+| `puppyData.js` | Filtering, mapping, lookup and adjacency; no component-level puppy fixture duplication |
+
+Unknown profile slugs return a profile not-found state. Sold records remain resolvable and are not included in the available catalogue.
+
+### Gallery media handling
+- Gallery selection uses the `media[]` array, with the cover as a fallback only when the array is empty.
+- `kind === "video"` renders a native controlled `video` element with an optional poster; all other known image records render as `img`. Image URLs are never used as video sources.
+- Source `url`, `poster`, `width`, `height`, `alt`, `caption`, `durationS`, `focalX` and `focalY` are retained. Video duration is presented on video thumbnails where available.
+- Missing or failed URLs show clear unavailable-media fallbacks. No binaries are downloaded into Git.
+- Catalogue and profile images use lazy loading and source dimensions where present.
+
+### Profile and enquiry behaviour
+- Puppy details use source `displayName/name`, breed, `genderLabel/gender`, age, origin and description/colour fields.
+- Shared care content reflects common TeddyPups copy; users are directed to ask for the individual puppy’s records. It does not fabricate individual health certificates.
+- Journey content is selected from `origin.slug` (`local` or `imported`) and uses the corresponding showroom or import steps.
+- WhatsApp links include the selected puppy's name and slug and reuse the Phase 1 helper.
+- The note form validates required name/phone and optional email, then prepares a WhatsApp message. There is no server call, persistence or false success acknowledgement.
+
+### Styling/accessibility
+Phase 2 styling is appended to the existing `index.css` and uses the Phase 1 warm-paper/ink/sage/serif tokens. The catalogue is three columns at wide desktop and two on mobile; profiles use a desktop gallery/details split and stack at narrower widths. Gallery thumbnails/arrows, list semantics, labels, status messages, visible focus and input error descriptions are implemented. Browser-level accessibility and responsive checks remain pending.
+
+
+## Phase 3 — Storybook profile presentation
+
+The reusable `PuppyProfilePage.jsx` retains its existing data loading, exact-slug lookup, available/sold states, WhatsApp CTA, origin-driven journey data and adjacent-available-puppy service. The reference-fidelity follow-up is recorded in implementation commit [`02be169`](https://github.com/dikshaforsure/P-mart/commit/02be169ed8dd690840934f3994322683f6df9e49).
+
+The profile uses three numbered storybook chapters:
+1. Puppy introduction, gallery, status and facts.
+2. Puppy care paper, nested beneath the framed information board in the right-hand profile column.
+3. Imported/local journey with a numbered dotted trail.
+
+The enquiry is a separate, unnumbered letter panel. Its paw stamp is rendered inside the existing `.tp-profile-letter` section. The profile CSS remains scoped under `.tp-profile-storybook` and `.tp-profile-*`; catalogue selectors and catalogue behavior are not changed.
+
+The refinement makes the gallery thumbnails a horizontally scrollable strip, uses a 4:5 stage on narrow screens and 5:6 from 768px, and stacks the main profile layout and journey trail below 1024px. The information column is sticky only at desktop widths. These are presentation changes; `PuppyGallery.jsx` and its keyboard/touch/video/lightbox logic are unchanged.
+
+`PuppyNoteForm.jsx` retains the field names, required-name/phone validation, phone/email checks, puppy-specific message construction, current WhatsApp URL helper, popup handling and explicit user-initiated handoff. No API, persistence or automatic-send behavior was introduced. The existing health-record disclaimer and shared care copy are unchanged.
+
+GitHub Actions run [#13](https://github.com/dikshaforsure/P-mart/actions/runs/45465525378) passed the three focused profile/form/gallery files (19 tests), the complete frontend suite (10 files, 47 tests) and `npm run build`. Browser-level responsive comparison, native media playback, external asset reachability and pixel-level parity remain unverified.
+
+
+## Phase 4 — Shared Shell, How It Works and FAQ
+
+**Implementation:** [`86ae5779f79f51c14c09de950393d34c6660c7bc`](https://github.com/dikshaforsure/P-mart/commit/86ae5779f79f51c14c09de950393d34c6660c7bc)
+
+### Routes and components
+| Route/component | Responsibility |
+|---|---|
+| `/how-it-works` — `HowItWorksPage.jsx` | Local/imported tabs, two separate four-step journeys, promise, delivery/collection and why-choose-us sections |
+| `/faq` — `FaqPage.jsx` | Runtime rendering from `data/faq.json`, combined question/answer search, live count, empty state and accessible accordion |
+| `PageIntro.jsx` | Reusable page-level eyebrow, heading and description |
+| `SectionHeading.jsx` | Reusable numbered/eyebrow section heading |
+| `JourneyStep.jsx` | Reusable numbered journey card |
+| `PawMark.jsx` | Small reusable brand/paw SVG for shared shell and page details |
+
+### State and accessibility
+- The journey selection is local React state in `HowItWorksPage`. Tabs use `role=tablist`, `role=tab`, `aria-selected`, `aria-controls`, roving `tabIndex` and Home/End/arrow-key handling. Each panel is connected through `aria-labelledby`.
+- FAQ entries are parsed from existing single-string `question?answer` JSON records at the first question mark. Search is case-insensitive across both fields. The count is announced using `aria-live`, and the clear button resets the controlled search.
+- Each FAQ note has a semantic button, `aria-expanded`, `aria-controls` and an associated labeled answer region. Search and accordion state are independent.
+- Shared mobile navigation retains its body-scroll lock, focus return, Escape and tab-loop behavior. `NavLink` active matching includes nested puppy profile paths under `/puppies`.
+
+### Content and dependencies
+No new package or framework was introduced. The FAQ data was not changed. Page journey/promise/delivery content is in `data/howItWorksContent.js`; the existing homepage `journeySteps` data remains untouched. The footer references the email, location and social links from the source shell while retaining the destination WhatsApp helper configuration.
+
+CSS for the new routes uses `how-*` and `faq-*` selectors. Shared shell and page-heading selectors intentionally apply across existing routes. Responsive styles include a stacked tablet layout, mobile journey cards/search layout and reduced-motion handling.
+
+### Verification
+Run [#15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) passed the four focused test files (15 tests), full frontend suite (14 files / 64 tests) and production build (Vite 8.3.8). No browser-level responsive inspection or visual snapshot comparison was run; jsdom and build results do not verify actual viewport rendering.
+
+### Implemented global pointer decoration
+
+`frontend/src/components/layout/PawTrail.jsx` is mounted once by `AppLayout` and reuses `PawMark.jsx` for the footprints. The companion custom cursor is a CSS SVG data URI matching the PawMark silhouette. This shared interaction is enabled only for fine mouse/pen pointers; touch/coarse-pointer devices retain native behavior, text-entry fields retain the text cursor, disabled elements retain `not-allowed`, and `prefers-reduced-motion` disables the animated trail. This is presentational only and has no route/data/API effects.
+
+### Happy Families lightbox image fit
+
+The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stage and optional caption. The source image is sized with automatic width/height plus max-width/max-height bounded by the stage and `object-fit: contain`; source width/height attributes remain attached for the native aspect ratio. Thumbnail Polaroids continue using cover cropping. This change is presentational only and leaves family data, image URLs, photo order and viewer navigation unchanged.
+### Homepage mascot interaction and paw trail
+
+- HomeHero wraps the existing PuppyMascot in a keyboard-accessible button. Homepage-only hover/focus animates its existing eyelid layers; click animates two independently grouped front paws and cycles playful bubble text. A polite live region announces text updates.
+- PuppyMascot.jsx former shared ledge front paws are wrapped in data-p="paw-left" and data-p="paw-right" groups; existing mascot SVG geometry and other placements are preserved.
+- Homepage mascot sizing/position is overridden at the hero only, with z-index kept below the scalloped quilt.
+- PawTrail.jsx uses 84px distance AND 220ms time thresholds, at most five active footprints, and 1.8s fade. Existing fine-pointer and reduced-motion handling remains.
+- Tests exist in HomeHero.test.jsx, PuppyMascot.test.jsx and PawTrail.test.jsx. The HomeHero interaction test uses RTL fireEvent.click() after correction.
+- CI verification is blocked after test correction by npm installation of tldts-core@^7.5.6 (ETARGET). No dependency or lockfile changes were introduced.
+ 
+### Shared header edge and route scrolling
+
+- The shared .site-header retains sticky positioning and existing navigation. Its straight bottom border is replaced by a repeating radial-gradient ::after scallop with subtle drop shadow to match the reference screenshot.
+- frontend/src/components/layout/ScrollToTop.jsx is mounted once in AppLayout. It switches history.scrollRestoration to manual for the SPA, jumps to the top on pathname changes, scrolls to valid hash targets, and ignores query-only changes.
+- ScrollToTop.test.jsx covers initial and route-change top resets, query-only navigation retention and hash target scrolling.
+- Visual shape/depth of the header in a real browser and actual browser back/forward behavior remain part of integrated Phase 7 QA.
+
+### PawTrail current tuning
+
+- Minimum pointer distance per print: 84px.
+- Minimum interval between prints: 220ms.
+- Maximum simultaneously displayed prints: 7.
+- JS removal timer and CSS imprint fade: 2200ms.
+- Paw SVG stamp remains 24px.
+- The distance/time thresholds remain unchanged so the longer tail does not become denser or faster. Reduced-motion and coarse/touch-pointer suppression remain intact.
+### Puppy profile Chapter 2 care panel
+
+- Shared markup is in `frontend/src/pages/PuppyProfilePage.jsx`; it serves available and sold profiles.
+- Card now uses chapter label `what comes with this {name}`, full-width h2 `Every Teddy Pup comes`, and one vertical `<ul>` containing the four existing care statements.
+- The previous paragraph (`Every TeddyPups puppy is described as...`) was removed because it did not appear in the supplied reference screenshot and increased card height. The checklist wording is unchanged.
+- CSS uses one-column content and list grids; paper max padding 42px, content gap 17px, list gap 12px. Responsive mobile spacing is slightly tighter.
+- Tests in `PuppyProfilePage.test.jsx` assert exact heading, four list items and absence of the paragraph for available and sold profiles.
+### Shared route-transition loading curtain
+
+- PageTransition.jsx is mounted once in AppLayout, watches useLocation().pathname and does not animate initial load, search/query-only filter changes or hash-only anchors. Browser back/forward path changes trigger the curtain as normal.
+- TeddyRunner.jsx is a locally authored inline SVG dog; CSS animates body bounce, head bob, tail wag and four running legs while the runner moves from left to right.
+- The transition background is CSS-only: warm honey base, radial center glow and repeating diagonal diamond/quilt lines. Existing PawMark SVG is reused for six sequential footprints. Text: 'every puppy is family'.
+- Phases and JS timers: entrance 440ms, running 1480ms, exit 540ms. CSS entrance moves the curtain from above down; CSS exit moves the curtain upward and out.
+- The active overlay blocks pointer interaction and uses a polite status region. prefers-reduced-motion: reduce skips it. All timers are cancelled on route interruption/unmount.
+- PageTransition.test.jsx covers initial load, route transition sequence, query/hash exclusions, reduced motion and timer cleanup.
+- CI run #62 passed 5 focused files / 33 tests; full suite 24 files / 121 tests; Vite 8.3.8 build with 68 modules.
+- Real-browser SVG/animation visual inspection remains outstanding.
+- Pawprint delays are computed per viewport using the runner's CSS-clamped width, viewport width, total horizontal travel distance and RUN_DURATION, with a 45ms trailing offset. This ensures each fixed paw location is stamped after the dog passes it on desktop and mobile. Follow-up commit ce8028e8929694ae5014416c6c34b985f9a63fc1 passed CI run #64 (24 files/121 tests and production build).
+### Transition runner art and motion — current settings
+
+- `TeddyRunner.jsx` reuses the site's local PuppyMascot SVG path data. It reveals the full-body and haunch groups, retains the existing poodle head, happy closed eyes, blush, collar and heart tag, animates the four original legs, and omits the paws-over-a-ledge layer.
+- Responsive runner width: `clamp(100px, 8.5vw, 172px)`. Movement starts at `-110%` and ends at `58vw`, keeping the runner right-of-centre.
+- Timing: entrance 440ms, runner/paw phase 3000ms, upward exit 540ms.
+- Five trail stamps at 31%, 36.5%, 42%, 47.5% and 53% width. Fade in for 280ms to 88% opacity, then hold. Their delay is calculated from viewport width, runner width and its route endpoint.
+- `getPawDelay()` uses milliseconds end-to-end: `Math.round(passedPositionTime + 80) + 'ms'`. Do not multiply by 1000; the travel calculation already returns milliseconds.
+- CI run #68 passed 5 focused files/33 tests, full suite 24 files/122 tests and Vite 8.3.8 build (68 modules). Browser animation verification is still outstanding.
+### Loading curtain — final implementation
+
+- Shared component: `PageTransition.jsx`, mounted once in `AppLayout.jsx`; dedicated illustration: `TeddyRunner.jsx`; global loader CSS is appended to `frontend/src/styles/index.css`.
+- Entry file is `frontend/src/main.jsx`; routing is `frontend/src/app/App.jsx`. Do not create a parallel router or route for the overlay.
+- Initial state is `entering`. On internal same-origin links with a different pathname, document capture prevents React Router's default click and queues the target. After CSS `page-transition-drop` ends (440ms), `navigate()` commits the destination behind the curtain. `useLocation().pathname` detects the controlled commit and changes phase directly to `running`. Runner animation ends at 3200ms and sets `exiting`; CSS curtain lift ends at 540ms and returns phase to idle.
+- External origins, target other than `_self`, download anchors, `rel=external`, modified clicks, query-only and hash-only changes do not use the curtain. Back/forward and programmatic pathname changes are handled on location change by `useLayoutEffect` before paint.
+- AppLayout passes active state to the shared site-content wrapper's `inert` attribute. Curtain is decorative and `aria-hidden=true`. Reduced motion bypasses the initial/navigation transition. Document click, window resize and media query listeners are cleaned up.
+- Dedicated `TeddyRunner` uses a 300 × 240 SVG viewBox and groups for body, head, two ears, four legs, tail, eyes, nose, mouth, tongue and ground shadow. All four legs run separately on staggered CSS keyframes; body bounce, head bob, tail wag and ear flop are separate animations.
+- Responsive size clamp is `clamp(132px, 10vw, 190px)`; path from `translateX(-150%)` to `50vw`; delay calculation uses the same width clamp and the tail/trailing-edge offset (1.4 × runner width) plus 120ms. Five PawMark SVGs at 27%, 31.5%, 36%, 40.5% and 45%, 240ms stamp-in and 88% held opacity. Resize recalculates the delays.
+- Background uses CSS warm cream/honey fill, central radial glow and repeating diagonal lattice, 96px on desktop/72px narrow screens. Stable tagline: `every puppy is family`.
+- GitHub Actions run #73 passed focused 5/33, full 24/126 and Vite build 68 modules. Browser frame-by-frame/viewport inspection remains outstanding.

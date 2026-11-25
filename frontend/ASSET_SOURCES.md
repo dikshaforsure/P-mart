@@ -1,0 +1,78 @@
+# Homepage asset source register
+
+**Reference host:** https://puppy.instabizweb.com/  
+**Inspection date:** 24 November 2026
+
+The current homepage uses images whose media paths were exposed by the supplied reference site's own public image links. They are represented in `src/data/referenceAssets.js` through the reference host's Next image endpoint. This avoids substituting unrelated stock photos.
+
+| Usage | Source record | Notes |
+|---|---|---|
+| Hero | Homepage image link | Black-and-white fluffy puppy photograph from supplied host |
+| Dubai showroom card | Homepage “Puppies in Dubai” image | Golden puppy being held in showroom |
+| Puppy cards 1–6 | Main gallery images from the six corresponding public puppy profiles | Max, Korean Teacup Maltipoo, Korean Teacup Poodle, Maltipoo & Cavapoo, Toy Poodle, Maltipoo |
+| Happy-family preview | First eight linked images on the homepage Happy families section | Family/puppy images; captions are kept in `siteContent.js` |
+
+## Important media handling
+
+- These are external image references; no binary image files were downloaded into this workspace.
+- The current site is dependent on the source host continuing to serve these URLs.
+- Confirm assignment/client permissions before shipping the images as production assets. Public accessibility does not establish reuse rights.
+- Once approved, download/transfer the approved originals into `src/assets/images/` or a project-owned CDN and update only `src/data/referenceAssets.js`.
+- Preserve alt text and use responsive dimensions/lazy loading for below-the-fold images.
+- No puppy videos were added in this phase.
+
+## Contact-link verification note
+
+The earlier public-page crawl recorded a visible `+971 50 000 0000` number and a provider-style `wa.me` destination (`919898124987`, with unrelated “Insta Biz Web” text). A later direct inspection of the supplied reference repository's `src/templates/contact.html` shows `+971 54 167 6733` in both the visible call link and the WhatsApp URL; the source component module also exposes this TeddyPups number. These are conflicting observations across snapshots. The destination Contact page does not display either number and continues using the pre-existing `getWhatsAppUrl()` configuration. Confirm the intended public number with the assignment owner before changing the helper or footer. The current Contact template includes `teddypupsadmin@gmail.com`.
+
+
+## Phase 2 puppy profile media
+
+The catalogue and profile components read cover/gallery records from `src/data/puppies.json`. URLs remain direct remote references to the `puppy.instabizweb.com/media/...` host. Image and video items are selected by `kind`; videos use their poster object where present. Metadata such as dimensions, alt, caption, duration and focal points is kept in the dataset and used by the UI.
+
+No binary files were downloaded or added to the repository. Direct network verification of each media URL could not complete in this environment, so do not treat media reachability as confirmed. The currently crawlable `teddypups.ae` profile pages show matching gallery counts but are a separate hostname from the requested media source. Confirm asset rights and actual media responses before deployment.
+
+
+## Phase 5 public-page asset register
+
+**Reference templates inspected:** \`src/templates/gone-home.html\`, \`src/templates/happy-families.html\`, \`src/templates/contact.html\`, \`src/data/families.json\` and \`src/data/home-families.json\`.
+
+| Usage | Destination data/source | Notes |
+|---|---|---|
+| Gone Home ticket portraits | Existing \`frontend/src/data/puppies.json\` cover/media records | All 27 sold cards reuse the existing profile media metadata and supplied-host URLs. The sold record \`poodle-molly-female\` has no cover/media in the destination snapshot; the ticket displays a designed paw fallback rather than an invented image. |
+| Happy Families gallery | Existing \`frontend/src/data/families.json\` (64 records) | ID order, captions, alt text, dimensions and focal points were compared with reference \`src/data/families.json\`. The destination already contains the full 64-image page gallery; it is not the 8-item homepage preview. |
+| Happy Families testimonial | Existing \`familyPreview.quote\` and \`familyPreview.author\` in \`frontend/src/data/siteContent.js\` | Source text and attribution verified against \`happy-families.html\`; the eight \`familyPreview.moments\` are not used as the page gallery inventory. |
+| Contact showroom image | \`https://puppy.instabizweb.com/media/skvodl2NZiKq/cefab5eee9/27b888_323008bb0f6a41d4bde2a0da7206cd98f003.jpg\` | The image URL and alt text are taken from the supplied reference \`contact.html\`. No binary was downloaded. |
+
+- Family gallery source contains exactly 64 image buttons; eight records have non-empty captions (including the caption attached to photo 59). The destination data preserves all 64 entries in their source order.
+- Destination \`families.json\` already uses absolute URLs at \`https://puppy.instabizweb.com/media/...\`; the reference JSON uses root-relative \`/media/...\` paths. The destination URLs were left unchanged.
+- No new image binaries or generic stock images were added. Remote media reachability was not independently verified in a browser in this task.
+- Asset ownership/reuse permissions are not established by public availability. Obtain assignment/client approval before production redistribution or local copying.
+
+## Cross-route loading animation artwork
+
+| Usage | Destination component | Notes |
+|---|---|---|
+| Full-body running TeddyPup during route transitions | frontend/src/components/layout/TeddyRunner.jsx | Original inline SVG drawn for this destination project; no third-party or remote image URL. Rendered by PageTransition.jsx. |
+| Pawprint trail during route transitions | Existing frontend/src/components/shared/PawMark.jsx | Reuses the existing project paw SVG six times; CSS positions/animates the prints. |
+| Warm quilt/diamond curtain background | frontend/src/styles/index.css | CSS gradients only; no raster or external asset. |
+
+The running-dog SVG is local authored artwork for the transition only; it does not replace any of the reference site's puppy/family photography or the existing mascot used on other pages.
+## Cross-route loading runner asset update
+
+| Usage | Destination component | Notes |
+|---|---|---|
+| Full-body TeddyPups runner in page-transition curtain | `frontend/src/components/layout/TeddyRunner.jsx` | Reuses existing local vector path data from `frontend/src/components/puppies/PuppyMascot.jsx`; the original poodle head, body, four legs, tail, collar and heart tag are retained. The hidden body/haunch groups are revealed and the ledge-paws are omitted for the running pose. No third-party or remote image. |
+| Pawprint trail | `frontend/src/components/shared/PawMark.jsx` | Existing local SVG reused for five sequential marks. |
+| Quilt/diamond curtain | `frontend/src/styles/index.css` | CSS gradients only. |
+
+The first transition revision used a temporary separately drawn dog. It was replaced by the existing brand mascot vector paths in the follow-up so the loader matches the project's established puppy artwork. No external asset was downloaded or added.
+## Dedicated running puppy artwork for the route-transition curtain
+
+| Usage | File | Provenance |
+|---|---|---|
+| Running puppy illustration | `frontend/src/components/layout/TeddyRunner.jsx` | Newly authored inline SVG vector, viewBox 300 × 240. Distinct body, head, two ears, four legs, tail, eyes, nose, mouth, tongue and shadow. Not downloaded and not the sitting PuppyMascot component. |
+| Five trail footprints | `frontend/src/components/shared/PawMark.jsx` | Existing local SVG reused with varied position/rotation and staggered CSS delay. |
+| Honey lattice and centre glow | `frontend/src/styles/index.css` | CSS gradients and keyframes only; no external image/font asset introduced for the loader. |
+
+No new binary asset, external URL, animation library, dependency or third-party illustration was added for this implementation.
