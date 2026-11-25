@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PageIntro from '../components/shared/PageIntro';
+import PuppyMascot from '../components/puppies/PuppyMascot';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 
 const contactPuppyOptions = [
@@ -55,6 +56,7 @@ export default function ContactPage() {
   const [errors, setErrors] = useState({});
   const [notice, setNotice] = useState('');
   const [handoffUrl, setHandoffUrl] = useState('');
+  const [contactImageFailed, setContactImageFailed] = useState(false);
 
   const updateField = (event) => {
     const { name, value } = event.target;
@@ -145,12 +147,19 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="contact-page-visit__photo">
-                <img
-                  src={contactImage.url}
-                  alt={contactImage.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
+                {contactImageFailed ? (
+                  <span className="contact-page-visit__photo-fallback" role="img" aria-label="Showroom photo unavailable">
+                    Showroom photo unavailable
+                  </span>
+                ) : (
+                  <img
+                    src={contactImage.url}
+                    alt={contactImage.alt}
+                    loading="lazy"
+                    decoding="async"
+                    onError={() => setContactImageFailed(true)}
+                  />
+                )}
               </div>
             </section>
           </aside>
@@ -279,6 +288,15 @@ export default function ContactPage() {
                 </a>
               )}
             </form>
+            <div className="contact-page-mascot">
+              <PuppyMascot
+                puppyName="you"
+                label="Teddy, waiting for your letter"
+                facing="left"
+                showRing={false}
+                bubbleText=""
+              />
+            </div>
           </section>
         </div>
       </div>

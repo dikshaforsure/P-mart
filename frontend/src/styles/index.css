@@ -2356,6 +2356,39 @@ img, video { display: block; max-width: 100%; }
   object-fit: cover;
   object-position: 45.3% 44.4%;
 }
+.contact-page-visit__photo-fallback {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  place-items: center;
+  padding: 18px;
+  background: #eee8dd;
+  color: var(--muted);
+  font: italic 15px/1.5 var(--serif);
+  text-align: center;
+}
+.contact-page-mascot {
+  position: relative;
+  width: clamp(8.5rem, 16vw, 10rem);
+  height: 8rem;
+  margin: -.5rem 24px 0 auto;
+}
+.contact-page-mascot .tp-profile-mascot {
+  position: relative !important;
+  inset: auto !important;
+  width: 100%;
+  height: 100%;
+  z-index: auto !important;
+}
+.contact-page-mascot .tp-profile-mascot .pup-buddy {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+.contact-page-mascot .pup-buddy[data-facing="left"] > svg {
+  transform: scaleX(-1);
+}
 .contact-page-letter-wrap { min-width: 0; }
 .contact-page-letter {
   position: relative;
@@ -2507,7 +2540,9 @@ img, video { display: block; max-width: 100%; }
   .gone-home-boothhead { grid-template-columns: minmax(0,1fr) 220px; gap: 24px; }
   .happy-families-header { grid-template-columns: 1fr; gap: 22px; }
   .happy-families-testimonial { max-width: 720px; margin-left: auto; }
-  .contact-page-layout { grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap: 24px; }
+  .contact-page-layout { grid-template-columns: 1fr; gap: 24px; }
+  .contact-page-letter-wrap { order: 1; }
+  .contact-page-details { order: 2; }
   .contact-page-line { line-height: 2.5; }
 }
 @media (max-width: 700px) {

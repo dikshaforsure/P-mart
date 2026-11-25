@@ -17,6 +17,24 @@ describe('PuppyMascot', () => {
     expect(screen.getByText('hello!')).toHaveAttribute('aria-hidden', 'true');
   });
 
+  it('supports the source contact-page presentation without a hanging ring or speech bubble', () => {
+    render(
+      <PuppyMascot
+        puppyName="you"
+        label="Teddy, waiting for your letter"
+        facing="left"
+        showRing={false}
+        bubbleText=""
+      />
+    );
+
+    const artwork = screen.getByRole('img', { name: 'Teddy, waiting for your letter' });
+    const buddy = artwork.closest('.pup-buddy');
+    expect(buddy).toHaveAttribute('data-facing', 'left');
+    expect(buddy.querySelector('.tp-profile-tag-ring')).not.toBeInTheDocument();
+    expect(buddy.querySelector('.pup-bubble')).not.toBeInTheDocument();
+  });
+
   it('reveals the hanging board when it enters view and disconnects the observer', () => {
     const observers = [];
     class TestObserver {

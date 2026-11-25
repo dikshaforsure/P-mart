@@ -29,7 +29,7 @@ jobs:
       - name: Install frontend dependencies
         run: npm install --no-audit --no-fund
       - name: Run focused Phase 5 public-page and route tests
-        run: npx vitest run src/pages/GoneHomePage.test.jsx src/pages/HappyFamiliesPage.test.jsx src/pages/ContactPage.test.jsx src/app/App.test.jsx
+        run: npx vitest run src/pages/GoneHomePage.test.jsx src/pages/HappyFamiliesPage.test.jsx src/pages/ContactPage.test.jsx src/app/App.test.jsx src/components/puppies/PuppyMascot.test.jsx
       - name: Run complete frontend test suite
         run: npm test
       - name: Build frontend for production

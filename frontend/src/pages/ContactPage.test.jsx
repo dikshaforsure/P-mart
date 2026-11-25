@@ -36,6 +36,19 @@ describe('ContactPage', () => {
     expect(screen.getByText(/prepare a WhatsApp message for you to review and send/)).toBeInTheDocument();
   });
 
+  it('renders Teddy waiting beneath the letter and keeps the showroom card when its image fails', () => {
+    render(<ContactPage />);
+
+    const mascot = screen.getByRole('img', { name: 'Teddy, waiting for your letter' });
+    expect(mascot.closest('.contact-page-mascot')).toBeInTheDocument();
+    expect(mascot.closest('.pup-buddy')).toHaveAttribute('data-facing', 'left');
+
+    fireEvent.error(screen.getByRole('img', { name: 'The apricot teddy bear puppy from our showroom, held up to say hello' }));
+    expect(screen.getByRole('img', { name: 'Showroom photo unavailable' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Visit us in Downtown Dubai' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Open in Google Maps/ })).toBeInTheDocument();
+  });
+
   it('validates required name and phone and validates email only when supplied', () => {
     render(<ContactPage />);
     fireEvent.click(screen.getByRole('button', { name: /Post my letter/ }));

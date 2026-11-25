@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function PuppyMascot({ boardRef, puppyName }) {
+export default function PuppyMascot({ boardRef, puppyName, label, facing = 'right', showRing = true, bubbleText = 'hello!' }) {
   useEffect(() => {
     const board = boardRef?.current;
     if (!board) return undefined;
@@ -24,16 +24,17 @@ export default function PuppyMascot({ boardRef, puppyName }) {
   }, [boardRef]);
 
   const name = puppyName || 'this puppy';
+  const accessibleLabel = label || "Teddy, the TeddyPups puppy, peeking over " + name + "'s information board";
 
   return (
     <div className="tp-profile-mascot" aria-hidden="false">
-      <span className="tp-profile-tag-ring" aria-hidden="true" />
-      <div className="pup-buddy" data-facing="right">
+      {showRing && <span className="tp-profile-tag-ring" aria-hidden="true" />}
+      <div className="pup-buddy" data-facing={facing}>
         <svg
           viewBox="0 0 300 240"
           style={{ overflow: 'visible' }}
           role="img"
-          aria-label={"Teddy, the TeddyPups puppy, peeking over " + name + "'s information board"}
+          aria-label={accessibleLabel}
           focusable="false"
         >
           <g data-p="root">
@@ -110,7 +111,7 @@ export default function PuppyMascot({ boardRef, puppyName }) {
             </g>
           </g>
         </svg>
-        <span className="pup-bubble" data-show="true" aria-hidden="true">hello!</span>
+        {bubbleText && <span className="pup-bubble" data-show="true" aria-hidden="true">{bubbleText}</span>}
       </div>
     </div>
   );
