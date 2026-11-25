@@ -424,3 +424,4 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - PageTransition.test.jsx covers initial load, route transition sequence, query/hash exclusions, reduced motion and timer cleanup.
 - CI run #62 passed 5 focused files / 33 tests; full suite 24 files / 121 tests; Vite 8.3.8 build with 68 modules.
 - Real-browser SVG/animation visual inspection remains outstanding.
+- Pawprint delays are computed per viewport using the runner's CSS-clamped width, viewport width, total horizontal travel distance and RUN_DURATION, with a 45ms trailing offset. This ensures each fixed paw location is stamped after the dog passes it on desktop and mobile. Follow-up commit ce8028e8929694ae5014416c6c34b985f9a63fc1 passed CI run #64 (24 files/121 tests and production build).

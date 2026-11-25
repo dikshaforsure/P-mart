@@ -454,3 +454,8 @@ Owner supplied a screenshot of the original site's loading page and requested th
 Added PageTransition in shared AppLayout, watching pathname only; no first-load curtain, query/hash-only changes do not animate, browser back/forward pathname changes do. Drew a new local inline SVG dog in TeddyRunner.jsx and reused existing PawMark. CSS quilt pattern and central glow require no external asset. Entrance/run/exit are 440ms / 1480ms / 540ms. Reduced motion skips animation; timers clear on interruption/unmount; the overlay blocks clicks and announces status accessibly.
 
 Five regression tests cover no initial loader, full route lifecycle, query/hash exclusion, reduced-motion skip and cleanup. Implementation commit 34185b01a587ebdfef6172cba304ad09600f2309. GitHub Actions #62 passed focused 5 files/33 tests, full 24 files/121 tests and Vite build (68 modules). Browser visual inspection is still outstanding.
+### Pawprint placement timing correction — 25 November 2026
+
+To ensure the pawprints appear behind (rather than ahead of) Teddy at different viewport widths, replaced hard-coded delays with a small calculation from window width, responsive runner width, target paw X position and runner travel duration, then applied a short trailing offset. Same six paw positions and phase durations; no dependency changes.
+
+Follow-up commit ce8028e8929694ae5014416c6c34b985f9a63fc1. CI run #64 passed 5 focused files/33 tests, full suite 24 files/121 tests and Vite production build with 68 modules.

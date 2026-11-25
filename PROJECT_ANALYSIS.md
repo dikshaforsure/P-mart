@@ -499,3 +499,8 @@ Timing: 440ms entrance; 1480ms runner/paw sequence; 540ms exit. The new TeddyRun
 Reduced-motion preference skips the transition entirely. Query-only catalogue filter changes and hash jumps do not animate. All phase timers are cleaned on unmount or interrupted navigation. No external libraries, assets or site content/data are introduced.
 
 Implementation commit 34185b01a587ebdfef6172cba304ad09600f2309. CI run #62 passed 5 focused files / 33 tests; full suite 24 files / 121 tests; Vite 8.3.8 production build (68 modules transformed). CSS/SVG animation fidelity and responsive viewport rendering remain unverified in a real browser.
+### Responsive pawprint delay correction
+
+The first transition implementation used fixed CSS delays. A follow-up changed the six print delays to derive from viewport width and the runner width (the same clamp used by the CSS at the target viewport), calculating the time at which the dog has traversed each print's horizontal position and adding a short trailing offset. This keeps the marks behind the runner at different viewport widths. The six positions, runner movement and phase durations are unchanged.
+
+Follow-up commit `ce8028e8929694ae5014416c6c34b985f9a63fc1`. CI run #64 passed 5 focused files / 33 tests, full suite 24 files / 121 tests and production build (68 modules transformed).

@@ -493,3 +493,15 @@ Tests assert the shared heading, exactly four existing checklist rows and absenc
 | Real-browser SVG gait/curtain/paw timing | **NOT RUN** |
 
 Transition duration is approximately 2460ms total: 440ms curtain drop, 1480ms dog/paw run, 540ms curtain lift. CSS animations, exact viewport positioning and rendered smoothness require real-browser QA.
+## Cross-route pawprint timing follow-up — 25 November 2026
+
+**Follow-up commit:** [ce8028e8929694ae5014416c6c34b985f9a63fc1](https://github.com/dikshaforsure/P-mart/commit/ce8028e8929694ae5014416c6c34b985f9a63fc1)
+**GitHub Actions:** [run #64](https://github.com/dikshaforsure/P-mart/actions/runs/45597269508)
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 24 files / 121 tests** |
+| Production build | **PASS — Vite 8.3.8; 68 modules transformed** |
+
+The six print delays are calculated from viewport width and responsive runner width so each pawprint appears after Teddy has passed that position. Route behavior and animation phase durations remain unchanged.

@@ -1,7 +1,7 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 25 November 2026  
-**Current phase:** Phase 7 — Integrated browser and responsive QA (shared route-transition curtain implemented; CI run #62 passed; real-browser animation and viewport QA pending)  
+**Current phase:** Phase 7 — Integrated browser and responsive QA (shared route-transition curtain implemented; CI run #64 passed; real-browser animation and viewport QA pending)  
 **Status:** Public-frontend implementation milestones Phases 0–6 are implemented on `develop`. Latest hero refinement commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036` passed GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674): focused public-page/route checks (5 files / 31 tests), complete frontend suite (21 files / 103 tests) and Vite 8.3.8 production build. The follow-up centers the visible mascot, evens the hero ears, adds reduced-motion-aware random puppy portrait dips, changes the hero display font and increases shared header typography. Real-browser screenshot comparison, live animation inspection, custom cursor/trail appearance and integrated responsive QA across all public routes remain outstanding. This is frontend scope only: no enquiry API/database persistence, deployment or production asset rights approval is claimed. Next work: integrated browser/responsive QA across all public routes; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
@@ -544,3 +544,10 @@ Verification note: CI run #51 passed the focused workflow step (5 files / 33 tes
 - Code commit: 34185b01a587ebdfef6172cba304ad09600f2309.
 - GitHub Actions run #62 (https://github.com/dikshaforsure/P-mart/actions/runs/45596571682) passed against that exact commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
 - Real-browser visual inspection of the SVG gait, exact entrance/exit direction, responsive pattern density and transition timing remains outstanding. Automated tests verify route gating, lifecycle phases and cleanup; they do not render CSS animations.
+### Responsive pawprint trail alignment follow-up — 25 November 2026
+
+- Refined the six route-transition pawprint delays to derive from the actual viewport width and the CSS runner width, so each print appears just after the running dog's trailing edge has passed its horizontal position. This avoids prints appearing ahead of Teddy and keeps the sequence aligned on both wide desktop and narrow mobile widths.
+- Paw positions, dog route, three transition phases and durations are unchanged.
+- Follow-up code commit: `ce8028e8929694ae5014416c6c34b985f9a63fc1`.
+- GitHub Actions [run #64](https://github.com/dikshaforsure/P-mart/actions/runs/45597269508) passed against that exact code commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
+- Final verified transition code HEAD: `ce8028e8929694ae5014416c6c34b985f9a63fc1`. The docs follow-up after the initial loader commit was recorded separately in commit `a87dd3d95bd638c1206e77aaec3d3e1bb47eedd1`.

@@ -403,7 +403,7 @@ Phase 6 homepage implementation is complete and committed. Do not restart or rei
 
 **Verified Phase 6 code commit:** `184424063be64b111b6c7bf763acff9a7a99075a`  
 **Phase 6 implementation CI:** [run #36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) — passed focused public-page/route tests, full frontend suite and production build.  
-**Latest verified cross-route transition implementation:** 34185b01a587ebdfef6172cba304ad09600f2309; CI run #62 passed on that exact code revision. Fetch the live develop head before continuing.
+**Latest verified cross-route transition implementation:** ce8028e8929694ae5014416c6c34b985f9a63fc1; CI run #64 passed on that exact code revision. Fetch the live develop head before continuing.
 
 ### Phase 7 objective
 
@@ -663,3 +663,10 @@ When starting a new chat, provide this message together with repository access:
 - Code commit: 34185b01a587ebdfef6172cba304ad09600f2309.
 - GitHub Actions run #62 (https://github.com/dikshaforsure/P-mart/actions/runs/45596571682) passed against that exact commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
 - Real-browser visual inspection of the SVG gait, exact entrance/exit direction, responsive pattern density and transition timing remains outstanding. Automated tests verify route gating, lifecycle phases and cleanup; they do not render CSS animations.
+### Responsive pawprint trail alignment follow-up — 25 November 2026
+
+- Refined the six route-transition pawprint delays to derive from the actual viewport width and the CSS runner width, so each print appears just after the running dog's trailing edge has passed its horizontal position. This avoids prints appearing ahead of Teddy and keeps the sequence aligned on both wide desktop and narrow mobile widths.
+- Paw positions, dog route, three transition phases and durations are unchanged.
+- Follow-up code commit: `ce8028e8929694ae5014416c6c34b985f9a63fc1`.
+- GitHub Actions [run #64](https://github.com/dikshaforsure/P-mart/actions/runs/45597269508) passed against that exact code commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
+- Final verified transition code HEAD: `ce8028e8929694ae5014416c6c34b985f9a63fc1`. The docs follow-up after the initial loader commit was recorded separately in commit `a87dd3d95bd638c1206e77aaec3d3e1bb47eedd1`.
