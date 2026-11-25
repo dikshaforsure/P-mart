@@ -458,3 +458,19 @@ The header decoration is a shared CSS pseudo-element and appears on all routes. 
 | Real-browser trail appearance | **NOT RUN** |
 
 Final settings: `TRAIL_DISTANCE = 84`; `TRAIL_INTERVAL = 220`; `MAX_TRAIL_MARKS = 7`; `TRAIL_LIFETIME = 2200`; CSS imprint animation-duration 2200ms; stamp size 24px.
+## Puppy profile Chapter 2 compact card — 25 November 2026
+
+**Implementation commit:** [8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5](https://github.com/dikshaforsure/P-mart/commit/8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5)
+**GitHub Actions:** [run #60](https://github.com/dikshaforsure/P-mart/actions/runs/45592795819)
+
+| Check | Result |
+|---|---|
+| Focused public-page/route tests | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 23 files / 116 tests** |
+| Production build | **PASS — Vite 8.3.8; 66 modules transformed** |
+| Available-profile Chapter 2 heading + four checklist items | **PASS** |
+| Sold-profile Chapter 2 heading + four checklist items | **PASS** |
+| Removed extra explanatory paragraph from care card | **PASS** |
+| Real-browser visual height/wrapping comparison | **NOT RUN** |
+
+Tests assert the shared heading, exactly four existing checklist rows and absence of the former explanatory paragraph on available and sold profile pages. Visual height and responsive wrapping remain for browser QA.

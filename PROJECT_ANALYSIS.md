@@ -467,3 +467,18 @@ Owner requested slightly more visible footprints and a slightly longer trail, wh
 Adjusted only the visible tail size and lifetime: MAX_TRAIL_MARKS 5 → 7; TRAIL_LIFETIME 1800ms → 2200ms; `.paw-trail-stamp` animation-duration 1800ms → 2200ms. Kept TRAIL_DISTANCE 84px, TRAIL_INTERVAL 220ms and footprint size 24px unchanged. The unchanged thresholds preserve the slow cadence and distance between new prints; the additional two marks and modestly longer lifetime make the trail more visible without speeding it up or tightening the spacing.
 
 Focused tests assert seven active marks maximum, persistence after 1800ms, removal at 2200ms and timer cleanup. GitHub Actions run #58 passed the focused step (5 files / 33 tests), full suite (23 files / 116 tests) and Vite 8.3.8 build (66 modules). Real-browser visual appearance is not verified yet.
+## Puppy profile Chapter 2 content/layout correction — 25 November 2026
+
+### Screenshot comparison and cause
+
+The owner supplied two screenshots: destination (1917 × 1035) and designated reference (1876 × 778), showing the same 'what comes with [puppy]' Chapter 2 care panel for a Korean Teacup Poodle. The destination had a narrow two-column content block (`.85fr 1.15fr`), with `Every Teddy Pup comes` and an explanatory paragraph occupying the first column; the checklist itself was further split into two columns. This created four lines for the heading, around seven lines for the additional paragraph, and several narrow multi-line checklist entries. The reference screenshot instead has a compact handwritten chapter label, a full-width heading, and a vertical one-column checklist.
+
+### Change
+
+Changed only the shared Chapter 2 component/layout: added 'this' to the chapter label, moved `Every Teddy Pup comes` to the full content width, removed the extra explanatory paragraph, and rendered the four existing checklist statements in a single column. Tightened panel padding from a maximum of 48px to 42px, set the content gap to 17px and list gap to 12px; mobile gaps are slightly tighter. The paper background, border, tape, slight rotation, footer note, chapter number and existing care-item wording remain. This applies to both available and sold puppy profile pages.
+
+No puppy JSON, profile routing, gallery, chapter count, enquiry, contact or health claim was changed. The four checklist items remain: Vaccinated; Dewormed; Verified health certificate from licensed vets; Thoroughly checked before joining your family.
+
+Reference route inspection via web tool failed, so the exact visual comparison is grounded in the two owner-supplied screenshots and the destination source files.
+
+Implementation commit `8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5`. CI run #60 passed 5 focused files / 33 tests, full 23 files / 116 tests, and Vite 8.3.8 build (66 modules). Real-browser rendering and responsive card-height comparison remain outstanding.

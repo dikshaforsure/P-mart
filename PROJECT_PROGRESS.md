@@ -519,3 +519,14 @@ Verification note: CI run #51 passed the focused workflow step (5 files / 33 tes
 - Updated PawTrail tests to assert that marks remain after 1800ms but disappear at 2200ms, cap at 7, and clear pending timers on unmount.
 - GitHub Actions [run #58](https://github.com/dikshaforsure/P-mart/actions/runs/45590623608) passed against implementation commit `f556f2603abf4d1e06425cae2b5a9f39d21bbfc6`: focused checks 5 files / 33 tests; full suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
 - No dependencies, global cursor asset, pointer thresholds, touch behavior, reduced-motion handling or unrelated UI were changed. Real-browser trail appearance remains part of Phase 7 visual QA.
+### Puppy profile Chapter 2 compact layout (25 November 2026)
+
+- Owner provided paired screenshots of the Korean Teacup Poodle Chapter 2 card. Destination was visibly taller because the existing markup put the heading and an extra explanatory paragraph in a narrow first column while the four care items were split into two narrow columns.
+- Updated the shared PuppyProfilePage Chapter 2 content to match the reference hierarchy: chapter label 'what comes with this {puppy name}', full-width 'Every Teddy Pup comes' heading, then the same four existing care checklist statements in one vertical column.
+- Removed only the additional explanatory paragraph from the care card; the four checklist statements and wording remain unchanged. No per-puppy health records or puppy data were added/altered.
+- Tightened paper padding and content/list gaps slightly; retained the patterned paper background, border, tape, rotation and handwritten footer note. The same layout applies to available and sold profiles.
+- Added profile regression assertions for both available and sold pages: Chapter 2 heading, exactly four checklist items and no extra paragraph.
+- The live reference route could not be opened by the web inspection tool during this task; comparison is based on the two original/destination screenshots uploaded by the owner and direct inspection of destination source.
+- Implementation commit: `8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5`.
+- GitHub Actions [run #60](https://github.com/dikshaforsure/P-mart/actions/runs/45592795819) passed on that exact commit: focused checks 5 files / 33 tests; full frontend suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
+- Real-browser visual comparison of resulting card height and breakpoint wrapping has not been performed; confirm on the same Korean Teacup Poodle profile at desktop and mobile as part of Phase 7.

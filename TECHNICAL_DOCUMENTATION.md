@@ -407,3 +407,10 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - JS removal timer and CSS imprint fade: 2200ms.
 - Paw SVG stamp remains 24px.
 - The distance/time thresholds remain unchanged so the longer tail does not become denser or faster. Reduced-motion and coarse/touch-pointer suppression remain intact.
+### Puppy profile Chapter 2 care panel
+
+- Shared markup is in `frontend/src/pages/PuppyProfilePage.jsx`; it serves available and sold profiles.
+- Card now uses chapter label `what comes with this {name}`, full-width h2 `Every Teddy Pup comes`, and one vertical `<ul>` containing the four existing care statements.
+- The previous paragraph (`Every TeddyPups puppy is described as...`) was removed because it did not appear in the supplied reference screenshot and increased card height. The checklist wording is unchanged.
+- CSS uses one-column content and list grids; paper max padding 42px, content gap 17px, list gap 12px. Responsive mobile spacing is slightly tighter.
+- Tests in `PuppyProfilePage.test.jsx` assert exact heading, four list items and absence of the paragraph for available and sold profiles.
