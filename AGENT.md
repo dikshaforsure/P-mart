@@ -135,7 +135,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
-| 6 | Homepage reference-fidelity refinement | Implemented on develop; GitHub Actions run #34 passed; real-browser visual QA outstanding |
+| 6 | Homepage reference-fidelity refinement | Implemented on develop; GitHub Actions run #36 passed; real-browser visual QA outstanding |
 | 7 | Integrated browser/responsive QA across all public routes | Not completed |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
@@ -541,7 +541,7 @@ When starting a new chat, provide this message together with repository access:
 
 ## 8. Phase 6 — Homepage storybook refinement
 
-**Implementation state:** Code is committed on develop. GitHub Actions run #34 passed; real-browser visual QA remains outstanding.
+**Implementation state:** Code and mobile touch-layout refinement are committed on develop. GitHub Actions run #36 passed; real-browser visual QA remains outstanding.
 
 - Reworked the hero into a warm cream/sunrise scene with six puppy portraits from existing featured puppy records, preserving cover images, focal positions and profile links.
 - Reused the existing Teddy mascot and paw SVG. Added a local scalloped quilt treatment and hand-drawn underline.
@@ -551,6 +551,7 @@ When starting a new chat, provide this message together with repository access:
 - Split the existing combined final journey description into secure-your-puppy and safe-delivery milestones using only its existing factual clauses.
 - Restyled the existing WhatsApp illustration, trust cards, family preview, FAQ notes and final CTA using homepage-scoped cocoa/toffee/honey styles. Reused the existing mascot in the final CTA.
 - Added focused HomeHero and PuppyJourney tests. Existing shared and other-route components are unchanged.
-- All added styling is scoped under .home-page-storybook. Shared header/footer and non-homepage routes were not intended to change.
+- All added styling is scoped under .home-page-storybook. Shared header/footer and non-homepage routes were not changed.
+- A final responsive CSS follow-up makes puppy photos visible without hover on touch layouts and increases hero puppy portrait height on narrow phones.
 
-**Verification:** GitHub Actions run #34 passed the focused public-page/route test step, full frontend test suite and production build. Local test/build commands were not executed in this environment. Real-browser screenshot comparison and viewport interaction checks remain outstanding.
+**Verification:** GitHub Actions run [#36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) passed after the final touch-layout CSS update. The focused public-page/route test step, full frontend test suite and production build all passed. Local test/build commands were not executed in this environment. Real-browser screenshot comparison and viewport interaction checks remain outstanding.

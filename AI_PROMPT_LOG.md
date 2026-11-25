@@ -378,3 +378,8 @@ Reused the existing puppy mascot, paw SVG, six featured puppy records, family pr
 ### Phase 6 verification update
 
 GitHub Actions run [#34](https://github.com/dikshaforsure/P-mart/actions/runs/45552516749) completed successfully on commit `671a2661bd0aaf2a969e8a102df9d80838fbb70c`. The focused public-page/route tests, full frontend test suite and production build all passed. Real-browser screenshot comparison and integrated responsive QA have not yet been performed.
+
+
+### Phase 6 final responsive verification
+
+A final homepage-scoped CSS follow-up makes puppy photos immediately visible on touch layouts (no hover required) and increases hero puppy portrait height on narrow phones. Commit: `184424063be64b111b6c7bf763acff9a7a99075a`. GitHub Actions run [#36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) completed successfully: focused public-page/route checks, full frontend test suite and production build all passed. Real-browser screenshot comparison / manual responsive QA remains outstanding.
