@@ -3,8 +3,8 @@ import PawMark from '../shared/PawMark';
 
 const TRAIL_DISTANCE = 84;
 const TRAIL_INTERVAL = 220;
-const TRAIL_LIFETIME = 1800;
-const MAX_TRAIL_MARKS = 5;
+const TRAIL_LIFETIME = 2200;
+const MAX_TRAIL_MARKS = 7;
 
 export default function PawTrail() {
   const [marks, setMarks] = useState([]);

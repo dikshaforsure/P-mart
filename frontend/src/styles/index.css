@@ -3359,9 +3359,9 @@ img, video { display: block; max-width: 100%; }
   }
 }
 
-/* Paw trails use fewer, farther-apart prints at a deliberate walking pace. */
+/* Paw trails keep a longer, softly fading seven-print tail at walking pace. */
 .paw-trail-stamp {
   width: 24px;
   height: 24px;
-  animation-duration: 1800ms;
+  animation-duration: 2200ms;
 }

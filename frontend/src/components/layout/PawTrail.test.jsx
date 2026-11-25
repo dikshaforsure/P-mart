@@ -44,6 +44,9 @@ describe('PawTrail', () => {
     expect(stamp.querySelector('svg')).toBeInTheDocument();
 
     act(() => vi.advanceTimersByTime(1800));
+    expect(container.querySelector('.paw-trail-stamp')).toBeInTheDocument();
+
+    act(() => vi.advanceTimersByTime(400));
     expect(container.querySelector('.paw-trail-stamp')).not.toBeInTheDocument();
   });
 
@@ -68,20 +71,20 @@ describe('PawTrail', () => {
     expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(2);
   });
 
-  it('keeps no more than five visible paw prints', () => {
+  it('keeps a balanced maximum of seven visible paw prints', () => {
     vi.useFakeTimers();
     configurePointer();
     const { container } = render(<PawTrail />);
 
     act(() => movePointer(100, 180));
-    for (let index = 1; index <= 7; index += 1) {
+    for (let index = 1; index <= 9; index += 1) {
       act(() => {
         vi.advanceTimersByTime(220);
         movePointer(100 + index * 100, 180);
       });
     }
 
-    expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(5);
+    expect(container.querySelectorAll('.paw-trail-stamp')).toHaveLength(7);
   });
 
   it('does not add a footprint for touch-pointer movement', () => {
@@ -117,7 +120,8 @@ describe('PawTrail', () => {
     expect(container.querySelector('.paw-trail-stamp')).toBeInTheDocument();
 
     unmount();
-    act(() => vi.advanceTimersByTime(780));
+    expect(vi.getTimerCount()).toBe(0);
+    act(() => vi.advanceTimersByTime(2200));
     expect(container.querySelector('.paw-trail-stamp')).not.toBeInTheDocument();
   });
 });
