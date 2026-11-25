@@ -5,7 +5,9 @@ import PuppiesPage from '../pages/PuppiesPage';
 import PuppyProfilePage from '../pages/PuppyProfilePage';
 import HowItWorksPage from '../pages/HowItWorksPage';
 import FaqPage from '../pages/FaqPage';
-import PlaceholderPage from '../pages/PlaceholderPage';
+import GoneHomePage from '../pages/GoneHomePage';
+import HappyFamiliesPage from '../pages/HappyFamiliesPage';
+import ContactPage from '../pages/ContactPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 export default function App() {
@@ -13,11 +15,11 @@ export default function App() {
     <Route index element={<HomePage />} />
     <Route path="puppies" element={<PuppiesPage />} />
     <Route path="puppies/:slug" element={<PuppyProfilePage />} />
-    <Route path="gone-home" element={<PlaceholderPage title="Gone home" />} />
-    <Route path="happy-families" element={<PlaceholderPage title="Happy families" />} />
+    <Route path="gone-home" element={<GoneHomePage />} />
+    <Route path="happy-families" element={<HappyFamiliesPage />} />
     <Route path="how-it-works" element={<HowItWorksPage />} />
     <Route path="faq" element={<FaqPage />} />
-    <Route path="contact" element={<PlaceholderPage title="Get in touch with us" />} />
+    <Route path="contact" element={<ContactPage />} />
     <Route path="*" element={<NotFoundPage />} />
   </Route></Routes></BrowserRouter>;
 }

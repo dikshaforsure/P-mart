@@ -28,6 +28,32 @@ describe('application puppy routes', () => {
     })).toBeInTheDocument();
   });
 
+  it('connects /gone-home to the source-ordered sold ticket archive', async () => {
+    renderAt('/gone-home');
+    expect(await screen.findByRole('heading', { level: 1, name: 'Gone home' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Puppies who have gone home' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+  });
+
+  it('connects /happy-families to the full family photo wall', async () => {
+    renderAt('/happy-families');
+    expect(await screen.findByRole('heading', { level: 1, name: 'Happy families' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Photos from TeddyPups families' })).toBeInTheDocument();
+    expect(screen.getByText('64 moments and counting')).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+  });
+
+  it('connects /contact to the visit details and letter form', async () => {
+    renderAt('/contact');
+    expect(await screen.findByRole('heading', { level: 1, name: 'Get in touch with us' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Your name (required)' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Visit us in Downtown Dubai' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+  });
+
   it('connects /how-it-works to the complete journey page', async () => {
     renderAt('/how-it-works');
     expect(await screen.findByRole('heading', { level: 1, name: 'How it works' })).toBeInTheDocument();

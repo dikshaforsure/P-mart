@@ -31,3 +31,20 @@ The visible reference phone is `+971 50 000 0000`. The supplied page's WhatsApp 
 The catalogue and profile components read cover/gallery records from `src/data/puppies.json`. URLs remain direct remote references to the `puppy.instabizweb.com/media/...` host. Image and video items are selected by `kind`; videos use their poster object where present. Metadata such as dimensions, alt, caption, duration and focal points is kept in the dataset and used by the UI.
 
 No binary files were downloaded or added to the repository. Direct network verification of each media URL could not complete in this environment, so do not treat media reachability as confirmed. The currently crawlable `teddypups.ae` profile pages show matching gallery counts but are a separate hostname from the requested media source. Confirm asset rights and actual media responses before deployment.
+
+
+## Phase 5 public-page asset register
+
+**Reference templates inspected:** \`src/templates/gone-home.html\`, \`src/templates/happy-families.html\`, \`src/templates/contact.html\`, \`src/data/families.json\` and \`src/data/home-families.json\`.
+
+| Usage | Destination data/source | Notes |
+|---|---|---|
+| Gone Home ticket portraits | Existing \`frontend/src/data/puppies.json\` cover/media records | All 27 sold cards reuse the existing profile media metadata and supplied-host URLs. The sold record \`poodle-molly-female\` has no cover/media in the destination snapshot; the ticket displays a designed paw fallback rather than an invented image. |
+| Happy Families gallery | Existing \`frontend/src/data/families.json\` (64 records) | ID order, captions, alt text, dimensions and focal points were compared with reference \`src/data/families.json\`. The destination already contains the full 64-image page gallery; it is not the 8-item homepage preview. |
+| Happy Families testimonial | Existing \`familyPreview.quote\` and \`familyPreview.author\` in \`frontend/src/data/siteContent.js\` | Source text and attribution verified against \`happy-families.html\`; the eight \`familyPreview.moments\` are not used as the page gallery inventory. |
+| Contact showroom image | \`https://puppy.instabizweb.com/media/skvodl2NZiKq/cefab5eee9/27b888_323008bb0f6a41d4bde2a0da7206cd98f003.jpg\` | The image URL and alt text are taken from the supplied reference \`contact.html\`. No binary was downloaded. |
+
+- Family gallery source contains exactly 64 image buttons; eight records have non-empty captions (including the caption attached to photo 59). The destination data preserves all 64 entries in their source order.
+- Destination \`families.json\` already uses absolute URLs at \`https://puppy.instabizweb.com/media/...\`; the reference JSON uses root-relative \`/media/...\` paths. The destination URLs were left unchanged.
+- No new image binaries or generic stock images were added. Remote media reachability was not independently verified in a browser in this task.
+- Asset ownership/reuse permissions are not established by public availability. Obtain assignment/client approval before production redistribution or local copying.
