@@ -135,12 +135,12 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
-| 6 | Homepage reference-fidelity refinement | Implemented on develop; automated CI and real-browser visual QA pending |
+| 6 | Homepage reference-fidelity refinement | Implemented on develop; GitHub Actions run #34 passed; real-browser visual QA outstanding |
 | 7 | Integrated browser/responsive QA across all public routes | Not completed |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
 
-Do not call the entire project complete. Phases 0–5 public frontend page implementation is complete; visual QA, homepage refinement, backend scope and deployment remain open.
+Do not call the entire project complete. Phases 0–6 public frontend implementation is committed; integrated browser/responsive QA, backend scope and deployment remain open.
 
 ---
 
@@ -541,7 +541,7 @@ When starting a new chat, provide this message together with repository access:
 
 ## 8. Phase 6 — Homepage storybook refinement
 
-**Implementation state:** Code is committed on develop. Automated CI status and real-browser visual QA remain pending until independently checked.
+**Implementation state:** Code is committed on develop. GitHub Actions run #34 passed; real-browser visual QA remains outstanding.
 
 - Reworked the hero into a warm cream/sunrise scene with six puppy portraits from existing featured puppy records, preserving cover images, focal positions and profile links.
 - Reused the existing Teddy mascot and paw SVG. Added a local scalloped quilt treatment and hand-drawn underline.
@@ -553,4 +553,4 @@ When starting a new chat, provide this message together with repository access:
 - Added focused HomeHero and PuppyJourney tests. Existing shared and other-route components are unchanged.
 - All added styling is scoped under .home-page-storybook. Shared header/footer and non-homepage routes were not intended to change.
 
-**Verification limitations:** Local test/build commands were not executed in this environment. GitHub Actions is the automated verification path. Real-browser screenshot comparison and viewport interaction checks remain outstanding.
+**Verification:** GitHub Actions run #34 passed the focused public-page/route test step, full frontend test suite and production build. Local test/build commands were not executed in this environment. Real-browser screenshot comparison and viewport interaction checks remain outstanding.

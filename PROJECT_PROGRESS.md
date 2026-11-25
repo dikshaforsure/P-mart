@@ -1,8 +1,8 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 25 November 2026  
-**Current phase:** Phase 6 — Homepage storybook refinement (implementation committed; verification pending)  
-**Status:** Public-frontend implementation milestones Phases 0–6 are implemented on `develop`: research/documentation, catalogue/profile experiences, shared public pages and the homepage storybook refinement. Phase 6 automated CI and real-browser visual QA are pending. The latest Phase 5 Contact fidelity correction is committed at `bed9eeab2394292462e4dcb2820ddae27a32b59e`; GitHub Actions run [#30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042) passed 5 focused files / 31 tests, 18 full-suite files / 97 tests, and the Vite production build. This is frontend scope only: no enquiry API/database persistence, deployment, production asset rights approval or real-browser visual QA is claimed. Next work: homepage visual refinement and integrated responsive/browser QA; separately determine whether backend enquiry persistence/admin is in scope.
+**Current phase:** Phase 6 — Homepage storybook refinement (implemented and CI passed; browser QA pending)  
+**Status:** Public-frontend implementation milestones Phases 0–6 are implemented on `develop`. Phase 6 GitHub Actions run [#34](https://github.com/dikshaforsure/P-mart/actions/runs/45552516749) passed its focused public-page/route checks, the full frontend test suite and production build. Real-browser screenshot comparison and integrated responsive QA remain outstanding. This is frontend scope only: no enquiry API/database persistence, deployment or production asset rights approval is claimed. Next work: integrated browser/responsive QA across all public routes; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
 
@@ -455,4 +455,4 @@ The homepage now has a warm storybook visual system scoped to the homepage wrapp
 
 Featured puppy cards use arched showroom-door frames with hinged panels, paw peepholes, availability labels and responsive mobile-open treatment. The two meeting paths gain a wooden signpost. The three existing journey entries are presented as four milestones by splitting the combined final description into its two existing factual clauses. Trust, family, FAQ, WhatsApp and final CTA sections receive scoped scrapbook/polaroid styling. The existing mascot is reused in the CTA.
 
-Two focused component tests were added for the six-puppy hero lineup and four journey milestones. Local tests/build were not run in this environment; check the GitHub Actions workflow triggered by the develop commit. Real-browser screenshots and viewport QA remain outstanding.
+Two focused component tests were added for the six-puppy hero lineup and four journey milestones. GitHub Actions run [#34](https://github.com/dikshaforsure/P-mart/actions/runs/45552516749) passed the focused public-page/route checks, complete frontend test suite and Vite production build. Real-browser screenshots and viewport QA remain outstanding.
