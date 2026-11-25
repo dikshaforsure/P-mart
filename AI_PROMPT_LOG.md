@@ -631,3 +631,65 @@ Owner provided a stricter source-fidelity specification. Inspected actual entry/
 Added an initial-load transition. For normal same-origin path links, the document capture listener keeps the current page mounted while the curtain drops; then navigates behind the full curtain, runs the dog and pawprints, then lifts. External, modified, new-tab and download clicks are excluded. Programmatic pathname changes and history back/forward are handled by a layout effect; query/hash-only changes are not animated. Shared content becomes inert while covered; overlay is aria-hidden. Reduced-motion, resizing and listener cleanup are covered. No libraries or unrelated page/content/config changes.
 
 Initial implementation commit e8436485069ce54d952b098b86d791de227251db; jsdom named animation-event test correction b541f6fcc27a3a8e342fb46d2554b6ad91680abf; responsive trailing-edge paw timing a587ded17471f27ede3c9c540129609baeda99c9. CI #73 passed 5 focused files/33 tests, full 24 files/126 tests, Vite build (68 modules). Browser visual verification is not available in this session.
+
+## Session 11 — Phase 2 catalogue sketchbook refinement
+
+**Date:** 25 November 2026  
+**Branch:** `develop`  
+**Documentation update only:** This entry records work already implemented and pushed by the project owner. It does not authorize or perform another implementation of the catalogue.
+
+### Filtered user prompt summary (structured; not verbatim)
+
+The user reported completion of another catalogue refinement round and instructed that the existing implementation be treated as finished work. The task for this log entry is to preserve an accurate handoff for subsequent work without recreating, overwriting or unnecessarily modifying the catalogue.
+
+**1. Completed catalogue UI/UX refinement**
+
+- The `/puppies` catalogue was restyled to follow the playful, cute, sketchbook-like visual direction of the supplied TeddyPups reference.
+- Added a paper-inspired catalogue background and heading treatment.
+- Added a visible filter board with sticker-like interactive controls.
+- Puppy cards now use pastel backgrounds, hand-drawn outlines, doodles, tilted-card styling and sticker-style labels.
+- Improved the presentation of puppy images, metadata and availability indicators.
+
+**2. Completed puppy filtering**
+
+- Added filters for the available dataset categories: origin/location, breed, collection (including Korean Teacup) and gender.
+- Selected filters are reflected in URL query parameters.
+- Multiple filters can be combined; changing one filter preserves the other selected filters.
+- Added a result count for the current filter combination.
+- Filter choices are derived from the actual dataset; no unsupported records or filter values should be invented.
+- All 15 currently available puppies are marked imported in the data. Do not add a fictitious local-puppy option.
+
+**3. Completed puppy-card refinement**
+
+- Updated `PuppyCard.jsx` with the sketch-inspired visual treatment, decorative SVG details, irregular framing, pastel styling and availability/video stickers.
+- Preserved puppy metadata and navigation to individual puppy profiles.
+
+**4. Files already changed for this completed implementation**
+
+- `frontend/src/pages/PuppiesPage.jsx`
+- `frontend/src/pages/PuppiesPage.test.jsx`
+- `frontend/src/components/puppies/PuppyCard.jsx`
+- `frontend/src/components/puppies/PuppyCard.test.jsx`
+- `frontend/src/styles/index.css`
+
+This list describes the owner's completed implementation. A documentation-only follow-up must not edit these files just to repeat the work.
+
+**5. Verification reported by the user**
+
+- The GitHub Actions workflow named **Phase 2 frontend tests** passed for the catalogue implementation commit `0a1720104729a40fa770a7a849ee9ae7d9dcaa15`.
+- The user identified `ec630aae429d932730738710090b2986f2590cfc` as the latest documentation commit before this log update.
+- Manual browser-based visual verification of the catalogue has not yet been completed. Do not describe the visual match as browser-verified.
+
+### Current project boundary and next handoff
+
+- Catalogue visual/filter/card implementation: **completed and pushed**. Preserve it.
+- Individual puppy profile page: not yet given the same sketchbook-style refinement.
+- Remaining website pages: not yet all given this same sketchbook-style refinement.
+- Continue the website-cloning work in later tasks by inspecting the latest `develop` branch and relevant source files first. Compare the remaining pages against their corresponding supplied reference implementation. Identify specific gaps before proposing edits.
+- Do not infer that the entire site is visually complete from the catalogue work.
+- Work incrementally, preserve existing working behaviour and do not refactor unrelated areas.
+- Continue using the existing React, JavaScript/JSX, Vite, Tailwind CSS and React Router stack. Do not introduce TypeScript.
+
+### Documentation and scope accuracy
+
+This entry records the user's report of already completed work; it is not an independent execution record. No application files, tests, styles, data, routes or dependencies were changed as part of this documentation update. The catalogue CI result and commit identifiers above are recorded as supplied by the user, not as newly rerun or independently verified by this log-only operation.
