@@ -3043,3 +3043,75 @@ img, video { display: block; max-width: 100%; }
     transition: none !important;
   }
 }
+
+
+
+/* Global paw cursor and movement trail. The custom cursor uses the PawMark path. */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  body * {
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'32'%20height%3D'32'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill%3D'%23a24a1a'%20d%3D'M32%2030.5c-7.6%200-15.6%208.3-15.6%2015.5%200%205.4%204.2%208.3%209.2%208.3%202.6%200%204.5-1.1%206.4-1.1s3.8%201.1%206.4%201.1c5%200%209.2-2.9%209.2-8.3%200-7.2-8-15.5-15.6-15.5zM19.28%2026.71C21.07%2030.08%2020.42%2033.92%2017.84%2035.29C15.25%2036.67%2011.71%2035.05%209.92%2031.69C8.13%2028.32%208.78%2024.48%2011.36%2023.11C13.95%2021.73%2017.49%2023.35%2019.28%2026.71ZM29.62%2015.64C30.32%2019.62%2028.46%2023.26%2025.47%2023.79C22.48%2024.32%2019.48%2021.53%2018.78%2017.56C18.08%2013.58%2019.94%209.94%2022.93%209.41C25.92%208.88%2028.92%2011.67%2029.62%2015.64ZM45.22%2017.56C44.52%2021.53%2042.66%2024.32%2039.67%2023.79C36.68%2023.26%2034.68%2019.62%2035.38%2015.64C36.08%2013.58%2038.08%208.88%2041.07%209.41C44.06%209.94%2045.92%2013.58%2045.22%2017.56ZM54.08%2031.69C52.29%2035.05%2048.75%2036.67%2046.16%2035.29C43.58%2033.92%2042.93%2030.08%2044.72%2026.71C46.51%2023.35%2050.05%2021.73%2052.64%2023.11C55.22%2024.48%2055.87%2028.32%2054.08%2031.69Z'%2F%3E%3C%2Fsvg%3E") 12 12, auto !important;
+  }
+
+  body input,
+  body textarea,
+  body [contenteditable="true"] {
+    cursor: text !important;
+  }
+
+  body :disabled {
+    cursor: not-allowed !important;
+  }
+}
+
+.paw-trail-layer {
+  position: fixed;
+  z-index: 9997;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.paw-trail-stamp {
+  position: fixed;
+  display: block;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  color: #a24a1a;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(var(--paw-rotation)) scale(.6);
+  animation: paw-trail-imprint 780ms cubic-bezier(.2,.7,.2,1) forwards;
+  will-change: opacity, transform;
+}
+
+.paw-trail-stamp svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.paw-trail-stamp--1 { color: #c2622b; }
+.paw-trail-stamp--2 { color: #806c5b; }
+
+@keyframes paw-trail-imprint {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--paw-rotation)) scale(.55);
+  }
+  18% {
+    opacity: .42;
+    transform: translate(-50%, -50%) rotate(var(--paw-rotation)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--paw-rotation)) scale(.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paw-trail-layer { display: none !important; }
+  .paw-trail-stamp { animation: none !important; }
+}
