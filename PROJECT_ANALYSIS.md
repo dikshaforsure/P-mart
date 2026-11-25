@@ -440,3 +440,14 @@ The owner screenshot of photo 13 showed the portrait original (families.json rec
 The dialog now uses a three-row grid (toolbar / flexible stage / optional caption). The lightbox image has automatic width and height with maximum width and height bounded by the stage and `object-fit: contain`. This allows tall portrait photos to remain narrower and wide landscape photos to use the available width without cropping either. The thumbnail collage still uses cover cropping, and all source dimensions/URLs and lightbox interactions remain unchanged.
 
 CI run #48 passed focused checks (5 files / 33 tests), full suite (22 files / 110 tests) and production build. The reference site was not needed to diagnose this screenshot-specific destination bug; real-browser verification is still outstanding.
+## Homepage mascot and paw trail screenshot refinement — 25 November 2026
+
+Source: the two owner-provided screenshots of the destination and designated reference hero. Destination source inspection confirmed the reusable SVG mascot already has open/shut eye layers and two front-paw paths within its ledge group. Rather than substitute an illustration, the existing front paws were separated into individually animatable SVG groups. Homepage-only interaction wraps the existing mascot in a button; hover/focus runs the existing eyelid layers as a brief blink, and click cycles five dog-like phrases plus an alternating paw wave. A polite live region announces phrase changes. Other PuppyMascot instances remain non-interactive.
+
+The hero mascot was increased and lowered while preserving its z-index below the existing quilt (mascot z-index 4, quilt z-index 5), so the lower paws tuck behind the scalloped boundary. Responsive sizing is included.
+
+Trail feedback was that the 30px/42ms marks looked dense and too fast. The new threshold requires both at least 84px of movement and 220ms elapsed since the last mark, and only the most recent five footprints stay mounted; each footprint fades over 1.8 seconds. No asset, package/dependency, route, puppy data or contact changes.
+
+Code commit: 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. Test correction: ca41cfeb3c5337f4f578351378e8e3c1284f5c26.
+
+CI run #51 focused step passed (5 files / 33 tests); full suite had 112 pass and one HomeHero test failure caused by raw DOM .click(), then the test was corrected. CI run #52 attempts 1 and 2 failed during npm installation with ETARGET for tldts-core@^7.5.6, before tests/build. The frontend has no committed package lock and no dependency changes were made. Real-browser rendering/animation/layering remains unverified.

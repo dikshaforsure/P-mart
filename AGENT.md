@@ -135,7 +135,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
-| 6 | Homepage reference-fidelity refinement | Implemented on develop; latest hero refinements and GitHub Actions run #41 passed; real-browser visual QA outstanding |
+| 6 | Homepage reference-fidelity refinement | Implemented on develop; interactive Teddy mascot and slower five-print paw trail code committed; test harness corrected; latest CI retry blocked during npm dependency resolution; real-browser visual QA outstanding |
 | 7 | Integrated browser/responsive QA across all public routes | Not completed |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
@@ -403,7 +403,7 @@ Phase 6 homepage implementation is complete and committed. Do not restart or rei
 
 **Verified Phase 6 code commit:** `184424063be64b111b6c7bf763acff9a7a99075a`  
 **Phase 6 implementation CI:** [run #36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) — passed focused public-page/route tests, full frontend suite and production build.  
-**Latest documented branch commit at this handoff update:** fetch the live `develop` head; never assume this historical value is still current.
+**Latest mascot/trail implementation commit:** 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. **Latest test-harness correction:** ca41cfeb3c5337f4f578351378e8e3c1284f5c26. Fetch the live develop head before continuing.
 
 ### Phase 7 objective
 
@@ -609,3 +609,15 @@ When starting a new chat, provide this message together with repository access:
 **CI:** [run #48](https://github.com/dikshaforsure/P-mart/actions/runs/45576189601) passed focused checks (5 files / 33 tests), the complete frontend suite (22 files / 110 tests) and Vite 8.3.8 production build (65 modules transformed).
 
 **Manual verification:** the fix has not been inspected in a real browser yet. Confirm portrait and landscape lightbox photos at desktop and mobile sizes; automated tests verify the sizing styles and source dimensions, not rendered browser geometry.
+### Homepage Teddy mascot and paw-trail refinement (25 November 2026)
+
+- Owner screenshots compare the destination hero with the supplied reference. The existing PuppyMascot SVG already contains open/shut eye groups and two separate front-paw shapes. Reused these; no replacement illustration or external asset was added.
+- PuppyMascot.jsx now exposes the two existing front paw shapes as data-p="paw-left" and data-p="paw-right" groups. No global mascot animation behavior was changed.
+- Homepage HomeHero wraps Teddy in an accessible button. Hover/focus triggers a short two-blink eye animation. Clicking triggers a short alternating two-paw wave and cycles the existing bubble text through woof woof!, ruff ruff!, yip-yip!, arf arf! and paw-some to see you!. The phrase is also announced through a polite live region. Other PuppyMascot placements remain non-interactive.
+- The homepage mascot is larger (clamp(260px,26vw,360px) on desktop) and placed lower. Its stacking order remains below the quilt (hero-mascot-anchor z-index 4; hero-quilt z-index 5), so the cloud/scallop boundary overlays the lower paws. Responsive sizing overrides are included for tablet/mobile.
+- Global PawTrail uses an 84px minimum distance AND 220ms minimum interval between prints, a maximum of five simultaneously rendered stamps, and 1.8-second fade duration. It remains limited to fine mouse/pen pointers, ignores touch/coarse devices, respects reduced motion, and cleans up listeners/timeouts.
+- No package manifest, lockfile, dependency, route, image URL, puppy data or contact configuration was changed. The repository has no committed frontend/package-lock.json; the workflow currently installs using npm ranges.
+- Tests were added/updated for mascot button greetings/wave state, presence of both paw groups, trail spacing/cadence, five-mark cap and 1.8-second fading. The trail component focused tests passed in the first CI attempt.
+- First workflow attempt #51: focused checks passed (5 files / 33 tests); full suite reached 112 passed and 1 failed. Failure was the new HomeHero test using direct DOM .click() instead of RTL fireEvent.click(). The test was corrected in commit ca41cfeb3c5337f4f578351378e8e3c1284f5c26.
+- Workflow #52, attempts 1 and 2, failed in npm install before any tests/build with ETARGET No matching version found for tldts-core@^7.5.6. No production-build result exists after the test correction. Do not change dependencies to mask this external resolution failure without checking the dependency tree and confirming a compatible version.
+- Real-browser mascot scale/layering, hover blink, click wave and trail cadence have not been visually inspected. jsdom can assert state/timers but does not validate rendered animation or layering.

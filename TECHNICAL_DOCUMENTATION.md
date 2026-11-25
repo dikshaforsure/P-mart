@@ -383,3 +383,11 @@ Run [#15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) pass
 ### Happy Families lightbox image fit
 
 The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stage and optional caption. The source image is sized with automatic width/height plus max-width/max-height bounded by the stage and `object-fit: contain`; source width/height attributes remain attached for the native aspect ratio. Thumbnail Polaroids continue using cover cropping. This change is presentational only and leaves family data, image URLs, photo order and viewer navigation unchanged.
+### Homepage mascot interaction and paw trail
+
+- HomeHero wraps the existing PuppyMascot in a keyboard-accessible button. Homepage-only hover/focus animates its existing eyelid layers; click animates two independently grouped front paws and cycles playful bubble text. A polite live region announces text updates.
+- PuppyMascot.jsx former shared ledge front paws are wrapped in data-p="paw-left" and data-p="paw-right" groups; existing mascot SVG geometry and other placements are preserved.
+- Homepage mascot sizing/position is overridden at the hero only, with z-index kept below the scalloped quilt.
+- PawTrail.jsx uses 84px distance AND 220ms time thresholds, at most five active footprints, and 1.8s fade. Existing fine-pointer and reduced-motion handling remains.
+- Tests exist in HomeHero.test.jsx, PuppyMascot.test.jsx and PawTrail.test.jsx. The HomeHero interaction test uses RTL fireEvent.click() after correction.
+- CI verification is blocked after test correction by npm installation of tldts-core@^7.5.6 (ETARGET). No dependency or lockfile changes were introduced.

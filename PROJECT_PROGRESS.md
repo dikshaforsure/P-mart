@@ -493,3 +493,12 @@ Implementation commit: [`d12b7753fef7ac31f5040c96078a764fc9363779`](https://gith
 **CI:** [run #48](https://github.com/dikshaforsure/P-mart/actions/runs/45576189601) passed focused checks (5 files / 33 tests), the complete frontend suite (22 files / 110 tests) and Vite 8.3.8 production build (65 modules transformed).
 
 **Manual verification:** the fix has not been inspected in a real browser yet. Confirm portrait and landscape lightbox photos at desktop and mobile sizes; automated tests verify the sizing styles and source dimensions, not rendered browser geometry.
+### Homepage Teddy mascot and walking-pace paw trail — 25 November 2026
+
+The owner supplied a destination/reference screenshot pair and requested three refinements. The homepage mascot now uses an accessible click target around the existing PuppyMascot: hover/focus blinks its existing eyes; clicking alternates its two separately grouped front paws and cycles five playful greeting phrases in the speech bubble. The same phrase is announced via a polite live region. Other profile/contact mascot instances keep their existing behavior.
+
+The hero mascot is enlarged and lowered so the quilt covers the lower paws; the quilt remains above the mascot in stacking order. The global PawTrail now places a print only after both 84px movement and 220ms have elapsed since the prior print. It shows at most five marks and fades each over 1.8 seconds. Fine-pointer, touch/coarse-pointer and reduced-motion protections and cleanup are unchanged. No dependency, media asset, puppy data or contact configuration changes were made.
+
+Implementation code commit: 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7. Test-harness correction: ca41cfeb3c5337f4f578351378e8e3c1284f5c26.
+
+Verification note: CI run #51 passed the focused workflow step (5 files / 33 tests), but the full suite reached 112 passed / 1 failed because the new interaction test used a raw DOM .click(). That test was corrected to fireEvent.click() in the follow-up commit. CI run #52 (attempts 1 and 2) then failed during npm install, before tests/build, with ETARGET No matching version found for tldts-core@^7.5.6. The repository has no committed frontend package lock; no dependencies were changed. Full-suite/build verification on the corrected test revision remains blocked pending a successful dependency install. Real-browser visual behavior remains unverified.

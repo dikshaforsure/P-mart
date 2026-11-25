@@ -403,3 +403,20 @@ The page now has four featured source photos next to the testimonial and 60 foll
 | Real-browser rendered image geometry | **NOT RUN** |
 
 The lightbox dialog now separates toolbar, image stage and optional caption using CSS grid. The image uses auto width/height and max width/height constraints so its original aspect ratio is retained inside the stage. `jsdom` checks style contracts and source dimension attributes, but does not render layout; a real-browser visual check remains outstanding.
+## Homepage Teddy mascot interaction and paw trail cadence — 25 November 2026
+
+**Code commit:** 46a6eb59e086ea1e81aec1a28bc2702ae15e20f7
+**Test harness correction:** ca41cfeb3c5337f4f578351378e8e3c1284f5c26
+
+| Check | Result | Evidence |
+|---|---|---|
+| Focused public-page/route workflow step, first code attempt | **PASS — 5 files / 33 tests** | run #51 |
+| PawTrail component suite | **PASS — 7 tests** | run #51 full-suite log |
+| Full suite, first code attempt | **112 passed / 1 failed** | HomeHero greeting test used HTMLButtonElement.click() directly |
+| HomeHero test harness correction | **COMMITTED** | switched to React Testing Library fireEvent.click() for both clicks |
+| Dependency install after test correction | **BLOCKED** | run #52, attempts 1 and 2 |
+| Full suite after test correction | **NOT RUN** | npm install stopped before tests |
+| Production build after test correction | **NOT RUN** | npm install stopped before build |
+| Real-browser mascot/trail visual check | **NOT RUN** | no browser evidence |
+
+The two install attempts logged ETARGET No matching version found for tldts-core@^7.5.6. frontend/package.json was inspected; there is no committed frontend/package-lock.json, and no package manifest/dependency change was made for this UI-only task. The exact test correction is on develop; rerun full tests/build after dependency resolution succeeds. Do not report the code as fully CI-verified.
