@@ -597,3 +597,15 @@ When starting a new chat, provide this message together with repository access:
 **CI:** [run #46](https://github.com/dikshaforsure/P-mart/actions/runs/45573989205) passed focused checks (5 files / 32 tests), full frontend suite (22 files / 109 tests) and Vite 8.3.8 production build.
 
 **Manual visual QA:** no real-browser screenshot comparison has been completed. The layout has not been visually verified at the six Phase 7 viewport sizes.
+### Happy Families lightbox image-fit correction (25 November 2026)
+
+- Owner screenshot showed a portrait source photograph (photo 13, 1306 × 1600) rendered as a wide stage-sized image and visibly cropped.
+- Replaced the dialog's percentage-height image arrangement with a three-row grid: fixed toolbar, minmax(0,1fr) image stage, and optional caption.
+- The lightbox image now uses intrinsic sizing (`width/height: auto`) and `max-width/max-height: 100%` with `object-fit: contain`, so portrait and landscape originals fit fully within the available stage without stretching or cropping.
+- Kept source width/height attributes, source focal data, image URLs, gallery thumbnails, navigation, keyboard/touch behavior, focus restoration and background scroll lock unchanged.
+- Added a regression test for photo 13 and a landscape source photo to verify intrinsic dimension attributes and contain sizing.
+
+**Implementation commit:** `04ead9cc5dd50e6dec25f3fa79184e3dcc9e688a`.
+**CI:** [run #48](https://github.com/dikshaforsure/P-mart/actions/runs/45576189601) passed focused checks (5 files / 33 tests), the complete frontend suite (22 files / 110 tests) and Vite 8.3.8 production build (65 modules transformed).
+
+**Manual verification:** the fix has not been inspected in a real browser yet. Confirm portrait and landscape lightbox photos at desktop and mobile sizes; automated tests verify the sizing styles and source dimensions, not rendered browser geometry.

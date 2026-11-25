@@ -379,3 +379,7 @@ Run [#15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) pass
 ### Implemented global pointer decoration
 
 `frontend/src/components/layout/PawTrail.jsx` is mounted once by `AppLayout` and reuses `PawMark.jsx` for the footprints. The companion custom cursor is a CSS SVG data URI matching the PawMark silhouette. This shared interaction is enabled only for fine mouse/pen pointers; touch/coarse-pointer devices retain native behavior, text-entry fields retain the text cursor, disabled elements retain `not-allowed`, and `prefers-reduced-motion` disables the animated trail. This is presentational only and has no route/data/API effects.
+
+### Happy Families lightbox image fit
+
+The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stage and optional caption. The source image is sized with automatic width/height plus max-width/max-height bounded by the stage and `object-fit: contain`; source width/height attributes remain attached for the native aspect ratio. Thumbnail Polaroids continue using cover cropping. This change is presentational only and leaves family data, image URLs, photo order and viewer navigation unchanged.

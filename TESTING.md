@@ -387,3 +387,19 @@ The cursor/trail uses the existing PawMark SVG silhouette. Text-editing fields a
 | Real-browser layout comparison at desktop/tablet/mobile | **NOT RUN** |
 
 The page now has four featured source photos next to the testimonial and 60 following photos in the masonry wall. Tests assert 64 records in original order across both lists, original global lightbox indexes and image-error fallback. CI does not verify visual balance or responsive rendering; those remain part of Phase 7.
+## Happy Families lightbox full-image fitting — 25 November 2026
+
+**Implementation commit:** [04ead9cc5dd50e6dec25f3fa79184e3dcc9e688a](https://github.com/dikshaforsure/P-mart/commit/04ead9cc5dd50e6dec25f3fa79184e3dcc9e688a)
+**GitHub Actions:** [run #48](https://github.com/dikshaforsure/P-mart/actions/runs/45576189601)
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 33 tests** |
+| HappyFamiliesPage component tests | **PASS — 10 tests** |
+| Complete frontend suite | **PASS — 22 files / 110 tests** |
+| Production build | **PASS — Vite 8.3.8; 65 modules transformed** |
+| Portrait source fit (photo 13, 1306 × 1600) | **PASS — contain sizing and intrinsic dimensions asserted** |
+| Landscape source fit | **PASS — contain sizing and intrinsic dimensions asserted** |
+| Real-browser rendered image geometry | **NOT RUN** |
+
+The lightbox dialog now separates toolbar, image stage and optional caption using CSS grid. The image uses auto width/height and max width/height constraints so its original aspect ratio is retained inside the stage. `jsdom` checks style contracts and source dimension attributes, but does not render layout; a real-browser visual check remains outstanding.

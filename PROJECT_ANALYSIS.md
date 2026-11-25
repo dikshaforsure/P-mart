@@ -433,3 +433,10 @@ The owner-provided screenshot showed the main title/description and count in the
 The correction moves the existing testimonial into a dedicated feature row and fills the opposite column with four real Polaroid cards from the first four existing families.json records. The lower masonry wall renders the remaining 60 records, so the 64-photo set is unique and remains in source order across the complete page. The same FamilyMomentCard component and original global indexes preserve accessibility labels and lightbox navigation.
 
 The reference route was not retrievable via the web inspection tool during this follow-up. CI run #46 passed focused checks (5 files / 32 tests), the full suite (22 files / 109 tests) and the production build. Browser screenshot verification remains open.
+## Happy Families lightbox aspect-ratio correction — 25 November 2026
+
+The owner screenshot of photo 13 showed the portrait original (families.json record 13: 1306 × 1600) rendered across the full width of the lightbox stage and cropped. Source inspection found that the stage used `height: calc(100% - 54px)` while the image was forced to `width: 100%; height: 100%`. Although `object-fit: contain` was present, the stage's percentage sizing made the image element fill the whole stage box rather than constrain its own dimensions to the source ratio.
+
+The dialog now uses a three-row grid (toolbar / flexible stage / optional caption). The lightbox image has automatic width and height with maximum width and height bounded by the stage and `object-fit: contain`. This allows tall portrait photos to remain narrower and wide landscape photos to use the available width without cropping either. The thumbnail collage still uses cover cropping, and all source dimensions/URLs and lightbox interactions remain unchanged.
+
+CI run #48 passed focused checks (5 files / 33 tests), full suite (22 files / 110 tests) and production build. The reference site was not needed to diagnose this screenshot-specific destination bug; real-browser verification is still outstanding.
