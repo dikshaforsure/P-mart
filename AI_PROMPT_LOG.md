@@ -324,7 +324,7 @@ Inspected the matching Gone Home, Happy Families and Contact templates, referenc
 
 ### Contact submission decision
 
-The source React form optionally POSTs to a \`VITE_ENQUIRY_ENDPOINT\`; no equivalent endpoint exists in the destination. The implementation therefore does not mimic the private API/demo success state and does not claim contact delivery. It builds a WhatsApp message, opens the existing configured link from the submit interaction, and instructs the visitor to review and manually send it. The form's source \`website\` anti-spam honeypot remains present and filled values are ignored. Existing footer phone/email/contact values were not changed; the reference phone/WhatsApp discrepancy remains documented, so no new telephone number is displayed.
+The source React form optionally POSTs to a \`VITE_ENQUIRY_ENDPOINT\`; no equivalent endpoint exists in the destination. The implementation therefore does not mimic the private API/demo success state and does not claim contact delivery. It builds a WhatsApp message, opens the existing configured link from the submit interaction, and instructs the visitor to review and manually send it. The form's source \`website\` anti-spam The 15 puppy-choice labels and their order match the source. Because the source option UUIDs belong to an unavailable private backend and the destination has no contact API, the page uses stable local option values and includes the selected visible label in the WhatsApp handoff; it does not submit or persist those option IDs. honeypot remains present and filled values are ignored. Existing footer phone/email/contact values were not changed; the reference phone/WhatsApp discrepancy remains documented, so no new telephone number is displayed.
 
 ### Verification
 

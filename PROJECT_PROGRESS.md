@@ -383,7 +383,7 @@ Inspected the source templates \`src/templates/gone-home.html\`, \`src/templates
 
 ### Contact delivery limitation
 
-The destination has no verified contact endpoint or backend acknowledgement. The form therefore does **not** send a fake API request or claim a request was received. It composes the form values into the existing configured WhatsApp handoff, opens that link from the submit gesture and exposes the prepared link if the popup is blocked. The visitor is told to review and send the message in WhatsApp. The reference form's visible fields and honeypot intent were preserved; the reference private endpoint/demo envelope animation was not copied. The WhatsApp helper/configuration and footer phone/email settings were not changed.
+The destination has no verified contact endpoint or backend acknowledgement. The form therefore does **not** send a fake API request or claim a request was received. It composes the form values into the existing configured WhatsApp handoff, opens that link from the submit gesture and exposes the prepared link if the popup is blocked. The visitor is told to review and send the message in WhatsApp. The 15 puppy-choice labels and their order match the source. Because the source option UUIDs belong to an unavailable private backend and the destination has no contact API, the page uses stable local option values and includes the selected visible label in the WhatsApp handoff; it does not submit or persist those option IDs. The reference form's visible fields and honeypot intent were preserved; the reference private endpoint/demo envelope animation was not copied. The WhatsApp helper/configuration and footer phone/email settings were not changed.
 
 ### Data, asset and preservation notes
 
