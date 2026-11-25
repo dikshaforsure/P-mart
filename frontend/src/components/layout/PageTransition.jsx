@@ -23,7 +23,7 @@ function getPawDelay(left) {
   const pawPosition = (viewportWidth * Number.parseFloat(left)) / 100;
   const passedPositionTime = ((pawPosition + startOffset) / travelDistance) * RUN_DURATION;
 
-  return Math.round((passedPositionTime + 0.08) * 1000) + 'ms';
+  return Math.round(passedPositionTime + 80) + 'ms';
 }
 
 export default function PageTransition() {
