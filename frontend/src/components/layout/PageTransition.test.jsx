@@ -34,22 +34,28 @@ function renderTransition(initialEntry = '/') {
   return { ...view, onActiveChange };
 }
 
+function fireAnimationEnd(element, animationName) {
+  const event = new Event('animationend', { bubbles: true });
+  Object.defineProperty(event, 'animationName', { configurable: true, value: animationName });
+  fireEvent(element, event);
+}
+
 function completeCurrentTransition() {
   const curtain = screen.queryByTestId('page-transition');
   if (!curtain) return;
 
   if (curtain.getAttribute('data-phase') === 'entering') {
-    fireEvent.animationEnd(curtain, { animationName: 'page-transition-drop' });
+    fireAnimationEnd(curtain, 'page-transition-drop');
   }
 
   const runner = screen.queryByTestId('page-transition-runner');
   if (runner && screen.queryByTestId('page-transition')?.getAttribute('data-phase') === 'running') {
-    fireEvent.animationEnd(runner, { animationName: 'page-transition-run-across' });
+    fireAnimationEnd(runner, 'page-transition-run-across');
   }
 
   const exitingCurtain = screen.queryByTestId('page-transition');
   if (exitingCurtain?.getAttribute('data-phase') === 'exiting') {
-    fireEvent.animationEnd(exitingCurtain, { animationName: 'page-transition-lift' });
+    fireAnimationEnd(exitingCurtain, 'page-transition-lift');
   }
 }
 
@@ -69,13 +75,13 @@ describe('PageTransition', () => {
     expect(screen.getByTestId('current-path')).toHaveTextContent('/');
     expect(onActiveChange).toHaveBeenLastCalledWith(true);
 
-    fireEvent.animationEnd(curtain, { animationName: 'page-transition-drop' });
+    fireAnimationEnd(curtain, 'page-transition-drop');
     expect(screen.getByTestId('page-transition')).toHaveAttribute('data-phase', 'running');
 
-    fireEvent.animationEnd(screen.getByTestId('page-transition-runner'), { animationName: 'page-transition-run-across' });
+    fireAnimationEnd(screen.getByTestId('page-transition-runner'), 'page-transition-run-across');
     expect(screen.getByTestId('page-transition')).toHaveAttribute('data-phase', 'exiting');
 
-    fireEvent.animationEnd(screen.getByTestId('page-transition'), { animationName: 'page-transition-lift' });
+    fireAnimationEnd(screen.getByTestId('page-transition'), 'page-transition-lift');
     expect(screen.queryByTestId('page-transition')).not.toBeInTheDocument();
     expect(onActiveChange).toHaveBeenLastCalledWith(false);
   });
@@ -93,12 +99,12 @@ describe('PageTransition', () => {
     fireEvent.click(screen.getByRole('link', { name: 'Open puppies' }));
     expect(screen.getByTestId('current-path')).toHaveTextContent('/');
 
-    fireEvent.animationEnd(screen.getByTestId('page-transition'), { animationName: 'page-transition-drop' });
+    fireAnimationEnd(screen.getByTestId('page-transition'), 'page-transition-drop');
     expect(screen.getByTestId('current-path')).toHaveTextContent('/puppies');
     expect(screen.getByTestId('page-transition')).toHaveAttribute('data-phase', 'running');
 
-    fireEvent.animationEnd(screen.getByTestId('page-transition-runner'), { animationName: 'page-transition-run-across' });
-    fireEvent.animationEnd(screen.getByTestId('page-transition'), { animationName: 'page-transition-lift' });
+    fireAnimationEnd(screen.getByTestId('page-transition-runner'), 'page-transition-run-across');
+    fireAnimationEnd(screen.getByTestId('page-transition'), 'page-transition-lift');
     expect(screen.queryByTestId('page-transition')).not.toBeInTheDocument();
   });
 
@@ -158,10 +164,10 @@ describe('PageTransition', () => {
     completeCurrentTransition();
 
     fireEvent.click(screen.getByRole('link', { name: 'Open puppies' }));
-    fireEvent.animationEnd(screen.getByTestId('page-transition'), { animationName: 'page-transition-drop' });
+    fireAnimationEnd(screen.getByTestId('page-transition'), 'page-transition-drop');
     expect(screen.getByTestId('current-path')).toHaveTextContent('/puppies');
-    fireEvent.animationEnd(screen.getByTestId('page-transition-runner'), { animationName: 'page-transition-run-across' });
-    fireEvent.animationEnd(screen.getByTestId('page-transition'), { animationName: 'page-transition-lift' });
+    fireAnimationEnd(screen.getByTestId('page-transition-runner'), 'page-transition-run-across');
+    fireAnimationEnd(screen.getByTestId('page-transition'), 'page-transition-lift');
 
     fireEvent.click(screen.getByRole('button', { name: 'Browser back' }));
     expect(screen.getByTestId('current-path')).toHaveTextContent('/');
