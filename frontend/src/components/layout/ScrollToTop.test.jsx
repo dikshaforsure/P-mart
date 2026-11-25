@@ -53,9 +53,9 @@ describe('ScrollToTop', () => {
 
   it('scrolls to an in-page hash target instead of forcing the top', () => {
     const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
-    const scrollIntoView = vi.fn();
-    HTMLElement.prototype.scrollIntoView = scrollIntoView;
     renderRoutes();
+    const scrollIntoView = vi.fn();
+    screen.getByText('Target section').scrollIntoView = scrollIntoView;
 
     fireEvent.click(screen.getByRole('link', { name: 'Open next page section' }));
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'instant', block: 'start' });
