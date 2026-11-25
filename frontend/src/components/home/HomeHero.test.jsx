@@ -43,7 +43,7 @@ describe('HomeHero', () => {
     expect(teddyButton.querySelector('[data-p="paw-right"]')).toBeInTheDocument();
 
     fireEvent.click(teddyButton);
-    expect(screen.getByText('woof woof!')).toBeInTheDocument();
+    expect(container.querySelector('.pup-bubble')).toHaveTextContent('woof woof!');
     expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('woof woof!');
 
     act(() => { vi.advanceTimersByTime(16); });
@@ -53,7 +53,7 @@ describe('HomeHero', () => {
     expect(teddyButton).not.toHaveClass('is-waving');
 
     fireEvent.click(teddyButton);
-    expect(screen.getByText('ruff ruff!')).toBeInTheDocument();
+    expect(container.querySelector('.pup-bubble')).toHaveTextContent('ruff ruff!');
     expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('ruff ruff!');
   });
 
