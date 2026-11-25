@@ -39,7 +39,9 @@ describe('application puppy routes', () => {
   it('connects /happy-families to the full family photo wall', async () => {
     renderAt('/happy-families');
     expect(await screen.findByRole('heading', { level: 1, name: 'Happy families' })).toBeInTheDocument();
-    expect(screen.getByRole('list', { name: 'Photos from TeddyPups families' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Featured photos from TeddyPups families' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'More photos from TeddyPups families' })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /Open photo/ })).toHaveLength(64);
     expect(screen.getByText('64 moments and counting')).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
