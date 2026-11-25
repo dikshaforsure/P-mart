@@ -75,21 +75,26 @@ export default function PageTransition() {
       aria-label="TeddyPups page transition"
     >
       <div className="page-transition-track" aria-hidden="true">
-        {pawPrints.map((paw, index) => (
-          <span
-            className="page-transition-paw"
-            data-testid="page-transition-paw"
-            key={index}
-            style={{
-              left: paw.left,
-              top: paw.top,
-              '--paw-rotation': paw.rotation,
-              '--paw-delay': getPawDelay(paw.left),
-            }}
-          >
-            <PawMark />
-          </span>
-        ))}
+        {pawPrints.map((paw, index) => {
+          const delay = getPawDelay(paw.left);
+
+          return (
+            <span
+              className="page-transition-paw"
+              data-testid="page-transition-paw"
+              data-paw-delay={delay}
+              key={index}
+              style={{
+                left: paw.left,
+                top: paw.top,
+                '--paw-rotation': paw.rotation,
+                '--paw-delay': delay,
+              }}
+            >
+              <PawMark />
+            </span>
+          );
+        })}
         <div className="page-transition-runner">
           <TeddyRunner />
         </div>

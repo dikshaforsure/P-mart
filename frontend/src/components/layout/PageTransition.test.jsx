@@ -75,7 +75,7 @@ describe('PageTransition', () => {
     fireEvent.click(screen.getByRole('link', { name: 'Open puppies' }));
     const curtain = screen.getByTestId('page-transition');
     const paws = [...curtain.querySelectorAll('[data-testid="page-transition-paw"]')];
-    const delays = paws.map((paw) => Number.parseFloat(paw.style.getPropertyValue('--paw-delay')));
+    const delays = paws.map((paw) => Number.parseFloat(paw.getAttribute('data-paw-delay')));
 
     expect(paws).toHaveLength(5);
     expect(delays.every((delay) => Number.isFinite(delay) && delay > 0 && delay < 3000)).toBe(true);
