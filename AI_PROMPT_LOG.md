@@ -440,3 +440,7 @@ Owner screenshot comparison showed the reference header has a repeating cloud/sc
 Found that AppLayout had no route scroll handling. Added ScrollToTop once at layout level: browser native history scroll restoration is set to manual, pathname changes jump to the top, hash navigation scrolls to its target, and query-only changes do not reset the viewport (important for catalogue filters). Added tests for all three cases.
 
 Implementation commit 392a440feb845edc6e6da016c4598e53f4fa4a21; regression-test follow-ups b7c70dd6a8992ebd33920db07ef781a141babfa4 and 5d3d4e310258b1edeff4d4532f10329c4dc572c0. CI run #56 passed 5 focused files / 33 tests, all 23 frontend test files / 116 tests, and Vite 8.3.8 build (66 modules). Manual browser visual/scroll checks remain outstanding.
+
+### Paw-trail length balance adjustment — 25 November 2026
+
+User asked to increase the trail's visible print count and overall length slightly without making the cursor trail crowded. Kept 84px distance and 220ms minimum spacing/time cadence unchanged; increased MAX_TRAIL_MARKS 5 → 7 and synchronized JS removal/CSS fade duration 1800ms → 2200ms. Stamp size remains 24px. Updated tests for the seven-print cap, continued visibility after 1800ms, removal at 2200ms and unmount timer cleanup. CI run #58 passed 5 focused files / 33 tests, full suite 23 files / 116 tests and production build with 66 modules transformed. Real-browser look remains unverified.

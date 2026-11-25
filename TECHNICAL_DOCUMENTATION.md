@@ -398,3 +398,12 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - frontend/src/components/layout/ScrollToTop.jsx is mounted once in AppLayout. It switches history.scrollRestoration to manual for the SPA, jumps to the top on pathname changes, scrolls to valid hash targets, and ignores query-only changes.
 - ScrollToTop.test.jsx covers initial and route-change top resets, query-only navigation retention and hash target scrolling.
 - Visual shape/depth of the header in a real browser and actual browser back/forward behavior remain part of integrated Phase 7 QA.
+
+### PawTrail current tuning
+
+- Minimum pointer distance per print: 84px.
+- Minimum interval between prints: 220ms.
+- Maximum simultaneously displayed prints: 7.
+- JS removal timer and CSS imprint fade: 2200ms.
+- Paw SVG stamp remains 24px.
+- The distance/time thresholds remain unchanged so the longer tail does not become denser or faster. Reduced-motion and coarse/touch-pointer suppression remain intact.

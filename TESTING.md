@@ -440,3 +440,21 @@ The two install attempts logged ETARGET No matching version found for tldts-core
 | Actual browser back/forward scroll behavior | **NOT RUN** |
 
 The header decoration is a shared CSS pseudo-element and appears on all routes. ScrollToTop is mounted once in AppLayout, sets history.scrollRestoration to manual, scrolls to the top for pathname changes and honors hash targets. Search/filter query-only updates do not change the pathname and do not reset scroll.
+
+## Paw-trail length balance refinement — 25 November 2026
+
+**Implementation commit:** [f556f2603abf4d1e06425cae2b5a9f39d21bbfc6](https://github.com/dikshaforsure/P-mart/commit/f556f2603abf4d1e06425cae2b5a9f39d21bbfc6)
+**GitHub Actions:** [run #58](https://github.com/dikshaforsure/P-mart/actions/runs/45590623608)
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 23 files / 116 tests** |
+| PawTrail tests | **PASS — 7 tests** |
+| Maximum visible prints | **PASS — capped at 7** |
+| Visible lifetime | **PASS — present at 1800ms, removed at 2200ms** |
+| Timer cleanup on unmount | **PASS** |
+| Production build | **PASS — Vite 8.3.8; 66 modules transformed** |
+| Real-browser trail appearance | **NOT RUN** |
+
+Final settings: `TRAIL_DISTANCE = 84`; `TRAIL_INTERVAL = 220`; `MAX_TRAIL_MARKS = 7`; `TRAIL_LIFETIME = 2200`; CSS imprint animation-duration 2200ms; stamp size 24px.

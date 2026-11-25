@@ -630,3 +630,11 @@ When starting a new chat, provide this message together with repository access:
 - Implementation commit: 392a440feb845edc6e6da016c4598e53f4fa4a21. Scroll-test isolation correction: b7c70dd6a8992ebd33920db07ef781a141babfa4. Mascot visible-bubble assertion correction: 5d3d4e310258b1edeff4d4532f10329c4dc572c0.
 - GitHub Actions run #56 (https://github.com/dikshaforsure/P-mart/actions/runs/45588040638) passed against 5d3d4e310258b1edeff4d4532f10329c4dc572c0: focused checks 5 files / 33 tests; full suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
 - Real-browser visual inspection of the scallop depth/shadow across desktop/mobile and real navigation scroll behavior has not been performed. jsdom confirms scroll calls and branch behavior but cannot measure rendered header geometry.
+### Paw-trail length balance refinement — 25 November 2026
+
+- Owner requested a slightly longer trail with a few more prints, while keeping the walking effect balanced rather than denser/faster.
+- Raised the active print cap from 5 to 7 and increased both the JS removal timer and CSS imprint fade from 1800ms to 2200ms.
+- Kept the 84px minimum pointer distance and 220ms minimum interval unchanged. Paw size remains 24px. This makes the visible trail longer while preserving the existing spacing/cadence.
+- Updated PawTrail tests to assert that marks remain after 1800ms but disappear at 2200ms, cap at 7, and clear pending timers on unmount.
+- GitHub Actions [run #58](https://github.com/dikshaforsure/P-mart/actions/runs/45590623608) passed against implementation commit `f556f2603abf4d1e06425cae2b5a9f39d21bbfc6`: focused checks 5 files / 33 tests; full suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
+- No dependencies, global cursor asset, pointer thresholds, touch behavior, reduced-motion handling or unrelated UI were changed. Real-browser trail appearance remains part of Phase 7 visual QA.

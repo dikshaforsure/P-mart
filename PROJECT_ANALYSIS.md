@@ -460,3 +460,10 @@ Destination inspection found the header is centralized in SiteHeader.jsx and sty
 The app uses BrowserRouter nested around the shared AppLayout but had no route scroll manager. Since client-side route transitions reuse one document, the viewport was not being reset after pathname changes. Added ScrollToTop to AppLayout: history scroll restoration is set to manual; pathname changes jump to (0,0); hash links target their element; query-only changes are ignored so catalogue filter state doesn't bounce the visitor to the top.
 
 ScrollToTop tests cover initial load/path changes, search/filter query changes and hash targets. CI run #56 passed 5 focused files / 33 tests and 23 full-suite files / 116 tests, plus Vite 8.3.8 production build (66 modules transformed). Visual browser geometry and actual browser back/forward behavior remain outstanding for Phase 7.
+## Paw-trail length adjustment — 25 November 2026
+
+Owner requested slightly more visible footprints and a slightly longer trail, while keeping the existing walking-speed spacing. Inspected PawTrail.jsx, PawTrail.test.jsx and CSS together because both JS cleanup timing and CSS animation duration control how long prints remain visible.
+
+Adjusted only the visible tail size and lifetime: MAX_TRAIL_MARKS 5 → 7; TRAIL_LIFETIME 1800ms → 2200ms; `.paw-trail-stamp` animation-duration 1800ms → 2200ms. Kept TRAIL_DISTANCE 84px, TRAIL_INTERVAL 220ms and footprint size 24px unchanged. The unchanged thresholds preserve the slow cadence and distance between new prints; the additional two marks and modestly longer lifetime make the trail more visible without speeding it up or tightening the spacing.
+
+Focused tests assert seven active marks maximum, persistence after 1800ms, removal at 2200ms and timer cleanup. GitHub Actions run #58 passed the focused step (5 files / 33 tests), full suite (23 files / 116 tests) and Vite 8.3.8 build (66 modules). Real-browser visual appearance is not verified yet.
