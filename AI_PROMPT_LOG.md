@@ -171,8 +171,72 @@ No backend, MongoDB, API, catalogue, individual profile, gone-home, happy-famili
 **Date:** 24 November 2026  
 **Branch:** `develop`
 
-### User request summary
-Inspect existing source and all six JSON datasets; verify puppy availability, slugs and media; implement the actual catalogue and one reusable profile route; support mixed variable-length galleries and WhatsApp enquiry; preserve the Phase 1 homepage/design; update documentation; commit directly to `develop` without branching.
+### Filtered user prompt summary (structured; not verbatim)
+
+The user authorized Phase 2 implementation of the puppy catalogue and reusable individual puppy profile experience in the existing frontend. Work must continue from the established `develop` branch and build on the completed Phase 1 application rather than recreating it.
+
+**1. Inspect and preserve the existing project**
+
+- Inspect the latest `develop` branch and the complete existing frontend before editing, including routing, components, styles, services, utilities and data modules.
+- Review all six structured datasets: `puppies.json`, `breeds.json`, `pages.json`, `faq.json`, `families.json` and `home-families.json`.
+- Understand `siteContent.js`, `referenceAssets.js` and `contentService.js`, along with the Phase 0 and Phase 1 documentation.
+- Preserve the homepage, shared layout, navigation, design language and completed work. Make only changes required for the catalogue/profile scope; do not create another branch.
+
+**2. Verify source data against the live website**
+
+- Inspect the current live puppy catalogue and individual profile URLs at `https://puppy.instabizweb.com/`.
+- Verify current availability, exact names, breeds, gender, age, canonical slugs/URLs, local or imported status, gallery media and profile content/order.
+- Use the live website as the reference for current availability, page structure and canonical URLs, and treat the committed JSON as the existing structured dataset.
+- Preserve historical/sold records and existing slugs. Do not invent or rename records. Where live content and JSON differ, make only a justified minimal correction and document the discrepancy.
+
+**3. Implement the available-puppy catalogue**
+
+- Build `/puppies` using the existing architecture and structured data. Display only currently available puppies with their correct cover image, name, breed, gender, age and availability state.
+- Link each card to its canonical individual profile. Use a responsive grid consistent with the current site, accessible image descriptions and keyboard-operable navigation.
+- Include appropriate loading, empty and missing-image states.
+- Do not add unsupported filters, sorting, search panels, badges or other catalogue controls that are not present in the reference. Do not duplicate puppy records inside React components.
+
+**4. Implement reusable dynamic puppy profiles**
+
+- Build one data-driven `/puppies/:slug` page that resolves the correct record using its canonical slug. Do not create separate hard-coded components for individual puppies.
+- Match the live profile's content and hierarchy where applicable: puppy identity and details, local/imported information, gallery, video, enquiry/WhatsApp actions, health and care information, delivery/import information, previous/next navigation and other profile-specific content supported by the source.
+- Support a variable number of media items. Use the existing metadata such as `kind`, `url`, `poster`, dimensions, alt text, caption, duration and focal-point data.
+- Provide working video posters and playback controls, render images and videos with the correct media element, and include sensible fallbacks for unavailable media and unknown slugs.
+
+**5. Integrate the existing JSON and service layers**
+
+- Keep the JSON datasets as the structured content source; do not copy their records into JSX or replace them with hard-coded arrays.
+- Add or extend service/data-access functions for available puppies, puppy-by-slug lookup, previous/next available puppies and breed information as needed.
+- Keep data mapping and filtering separate from presentation components, reuse the existing service layer where practical and avoid unnecessary dependencies or new state-management systems.
+- Treat media URLs as external assets hosted by the reference site. Verify loading where possible, do not describe them as local files, and do not download/duplicate media binaries. Record exact inaccessible puppy/media URLs and issues.
+
+**6. Enquiry behaviour and frontend-only boundary**
+
+- Generate puppy-specific WhatsApp enquiry messages using the existing utility where suitable, and preserve the site's contact/navigation conventions.
+- Validate any forms locally and provide useful feedback.
+- Do not claim enquiries are saved or sent to a backend. Do not add fake persistence, placeholder API calls, authentication, MongoDB or backend implementation in this phase.
+
+**7. Responsive quality and accessibility**
+
+- Keep catalogue and profile pages usable on desktop, tablet and mobile. Check image proportions, gallery behaviour, spacing, typography, overflow, navigation and touch interactions.
+- Reuse the Phase 1 shared components and styles rather than introducing an unrelated design system.
+- Use semantic HTML, meaningful alt text, keyboard-operable controls, visible focus states and appropriate labels.
+- Continue using React, JavaScript/JSX, Vite, Tailwind CSS and React Router DOM only; do not introduce TypeScript.
+
+**8. Testing, documentation and Git delivery**
+
+- Install dependencies using the existing configuration and run the production build. Resolve build errors.
+- Verify all 15 current available listings against the live site or state precisely which could not be checked. Test profile routes, invalid slugs, variable-length galleries, video playback, catalogue/profile/home navigation, desktop/mobile layouts, console errors and broken media requests where tooling permits.
+- Report only tests actually executed and distinguish verified results from unavailable checks.
+- Update `PROJECT_PROGRESS.md`, `TECHNICAL_DOCUMENTATION.md`, `TESTING.md` and `frontend/README.md`; update `PROJECT_ANALYSIS.md` only when findings change an earlier assumption. Preserve earlier Phase 0/Phase 1 content and append the Phase 2 outcomes, decisions, limitations and remaining work.
+- Review `git status` and the full diff, commit the complete scope with a meaningful message directly to `develop`, push to `origin/develop` and verify the remote commit/files. Never push to `main`, create another branch, force-push or rewrite history.
+
+**9. Completion report and phase boundary**
+
+- Report implemented catalogue/profile features and routes, number of puppies verified, JSON/service integration, gallery/video behaviour, build/test results, unavailable media, documentation changes, commit SHA and GitHub verification.
+- Complete the catalogue and dynamic puppy profile experience; do not stop at placeholders or a basic catalogue.
+- Do not begin the Happy Families gallery, full FAQ page, How It Works page, Contact redesign or backend. Those belong to later phases.
+- Work from the existing codebase, use engineering judgement and make only the changes necessary for this phase.
 
 ### Changes delivered
 - Added `puppyData.js` as the JSON-backed puppy/breed mapping layer and extended the existing `contentService.js`.
