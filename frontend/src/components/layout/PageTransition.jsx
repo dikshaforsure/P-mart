@@ -21,10 +21,10 @@ function prefersReducedMotion() {
 
 function getPawDelay(left, viewportWidth) {
   const runnerWidth = Math.min(190, Math.max(132, viewportWidth * 0.1));
-  const initialCenterOffset = runnerWidth;
+  const trailingEdgeOffset = runnerWidth * 1.4;
   const totalTravel = viewportWidth * 0.5 + runnerWidth * 1.5;
   const pawPosition = (viewportWidth * Number.parseFloat(left)) / 100;
-  const passedPositionTime = ((pawPosition + initialCenterOffset) / totalTravel) * RUN_DURATION;
+  const passedPositionTime = ((pawPosition + trailingEdgeOffset) / totalTravel) * RUN_DURATION;
 
   return `${Math.round(passedPositionTime + 120)}ms`;
 }

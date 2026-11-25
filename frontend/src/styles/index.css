@@ -3409,7 +3409,7 @@ img, video { display: block; max-width: 100%; }
 }
 .page-transition-runner {
   position: absolute;
-  top: calc(50% - 118px);
+  top: calc(50% - clamp(94px,6.2vw,118px));
   left: 0;
   width: clamp(132px,10vw,190px);
   opacity: 0;
@@ -3545,7 +3545,6 @@ img, video { display: block; max-width: 100%; }
   }
   .page-transition-runner {
     top: calc(50% - 94px);
-    width: 140px;
   }
   .page-transition-message {
     top: calc(50% + 40px);
@@ -3553,7 +3552,7 @@ img, video { display: block; max-width: 100%; }
     font-size: clamp(17px,4.4vw,21px);
   }
   .page-transition-paw {
-    width: 17px;
+    width: 13px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
