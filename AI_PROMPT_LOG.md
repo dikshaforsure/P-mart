@@ -117,17 +117,31 @@ npm install was blocked by `EAI_AGAIN` to the npm registry. `npm run build` was 
 **Branch:** \`develop\`  
 **UI implementation commit:** \`0a1720104729a40fa770a7a849ee9ae7d9dcaa15\`
 
-### Reconstructed design brief (illustrative, not a historical verbatim prompt)
+### Reconstructed prompt summary (illustrative, not a historical verbatim prompt)
 
-The following prompt is a retrospective reconstruction written to explain the implemented work. It is not presented as the exact text of an earlier user message.
+The following is a structured, source-neutral reconstruction of the requirements represented by this implementation. It is an explanatory summary, not the exact text of an earlier user message.
 
-> Review the current puppy catalogue in my React application and compare its UI and interactions with the source implementation in \`Khushiii720/TeddyPups-Clone\`, particularly the catalogue-related components and reference styles under \`src/\`. The catalogue must make it obvious that visitors can filter puppies; do not leave the filter controls hidden or visually indistinguishable from ordinary text.
->
-> Rework the catalogue presentation to follow the source site's playful sketchbook direction: warm paper-like background, hand-drawn outlines, doodle details, pastel card surfaces, slightly irregular/tilted puppy cards, sticker-like labels and a filter board that looks like part of the same visual system. Keep the implementation native to this project's existing React + JavaScript/JSX + Tailwind/CSS stack; do not copy the source TypeScript architecture.
->
-> Add accessible, visibly interactive filters for the available data: origin/location where records support it, puppy breed, collection (including Korean Teacup), and gender. Filters should combine rather than overwrite one another, update the URL query string so selections can be shared or refreshed, and show an accurate result count. Derive available choices from the real puppy dataset; do not invent local puppies or unsupported filter options just to fill the UI.
->
-> Keep the existing data flow and routes intact, make the cards responsive, preserve meaningful image text and keyboard accessibility, and add/update focused component tests for filtering and card presentation. Do not redesign unrelated pages as part of this catalogue-only task.
+**Objective**
+
+Refine the existing React puppy catalogue so that its filtering capabilities are immediately visible and the catalogue has a cohesive, playful sketchbook visual direction.
+
+**Visual and interaction requirements**
+
+- Use a warm, paper-like visual treatment with hand-drawn outlines, doodle details, pastel card surfaces, slightly varied or tilted puppy cards, sticker-style labels and a filter board that belongs to the same design system.
+- Make filter controls prominent and clearly interactive rather than hidden or visually indistinguishable from ordinary text.
+- Keep the implementation within the project's existing React, JavaScript/JSX and Tailwind/CSS stack. Do not introduce a different application architecture.
+
+**Filtering and data requirements**
+
+- Provide accessible filters for origin/location when supported by the records, breed, collection (including Korean Teacup) and gender.
+- Allow filters to combine, preserve other active selections when one filter changes, and reflect the current selections in the URL query string so the view can be shared or refreshed.
+- Display an accurate result count and derive filter choices from the existing puppy dataset. Do not invent records or offer unsupported options.
+
+**Compatibility, accessibility and scope**
+
+- Preserve the existing data flow and routes.
+- Keep catalogue cards responsive, retain meaningful image text and keyboard accessibility, and add or update focused component tests for filtering and card presentation.
+- Limit the change to the catalogue. Do not redesign unrelated pages.
 
 ### Implementation actually committed
 
