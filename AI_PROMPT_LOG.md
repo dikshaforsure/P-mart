@@ -416,3 +416,9 @@ Implemented the requested paw-shaped cursor on fine mouse/pen pointer devices us
 Added five component tests covering footprint creation/removal, touch and coarse pointer suppression, reduced-motion suppression and timeout cleanup. No new package dependency or asset file was introduced.
 
 GitHub Actions [run #43](https://github.com/dikshaforsure/P-mart/actions/runs/45571912528) on commit `d12b7753fef7ac31f5040c96078a764fc9363779` passed focused checks (5 files / 31 tests), full frontend suite (22 files / 108 tests) and Vite 8.3.8 production build. Browser rendering/performance review remains outstanding.
+
+### Happy Families page opening layout — 25 November 2026
+
+The owner screenshot showed a testimonial card alone in the left cell with a large empty right area. I moved the testimonial into a dedicated opening feature grid and added four existing family photos as a Polaroid collage in the right column. The collage uses the first four family gallery records; the lower masonry wall renders the remaining 60. Every one of the 64 records appears once, in source order, with its original caption, alt text, focal point and URL. The existing FamilyMomentCard receives its original full-gallery index, preserving photo numbering and lightbox navigation.
+
+Updated the page test and route integration test for the two lists and all 64 photos/buttons. CI run #46 on commit cd2297de6a7bfbd4224cc1b1779ec7cbe50e25c0 passed 5 focused files / 32 tests, 22 full-suite files / 109 tests and the Vite 8.3.8 production build. A real-browser visual comparison remains outstanding; the reference route could not be opened by the web inspection tool for this follow-up.

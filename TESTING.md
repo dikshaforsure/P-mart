@@ -372,3 +372,18 @@ The production build completed successfully. Vite printed its chunk-size advisor
 | Real-browser trail appearance, density and performance | **NOT RUN** | jsdom does not render CSS animation or measure pointer interaction performance |
 
 The cursor/trail uses the existing PawMark SVG silhouette. Text-editing fields and disabled controls retain their semantic cursor, and CSS cursor/trail behavior is restricted to fine-pointer desktop environments.
+
+## Happy Families opening layout correction — 25 November 2026
+
+**Implementation commits:** 2374cd56506ed080c0f01f0ce7cf5bf59340e106 and cd2297de6a7bfbd4224cc1b1779ec7cbe50e25c0.
+**GitHub Actions:** [run #46](https://github.com/dikshaforsure/P-mart/actions/runs/45573989205)
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 32 tests** |
+| HappyFamiliesPage component tests | **PASS — 9 tests** |
+| Full frontend test suite | **PASS — 22 files / 109 tests** |
+| Production build | **PASS — Vite 8.3.8; 65 modules transformed** |
+| Real-browser layout comparison at desktop/tablet/mobile | **NOT RUN** |
+
+The page now has four featured source photos next to the testimonial and 60 following photos in the masonry wall. Tests assert 64 records in original order across both lists, original global lightbox indexes and image-error fallback. CI does not verify visual balance or responsive rendering; those remain part of Phase 7.

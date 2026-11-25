@@ -425,3 +425,11 @@ The correction is in commit \`bed9eeab2394292462e4dcb2820ddae27a32b59e\`. It doe
 **Contact-number evidence remains conflicting:** the directly inspected reference \`src/templates/contact.html\` currently contains the \`+971 54 167 6733\` call and WhatsApp links, while the earlier asset crawl note recorded different number/link observations. The destination continues using its already configured WhatsApp helper and does not expose a new phone number. Resolve the intended public contact number with the assignment owner before altering shared contact configuration.
 
 No real-browser viewport QA, screenshots, live image reachability test, manual WhatsApp send, asset-rights approval, API persistence or deployment were completed.
+
+## Happy Families opening layout screenshot follow-up — 25 November 2026
+
+The owner-provided screenshot showed the main title/description and count in the opening header, followed by a testimonial card on the left and a large blank area on the right. In the destination implementation, the header grid had only three children (intro, count, testimonial), so automatic grid placement left its second column unoccupied on the testimonial row.
+
+The correction moves the existing testimonial into a dedicated feature row and fills the opposite column with four real Polaroid cards from the first four existing families.json records. The lower masonry wall renders the remaining 60 records, so the 64-photo set is unique and remains in source order across the complete page. The same FamilyMomentCard component and original global indexes preserve accessibility labels and lightbox navigation.
+
+The reference route was not retrievable via the web inspection tool during this follow-up. CI run #46 passed focused checks (5 files / 32 tests), the full suite (22 files / 109 tests) and the production build. Browser screenshot verification remains open.
