@@ -564,3 +564,31 @@ Verification note: CI run #51 passed the focused workflow step (5 files / 33 tes
 - Intermediate CI runs #66 and #67 detected the out-of-range delay values; the unit correction is committed in `7690301400560391de04932073ad0a175c690356`.
 - GitHub Actions [run #68](https://github.com/dikshaforsure/P-mart/actions/runs/45600190889) passed against that exact implementation commit: focused checks 5 files / 33 tests; complete frontend suite 24 files / 122 tests; Vite 8.3.8 production build passed (68 modules transformed).
 - Real-browser verification of the mascot likeness, gait, paw visibility and visual timing remains outstanding; automated tests do not render the CSS animation.
+
+### Source-faithful loading curtain and dedicated running puppy — 25 November 2026
+
+Owner supplied a stricter implementation specification and loading-screen screenshot. This follow-up replaces the earlier sitting-mascot adaptation with a separately authored, full-body running puppy SVG and adds a true first-application-load sequence.
+
+**Files inspected:** `frontend/src/main.jsx`, `frontend/src/app/App.jsx`, `frontend/src/components/layout/AppLayout.jsx`, `PageTransition.jsx`, `TeddyRunner.jsx`, `PageTransition.test.jsx`, `ScrollToTop.jsx`, `frontend/src/components/shared/PawMark.jsx`, `frontend/src/components/puppies/PuppyMascot.jsx` (comparison only), `frontend/src/pages/HomePage.jsx`, `frontend/src/styles/index.css`, `frontend/package.json`, and the existing source/project handoff files.
+
+**Files changed for implementation:** `frontend/src/components/layout/AppLayout.jsx`, `PageTransition.jsx`, `TeddyRunner.jsx`, `PageTransition.test.jsx`, and `frontend/src/styles/index.css`. No package manifest, dependency, route, header/footer markup, home content, puppy/family data, remote asset URL or contact configuration changed.
+
+**SVG illustration:** `TeddyRunner.jsx` is a dedicated inline SVG with `viewBox="0 0 300 240"`. The vector parts are separate: body, head, left ear, right ear, rear-far/front-far/rear-near/front-near legs, tail, eyes, nose, mouth, tongue and ground shadow. It uses honey/golden fills, dark brown outlines, rounded paws, a curly head tuft, cheek blush, muzzle and a small collar/heart tag. It is not the regular sitting mascot and it is not an emoji or simplified silhouette.
+
+**Running gait:** CSS independently animates all four leg groups with staggered phases (diagonal-pair rhythm), plus body bounce, head bob, tail wag and left/right ear flop. No JS animation loop or animation dependency is used. Runner width is `clamp(132px, 10vw, 190px)` and the track takes it from `translateX(-150%)` to `50vw`. Run duration is 3200ms; curtain entrance is 440ms and upward exit is 540ms.
+
+**Paw trail and background:** five existing `PawMark.jsx` SVGs are placed at 27%, 31.5%, 36%, 40.5% and 45% of viewport width, with varied y positions and rotations. Each fades in over 240ms and holds at 88% opacity. Delay is calculated from viewport width and the shared CSS runner-width clamp, using the puppy's trailing edge plus a 120ms offset, so each mark appears after Teddy passes it. Resize updates the width used for the calculated delays. The curtain uses a CSS radial centre glow and repeating 96px diagonal lattice (72px on narrow screens), with the exact tagline `every puppy is family` below the dog in a warm handwritten/cursive stack.
+
+**Initial load:** `PageTransition` begins in `entering` on mount, so the first visit also drops the full-screen curtain, runs Teddy and the trail, then lifts away to reveal the homepage/content that has rendered beneath it.
+
+**Internal links:** a document-level capture listener holds ordinary same-origin, different-path anchors. It excludes modified clicks, external origins, target other than `_self`, downloads, `rel=external` and explicit `data-no-transition`. The current page stays mounted while the curtain drops; when the drop animation ends the listener's queued destination is sent through React Router, the new pathname is committed behind the fully covering curtain, and the runner sequence begins. Duplicate clicks during a pending transition are prevented. Browser back/forward and programmatic pathname changes cannot be delayed before the router commits; a `useLayoutEffect` raises the curtain before the next paint. Query-only and hash-only changes do not transition.
+
+**Input/accessibility/lifecycle:** shared route content is `inert` while the curtain is active, while the decorative overlay is `aria-hidden`. `prefers-reduced-motion` skips transitions (including if the preference changes during a transition). Resize, document click and media-query listeners are removed on cleanup. Animations are CSS/event-driven; there are no interval/timeout/rAF loops to leak.
+
+**Regression tests:** initial loading sequence; delayed internal-link commit; duplicate-click suppression; five SVG prints/positions/order/delay bounds; dedicated SVG viewBox/anatomy; query/hash exclusion; external/new-tab/download exclusion; back/forward; reduced motion; viewport resize; and listener cleanup.
+
+**Implementation commits:** `e8436485069ce54d952b098b86d791de227251db` (dedicated runner, initial load and delayed navigation), `b541f6fcc27a3a8e342fb46d2554b6ad91680abf` (explicit named AnimationEvent helper for jsdom), `a587ded17471f27ede3c9c540129609baeda99c9` (trailing-edge paw timing and responsive runner-width alignment).
+
+**CI:** GitHub Actions [run #73](https://github.com/dikshaforsure/P-mart/actions/runs/45604697990) passed against final implementation commit `a587ded17471f27ede3c9c540129609baeda99c9`: focused 5 files / 33 tests; full frontend suite 24 files / 126 tests; Vite 8.3.8 production build passed (68 modules transformed).
+
+**Manual-browser limitation:** no real Chrome/browser session was available for this task. The source SVG was locally raster-previewed, but the running application, initial page curtain, three-route transitions, back/forward, frame-by-frame gait, network console, and desktop/mobile browser viewports have not been visually inspected. Keep Phase 7 open and do not claim pixel-perfect/browser verification.

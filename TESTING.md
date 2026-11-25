@@ -522,3 +522,28 @@ The six print delays are calculated from viewport width and responsive runner wi
 | Real-browser mascot/gait/paw-visibility inspection | **NOT RUN** |
 
 The 3-second runner phase is preceded by a 440ms curtain entrance and followed by a 540ms upward exit. CSS motion is not rendered by jsdom.
+## Source-faithful loading curtain and dedicated running puppy — 25 November 2026
+
+**Final implementation commit:** https://github.com/dikshaforsure/P-mart/commit/a587ded17471f27ede3c9c540129609baeda99c9
+**GitHub Actions:** https://github.com/dikshaforsure/P-mart/actions/runs/45604697990
+
+| Check | Result |
+|---|---|
+| Focused route/public-page checks | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 24 files / 126 tests** |
+| Initial load curtain lifecycle | **PASS** |
+| Current page remains until curtain drop completes | **PASS** |
+| Destination commits behind curtain before runner phase | **PASS** |
+| Duplicate internal click suppression | **PASS** |
+| Dedicated 300 × 240 SVG anatomy groups | **PASS — body, head, ears, four legs, tail, face and shadow** |
+| Five SVG pawprints, order, positions and delays | **PASS** |
+| External, new-tab, download and modified-click exclusions | **PASS** |
+| Query/hash-only changes excluded | **PASS** |
+| Browser history back/forward pathname handling | **PASS in router tests** |
+| Reduced-motion initial and navigation behavior | **PASS** |
+| Viewport resize recalculates paw timing | **PASS** |
+| Event-listener cleanup | **PASS** |
+| Production build | **PASS — Vite 8.3.8; 68 modules transformed** |
+| Real Chrome/browser visual inspection | **NOT RUN** |
+
+CI run #71 exposed a jsdom test issue: generic AnimationEvent dispatch did not carry `animationName`. The test helper was changed to dispatch a named event; [run #72](https://github.com/dikshaforsure/P-mart/actions/runs/45604070567) then passed. The final trailing-edge timing/mobile-width refinement was verified by run #73.

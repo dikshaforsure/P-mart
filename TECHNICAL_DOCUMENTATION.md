@@ -433,3 +433,14 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - Five trail stamps at 31%, 36.5%, 42%, 47.5% and 53% width. Fade in for 280ms to 88% opacity, then hold. Their delay is calculated from viewport width, runner width and its route endpoint.
 - `getPawDelay()` uses milliseconds end-to-end: `Math.round(passedPositionTime + 80) + 'ms'`. Do not multiply by 1000; the travel calculation already returns milliseconds.
 - CI run #68 passed 5 focused files/33 tests, full suite 24 files/122 tests and Vite 8.3.8 build (68 modules). Browser animation verification is still outstanding.
+### Loading curtain — final implementation
+
+- Shared component: `PageTransition.jsx`, mounted once in `AppLayout.jsx`; dedicated illustration: `TeddyRunner.jsx`; global loader CSS is appended to `frontend/src/styles/index.css`.
+- Entry file is `frontend/src/main.jsx`; routing is `frontend/src/app/App.jsx`. Do not create a parallel router or route for the overlay.
+- Initial state is `entering`. On internal same-origin links with a different pathname, document capture prevents React Router's default click and queues the target. After CSS `page-transition-drop` ends (440ms), `navigate()` commits the destination behind the curtain. `useLocation().pathname` detects the controlled commit and changes phase directly to `running`. Runner animation ends at 3200ms and sets `exiting`; CSS curtain lift ends at 540ms and returns phase to idle.
+- External origins, target other than `_self`, download anchors, `rel=external`, modified clicks, query-only and hash-only changes do not use the curtain. Back/forward and programmatic pathname changes are handled on location change by `useLayoutEffect` before paint.
+- AppLayout passes active state to the shared site-content wrapper's `inert` attribute. Curtain is decorative and `aria-hidden=true`. Reduced motion bypasses the initial/navigation transition. Document click, window resize and media query listeners are cleaned up.
+- Dedicated `TeddyRunner` uses a 300 × 240 SVG viewBox and groups for body, head, two ears, four legs, tail, eyes, nose, mouth, tongue and ground shadow. All four legs run separately on staggered CSS keyframes; body bounce, head bob, tail wag and ear flop are separate animations.
+- Responsive size clamp is `clamp(132px, 10vw, 190px)`; path from `translateX(-150%)` to `50vw`; delay calculation uses the same width clamp and the tail/trailing-edge offset (1.4 × runner width) plus 120ms. Five PawMark SVGs at 27%, 31.5%, 36%, 40.5% and 45%, 240ms stamp-in and 88% held opacity. Resize recalculates the delays.
+- Background uses CSS warm cream/honey fill, central radial glow and repeating diagonal lattice, 96px on desktop/72px narrow screens. Stable tagline: `every puppy is family`.
+- GitHub Actions run #73 passed focused 5/33, full 24/126 and Vite build 68 modules. Browser frame-by-frame/viewport inspection remains outstanding.

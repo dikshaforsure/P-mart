@@ -67,3 +67,12 @@ The running-dog SVG is local authored artwork for the transition only; it does n
 | Quilt/diamond curtain | `frontend/src/styles/index.css` | CSS gradients only. |
 
 The first transition revision used a temporary separately drawn dog. It was replaced by the existing brand mascot vector paths in the follow-up so the loader matches the project's established puppy artwork. No external asset was downloaded or added.
+## Dedicated running puppy artwork for the route-transition curtain
+
+| Usage | File | Provenance |
+|---|---|---|
+| Running puppy illustration | `frontend/src/components/layout/TeddyRunner.jsx` | Newly authored inline SVG vector, viewBox 300 × 240. Distinct body, head, two ears, four legs, tail, eyes, nose, mouth, tongue and shadow. Not downloaded and not the sitting PuppyMascot component. |
+| Five trail footprints | `frontend/src/components/shared/PawMark.jsx` | Existing local SVG reused with varied position/rotation and staggered CSS delay. |
+| Honey lattice and centre glow | `frontend/src/styles/index.css` | CSS gradients and keyframes only; no external image/font asset introduced for the loader. |
+
+No new binary asset, external URL, animation library, dependency or third-party illustration was added for this implementation.

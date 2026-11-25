@@ -521,3 +521,24 @@ Runner width: `clamp(100px, 8.5vw, 172px)`. Its horizontal endpoint is `58vw` af
 `getPawDelay()` now keeps its unit in milliseconds: it adds an 80ms trailing offset and returns `Math.round(passedPositionTime + 80) + 'ms'`. The previous multiplication by 1000 scheduled prints thousands of seconds too late. The CSS runner width/route and JS delay calculation use matching responsive bounds.
 
 Tests cover the five positions, ascending positive delays within the 3000ms run, the transition state sequence and reduced-motion/timer behavior. GitHub Actions run #68 passed 5 focused files / 33 tests, full 24 files / 122 tests and Vite 8.3.8 production build (68 modules transformed). Browser animation/visual likeness remains unverified in Chrome.
+## Source-faithful loading-screen implementation — 25 November 2026
+
+### Architecture inspected
+
+The actual app entry is `frontend/src/main.jsx` (React 19 `createRoot` / `StrictMode`), the router is `frontend/src/app/App.jsx` (declarative `BrowserRouter` / `Routes`), and the overlay belongs in the shared `AppLayout`. The implementation does not add a new route or page. Existing `PawMark.jsx` supplies the vector paw shapes; `ScrollToTop.jsx` remains the existing scroll reset. `PuppyMascot.jsx` was inspected for brand comparison but is not used as the loader runner.
+
+### Dedicated runner artwork
+
+`TeddyRunner.jsx` is a newly authored inline vector illustration with a 300 × 240 viewBox. Its identifiable SVG groups are body, head, two ears, four separate legs, tail, eyes, nose, mouth, tongue and ground shadow, with supporting tuft, cheeks, collar and heart tag. Golden/honey fills and dark brown strokes keep it consistent with the supplied storybook screenshot while avoiding the static seated mascot.
+
+### Animation and paw placement
+
+The 440ms curtain drop runs first. The puppy moves from -150% to 50vw over 3200ms. Four leg groups animate on independently staggered cycles; body bounce, head bob, ear flop and tail wag are separate CSS keyframes. The 540ms curtain lift starts when the runner animation ends. Five existing SVG paw marks are fixed at 27%, 31.5%, 36%, 40.5% and 45% width. Each fades in over 240ms and remains visible during the run. Delay is derived from viewport width, responsive runner width and the dog's trailing edge plus 120ms. The JS sizing clamp matches the CSS `clamp(132px, 10vw, 190px)`; resize refreshes the calculation. The background is CSS-only cream/honey with a central radial glow and 96px lattice (72px on narrow screens). Tagline is exactly `every puppy is family`.
+
+### Initial and route navigation
+
+The component starts in `entering` on initial app mount. For ordinary internal anchors, a document capture listener holds navigation while the curtain drops. At the drop animation end, the destination is committed with React Router behind the full curtain; the puppy/paw sequence then runs and the curtain lifts. External links, new tabs, downloads, modified clicks and same-path query/hash updates are excluded. Browser back/forward and programmatic pathname changes are detected by `useLocation` and covered in a layout effect before paint. The shared route tree is inert while the decorative curtain is active; the curtain is `aria-hidden`. Reduced motion skips the animation. Document/resize/media-query listeners clean up on unmount.
+
+### Automated evidence and remaining limitation
+
+GitHub Actions [run #73](https://github.com/dikshaforsure/P-mart/actions/runs/45604697990) passed 5 focused files/33 tests, all 24 frontend test files/126 tests and Vite 8.3.8 production build (68 modules transformed). Tests cover initial load, curtain-before-navigation sequence, repeated clicks, SVG anatomy, paw positions/timing, external/new-tab/download links, query/hash exclusions, back/forward, reduced motion, resize and cleanup. No real browser was available, so actual screen appearance, animation frame smoothness, console/network, three-route visual navigation and desktop/mobile visual output have not been checked.
