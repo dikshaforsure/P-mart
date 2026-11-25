@@ -352,3 +352,23 @@ The full suite continues to include existing catalogue, profile, gallery, enquir
 | Desktop/tablet/mobile header typography and overflow | **NOT RUN** | Phase 7 browser QA remains open |
 
 The production build completed successfully. Vite printed its chunk-size advisory (the generated JavaScript bundle is above its default warning threshold); this was a warning, not a build failure. Automated tests do not establish that the externally hosted Fraunces font loads, that the mascot alignment matches the screenshot at every viewport, or that CSS transitions appear exactly as intended in a browser.
+
+
+## 22. Global mouse paw cursor and movement trail — 25 November 2026
+
+**Implementation commit:** [`d12b7753fef7ac31f5040c96078a764fc9363779`](https://github.com/dikshaforsure/P-mart/commit/d12b7753fef7ac31f5040c96078a764fc9363779)  
+**GitHub Actions:** [run #43](https://github.com/dikshaforsure/P-mart/actions/runs/45571912528)
+
+| Command/check | Result | Evidence |
+|---|---|---|
+| Focused Phase 5 public-page/route workflow step | **PASS — 5 files, 31 tests** | Workflow logs |
+| Complete frontend test suite (`npm test`) | **PASS — 22 files, 108 tests** | Workflow logs; includes 5 PawTrail tests |
+| Production build (`npm run build`) | **PASS** | Vite 8.3.8; 65 modules transformed |
+| Paw footprint creation and 780 ms removal | **PASS in jsdom test** | `PawTrail.test.jsx` |
+| Touch/coarse pointer suppression | **PASS in jsdom test** | `PawTrail.test.jsx` |
+| Reduced-motion suppression | **PASS in jsdom test** | `PawTrail.test.jsx` |
+| Unmount timeout cleanup | **PASS in jsdom test** | `PawTrail.test.jsx` |
+| Real-browser custom cursor rendering and hotspot accuracy | **NOT RUN** | Requires manual desktop browser inspection |
+| Real-browser trail appearance, density and performance | **NOT RUN** | jsdom does not render CSS animation or measure pointer interaction performance |
+
+The cursor/trail uses the existing PawMark SVG silhouette. Text-editing fields and disabled controls retain their semantic cursor, and CSS cursor/trail behavior is restricted to fine-pointer desktop environments.

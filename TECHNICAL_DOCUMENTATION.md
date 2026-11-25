@@ -87,7 +87,7 @@ Confirm whether Delivery & collection is a standalone route or section anchor.
 
 ### Component plan
 
-**Shared:** AppLayout, SiteHeader, MobileNavigation, SiteFooter, Breadcrumbs, PageHeading, SectionHeading, Button, ResponsiveImage.
+**Shared:** AppLayout, SiteHeader, MobileNavigation, SiteFooter, PawTrail (global fine-pointer cursor/trail), Breadcrumbs, PageHeading, SectionHeading, Button, ResponsiveImage.
 
 **Home:** HomeHero, FeaturedPuppies, WaysToMeet, PuppyJourneyPreview, TrustFeatures, WhatsAppConversationIllustration (only if confirmed), HappyFamiliesPreview, FaqPreview, FinalCta.
 
@@ -375,3 +375,7 @@ CSS for the new routes uses `how-*` and `faq-*` selectors. Shared shell and page
 
 ### Verification
 Run [#15](https://github.com/dikshaforsure/P-mart/actions/runs/45474656254) passed the four focused test files (15 tests), full frontend suite (14 files / 64 tests) and production build (Vite 8.3.8). No browser-level responsive inspection or visual snapshot comparison was run; jsdom and build results do not verify actual viewport rendering.
+
+### Implemented global pointer decoration
+
+`frontend/src/components/layout/PawTrail.jsx` is mounted once by `AppLayout` and reuses `PawMark.jsx` for the footprints. The companion custom cursor is a CSS SVG data URI matching the PawMark silhouette. This shared interaction is enabled only for fine mouse/pen pointers; touch/coarse-pointer devices retain native behavior, text-entry fields retain the text cursor, disabled elements retain `not-allowed`, and `prefers-reduced-motion` disables the animated trail. This is presentational only and has no route/data/API effects.

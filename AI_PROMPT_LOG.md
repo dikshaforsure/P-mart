@@ -407,3 +407,12 @@ The six existing puppy records now participate in a randomized loop: one or two 
 Loaded the soft Fraunces display face for the hero heading and increased the shared desktop navigation, wordmark and WhatsApp label sizes modestly to match the supplied reference. No new package dependency, puppy data, contact configuration or route behavior was changed.
 
 GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674) on implementation commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036` passed focused public-page/route checks (5 files / 31 tests), the complete frontend suite (21 files / 103 tests) and the Vite 8.3.8 production build. Browser screenshot and animation QA remains outstanding.
+
+
+### Global dog-paw mouse pointer and movement trail — 25 November 2026
+
+Implemented the requested paw-shaped cursor on fine mouse/pen pointer devices using a CSS data-URI SVG that matches the existing `PawMark.jsx` silhouette. Added a single global `PawTrail` component in `AppLayout` (not page/profile-level instances); it reuses the PawMark React SVG to stamp fading footprints behind pointer movement. The trail is distance/time throttled, capped at 14 marks, fades marks after 780 ms, ignores touch pointer events, and is disabled for coarse pointers or `prefers-reduced-motion`. Text entry and disabled controls retain their normal cursor semantics. Event listeners and pending timeout handles are cleaned on unmount.
+
+Added five component tests covering footprint creation/removal, touch and coarse pointer suppression, reduced-motion suppression and timeout cleanup. No new package dependency or asset file was introduced.
+
+GitHub Actions [run #43](https://github.com/dikshaforsure/P-mart/actions/runs/45571912528) on commit `d12b7753fef7ac31f5040c96078a764fc9363779` passed focused checks (5 files / 31 tests), full frontend suite (22 files / 108 tests) and Vite 8.3.8 production build. Browser rendering/performance review remains outstanding.

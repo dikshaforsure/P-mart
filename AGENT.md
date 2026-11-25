@@ -568,3 +568,18 @@ When starting a new chat, provide this message together with repository access:
 - Added focused HomeHero tests for single/double portrait dips and reduced-motion handling. Existing route/data/contact behavior and all non-homepage page components remain unchanged.
 
 **Verification:** GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674) passed on implementation commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036`: focused public-page/route checks (5 files / 31 tests), complete frontend suite (21 files / 103 tests) and Vite 8.3.8 production build. Build completed successfully; Vite emitted its existing bundle-size advisory. Local test/build commands were not executed in this environment. No real-browser screenshot comparison, live animation inspection or viewport interaction check was performed; those remain part of Phase 7.
+
+### Global mouse paw cursor and movement trail (25 November 2026)
+
+- Added `frontend/src/components/layout/PawTrail.jsx` once in `AppLayout`, so the effect is shared by all public routes and is not duplicated inside individual pages/profile routes.
+- Reused the existing `PawMark.jsx` SVG for each animated trail footprint. The CSS custom cursor carries the matching PawMark silhouette in a small data-URI SVG.
+- Fine-pointer mouse/pen movement creates a footprint after a distance/time threshold; marks fade away after 780 ms, with a capped 14-mark layer to keep rendering bounded.
+- Text inputs/textareas/contenteditable retain the text insertion cursor; disabled controls retain `not-allowed`. Coarse/touch devices do not receive the custom cursor/trail. The trail is disabled for `prefers-reduced-motion`.
+- Pointer listeners and all outstanding timeout handles are removed on component unmount.
+- Added `PawTrail.test.jsx`: footprint creation/fade, touch suppression, coarse-pointer suppression, reduced-motion suppression and unmount timer cleanup.
+- No new dependency, route, asset download, or puppy/contact data change.
+
+**Implementation commit:** `d12b7753fef7ac31f5040c96078a764fc9363779`  
+**CI:** [GitHub Actions run #43](https://github.com/dikshaforsure/P-mart/actions/runs/45571912528) passed focused checks (5 files / 31 tests), full frontend suite (22 files / 108 tests) and the Vite 8.3.8 production build.
+
+**Manual verification:** real-browser cursor appearance, trail density and visual performance have not been inspected in a browser. Check on a mouse/pen desktop and confirm that touch devices retain their native pointer behavior.
