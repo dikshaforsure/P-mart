@@ -4,27 +4,26 @@ import PawMark from '../shared/PawMark';
 import TeddyRunner from './TeddyRunner';
 
 const ENTRANCE_DURATION = 440;
-const RUN_DURATION = 1480;
+const RUN_DURATION = 3000;
 const EXIT_DURATION = 540;
 
 const pawPrints = [
-  { left: '12%', top: '49%', rotation: '-18deg' },
-  { left: '23%', top: '53%', rotation: '14deg' },
-  { left: '34%', top: '48%', rotation: '-15deg' },
-  { left: '45%', top: '53%', rotation: '17deg' },
-  { left: '56%', top: '48%', rotation: '-14deg' },
-  { left: '67%', top: '53%', rotation: '16deg' },
+  { left: '31%', top: '53%', rotation: '-18deg' },
+  { left: '36.5%', top: '50%', rotation: '14deg' },
+  { left: '42%', top: '54%', rotation: '-15deg' },
+  { left: '47.5%', top: '51%', rotation: '17deg' },
+  { left: '53%', top: '54%', rotation: '-14deg' },
 ];
 
 function getPawDelay(left) {
   const viewportWidth = window.innerWidth || 1280;
-  const runnerWidth = Math.min(168, Math.max(112, viewportWidth * 0.095));
-  const startOffset = runnerWidth * 1.4;
-  const travelDistance = viewportWidth + runnerWidth * 2.8;
+  const runnerWidth = Math.min(172, Math.max(100, viewportWidth * 0.085));
+  const startOffset = runnerWidth * 1.1;
+  const travelDistance = viewportWidth * 0.58 + startOffset;
   const pawPosition = (viewportWidth * Number.parseFloat(left)) / 100;
   const passedPositionTime = ((pawPosition + startOffset) / travelDistance) * RUN_DURATION;
 
-  return Math.round((passedPositionTime + 0.045) * 1000) + 'ms';
+  return Math.round((passedPositionTime + 0.08) * 1000) + 'ms';
 }
 
 export default function PageTransition() {
@@ -69,6 +68,7 @@ export default function PageTransition() {
     <div
       className="page-transition-curtain"
       data-phase={phase}
+      data-run-duration-ms={RUN_DURATION}
       data-testid="page-transition"
       role="status"
       aria-live="polite"

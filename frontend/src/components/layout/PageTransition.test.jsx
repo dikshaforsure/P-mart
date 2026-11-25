@@ -52,19 +52,35 @@ describe('PageTransition', () => {
     const curtain = screen.getByTestId('page-transition');
     expect(curtain).toHaveAttribute('data-phase', 'entering');
     expect(curtain).toHaveAttribute('role', 'status');
-    expect(withinStatusPaws(curtain)).toBe(6);
+    expect(withinStatusPaws(curtain)).toBe(5);
+    expect(curtain).toHaveAttribute('data-run-duration-ms', '3000');
     expect(screen.getByTestId('teddy-runner-svg')).toBeInTheDocument();
     expect(screen.getByTestId('current-path')).toHaveTextContent('/puppies');
 
     act(() => vi.advanceTimersByTime(440));
     expect(screen.getByTestId('page-transition')).toHaveAttribute('data-phase', 'running');
 
-    act(() => vi.advanceTimersByTime(1480));
+    act(() => vi.advanceTimersByTime(3000));
     expect(screen.getByTestId('page-transition')).toHaveAttribute('data-phase', 'exiting');
 
     act(() => vi.advanceTimersByTime(540));
     expect(screen.queryByTestId('page-transition')).not.toBeInTheDocument();
     expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('stamps the five pawprints in order and keeps them visible along the reference path', () => {
+    vi.useFakeTimers();
+    renderTransition();
+
+    fireEvent.click(screen.getByRole('link', { name: 'Open puppies' }));
+    const curtain = screen.getByTestId('page-transition');
+    const paws = [...curtain.querySelectorAll('[data-testid="page-transition-paw"]')];
+    const delays = paws.map((paw) => Number.parseFloat(paw.style.getPropertyValue('--paw-delay')));
+
+    expect(paws).toHaveLength(5);
+    expect(delays.every((delay) => Number.isFinite(delay) && delay > 0 && delay < 3000)).toBe(true);
+    expect(delays).toEqual([...delays].sort((a, b) => a - b));
+    expect(paws.map((paw) => paw.style.left)).toEqual(['31%', '36.5%', '42%', '47.5%', '53%']);
   });
 
   it('does not animate query-only or hash-only navigation', () => {

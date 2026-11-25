@@ -3404,19 +3404,19 @@ img, video { display: block; max-width: 100%; }
 }
 .page-transition-runner {
   position: absolute;
-  top: calc(50% - 128px);
+  top: calc(50% - clamp(60px,4.8vw,90px));
   left: 0;
-  width: clamp(112px,9.5vw,168px);
+  width: clamp(100px,8.5vw,172px);
   opacity: 0;
-  transform: translate3d(-140%,0,0);
+  transform: translate3d(-110%,0,0);
 }
 .page-transition-curtain[data-phase="running"] .page-transition-runner {
   opacity: 1;
-  animation: page-transition-run-across 1.48s linear both;
+  animation: page-transition-run-across 3s linear both;
 }
 @keyframes page-transition-run-across {
-  from { transform: translate3d(-140%,0,0); }
-  to { transform: translate3d(calc(100vw + 140%),0,0); }
+  from { transform: translate3d(-110%,0,0); }
+  to { transform: translate3d(58vw,0,0); }
 }
 .teddy-runner-svg {
   display: block;
@@ -3427,42 +3427,42 @@ img, video { display: block; max-width: 100%; }
 .page-transition-curtain[data-phase="running"] .teddy-runner-body {
   transform-box: fill-box;
   transform-origin: center;
-  animation: teddy-runner-bounce .18s ease-in-out infinite alternate;
+  animation: teddy-runner-bounce .36s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-head {
-  transform-box: fill-box;
-  transform-origin: center bottom;
-  animation: teddy-runner-head-bob .22s ease-in-out infinite alternate;
+  transform-box: view-box;
+  transform-origin: 212px 145px;
+  animation: teddy-runner-head-bob .44s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-tail {
   transform-box: view-box;
-  transform-origin: 48px 82px;
-  animation: teddy-runner-tail-wag .19s ease-in-out infinite alternate;
+  transform-origin: 84px 150px;
+  animation: teddy-runner-tail-wag .3s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg {
   transform-box: fill-box;
   transform-origin: center 10%;
-  animation: teddy-runner-leg-cycle .2s ease-in-out infinite alternate;
+  animation: teddy-runner-leg-cycle .34s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg--front-far,
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg--rear-near {
-  animation-delay: -.1s;
+  animation-delay: -.17s;
 }
 @keyframes teddy-runner-bounce {
-  from { transform: translateY(2px) rotate(-1deg); }
-  to { transform: translateY(-5px) rotate(1deg); }
+  from { transform: translateY(1px); }
+  to { transform: translateY(-3px); }
 }
 @keyframes teddy-runner-head-bob {
-  from { transform: rotate(-3deg); }
-  to { transform: rotate(3deg); }
+  from { transform: rotate(-1.5deg); }
+  to { transform: rotate(1.5deg); }
 }
 @keyframes teddy-runner-tail-wag {
-  from { transform: rotate(-13deg); }
-  to { transform: rotate(13deg); }
+  from { transform: rotate(-16deg); }
+  to { transform: rotate(16deg); }
 }
 @keyframes teddy-runner-leg-cycle {
-  from { transform: rotate(-29deg) translateY(-2px); }
-  to { transform: rotate(29deg) translateY(2px); }
+  from { transform: rotate(-22deg) translateY(-1px); }
+  to { transform: rotate(22deg) translateY(1px); }
 }
 .page-transition-paw {
   position: absolute;
@@ -3480,17 +3480,15 @@ img, video { display: block; max-width: 100%; }
   height: auto;
 }
 .page-transition-curtain[data-phase="running"] .page-transition-paw {
-  animation: page-transition-paw-step 2s ease-out var(--paw-delay) both;
+  animation: page-transition-paw-step .28s ease-out var(--paw-delay) both;
 }
 @keyframes page-transition-paw-step {
-  0% { opacity: 0; transform: rotate(var(--paw-rotation)) scale(.5); }
-  18% { opacity: .82; transform: rotate(var(--paw-rotation)) scale(1); }
-  72% { opacity: .72; transform: rotate(var(--paw-rotation)) scale(1); }
-  100% { opacity: .14; transform: rotate(var(--paw-rotation)) scale(.92); }
+  from { opacity: 0; transform: rotate(var(--paw-rotation)) scale(.48); }
+  to { opacity: .88; transform: rotate(var(--paw-rotation)) scale(1); }
 }
 .page-transition-message {
   position: absolute;
-  top: calc(50% + 38px);
+  top: 61%;
   left: 50%;
   width: max-content;
   max-width: calc(100% - 36px);
@@ -3513,11 +3511,10 @@ img, video { display: block; max-width: 100%; }
     background-size: auto, 72px 72px, 72px 72px;
   }
   .page-transition-runner {
-    top: calc(50% - 105px);
-    width: clamp(106px,28vw,138px);
+    top: calc(50% - 60px);
   }
   .page-transition-message {
-    top: calc(50% + 28px);
+    top: 61%;
     font-size: clamp(17px,4.3vw,21px);
   }
   .page-transition-paw {
