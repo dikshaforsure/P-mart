@@ -2989,3 +2989,16 @@ img, video { display: block; max-width: 100%; }
     transition: none;
   }
 }
+
+
+/* Keep the handle on the free edge, opposite the outer hinge. */
+.home-page-storybook .puppy-door-knob {
+  right: auto;
+  left: 9px;
+}
+@media (max-width:520px) {
+  .home-page-storybook .puppy-door-knob {
+    right: auto;
+    left: 6px;
+  }
+}

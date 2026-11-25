@@ -561,8 +561,9 @@ When starting a new chat, provide this message together with repository access:
 - Added a decorative wooden signpost above the existing two-path cards.
 - Split the existing combined final journey description into secure-your-puppy and safe-delivery milestones using only its existing factual clauses.
 - Restyled the existing WhatsApp illustration, trust cards, family preview, FAQ notes and final CTA using homepage-scoped cocoa/toffee/honey styles. Reused the existing mascot in the final CTA.
-- Added focused HomeHero and PuppyJourney tests. Existing shared and other-route components are unchanged.
+- Added focused HomeHero, PuppyJourney and HappyFamiliesPreview tests. Existing shared and other-route components are unchanged.
+- Visual QA follow-up after comparison with the supplied local screenshots: increased the open center pocket between hero portraits, added keyboard-accessible hover lift, moved the showroom door hinge to the outer edge (with the knob on the free edge), and restored a fixed Polaroid image area that prevents absolute-positioned family images from collapsing their cards.
 - All added styling is scoped under .home-page-storybook. Shared header/footer and non-homepage routes were not changed.
 - A final responsive CSS follow-up makes puppy photos visible without hover on touch layouts and increases hero puppy portrait height on narrow phones.
 
-**Verification:** GitHub Actions run [#36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) passed after the final touch-layout CSS update. The focused public-page/route test step, full frontend test suite and production build all passed. Local test/build commands were not executed in this environment. Real-browser screenshot comparison and viewport interaction checks remain outstanding.
+**Verification:** GitHub Actions run [#39](https://github.com/dikshaforsure/P-mart/actions/runs/45565628125) passed on homepage visual-QA commit `745d6e6121ce4353076aa7bd2b275528048f0dbd`. The focused public-page/route test step, full frontend test suite and production build all passed. The new family-preview image/caption regression test is included in the full suite. Local test/build commands were not executed in this environment. A further manual browser screenshot comparison at desktop/tablet/mobile sizes remains outstanding.

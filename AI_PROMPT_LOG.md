@@ -383,3 +383,16 @@ GitHub Actions run [#34](https://github.com/dikshaforsure/P-mart/actions/runs/45
 ### Phase 6 final responsive verification
 
 A final homepage-scoped CSS follow-up makes puppy photos immediately visible on touch layouts (no hover required) and increases hero puppy portrait height on narrow phones. Commit: `184424063be64b111b6c7bf763acff9a7a99075a`. GitHub Actions run [#36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) completed successfully: focused public-page/route checks, full frontend test suite and production build all passed. Real-browser screenshot comparison / manual responsive QA remains outstanding.
+
+
+### Phase 6 — screenshot-driven visual QA corrections
+
+Compared the owner-provided local screenshots with the committed homepage implementation and corrected three defects:
+
+- Hero puppy portraits now leave a larger, balanced space for the central Teddy mascot, have varied portrait heights, and lift on hover or keyboard focus.
+- Puppy showroom doors now hinge at the outer right edge and swing outward; the knob is positioned on the free edge. Touch layouts retain an immediately visible puppy photograph.
+- Family preview Polaroids now have an explicit card height and a defined image viewport/caption area. This fixes the inherited absolute-positioned image/caption layout collapsing to a thin strip.
+
+Added focused checks for the six hero portrait positions and the four family-preview image URLs/captions. CSS remains scoped to \`.home-page-storybook\`; no shared layout or non-homepage route was changed.
+
+GitHub Actions run [#39](https://github.com/dikshaforsure/P-mart/actions/runs/45565628125) on commit \`745d6e6121ce4353076aa7bd2b275528048f0dbd\` passed the focused checks, full frontend test suite and production build. Manual real-browser screenshot comparison at desktop/tablet/mobile sizes remains outstanding.
