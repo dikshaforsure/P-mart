@@ -136,7 +136,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
 | 6 | Homepage reference-fidelity refinement | Implemented on develop; interactive mascot, slower paw trail, scalloped shared header and route scroll reset committed; CI run #56 green; real-browser visual QA outstanding |
-| 7 | Integrated browser/responsive QA across all public routes | Not completed |
+| 7 | Integrated browser/responsive QA across all public routes | In progress — shared route-transition curtain implemented; browser/responsive visual QA remains open |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
 
@@ -262,7 +262,7 @@ Run #31 completed successfully on the latest Phase 5 documentation HEAD. The det
 - frontend/src/main.jsx — application entry.
 - frontend/src/app/App.jsx — React Router routes.
 - frontend/src/app/App.test.jsx — route integration tests.
-- frontend/src/components/layout/ — shared app layout, header/footer, PawTrail and ScrollToTop.
+- frontend/src/components/layout/ — shared app layout, header/footer, PawTrail, ScrollToTop and PageTransition; TeddyRunner is its local inline SVG.
 
 Implemented public routes:
 - /
@@ -307,7 +307,7 @@ Use the existing service/data patterns. Do not duplicate data inside page compon
 
 - frontend/src/components/shared/ — PageIntro, SectionHeading, JourneyStep, PawMark and related shared pieces.
 - frontend/src/components/puppies/ — PuppyCard, PuppyGallery, PuppyNoteForm, PuppyMascot.
-- frontend/src/components/layout/ — SiteHeader, SiteFooter and AppLayout.
+- frontend/src/components/layout/ — SiteHeader, SiteFooter, AppLayout, ScrollToTop and PageTransition; TeddyRunner.jsx contains the local running-dog SVG.
 
 ### Utilities/styles
 
@@ -403,11 +403,11 @@ Phase 6 homepage implementation is complete and committed. Do not restart or rei
 
 **Verified Phase 6 code commit:** `184424063be64b111b6c7bf763acff9a7a99075a`  
 **Phase 6 implementation CI:** [run #36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) — passed focused public-page/route tests, full frontend suite and production build.  
-**Latest verified homepage/header/scroll implementation:** 392a440feb845edc6e6da016c4598e53f4fa4a21. **Latest regression-test corrections:** b7c70dd6a8992ebd33920db07ef781a141babfa4 and 5d3d4e310258b1edeff4d4532f10329c4dc572c0. CI run #56 passed on the latest test revision. Fetch the live develop head before continuing.
+**Latest verified cross-route transition implementation:** 34185b01a587ebdfef6172cba304ad09600f2309; CI run #62 passed on that exact code revision. Fetch the live develop head before continuing.
 
 ### Phase 7 objective
 
-Perform real-browser visual, responsive, accessibility and interaction QA across every implemented public route. Compare the running destination application with the designated live reference site `https://puppy.instabizweb.com/`. Automated jsdom tests and a successful production build are not substitutes for this work.
+Perform real-browser visual, responsive, accessibility and interaction QA across every implemented public route. A screenshot-driven shared route-transition curtain has now been implemented, but real-browser inspection of that animation and the remaining public routes is still outstanding. Compare the running destination application with the designated live reference site `https://puppy.instabizweb.com/`. Automated jsdom tests and a successful production build are not substitutes for this work.
 
 ### Required viewports
 
@@ -649,3 +649,17 @@ When starting a new chat, provide this message together with repository access:
 - Implementation commit: `8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5`.
 - GitHub Actions [run #60](https://github.com/dikshaforsure/P-mart/actions/runs/45592795819) passed on that exact commit: focused checks 5 files / 33 tests; full frontend suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
 - Real-browser visual comparison of resulting card height and breakpoint wrapping has not been performed; confirm on the same Korean Teacup Poodle profile at desktop and mobile as part of Phase 7.
+
+### Cross-route storybook loading curtain — 25 November 2026
+
+- Implemented the requested reference-inspired loading screen once in the shared AppLayout, so all public route transitions use the same overlay rather than duplicating loaders on individual pages.
+- Added PageTransition.jsx: it ignores the initial app load and watches pathname changes only. Query-only changes (catalogue filters) and hash-only jumps do not trigger the curtain. Browser back/forward pathname changes do trigger it.
+- Added TeddyRunner.jsx, a locally authored inline vector SVG of a full-body, honey-coloured TeddyPup with animated legs, bounce, tail wag and head movement. It is original destination artwork, not a downloaded or externally sourced image.
+- The overlay uses a CSS-only pale honey diamond/quilt pattern and center glow. It drops down from above the viewport (440ms), then six existing PawMark SVGs appear sequentially while Teddy runs left-to-right (1480ms), then the curtain lifts upward and out of view (540ms).
+- The message 'every puppy is family' appears below the runner. The overlay blocks interaction while active and announces its state through a polite status region.
+- prefers-reduced-motion: reduce skips the transition completely. All three transition timers are cleared on pathname interruption/unmount.
+- Added five PageTransition.test.jsx cases: no initial overlay, full enter/run/exit sequence, no query/hash transition, reduced-motion skip, and timer cleanup on unmount.
+- No external dependency, image binary, route, content, puppy data, contact setting or page-specific component was changed.
+- Code commit: 34185b01a587ebdfef6172cba304ad09600f2309.
+- GitHub Actions run #62 (https://github.com/dikshaforsure/P-mart/actions/runs/45596571682) passed against that exact commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
+- Real-browser visual inspection of the SVG gait, exact entrance/exit direction, responsive pattern density and transition timing remains outstanding. Automated tests verify route gating, lifecycle phases and cleanup; they do not render CSS animations.

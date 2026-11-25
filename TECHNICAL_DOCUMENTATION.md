@@ -414,3 +414,13 @@ The full-family lightbox uses a three-row CSS grid: toolbar, flexible image stag
 - The previous paragraph (`Every TeddyPups puppy is described as...`) was removed because it did not appear in the supplied reference screenshot and increased card height. The checklist wording is unchanged.
 - CSS uses one-column content and list grids; paper max padding 42px, content gap 17px, list gap 12px. Responsive mobile spacing is slightly tighter.
 - Tests in `PuppyProfilePage.test.jsx` assert exact heading, four list items and absence of the paragraph for available and sold profiles.
+### Shared route-transition loading curtain
+
+- PageTransition.jsx is mounted once in AppLayout, watches useLocation().pathname and does not animate initial load, search/query-only filter changes or hash-only anchors. Browser back/forward path changes trigger the curtain as normal.
+- TeddyRunner.jsx is a locally authored inline SVG dog; CSS animates body bounce, head bob, tail wag and four running legs while the runner moves from left to right.
+- The transition background is CSS-only: warm honey base, radial center glow and repeating diagonal diamond/quilt lines. Existing PawMark SVG is reused for six sequential footprints. Text: 'every puppy is family'.
+- Phases and JS timers: entrance 440ms, running 1480ms, exit 540ms. CSS entrance moves the curtain from above down; CSS exit moves the curtain upward and out.
+- The active overlay blocks pointer interaction and uses a polite status region. prefers-reduced-motion: reduce skips it. All timers are cancelled on route interruption/unmount.
+- PageTransition.test.jsx covers initial load, route transition sequence, query/hash exclusions, reduced motion and timer cleanup.
+- CI run #62 passed 5 focused files / 33 tests; full suite 24 files / 121 tests; Vite 8.3.8 build with 68 modules.
+- Real-browser SVG/animation visual inspection remains outstanding.

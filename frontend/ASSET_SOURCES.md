@@ -48,3 +48,13 @@ No binary files were downloaded or added to the repository. Direct network verif
 - Destination \`families.json\` already uses absolute URLs at \`https://puppy.instabizweb.com/media/...\`; the reference JSON uses root-relative \`/media/...\` paths. The destination URLs were left unchanged.
 - No new image binaries or generic stock images were added. Remote media reachability was not independently verified in a browser in this task.
 - Asset ownership/reuse permissions are not established by public availability. Obtain assignment/client approval before production redistribution or local copying.
+
+## Cross-route loading animation artwork
+
+| Usage | Destination component | Notes |
+|---|---|---|
+| Full-body running TeddyPup during route transitions | frontend/src/components/layout/TeddyRunner.jsx | Original inline SVG drawn for this destination project; no third-party or remote image URL. Rendered by PageTransition.jsx. |
+| Pawprint trail during route transitions | Existing frontend/src/components/shared/PawMark.jsx | Reuses the existing project paw SVG six times; CSS positions/animates the prints. |
+| Warm quilt/diamond curtain background | frontend/src/styles/index.css | CSS gradients only; no raster or external asset. |
+
+The running-dog SVG is local authored artwork for the transition only; it does not replace any of the reference site's puppy/family photography or the existing mascot used on other pages.

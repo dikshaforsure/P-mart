@@ -1,7 +1,7 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 25 November 2026  
-**Current phase:** Phase 6 — Homepage/shared-shell refinement (scalloped header and route scroll reset implemented; CI run #56 passed; visual browser QA pending)  
+**Current phase:** Phase 7 — Integrated browser and responsive QA (shared route-transition curtain implemented; CI run #62 passed; real-browser animation and viewport QA pending)  
 **Status:** Public-frontend implementation milestones Phases 0–6 are implemented on `develop`. Latest hero refinement commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036` passed GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674): focused public-page/route checks (5 files / 31 tests), complete frontend suite (21 files / 103 tests) and Vite 8.3.8 production build. The follow-up centers the visible mascot, evens the hero ears, adds reduced-motion-aware random puppy portrait dips, changes the hero display font and increases shared header typography. Real-browser screenshot comparison, live animation inspection, custom cursor/trail appearance and integrated responsive QA across all public routes remain outstanding. This is frontend scope only: no enquiry API/database persistence, deployment or production asset rights approval is claimed. Next work: integrated browser/responsive QA across all public routes; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
@@ -530,3 +530,17 @@ Verification note: CI run #51 passed the focused workflow step (5 files / 33 tes
 - Implementation commit: `8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5`.
 - GitHub Actions [run #60](https://github.com/dikshaforsure/P-mart/actions/runs/45592795819) passed on that exact commit: focused checks 5 files / 33 tests; full frontend suite 23 files / 116 tests; Vite 8.3.8 production build passed (66 modules transformed).
 - Real-browser visual comparison of resulting card height and breakpoint wrapping has not been performed; confirm on the same Korean Teacup Poodle profile at desktop and mobile as part of Phase 7.
+
+### Cross-route storybook loading curtain — 25 November 2026
+
+- Implemented the requested reference-inspired loading screen once in the shared AppLayout, so all public route transitions use the same overlay rather than duplicating loaders on individual pages.
+- Added PageTransition.jsx: it ignores the initial app load and watches pathname changes only. Query-only changes (catalogue filters) and hash-only jumps do not trigger the curtain. Browser back/forward pathname changes do trigger it.
+- Added TeddyRunner.jsx, a locally authored inline vector SVG of a full-body, honey-coloured TeddyPup with animated legs, bounce, tail wag and head movement. It is original destination artwork, not a downloaded or externally sourced image.
+- The overlay uses a CSS-only pale honey diamond/quilt pattern and center glow. It drops down from above the viewport (440ms), then six existing PawMark SVGs appear sequentially while Teddy runs left-to-right (1480ms), then the curtain lifts upward and out of view (540ms).
+- The message 'every puppy is family' appears below the runner. The overlay blocks interaction while active and announces its state through a polite status region.
+- prefers-reduced-motion: reduce skips the transition completely. All three transition timers are cleared on pathname interruption/unmount.
+- Added five PageTransition.test.jsx cases: no initial overlay, full enter/run/exit sequence, no query/hash transition, reduced-motion skip, and timer cleanup on unmount.
+- No external dependency, image binary, route, content, puppy data, contact setting or page-specific component was changed.
+- Code commit: 34185b01a587ebdfef6172cba304ad09600f2309.
+- GitHub Actions run #62 (https://github.com/dikshaforsure/P-mart/actions/runs/45596571682) passed against that exact commit: focused checks 5 files / 33 tests; full frontend suite 24 files / 121 tests; Vite 8.3.8 production build passed (68 modules transformed).
+- Real-browser visual inspection of the SVG gait, exact entrance/exit direction, responsive pattern density and transition timing remains outstanding. Automated tests verify route gating, lifecycle phases and cleanup; they do not render CSS animations.

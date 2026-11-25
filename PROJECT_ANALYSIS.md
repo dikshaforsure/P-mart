@@ -482,3 +482,20 @@ No puppy JSON, profile routing, gallery, chapter count, enquiry, contact or heal
 Reference route inspection via web tool failed, so the exact visual comparison is grounded in the two owner-supplied screenshots and the destination source files.
 
 Implementation commit `8c8aa0d3ed62cfa8c2a44a9eb4a27e6a074ae5d5`. CI run #60 passed 5 focused files / 33 tests, full 23 files / 116 tests, and Vite 8.3.8 build (66 modules). Real-browser rendering and responsive card-height comparison remain outstanding.
+## Reference-inspired cross-route loading curtain — 25 November 2026
+
+### Reference observation
+
+The supplied 1918 × 1053 screenshot shows a full-viewport warm pale-honey loading scene, a subtle central light glow, repeating diagonal diamond/quilt lines, a small full-body TeddyPups-style dog, a trail of pawprints and the centered handwritten phrase 'every puppy is family'. The browser/OS taskbar is visible along the lower edge of the captured screenshot; it is not recreated inside the webpage.
+
+The requested transition sequence is: the curtain enters from above and travels down to cover the page; Teddy runs left-to-right and leaves sequential pawprints; the curtain then travels upward (bottom-to-top exit) to reveal the destination route.
+
+### Implementation
+
+Mounted PageTransition in the shared AppLayout, so it responds to pathname changes across all public routes. It does not appear on initial load and ignores query-only/hash-only changes. Browser back/forward navigation that changes the pathname also triggers it. The destination route is resolved behind the overlay while the curtain covers it.
+
+Timing: 440ms entrance; 1480ms runner/paw sequence; 540ms exit. The new TeddyRunner.jsx is a locally authored inline SVG (body, face, tail, four legs); CSS animates its bounce, head, tail and leg gait while moving across the viewport. Six existing PawMark SVGs appear in sequence. The quilt/diamond pattern and central glow are CSS only. Text and overlay status are accessible through a polite status region; interaction is blocked during the short transition.
+
+Reduced-motion preference skips the transition entirely. Query-only catalogue filter changes and hash jumps do not animate. All phase timers are cleaned on unmount or interrupted navigation. No external libraries, assets or site content/data are introduced.
+
+Implementation commit 34185b01a587ebdfef6172cba304ad09600f2309. CI run #62 passed 5 focused files / 33 tests; full suite 24 files / 121 tests; Vite 8.3.8 production build (68 modules transformed). CSS/SVG animation fidelity and responsive viewport rendering remain unverified in a real browser.

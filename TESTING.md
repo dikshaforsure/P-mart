@@ -474,3 +474,22 @@ Final settings: `TRAIL_DISTANCE = 84`; `TRAIL_INTERVAL = 220`; `MAX_TRAIL_MARKS 
 | Real-browser visual height/wrapping comparison | **NOT RUN** |
 
 Tests assert the shared heading, exactly four existing checklist rows and absence of the former explanatory paragraph on available and sold profile pages. Visual height and responsive wrapping remain for browser QA.
+## Cross-route TeddyPups loading curtain — 25 November 2026
+
+**Implementation commit:** https://github.com/dikshaforsure/P-mart/commit/34185b01a587ebdfef6172cba304ad09600f2309
+**GitHub Actions:** https://github.com/dikshaforsure/P-mart/actions/runs/45596571682
+
+| Check | Result |
+|---|---|
+| Focused public-page/route checks | **PASS — 5 files / 33 tests** |
+| Full frontend suite | **PASS — 24 files / 121 tests** |
+| PageTransition lifecycle tests | **PASS — 5 tests** |
+| Initial page load does not show curtain | **PASS** |
+| Pathname change enter/run/exit lifecycle | **PASS** |
+| Query-only and hash-only navigation | **PASS — no curtain** |
+| Reduced-motion preference | **PASS — transition skipped** |
+| Timer cleanup on unmount | **PASS** |
+| Production build | **PASS — Vite 8.3.8; 68 modules transformed** |
+| Real-browser SVG gait/curtain/paw timing | **NOT RUN** |
+
+Transition duration is approximately 2460ms total: 440ms curtain drop, 1480ms dog/paw run, 540ms curtain lift. CSS animations, exact viewport positioning and rendered smoothness require real-browser QA.
