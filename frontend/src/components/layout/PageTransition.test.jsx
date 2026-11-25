@@ -78,7 +78,7 @@ describe('PageTransition', () => {
     expect(startOffset).toBeLessThanOrEqual(32);
     expect(runner.style.getPropertyValue('--runner-start-offset')).toBe(`${startOffset}px`);
     expect(runner.style.getPropertyValue('--runner-run-duration')).toBe('2700ms');
-    expect(runner.style.getPropertyValue('--runner-stride-duration')).toMatch(/^\\d+ms$/);
+    expect(runner.style.getPropertyValue('--runner-stride-duration')).toMatch(/^\d+ms$/);
     expect(screen.getByTestId('current-path')).toHaveTextContent('/');
     expect(onActiveChange).toHaveBeenLastCalledWith(true);
 
