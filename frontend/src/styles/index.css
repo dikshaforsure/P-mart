@@ -1414,7 +1414,7 @@ img, video { display: block; max-width: 100%; }
 }
 .brand-paw svg { width: 25px; height: 25px; }
 .brand-copy { display: grid; gap: 4px; }
-.brand-name { color: #2a170e; font: 700 22px/.95 var(--serif); letter-spacing: -.04em; }
+.brand-name { color: #2a170e; font: 700 24px/.95 var(--serif); letter-spacing: -.04em; }
 .brand-region { margin: 0; color: #9a5934; font-size: 8px; letter-spacing: .24em; }
 .desktop-nav { flex: 1; gap: clamp(12px,1.65vw,27px); }
 .desktop-nav a {
@@ -1423,7 +1423,7 @@ img, video { display: block; max-width: 100%; }
   min-height: 48px;
   align-items: center;
   color: #493326;
-  font: 600 13px/1.1 var(--sans);
+  font: 600 15px/1.1 var(--sans);
   white-space: nowrap;
   transition: color .2s ease;
 }
@@ -1453,7 +1453,7 @@ img, video { display: block; max-width: 100%; }
   border-radius: 999px;
   background: #1f6b45;
   color: #fffdf8;
-  font: 700 12px var(--sans);
+  font: 700 13px var(--sans);
   box-shadow: 0 4px rgba(42,23,14,.15);
   transition: translate .2s ease, background .2s ease;
 }
@@ -3000,5 +3000,46 @@ img, video { display: block; max-width: 100%; }
   .home-page-storybook .puppy-door-knob {
     right: auto;
     left: 6px;
+  }
+}
+
+
+/* Homepage hero polish: centred mascot, even ears, gentle portrait carousel and softer type. */
+.home-page-storybook .hero-mascot-anchor .pup-buddy > svg [data-p="root"] {
+  transform: translateX(-78px);
+}
+.home-page-storybook .hero-mascot-anchor .pup-buddy [data-p="earR"] {
+  animation: none;
+  rotate: 0deg;
+}
+.home-page-storybook .hero-mascot-anchor .pup-bubble {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.home-page-storybook .hero-story-copy h1 {
+  font-family: "Fraunces", var(--serif), Georgia, serif;
+  font-weight: 800;
+  letter-spacing: -.045em;
+  font-variation-settings: "SOFT" 70, "WONK" 1;
+}
+.home-page-storybook .hero-story-copy h1 em {
+  font-weight: 800;
+}
+.home-page-storybook .hero-puppy-peek.is-dipping {
+  z-index: 1;
+  transform: translateX(-50%) translateY(118%) rotate(var(--hero-puppy-tilt));
+}
+.home-page-storybook .hero-puppy-peek.is-dipping:hover,
+.home-page-storybook .hero-puppy-peek.is-dipping:focus-within {
+  transform: translateX(-50%) translateY(118%) rotate(var(--hero-puppy-tilt));
+  filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page-storybook .hero-puppy-peek,
+  .home-page-storybook .hero-puppy-peek .hero-puppy-photo,
+  .home-page-storybook .hero-mascot-anchor .pup-buddy > svg,
+  .home-page-storybook .hero-mascot-anchor .pup-buddy [data-p="earR"] {
+    animation: none !important;
+    transition: none !important;
   }
 }

@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
-import { render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { act, render, screen, within } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import HomeHero from './HomeHero';
 
 const puppies = Array.from({ length: 6 }, (_, index) => ({
@@ -32,4 +32,43 @@ describe('HomeHero', () => {
       '7%', '22%', '36%', '64%', '78%', '93%',
     ]);
   });
+
+  it('automatically dips one puppy portrait before bringing it back up', () => {
+    vi.useFakeTimers();
+    vi.spyOn(Math, 'random').mockReturnValue(0.1);
+    const { container } = render(<BrowserRouter><HomeHero puppies={puppies} /></BrowserRouter>);
+    const cards = container.querySelectorAll('.hero-puppy-peek');
+
+    act(() => { vi.advanceTimersByTime(2300); });
+    expect([...cards].filter((card) => card.classList.contains('is-dipping'))).toHaveLength(1);
+
+    act(() => { vi.advanceTimersByTime(850); });
+    expect([...cards].filter((card) => card.classList.contains('is-dipping'))).toHaveLength(0);
+  });
+
+  it('can automatically dip two puppy portraits in a cycle', () => {
+    vi.useFakeTimers();
+    vi.spyOn(Math, 'random').mockReturnValue(0.9);
+    const { container } = render(<BrowserRouter><HomeHero puppies={puppies} /></BrowserRouter>);
+    const cards = container.querySelectorAll('.hero-puppy-peek');
+
+    act(() => { vi.advanceTimersByTime(2300); });
+    expect([...cards].filter((card) => card.classList.contains('is-dipping'))).toHaveLength(2);
+  });
+
+  it('does not start the automatic portrait cycle when reduced motion is requested', () => {
+    vi.useFakeTimers();
+    vi.stubGlobal('matchMedia', vi.fn().mockReturnValue({ matches: true }));
+    const { container } = render(<BrowserRouter><HomeHero puppies={puppies} /></BrowserRouter>);
+    const cards = container.querySelectorAll('.hero-puppy-peek');
+
+    act(() => { vi.advanceTimersByTime(10000); });
+    expect([...cards].some((card) => card.classList.contains('is-dipping'))).toBe(false);
+  });
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
 });

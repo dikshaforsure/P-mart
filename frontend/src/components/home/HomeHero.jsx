@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getWhatsAppUrl } from '../../utils/whatsapp';
 import PuppyMascot from '../puppies/PuppyMascot';
@@ -9,6 +9,39 @@ const puppyPositions = [7, 22, 36, 64, 78, 93];
 
 export default function HomeHero({ puppies = [] }) {
   const mascotRef = useRef(null);
+  const [dippingPuppies, setDippingPuppies] = useState([]);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    if (prefersReducedMotion || puppies.length < 2) return undefined;
+
+    let animationTimer;
+    let dipTimer;
+    let previousSelection = [];
+
+    const runPuppyCycle = () => {
+      let candidates = puppies.map((_, index) => index).filter((index) => !previousSelection.includes(index));
+      const count = Math.random() < 0.68 ? 1 : 2;
+      if (candidates.length < count) candidates = puppies.map((_, index) => index);
+
+      const selected = [];
+      for (let index = 0; index < count; index += 1) {
+        const randomIndex = Math.floor(Math.random() * candidates.length);
+        selected.push(candidates.splice(randomIndex, 1)[0]);
+      }
+
+      previousSelection = selected;
+      setDippingPuppies(selected);
+      dipTimer = window.setTimeout(() => setDippingPuppies([]), 850);
+      animationTimer = window.setTimeout(runPuppyCycle, 2900 + Math.random() * 1800);
+    };
+
+    animationTimer = window.setTimeout(runPuppyCycle, 2300);
+    return () => {
+      window.clearTimeout(animationTimer);
+      window.clearTimeout(dipTimer);
+    };
+  }, [puppies.length]);
 
   return (
     <section className="home-hero home-hero-storybook" aria-labelledby="hero-title">
@@ -36,7 +69,7 @@ export default function HomeHero({ puppies = [] }) {
             const focalY = Number.isFinite(puppy.cover && puppy.cover.focalY) ? puppy.cover.focalY * 100 : 50;
             return (
               <li
-                className="hero-puppy-peek"
+                className={`hero-puppy-peek${dippingPuppies.includes(index) ? ' is-dipping' : ''}`}
                 key={puppy.id || puppy.slug}
                 style={{
                   '--hero-puppy-left': puppyPositions[index] + '%',
