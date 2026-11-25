@@ -83,6 +83,37 @@ describe('HappyFamiliesPage', () => {
     expect(screen.getByText('Happy families · photo 1 of 64')).toBeInTheDocument();
   });
 
+  it('fits portrait and landscape originals inside the lightbox without stretching or cropping', () => {
+    render(<HappyFamiliesPage />);
+
+    const portraitIndex = 12;
+    const portrait = familyMoments[portraitIndex];
+    fireEvent.click(screen.getByRole('button', { name: 'Open photo 13 of 64' }));
+
+    let dialog = screen.getByRole('dialog', { name: 'Happy families photos' });
+    let image = dialog.querySelector('.happy-families-lightbox__image');
+    expect(image).toHaveAttribute('width', String(portrait.width));
+    expect(image).toHaveAttribute('height', String(portrait.height));
+    expect(image).toHaveStyle({
+      objectFit: 'contain',
+      width: 'auto',
+      height: 'auto',
+      maxWidth: '100%',
+      maxHeight: '100%',
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Close photo viewer' }));
+    const landscapeIndex = familyMoments.findIndex((item) => item.width > item.height);
+    expect(landscapeIndex).toBeGreaterThanOrEqual(0);
+    fireEvent.click(screen.getByRole('button', { name: 'Open photo ' + (landscapeIndex + 1) + ' of 64' }));
+
+    dialog = screen.getByRole('dialog', { name: 'Happy families photos' });
+    image = dialog.querySelector('.happy-families-lightbox__image');
+    expect(image).toHaveAttribute('width', String(familyMoments[landscapeIndex].width));
+    expect(image).toHaveAttribute('height', String(familyMoments[landscapeIndex].height));
+    expect(image).toHaveStyle({ objectFit: 'contain', width: 'auto', height: 'auto' });
+  });
+
   it('supports touch swipe and visible previous/next buttons', () => {
     render(<HappyFamiliesPage />);
     fireEvent.click(screen.getByRole('button', { name: 'Open photo 1 of 64' }));

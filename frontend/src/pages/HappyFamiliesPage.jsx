@@ -23,6 +23,7 @@ function FamilyPhoto({ item, className, contain = false, eager = false }) {
       style={{
         objectFit: contain ? 'contain' : 'cover',
         objectPosition: ((item.focalX ?? 0.5) * 100) + '% ' + ((item.focalY ?? 0.5) * 100) + '%',
+        ...(contain ? { width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' } : {}),
       }}
       onError={() => setFailed(true)}
     />
