@@ -3360,3 +3360,192 @@ img, video { display: block; max-width: 100%; }
   height: 24px;
   animation-duration: 2200ms;
 }
+
+
+/* Full-screen storybook curtain shown between public-page route changes. */
+.page-transition-curtain {
+  position: fixed;
+  z-index: 220;
+  inset: 0;
+  overflow: hidden;
+  border-top: 6px solid #2a170e;
+  background-color: #ffe7bd;
+  background-image:
+    radial-gradient(ellipse at 50% 47%, rgba(255,253,245,.98) 0%, rgba(255,249,232,.75) 28%, rgba(255,231,189,0) 61%),
+    linear-gradient(45deg, transparent 48.7%, rgba(150,112,69,.16) 49.3%, rgba(150,112,69,.16) 50.2%, transparent 50.8%),
+    linear-gradient(-45deg, transparent 48.7%, rgba(150,112,69,.16) 49.3%, rgba(150,112,69,.16) 50.2%, transparent 50.8%);
+  background-size: auto, 96px 96px, 96px 96px;
+  color: #8f4319;
+  pointer-events: auto;
+  will-change: transform;
+}
+.page-transition-curtain[data-phase="entering"] {
+  animation: page-transition-drop .44s cubic-bezier(.2,.78,.22,1) both;
+}
+.page-transition-curtain[data-phase="running"] {
+  transform: translate3d(0,0,0);
+}
+.page-transition-curtain[data-phase="exiting"] {
+  animation: page-transition-lift .54s cubic-bezier(.72,0,.82,.28) both;
+}
+@keyframes page-transition-drop {
+  from { transform: translate3d(0,-102%,0); }
+  to { transform: translate3d(0,0,0); }
+}
+@keyframes page-transition-lift {
+  from { transform: translate3d(0,0,0); }
+  to { transform: translate3d(0,-102%,0); }
+}
+.page-transition-track {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.page-transition-runner {
+  position: absolute;
+  top: calc(50% - 128px);
+  left: 0;
+  width: clamp(112px,9.5vw,168px);
+  opacity: 0;
+  transform: translate3d(-140%,0,0);
+}
+.page-transition-curtain[data-phase="running"] .page-transition-runner {
+  opacity: 1;
+  animation: page-transition-run-across 1.48s linear both;
+}
+@keyframes page-transition-run-across {
+  from { transform: translate3d(-140%,0,0); }
+  to { transform: translate3d(calc(100vw + 140%),0,0); }
+}
+.teddy-runner-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-body {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: teddy-runner-bounce .18s ease-in-out infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-head {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: teddy-runner-head-bob .22s ease-in-out infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-tail {
+  transform-box: view-box;
+  transform-origin: 48px 82px;
+  animation: teddy-runner-tail-wag .19s ease-in-out infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-leg {
+  transform-box: fill-box;
+  transform-origin: center 10%;
+  animation: teddy-runner-leg-cycle .2s ease-in-out infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-leg--front-far,
+.page-transition-curtain[data-phase="running"] .teddy-runner-leg--rear-near {
+  animation-delay: -.1s;
+}
+@keyframes teddy-runner-bounce {
+  from { transform: translateY(2px) rotate(-1deg); }
+  to { transform: translateY(-5px) rotate(1deg); }
+}
+@keyframes teddy-runner-head-bob {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(3deg); }
+}
+@keyframes teddy-runner-tail-wag {
+  from { transform: rotate(-13deg); }
+  to { transform: rotate(13deg); }
+}
+@keyframes teddy-runner-leg-cycle {
+  from { transform: rotate(-29deg) translateY(-2px); }
+  to { transform: rotate(29deg) translateY(2px); }
+}
+.page-transition-paw {
+  position: absolute;
+  display: block;
+  width: clamp(19px,1.6vw,27px);
+  height: auto;
+  color: #c98251;
+  opacity: 0;
+  transform: rotate(var(--paw-rotation)) scale(.55);
+  transform-origin: center;
+}
+.page-transition-paw svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.page-transition-curtain[data-phase="running"] .page-transition-paw {
+  animation: page-transition-paw-step 2s ease-out var(--paw-delay) both;
+}
+@keyframes page-transition-paw-step {
+  0% { opacity: 0; transform: rotate(var(--paw-rotation)) scale(.5); }
+  18% { opacity: .82; transform: rotate(var(--paw-rotation)) scale(1); }
+  72% { opacity: .72; transform: rotate(var(--paw-rotation)) scale(1); }
+  100% { opacity: .14; transform: rotate(var(--paw-rotation)) scale(.92); }
+}
+.page-transition-message {
+  position: absolute;
+  top: calc(50% + 38px);
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 36px);
+  margin: 0;
+  color: #994919;
+  text-align: center;
+  font: 700 clamp(19px,2vw,28px)/1.25 'Comic Sans MS','Segoe Print','Bradley Hand',cursive;
+  letter-spacing: .005em;
+  opacity: 0;
+  transform: translate(-50%,8px);
+}
+.page-transition-curtain[data-phase="running"] .page-transition-message {
+  animation: page-transition-message-in .4s ease-out .18s both;
+}
+@keyframes page-transition-message-in {
+  to { opacity: 1; transform: translate(-50%,0); }
+}
+@media (max-width: 600px) {
+  .page-transition-curtain {
+    background-size: auto, 72px 72px, 72px 72px;
+  }
+  .page-transition-runner {
+    top: calc(50% - 105px);
+    width: clamp(106px,28vw,138px);
+  }
+  .page-transition-message {
+    top: calc(50% + 28px);
+    font-size: clamp(17px,4.3vw,21px);
+  }
+  .page-transition-paw {
+    width: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-curtain[data-phase="entering"],
+  .page-transition-curtain[data-phase="exiting"],
+  .page-transition-curtain[data-phase="running"] .page-transition-runner,
+  .page-transition-curtain[data-phase="running"] .page-transition-paw,
+  .page-transition-curtain[data-phase="running"] .page-transition-message,
+  .page-transition-curtain[data-phase="running"] .teddy-runner-body,
+  .page-transition-curtain[data-phase="running"] .teddy-runner-head,
+  .page-transition-curtain[data-phase="running"] .teddy-runner-tail,
+  .page-transition-curtain[data-phase="running"] .teddy-runner-leg {
+    animation: none !important;
+  }
+  .page-transition-curtain[data-phase="entering"] {
+    transform: translate3d(0,0,0);
+  }
+  .page-transition-curtain[data-phase="running"] .page-transition-runner {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+  .page-transition-curtain[data-phase="running"] .page-transition-paw,
+  .page-transition-curtain[data-phase="running"] .page-transition-message {
+    opacity: 1;
+    transform: none;
+  }
+}
