@@ -334,3 +334,21 @@ The workflow completed successfully on `develop` at the exact code implementatio
 Before implementation, run [#14](https://github.com/dikshaforsure/P-mart/actions/runs/45466221520) passed at baseline commit `984652e8fde64cb715e063d556fbbebe96689dd0`: 10 files / 47 tests, plus a production build. Run #15 tests the new Phase 4 implementation commit and passed 4 focused files / 15 tests, 14 full-suite files / 64 tests and the production build.
 
 The full suite continues to include existing catalogue, profile, gallery, enquiry-form and route coverage. It now also contains the Phase 4 route/shell/page tests. Automated jsdom coverage does not establish pixel-level reference parity, actual responsive layout, or successful third-party network handoffs.
+
+
+## 21. Phase 6 — homepage hero motion and typography follow-up (25 November 2026)
+
+**Implementation commit:** [`cbb67ab3516e92ce135f4796cabcf18ba9e99036`](https://github.com/dikshaforsure/P-mart/commit/cbb67ab3516e92ce135f4796cabcf18ba9e99036)  
+**GitHub Actions:** [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674)
+
+| Command/check | Result | Evidence |
+|---|---|---|
+| Focused public-page/route checks | **PASS — 5 files, 31 tests** | Workflow logs |
+| Complete frontend test suite (`npm test`) | **PASS — 21 files, 103 tests** | Workflow logs; includes three new HomeHero timer/reduced-motion tests |
+| Production build (`npm run build`) | **PASS** | Vite 8.3.8; 64 modules transformed |
+| Reduced-motion cycle suppression | **PASS in jsdom test** | HomeHero test |
+| Real-browser mascot alignment/ear appearance | **NOT RUN** | Manual visual comparison is still required |
+| Real-browser random animation timing and portrait clipping | **NOT RUN** | jsdom verifies state/timers, not rendered CSS animation |
+| Desktop/tablet/mobile header typography and overflow | **NOT RUN** | Phase 7 browser QA remains open |
+
+The production build completed successfully. Vite printed its chunk-size advisory (the generated JavaScript bundle is above its default warning threshold); this was a warning, not a build failure. Automated tests do not establish that the externally hosted Fraunces font loads, that the mascot alignment matches the screenshot at every viewport, or that CSS transitions appear exactly as intended in a browser.

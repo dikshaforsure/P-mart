@@ -396,3 +396,14 @@ Compared the owner-provided local screenshots with the committed homepage implem
 Added focused checks for the six hero portrait positions and the four family-preview image URLs/captions. CSS remains scoped to \`.home-page-storybook\`; no shared layout or non-homepage route was changed.
 
 GitHub Actions run [#39](https://github.com/dikshaforsure/P-mart/actions/runs/45565628125) on commit \`745d6e6121ce4353076aa7bd2b275528048f0dbd\` passed the focused checks, full frontend test suite and production build. Manual real-browser screenshot comparison at desktop/tablet/mobile sizes remains outstanding.
+
+
+### Phase 6 — hero mascot, portrait cycle and typography follow-up
+
+Compared the two owner-provided screenshots. In the destination mascot SVG, the visible dog artwork is offset within its viewBox, although the outer anchor is centered. The homepage now shifts the SVG artwork into the visual center, disables the separate right-ear flap for a steady symmetric silhouette, and aligns the greeting bubble with the face. This is applied only in the homepage hero; other mascot placements are preserved.
+
+The six existing puppy records now participate in a randomized loop: one or two portraits dip down behind the quilt and return, then a different selection is chosen after a short interval. The cycle respects `prefers-reduced-motion` and cleans up both timeouts on unmount. Added three HomeHero tests for one-puppy, two-puppy and reduced-motion behavior.
+
+Loaded the soft Fraunces display face for the hero heading and increased the shared desktop navigation, wordmark and WhatsApp label sizes modestly to match the supplied reference. No new package dependency, puppy data, contact configuration or route behavior was changed.
+
+GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674) on implementation commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036` passed focused public-page/route checks (5 files / 31 tests), the complete frontend suite (21 files / 103 tests) and the Vite 8.3.8 production build. Browser screenshot and animation QA remains outstanding.

@@ -135,7 +135,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
-| 6 | Homepage reference-fidelity refinement | Implemented on develop; GitHub Actions run #36 passed; real-browser visual QA outstanding |
+| 6 | Homepage reference-fidelity refinement | Implemented on develop; latest hero refinements and GitHub Actions run #41 passed; real-browser visual QA outstanding |
 | 7 | Integrated browser/responsive QA across all public routes | Not completed |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
@@ -552,7 +552,7 @@ When starting a new chat, provide this message together with repository access:
 
 ## 8. Phase 6 — Homepage storybook refinement
 
-**Implementation state:** Code and mobile touch-layout refinement are committed on develop. GitHub Actions run #36 passed; real-browser visual QA remains outstanding.
+**Implementation state:** Homepage storybook design and screenshot-driven corrections are committed on develop. Latest hero polish commit: `cbb67ab3516e92ce135f4796cabcf18ba9e99036`. Manual real-browser visual QA remains outstanding.
 
 - Reworked the hero into a warm cream/sunrise scene with six puppy portraits from existing featured puppy records, preserving cover images, focal positions and profile links.
 - Reused the existing Teddy mascot and paw SVG. Added a local scalloped quilt treatment and hand-drawn underline.
@@ -561,9 +561,10 @@ When starting a new chat, provide this message together with repository access:
 - Added a decorative wooden signpost above the existing two-path cards.
 - Split the existing combined final journey description into secure-your-puppy and safe-delivery milestones using only its existing factual clauses.
 - Restyled the existing WhatsApp illustration, trust cards, family preview, FAQ notes and final CTA using homepage-scoped cocoa/toffee/honey styles. Reused the existing mascot in the final CTA.
-- Added focused HomeHero, PuppyJourney and HappyFamiliesPreview tests. Existing shared and other-route components are unchanged.
-- Visual QA follow-up after comparison with the supplied local screenshots: increased the open center pocket between hero portraits, added keyboard-accessible hover lift, moved the showroom door hinge to the outer edge (with the knob on the free edge), and restored a fixed Polaroid image area that prevents absolute-positioned family images from collapsing their cards.
-- All added styling is scoped under .home-page-storybook. Shared header/footer and non-homepage routes were not changed.
-- A final responsive CSS follow-up makes puppy photos visible without hover on touch layouts and increases hero puppy portrait height on narrow phones.
+- Visual QA follow-up after owner-provided screenshots: increased the open center pocket between hero portraits, added keyboard-accessible hover lift, moved the showroom door hinge to the outer edge (with the knob on the free edge), and restored fixed Polaroid photo/caption sizing.
+- Latest hero follow-up: shifted the visible mascot artwork left inside its SVG viewBox so the dog itself—not only its container—is centered in the hero; disabled the right-ear flap in this hero placement to keep the ears balanced and centered the speech bubble with the face.
+- Added a randomized automatic puppy portrait cycle. One or two portraits dip below the quilt and return at random intervals of approximately 2.9–4.7 seconds. The cycle is disabled when `prefers-reduced-motion: reduce` is active.
+- Changed the hero heading to the soft Fraunces display face and modestly increased shared desktop navigation, wordmark and WhatsApp label typography to better match the supplied reference screenshot. The header typography adjustment is intentional and shared; hero-only effects remain scoped under `.home-page-storybook`.
+- Added focused HomeHero tests for single/double portrait dips and reduced-motion handling. Existing route/data/contact behavior and all non-homepage page components remain unchanged.
 
-**Verification:** GitHub Actions run [#39](https://github.com/dikshaforsure/P-mart/actions/runs/45565628125) passed on homepage visual-QA commit `745d6e6121ce4353076aa7bd2b275528048f0dbd`. The focused public-page/route test step, full frontend test suite and production build all passed. The new family-preview image/caption regression test is included in the full suite. Local test/build commands were not executed in this environment. A further manual browser screenshot comparison at desktop/tablet/mobile sizes remains outstanding.
+**Verification:** GitHub Actions [run #41](https://github.com/dikshaforsure/P-mart/actions/runs/45570910674) passed on implementation commit `cbb67ab3516e92ce135f4796cabcf18ba9e99036`: focused public-page/route checks (5 files / 31 tests), complete frontend suite (21 files / 103 tests) and Vite 8.3.8 production build. Build completed successfully; Vite emitted its existing bundle-size advisory. Local test/build commands were not executed in this environment. No real-browser screenshot comparison, live animation inspection or viewport interaction check was performed; those remain part of Phase 7.
