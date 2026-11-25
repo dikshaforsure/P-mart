@@ -19,7 +19,7 @@ Before doing anything:
 2. Fetch the latest remote develop branch and record its exact HEAD.
 3. Inspect recent commits and the current contents of all files relevant to the task.
 4. Read the corresponding project notes in PROJECT_PROGRESS.md, PROJECT_ANALYSIS.md, AI_PROMPT_LOG.md, TESTING.md and TECHNICAL_DOCUMENTATION.md as needed.
-5. Inspect the matching source templates/data in the reference repository.
+5. Inspect the live reference website and the relevant files already present in this destination repository.
 6. Distinguish completed work from unverified visual behaviour and unresolved scope.
 7. Continue from the repository's actual state. Never restart, overwrite or duplicate work merely because the chat context changed.
 
@@ -135,7 +135,7 @@ This SHA is a historical baseline for this handoff file, not a permanent current
 | 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
 | 4 | Shared header/footer, How It Works and FAQ | Implemented |
 | 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
-| 6 | Homepage reference-fidelity refinement | **Next planned implementation phase** |
+| 6 | Homepage reference-fidelity refinement | Implemented on develop; automated CI and real-browser visual QA pending |
 | 7 | Integrated browser/responsive QA across all public routes | Not completed |
 | 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
 | 9 | Deployment, final security/configuration and handoff | Not completed |
@@ -537,3 +537,20 @@ Do not delete earlier phase notes or rewrite old CI results. Add dated follow-up
 When starting a new chat, provide this message together with repository access:
 
 “Continue the TeddyPups project in dikshaforsure/P-mart. Read the root AGENT.md completely before acting. Fetch the latest develop branch and inspect recent commits and the current task state. Treat AGENT.md and the repository as the source of truth, not prior chat summaries. Preserve completed phases, work only on develop, inspect source before edits, continue only incomplete work, run tests/build, update AGENT.md and project docs, commit and verify remote state. Do not invent content or claim unperformed browser verification. First report the current state you found and the exact next action.”
+
+
+## 8. Phase 6 — Homepage storybook refinement
+
+**Implementation state:** Code is committed on develop. Automated CI status and real-browser visual QA remain pending until independently checked.
+
+- Reworked the hero into a warm cream/sunrise scene with six puppy portraits from existing featured puppy records, preserving cover images, focal positions and profile links.
+- Reused the existing Teddy mascot and paw SVG. Added a local scalloped quilt treatment and hand-drawn underline.
+- Restyled the breed ribbon as a stitched fabric strip.
+- Converted featured puppy cards into arched showroom doorways with hinged panels, paw peepholes, availability labels and keyboard-focus interaction. Mobile shows the photo without relying on hover.
+- Added a decorative wooden signpost above the existing two-path cards.
+- Split the existing combined final journey description into secure-your-puppy and safe-delivery milestones using only its existing factual clauses.
+- Restyled the existing WhatsApp illustration, trust cards, family preview, FAQ notes and final CTA using homepage-scoped cocoa/toffee/honey styles. Reused the existing mascot in the final CTA.
+- Added focused HomeHero and PuppyJourney tests. Existing shared and other-route components are unchanged.
+- All added styling is scoped under .home-page-storybook. Shared header/footer and non-homepage routes were not intended to change.
+
+**Verification limitations:** Local test/build commands were not executed in this environment. GitHub Actions is the automated verification path. Real-browser screenshot comparison and viewport interaction checks remain outstanding.

@@ -1,8 +1,8 @@
 # TeddyPups Clone — Project Progress
 
 **Last updated:** 25 November 2026  
-**Current phase:** Phase 5 — Gone Home, Happy Families and Contact (public-page implementation complete)  
-**Status:** Public-frontend implementation milestones Phases 0–5 are complete on `develop`: research/documentation, catalogue/profile experiences, the Phase 3 profile close-out, the Phase 4 shared shell/How It Works/FAQ, and the Phase 5 Gone Home, Happy Families and Contact pages. The latest Phase 5 Contact fidelity correction is committed at `bed9eeab2394292462e4dcb2820ddae27a32b59e`; GitHub Actions run [#30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042) passed 5 focused files / 31 tests, 18 full-suite files / 97 tests, and the Vite production build. This is frontend scope only: no enquiry API/database persistence, deployment, production asset rights approval or real-browser visual QA is claimed. Next work: homepage visual refinement and integrated responsive/browser QA; separately determine whether backend enquiry persistence/admin is in scope.
+**Current phase:** Phase 6 — Homepage storybook refinement (implementation committed; verification pending)  
+**Status:** Public-frontend implementation milestones Phases 0–6 are implemented on `develop`: research/documentation, catalogue/profile experiences, shared public pages and the homepage storybook refinement. Phase 6 automated CI and real-browser visual QA are pending. The latest Phase 5 Contact fidelity correction is committed at `bed9eeab2394292462e4dcb2820ddae27a32b59e`; GitHub Actions run [#30](https://github.com/dikshaforsure/P-mart/actions/runs/45544244042) passed 5 focused files / 31 tests, 18 full-suite files / 97 tests, and the Vite production build. This is frontend scope only: no enquiry API/database persistence, deployment, production asset rights approval or real-browser visual QA is claimed. Next work: homepage visual refinement and integrated responsive/browser QA; separately determine whether backend enquiry persistence/admin is in scope.
 
 ## 1. Objectives
 
@@ -447,3 +447,12 @@ Run #30 passed against the exact correction commit:
 - Production build: **passed**, Vite 8.3.8.
 
 No browser screenshots or manual checks at 1440×900, 1280×800, 1024×768, 768×1024, 390×844 or 375×812 were performed. Live image reachability, actual WhatsApp sending, asset permission and deployed behavior remain unverified.
+
+
+## Phase 6 — Homepage storybook refinement
+
+The homepage now has a warm storybook visual system scoped to the homepage wrapper. The hero uses six existing featured puppy records, cover images, focal positions and profile links, plus the existing Teddy mascot and paw-mark SVG. A local scalloped quilt, hand-drawn underline and stitched breed ribbon establish the visual tone.
+
+Featured puppy cards use arched showroom-door frames with hinged panels, paw peepholes, availability labels and responsive mobile-open treatment. The two meeting paths gain a wooden signpost. The three existing journey entries are presented as four milestones by splitting the combined final description into its two existing factual clauses. Trust, family, FAQ, WhatsApp and final CTA sections receive scoped scrapbook/polaroid styling. The existing mascot is reused in the CTA.
+
+Two focused component tests were added for the six-puppy hero lineup and four journey milestones. Local tests/build were not run in this environment; check the GitHub Actions workflow triggered by the develop commit. Real-browser screenshots and viewport QA remain outstanding.

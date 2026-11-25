@@ -2597,3 +2597,252 @@ img, video { display: block; max-width: 100%; }
   .happy-families-wall__print:hover .happy-families-polaroid,
   .happy-families-wall__print:focus-visible .happy-families-polaroid { translate: 0 0; }
 }
+
+
+/* Phase 6 — homepage storybook refinement. Homepage-scoped by design. */
+.home-page-storybook {
+  --home-cocoa:#2a170e; --home-cocoa-soft:#5a3a28; --home-toffee:#c2622b; --home-toffee-deep:#a24a1a;
+  --home-honey:#f2be6b; --home-honey-soft:#fbe3b4; --home-milk:#fffdf8; --home-cream:#fff1d8;
+  color:var(--home-cocoa); background:var(--home-milk);
+}
+.home-page-storybook .eyebrow { color:var(--home-toffee-deep); font:700 12px/1.45 var(--display); letter-spacing:.08em; text-transform:none; }
+.home-page-storybook .section-topline { border-bottom:2px solid rgba(42,23,14,.24); color:var(--home-cocoa-soft); font-size:9px; letter-spacing:.13em; }
+.home-page-storybook .section-heading { margin-block:clamp(32px,5vw,54px) clamp(30px,4vw,44px); }
+.home-page-storybook .section-heading h2 { color:var(--home-cocoa); font:800 clamp(38px,5.2vw,68px)/.98 var(--display); letter-spacing:-.055em; }
+.home-page-storybook .section-heading-description { color:var(--home-cocoa-soft); font-size:14px; line-height:1.75; }
+.home-page-storybook .button { min-height:50px; padding-inline:22px; border:2px solid var(--home-cocoa); border-radius:999px; box-shadow:0 5px 0 -1px rgba(42,23,14,.8); font-size:12px; letter-spacing:0; transition:transform .25s ease,box-shadow .25s ease,background .25s ease; }
+.home-page-storybook .button:hover { transform:translateY(-3px) rotate(-.8deg); box-shadow:0 8px 0 -1px rgba(42,23,14,.8); }
+.home-page-storybook .button-dark { background:var(--home-toffee-deep); color:var(--home-milk); }
+.home-page-storybook .button-outline { border-color:var(--home-cocoa); background:var(--home-milk); color:var(--home-cocoa); }
+.home-page-storybook a:focus-visible,.home-page-storybook button:focus-visible { outline:3px solid var(--home-toffee); outline-offset:4px; }
+
+/* Hero blanket scene */
+.home-page-storybook .home-hero-storybook { position:relative; display:flex; min-height:clamp(690px,calc(100svh - 86px),840px); flex-direction:column; align-items:center; padding:clamp(38px,5vh,60px) 24px 0; overflow:hidden; background:linear-gradient(180deg,#fffdf8 0%,#fff8e9 57%,#fff1d8 100%); isolation:isolate; }
+.home-page-storybook .hero-sunwash { position:absolute; z-index:-1; top:1%; left:50%; width:min(82vw,760px); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(242,190,107,.42),rgba(251,227,180,.24) 42%,transparent 70%); transform:translateX(-50%); pointer-events:none; }
+.home-page-storybook .hero-story-copy { z-index:2; display:flex; width:min(920px,100%); flex:0 0 auto; flex-direction:column; align-items:center; padding:0 0 12px; text-align:center; }
+.home-page-storybook .hero-story-copy .hero-eyebrow { position:relative; display:inline-flex; margin:0 0 22px; color:var(--home-toffee-deep); font:italic 600 clamp(17px,1.7vw,22px)/1.3 var(--serif); letter-spacing:0; }
+.home-page-storybook .hero-hand-underline { position:absolute; right:0; bottom:-10px; left:0; width:100%; height:12px; overflow:visible; }
+.home-page-storybook .hero-hand-underline path { fill:none; stroke:var(--home-toffee); stroke-width:3; stroke-linecap:round; }
+.home-page-storybook .hero-story-copy h1 { max-width:15ch; margin:0; color:var(--home-cocoa); font:800 clamp(44px,7.3vw,88px)/.94 var(--display); letter-spacing:-.065em; text-wrap:balance; }
+.home-page-storybook .hero-story-copy h1 em { display:block; color:var(--home-toffee-deep); font-style:normal; font-weight:800; }
+.home-page-storybook .hero-story-copy .hero-description { max-width:610px; margin:20px auto 22px; color:var(--home-cocoa-soft); font-size:clamp(14px,1.25vw,16px); line-height:1.65; }
+.home-page-storybook .hero-story-copy .hero-actions { justify-content:center; gap:12px; }
+.home-page-storybook .hero-hand-note { display:flex; align-items:center; gap:9px; margin:17px 0 0; color:var(--home-cocoa-soft); font:italic 14px/1.35 var(--serif); }
+.home-page-storybook .hero-hand-note span { color:var(--home-toffee); font-size:20px; }
+.home-page-storybook .hero-stage { --hero-quilt-height:78px; position:relative; width:min(1240px,calc(100vw - 24px)); height:clamp(210px,27vw,300px); flex:1 1 auto; min-height:210px; margin-top:auto; }
+.home-page-storybook .hero-puppy-lineup { position:absolute; inset:0; z-index:2; margin:0; padding:0; list-style:none; }
+.home-page-storybook .hero-puppy-peek { position:absolute; bottom:0; left:var(--hero-puppy-left); width:clamp(94px,12.6vw,158px); height:clamp(142px,19vw,228px); transform:translateX(-50%) rotate(var(--hero-puppy-tilt)); transform-origin:center bottom; z-index:2; }
+.home-page-storybook .hero-puppy-peek:nth-child(2),.home-page-storybook .hero-puppy-peek:nth-child(5) { width:clamp(100px,13.4vw,172px); }
+.home-page-storybook .hero-puppy-peek > a { display:block; width:100%; height:100%; color:inherit; text-decoration:none; }
+.home-page-storybook .hero-puppy-photo { display:block; width:100%; height:100%; overflow:hidden; border:3px solid var(--home-cocoa); border-bottom:0; border-radius:999px 999px 0 0; background:var(--home-honey-soft); box-shadow:inset 0 0 0 4px var(--home-milk); animation:home-puppy-rise .78s cubic-bezier(.22,1,.36,1) both; animation-delay:var(--hero-puppy-delay,0ms); }
+.home-page-storybook .hero-puppy-photo img { width:100%; height:100%; object-fit:cover; }
+.home-page-storybook .hero-puppy-fallback { display:grid; width:100%; height:100%; place-items:center; color:var(--home-toffee); }
+.home-page-storybook .hero-puppy-fallback svg { width:34%; }
+.home-page-storybook .hero-puppy-name { position:absolute; top:7px; left:50%; max-width:130%; overflow:hidden; padding:5px 10px; border:2px solid var(--home-cocoa); border-radius:999px; background:var(--home-milk); color:var(--home-cocoa); font:600 10px/1.2 var(--serif); text-overflow:ellipsis; white-space:nowrap; opacity:0; transform:translate(-50%,-4px); transition:opacity .2s ease,transform .25s ease; }
+.home-page-storybook .hero-puppy-peek:hover .hero-puppy-name,.home-page-storybook .hero-puppy-peek:focus-within .hero-puppy-name { opacity:1; transform:translate(-50%,0); }
+.home-page-storybook .hero-mascot-anchor { position:absolute; z-index:4; bottom:48px; left:50%; width:clamp(168px,22vw,252px); height:clamp(145px,18vw,194px); transform:translateX(-50%); pointer-events:none; }
+.home-page-storybook .hero-mascot-anchor .tp-profile-mascot { position:absolute !important; inset:0; overflow:visible; }
+.home-page-storybook .hero-mascot-anchor .tp-profile-mascot .pup-buddy { top:-1.6rem; right:0; left:0; width:100%; }
+.home-page-storybook .hero-mascot-anchor .pup-bubble { bottom:82%; left:72%; font-size:13px; }
+.home-page-storybook .hero-quilt { position:absolute; z-index:5; right:-2vw; bottom:0; left:-2vw; height:var(--hero-quilt-height); border-top:3px solid var(--home-cocoa); background:repeating-linear-gradient(45deg,transparent 0 32px,rgba(42,23,14,.07) 32px 34px),repeating-linear-gradient(-45deg,transparent 0 32px,rgba(42,23,14,.07) 32px 34px),var(--home-cream); }
+.home-page-storybook .hero-quilt-edge { position:absolute; top:-39px; left:0; display:block; width:100%; height:40px; }
+.home-page-storybook .hero-quilt-paws { position:absolute; inset:12px 5% auto; display:flex; justify-content:space-around; color:rgba(42,23,14,.16); }
+.home-page-storybook .hero-quilt-paws svg { width:23px; height:23px; }
+@keyframes home-puppy-rise { from { transform:translateY(75%); } to { transform:translateY(0); } }
+
+/* Fabric ribbon */
+.home-page-storybook .breed-showcase-storybook { position:relative; padding:21px 0 23px; border-block:3px solid var(--home-cocoa); background:repeating-linear-gradient(90deg,transparent 0 28px,rgba(42,23,14,.035) 28px 30px),var(--home-honey-soft); }
+.home-page-storybook .breed-showcase-label { color:var(--home-cocoa-soft); font:italic 15px/1.3 var(--serif); letter-spacing:0; text-transform:none; }
+.home-page-storybook .breed-marquee-track span { align-items:center; gap:26px; color:var(--home-cocoa); font:600 20px/1.2 var(--serif); }
+.home-page-storybook .breed-paw { width:16px; height:16px; color:var(--home-toffee); }
+
+/* Puppy showroom doors */
+.home-page-storybook .home-puppy-showroom { padding-top:clamp(64px,8vw,104px); padding-bottom:clamp(64px,8vw,100px); }
+.home-page-storybook .home-puppy-doors { grid-template-columns:repeat(3,minmax(0,1fr)); gap:42px 24px; }
+.home-page-storybook .puppy-door-card { display:block; color:inherit; text-decoration:none; transform:rotate(var(--puppy-card-tilt,0deg)); transition:transform .35s cubic-bezier(.22,1,.36,1); }
+.home-page-storybook .puppy-door-card:nth-child(3n + 1) { --puppy-card-tilt:-1deg; }
+.home-page-storybook .puppy-door-card:nth-child(3n + 2) { --puppy-card-tilt:1.3deg; }
+.home-page-storybook .puppy-door-card:nth-child(3n) { --puppy-card-tilt:-.5deg; }
+.home-page-storybook .puppy-door-card:hover,.home-page-storybook .puppy-door-card:focus-visible { transform:translateY(-6px) rotate(0); }
+.home-page-storybook .puppy-card-plaque { min-height:66px; padding:9px 8px 11px; text-align:center; }
+.home-page-storybook .puppy-card-plaque h3 { margin:0; color:var(--home-cocoa); font:800 clamp(18px,2vw,25px)/1.08 var(--display); letter-spacing:-.04em; }
+.home-page-storybook .puppy-card-plaque p { margin:5px 0 0; color:var(--home-cocoa-soft); font-size:11px; line-height:1.35; }
+.home-page-storybook .puppy-door-card .puppy-card-media { position:relative; display:block; height:auto; aspect-ratio:4 / 5.15; overflow:hidden; border:3px solid var(--home-cocoa); border-bottom:0; border-radius:999px 999px 7px 7px; background:var(--home-honey-soft); box-shadow:inset 0 0 0 4px var(--home-milk),6px 8px rgba(42,23,14,.14); }
+.home-page-storybook .puppy-door-card .puppy-card-media > img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+.home-page-storybook .puppy-door-leaf { position:absolute; top:3px; right:3px; bottom:0; display:block; width:33%; border:2.5px solid var(--home-cocoa); border-bottom:0; border-radius:999px 999px 0 0; background:repeating-linear-gradient(90deg,rgba(42,23,14,.06) 0 2px,transparent 2px 14px),linear-gradient(135deg,#f6d7a6,#d99b55); box-shadow:inset 0 0 0 3px rgba(255,253,248,.55); transform:perspective(700px) rotateY(-14deg); transform-origin:left center; transition:transform .8s cubic-bezier(.2,.75,.2,1); }
+.home-page-storybook .puppy-door-card:hover .puppy-door-leaf,.home-page-storybook .puppy-door-card:focus-visible .puppy-door-leaf,.home-page-storybook .puppy-door-card:focus-within .puppy-door-leaf { transform:perspective(700px) rotateY(-105deg); }
+.home-page-storybook .puppy-door-peephole { position:absolute; top:24%; left:50%; display:grid; width:27px; height:27px; place-items:center; border:2px solid var(--home-cocoa); border-radius:50%; background:var(--home-milk); color:var(--home-toffee-deep); transform:translateX(-50%); }
+.home-page-storybook .puppy-door-peephole svg { width:18px; height:18px; }
+.home-page-storybook .puppy-door-knob { position:absolute; top:57%; right:9px; width:7px; height:7px; border:1.5px solid var(--home-cocoa); border-radius:50%; background:var(--home-honey); }
+.home-page-storybook .puppy-door-availability { position:absolute; bottom:13px; left:13px; padding:6px 10px; border:2px solid var(--home-cocoa); border-radius:999px; background:var(--home-milk); color:#315a36; font:700 10px/1 var(--display); }
+.home-page-storybook .puppy-door-card .video-chip { top:13px; left:13px; border:2px solid var(--home-cocoa); border-radius:999px; background:var(--home-milk); color:var(--home-cocoa); font-size:10px; }
+.home-page-storybook .puppy-card-image-fallback { display:flex; width:100%; height:100%; flex-direction:column; align-items:center; justify-content:center; gap:9px; color:var(--home-toffee); font:italic 14px var(--serif); }
+.home-page-storybook .puppy-card-image-fallback svg { width:44px; }
+.home-page-storybook .puppy-card-meta { align-items:center; padding:13px 2px 0; color:var(--home-cocoa-soft); font:italic 13px var(--serif); }
+.home-page-storybook .puppy-card-arrow { color:var(--home-toffee-deep); font-size:19px; transition:transform .2s ease; }
+
+/* Signpost and illustrated two-path cards */
+.home-page-storybook .home-ways-section { overflow:hidden; background:linear-gradient(180deg,#fff1d8 0%,#fbe3b4 100%); }
+.home-page-storybook .ways-signpost { position:relative; display:flex; width:min(610px,90%); min-height:104px; align-items:flex-start; justify-content:center; gap:16px; margin:6px auto 42px; }
+.home-page-storybook .ways-signpost-post { position:absolute; top:20px; left:50%; z-index:0; width:20px; height:92px; border:3px solid var(--home-cocoa); border-radius:5px; background:repeating-linear-gradient(0deg,rgba(42,23,14,.1) 0 2px,transparent 2px 12px),linear-gradient(90deg,#d18e43,#f0bd70); transform:translateX(-50%); }
+.home-page-storybook .ways-signpost-board { position:relative; z-index:1; display:inline-flex; min-width:190px; align-items:center; justify-content:center; gap:10px; padding:13px 18px; border:3px solid var(--home-cocoa); background:linear-gradient(180deg,#f2be6b,#d58c42); box-shadow:3px 5px 0 rgba(42,23,14,.2); color:var(--home-cocoa); font:800 13px/1.15 var(--display); letter-spacing:.04em; }
+.home-page-storybook .ways-signpost-board svg { width:18px; height:18px; }
+.home-page-storybook .ways-signpost-board-left { margin-top:0; transform:rotate(-3deg); }
+.home-page-storybook .ways-signpost-board-right { margin-top:18px; transform:rotate(3deg); }
+.home-page-storybook .ways-grid { gap:24px; }
+.home-page-storybook .way-card { overflow:hidden; border:3px solid var(--home-cocoa); border-radius:22px; background:var(--home-milk); box-shadow:7px 9px rgba(42,23,14,.14); transform:rotate(-.7deg); }
+.home-page-storybook .way-card-2 { background:#fff8ea; transform:rotate(.7deg); }
+.home-page-storybook .way-card-art { height:auto; aspect-ratio:16 / 9; overflow:hidden; background:var(--home-honey-soft); }
+.home-page-storybook .way-card-art > img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+.home-page-storybook .way-card:hover .way-card-art > img { transform:scale(1.045); }
+.home-page-storybook .way-card-art-stamp { position:absolute; right:16px; bottom:16px; display:grid; width:46px; aspect-ratio:1; place-items:center; border:2px dashed var(--home-cocoa); border-radius:50%; background:var(--home-milk); color:var(--home-toffee); transform:rotate(9deg); }
+.home-page-storybook .way-card-art-stamp svg { width:25px; }
+.home-page-storybook .way-card-copy { padding:24px 26px 28px; }
+.home-page-storybook .way-card-copy h3 { color:var(--home-cocoa); font:800 clamp(25px,3vw,36px)/1.05 var(--display); letter-spacing:-.045em; }
+.home-page-storybook .way-card-copy > p:not(.eyebrow) { color:var(--home-cocoa-soft); font-size:13px; line-height:1.75; }
+.home-page-storybook .way-card .text-link { color:var(--home-toffee-deep); border-color:rgba(194,98,43,.5); }
+
+/* Journey milestones */
+.home-page-storybook .home-journey-section { padding-top:clamp(68px,8vw,108px); padding-bottom:clamp(68px,8vw,106px); }
+.home-page-storybook .journey-route { height:72px; margin:0 0 -6px; pointer-events:none; }
+.home-page-storybook .journey-route svg { width:100%; height:100%; overflow:visible; }
+.home-page-storybook .journey-route path { fill:none; stroke:var(--home-toffee); stroke-width:4; stroke-dasharray:3 12; stroke-linecap:round; }
+.home-page-storybook .journey-route circle { fill:var(--home-honey); stroke:var(--home-cocoa); stroke-width:3; }
+.home-page-storybook .home-journey-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; border:0; }
+.home-page-storybook .home-journey-grid .journey-step { min-width:0; padding:20px 17px 22px; border:3px solid var(--home-cocoa); border-radius:20px; background:#fff8ea; box-shadow:5px 7px rgba(42,23,14,.12); transform:rotate(var(--journey-tilt,0deg)); }
+.home-page-storybook .home-journey-grid .journey-step:nth-child(even) { --journey-tilt:1.1deg; background:#fffdf8; }
+.home-page-storybook .home-journey-grid .journey-step:nth-child(odd) { --journey-tilt:-.8deg; }
+.home-page-storybook .home-journey-grid .journey-step + .journey-step { border-left:3px solid var(--home-cocoa); }
+.home-page-storybook .journey-number { display:inline-grid; width:38px; height:38px; place-items:center; border:2px solid var(--home-cocoa); border-radius:50%; background:var(--home-honey-soft); color:var(--home-cocoa); font:800 12px var(--display); }
+.home-page-storybook .journey-step-mark { display:grid; width:48px; height:48px; place-items:center; margin:16px 0 13px; border-radius:46% 54% 52% 48% / 55% 45%; background:var(--home-honey-soft); color:var(--home-toffee-deep); font:400 29px var(--serif); }
+.home-page-storybook .journey-step h3 { margin:0 0 9px; color:var(--home-cocoa); font:800 clamp(17px,1.6vw,21px)/1.15 var(--display); letter-spacing:-.035em; }
+.home-page-storybook .journey-step p { color:var(--home-cocoa-soft); font-size:12px; line-height:1.7; }
+.home-page-storybook .journey-bottom { color:var(--home-cocoa-soft); }
+
+/* Existing WhatsApp conversation */
+.home-page-storybook .whatsapp-section { padding-block:clamp(66px,8vw,104px); background:linear-gradient(135deg,#a24a1a,#c2622b); color:var(--home-milk); }
+.home-page-storybook .whatsapp-copy .eyebrow { color:#ffe3b9; }
+.home-page-storybook .whatsapp-copy h2 { font-weight:800; font-family:var(--display); letter-spacing:-.055em; }
+.home-page-storybook .whatsapp-copy h2 em { color:#ffe2ae; }
+.home-page-storybook .whatsapp-copy > p:not(.eyebrow) { color:rgba(255,253,248,.88); }
+.home-page-storybook .chat-card { border:3px solid var(--home-cocoa); border-radius:22px; background:#fff8ea; box-shadow:8px 10px rgba(42,23,14,.2); transform:rotate(1deg); }
+.home-page-storybook .chat-top { background:#fbe3b4; }
+.home-page-storybook .chat-avatar { background:var(--home-toffee-deep); }
+.home-page-storybook .chat-bubble { border-radius:13px 13px 13px 3px; }
+.home-page-storybook .chat-in { background:#fff; }
+.home-page-storybook .chat-out { border-radius:13px 13px 3px 13px; background:#fbe3b4; }
+.home-page-storybook .chat-breed-list a { border:2px solid rgba(42,23,14,.2); background:#fffdf8; }
+
+/* Trust cards and family Polaroids */
+.home-page-storybook .home-trust-section { align-items:center; gap:clamp(35px,6vw,80px); }
+.home-page-storybook .trust-intro .section-heading { margin-top:15px; }
+.home-page-storybook .trust-grid { gap:14px; }
+.home-page-storybook .trust-item { min-height:190px; padding:20px; border:3px solid var(--home-cocoa); border-radius:18px; background:#fff8ea; box-shadow:4px 6px rgba(42,23,14,.11); }
+.home-page-storybook .trust-item:nth-child(even) { border-left:3px solid var(--home-cocoa); background:#fffdf8; }
+.home-page-storybook .trust-item-top { align-items:center; color:var(--home-cocoa-soft); }
+.home-page-storybook .trust-stamp { position:relative; display:grid; width:42px; height:42px; place-items:center; border:2px dashed var(--home-toffee-deep); border-radius:50%; background:var(--home-honey-soft); color:var(--home-toffee-deep); transform:rotate(8deg); }
+.home-page-storybook .trust-stamp svg { width:24px; height:24px; opacity:.35; }
+.home-page-storybook .trust-stamp b { position:absolute; color:var(--home-cocoa); font:700 10px var(--display); }
+.home-page-storybook .trust-item h3 { margin:20px 0 8px; color:var(--home-cocoa); font:800 21px/1.15 var(--display); }
+.home-page-storybook .trust-item p { color:var(--home-cocoa-soft); font-size:12px; line-height:1.7; }
+.home-page-storybook .home-family-section { background:#fff1d8; }
+.home-page-storybook .family-quote { max-width:420px; padding:24px; border:3px solid var(--home-cocoa); border-radius:5px; background:#fffdf8; box-shadow:6px 8px rgba(42,23,14,.12); transform:rotate(-1.2deg); }
+.home-page-storybook .family-quote p { color:var(--home-cocoa); font:italic clamp(19px,2vw,25px)/1.38 var(--serif); }
+.home-page-storybook .family-quote cite { color:var(--home-toffee-deep); }
+.home-page-storybook .family-photo-wall { gap:22px; }
+.home-page-storybook .family-photo { position:relative; min-height:0; padding:10px 10px 24px; border:2px solid rgba(42,23,14,.24); background:#fffdf8; color:var(--home-cocoa); box-shadow:5px 7px rgba(42,23,14,.15); transform:rotate(var(--polaroid-tilt,0deg)); transition:transform .3s ease,box-shadow .3s ease; }
+.home-page-storybook .family-photo::before { position:absolute; z-index:2; top:-10px; left:50%; width:64px; height:21px; border:1px solid rgba(142,93,45,.18); background:rgba(242,190,107,.6); content:""; transform:translateX(-50%) rotate(-4deg); }
+.home-page-storybook .family-photo:nth-child(1) { --polaroid-tilt:-2deg; }
+.home-page-storybook .family-photo:nth-child(2) { --polaroid-tilt:1.7deg; }
+.home-page-storybook .family-photo:nth-child(3) { --polaroid-tilt:1deg; }
+.home-page-storybook .family-photo:nth-child(4) { --polaroid-tilt:-1.4deg; }
+.home-page-storybook .family-photo:hover { z-index:2; box-shadow:8px 12px rgba(42,23,14,.19); transform:translateY(-5px) rotate(0); }
+.home-page-storybook .family-photo img { width:100%; height:178px; object-fit:cover; border:1px solid rgba(42,23,14,.12); }
+.home-page-storybook .family-photo span:last-child { display:block; padding-top:11px; color:var(--home-cocoa-soft); font:italic 13px/1.3 var(--serif); text-align:center; }
+.home-page-storybook .family-link-row { color:var(--home-cocoa-soft); }
+
+/* FAQ notes and final illustrated CTA */
+.home-page-storybook .home-faq-section { padding-top:clamp(68px,8vw,105px); padding-bottom:clamp(68px,8vw,105px); }
+.home-page-storybook .faq-preview-list { display:grid; gap:12px; border:0; }
+.home-page-storybook .faq-preview-item { border:3px solid var(--home-cocoa); border-radius:15px; background:#fff8ea; box-shadow:4px 5px rgba(42,23,14,.1); }
+.home-page-storybook .faq-preview-item:nth-child(even) { background:#fffdf8; transform:rotate(.4deg); }
+.home-page-storybook .faq-preview-item:nth-child(odd) { transform:rotate(-.3deg); }
+.home-page-storybook .faq-preview-item button { grid-template-columns:32px 1fr 24px; gap:12px; padding:17px; color:var(--home-cocoa); font:700 16px/1.3 var(--display); }
+.home-page-storybook .faq-preview-index { color:var(--home-toffee-deep); }
+.home-page-storybook .faq-plus { display:grid; width:26px; height:26px; place-items:center; border:2px solid var(--home-cocoa); border-radius:50%; background:var(--home-honey-soft); color:var(--home-cocoa); font:700 16px var(--sans); }
+.home-page-storybook .faq-preview-answer { padding:0 20px 15px 61px; }
+.home-page-storybook .faq-preview-answer p { max-width:520px; margin:0; color:var(--home-cocoa-soft); font-size:13px; line-height:1.7; }
+.home-page-storybook .home-final-cta { position:relative; overflow:hidden; padding-block:clamp(86px,10vw,126px) clamp(78px,9vw,108px); border-top:3px solid var(--home-cocoa); background:linear-gradient(180deg,#fbe3b4 0%,#fff1d8 100%); }
+.home-page-storybook .final-cta-inner { z-index:1; }
+.home-page-storybook .final-cta-inner h2 { color:var(--home-cocoa); font:800 clamp(42px,6vw,78px)/.96 var(--display); letter-spacing:-.06em; }
+.home-page-storybook .final-cta-inner h2 em { color:var(--home-toffee-deep); font-style:normal; }
+.home-page-storybook .final-cta-inner > p:not(.eyebrow) { max-width:560px; color:var(--home-cocoa-soft); font-size:13px; line-height:1.75; }
+.home-page-storybook .final-cta-inner .eyebrow { color:var(--home-toffee-deep); }
+.home-page-storybook .final-cta-star { top:12%; right:18%; color:var(--home-toffee); animation:home-star-twinkle 3.2s ease-in-out infinite; }
+.home-page-storybook .final-cta-script { color:var(--home-toffee-deep); font:italic 24px var(--serif); }
+.home-page-storybook .final-cta-paw { position:absolute; top:12%; left:16%; color:rgba(162,74,26,.22); transform:rotate(-18deg); }
+.home-page-storybook .final-cta-paw svg { width:42px; }
+.home-page-storybook .final-cta-mascot-anchor { position:absolute; right:2%; bottom:0; width:clamp(100px,15vw,170px); height:125px; pointer-events:none; }
+.home-page-storybook .final-cta-mascot-anchor .tp-profile-mascot { position:absolute !important; inset:0; }
+.home-page-storybook .final-cta-mascot-anchor .tp-profile-mascot .pup-buddy { top:-2rem; right:0; width:100%; }
+.home-page-storybook .final-cta-mascot-anchor .pup-bubble { display:none; }
+@keyframes home-star-twinkle { 50% { opacity:.5; transform:rotate(12deg) scale(.88); } }
+@media (max-width:1023px) {
+  .home-page-storybook .trust-section { grid-template-columns:1fr; gap:32px; }
+  .home-page-storybook .trust-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .home-page-storybook .home-journey-grid { gap:12px; }
+}
+@media (max-width:760px) {
+  .home-page-storybook .home-hero-storybook { min-height:690px; padding:36px 16px 0; }
+  .home-page-storybook .hero-story-copy { padding-inline:5px; }
+  .home-page-storybook .hero-story-copy h1 { font-size:clamp(42px,10vw,64px); }
+  .home-page-storybook .hero-story-copy .hero-description { max-width:500px; margin-top:16px; }
+  .home-page-storybook .hero-stage { --hero-quilt-height:67px; width:calc(100vw - 8px); height:220px; min-height:220px; }
+  .home-page-storybook .hero-puppy-peek { width:clamp(68px,13vw,92px); height:128px; }
+  .home-page-storybook .hero-puppy-peek:nth-child(2),.home-page-storybook .hero-puppy-peek:nth-child(5) { width:clamp(72px,14vw,98px); }
+  .home-page-storybook .hero-puppy-name { display:none; }
+  .home-page-storybook .hero-mascot-anchor { bottom:42px; width:166px; height:145px; }
+  .home-page-storybook .home-puppy-doors { grid-template-columns:repeat(2,minmax(0,1fr)); gap:30px 16px; }
+  .home-page-storybook .puppy-card-plaque { min-height:64px; }
+  .home-page-storybook .puppy-card-plaque h3 { font-size:17px; }
+  .home-page-storybook .ways-signpost { width:100%; gap:8px; margin-bottom:30px; }
+  .home-page-storybook .ways-signpost-board { min-width:0; padding:11px 10px; font-size:10px; }
+  .home-page-storybook .ways-grid { grid-template-columns:1fr; gap:24px; }
+  .home-page-storybook .way-card,.home-page-storybook .way-card-2 { transform:none; }
+  .home-page-storybook .journey-route { display:none; }
+  .home-page-storybook .home-journey-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .home-page-storybook .family-layout { grid-template-columns:1fr; gap:25px; }
+  .home-page-storybook .family-quote { max-width:none; }
+  .home-page-storybook .family-photo-wall { gap:15px; }
+  .home-page-storybook .final-cta-mascot-anchor { right:-10px; width:112px; height:96px; opacity:.9; }
+  .home-page-storybook .final-cta-paw { left:6%; top:8%; }
+}
+@media (max-width:520px) {
+  .home-page-storybook .home-hero-storybook { min-height:680px; padding-top:29px; }
+  .home-page-storybook .hero-story-copy .hero-eyebrow { margin-bottom:18px; font-size:17px; }
+  .home-page-storybook .hero-story-copy h1 { font-size:clamp(38px,10.5vw,48px); }
+  .home-page-storybook .hero-story-copy .hero-description { font-size:13px; }
+  .home-page-storybook .hero-story-copy .hero-actions { width:100%; gap:9px; }
+  .home-page-storybook .hero-story-copy .button { min-height:46px; padding-inline:14px; font-size:10px; }
+  .home-page-storybook .hero-hand-note { margin-top:13px; font-size:12px; }
+  .home-page-storybook .hero-stage { height:195px; min-height:195px; }
+  .home-page-storybook .hero-puppy-peek { width:clamp(54px,14vw,72px); height:106px; }
+  .home-page-storybook .hero-puppy-peek:nth-child(2),.home-page-storybook .hero-puppy-peek:nth-child(5) { width:clamp(58px,15vw,78px); }
+  .home-page-storybook .hero-mascot-anchor { bottom:40px; width:142px; height:128px; }
+  .home-page-storybook .home-puppy-doors { gap:26px 12px; }
+  .home-page-storybook .puppy-card-plaque { padding-inline:2px; }
+  .home-page-storybook .puppy-card-plaque h3 { font-size:15px; }
+  .home-page-storybook .puppy-card-plaque p { font-size:9px; }
+  .home-page-storybook .puppy-door-availability { bottom:8px; left:8px; padding:5px 7px; font-size:8px; }
+  .home-page-storybook .puppy-door-peephole { width:21px; height:21px; }
+  .home-page-storybook .puppy-door-peephole svg { width:14px; }
+  .home-page-storybook .puppy-door-knob { right:6px; width:6px; height:6px; }
+  .home-page-storybook .home-journey-grid { grid-template-columns:1fr; gap:13px; }
+  .home-page-storybook .family-photo img { height:145px; }
+  .home-page-storybook .final-cta-mascot-anchor { opacity:.55; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .home-page-storybook .hero-puppy-photo,.home-page-storybook .final-cta-star,.home-page-storybook .breed-marquee-track { animation:none !important; }
+  .home-page-storybook .puppy-door-leaf,.home-page-storybook .puppy-preview-card,.home-page-storybook .family-photo,.home-page-storybook .button { transition:none !important; }
+  .home-page-storybook .puppy-preview-card:hover { transform:none; }
+}

@@ -32,8 +32,8 @@ export default function HomePage() {
   if (!content) return <div className="home-loading" aria-label="Loading homepage"><span>Every puppy is family</span></div>;
 
   return (
-    <>
-      <HomeHero />
+    <div className="home-page-storybook">
+      <HomeHero puppies={content.puppies} />
       <BreedShowcase />
       <FeaturedPuppies puppies={content.puppies} />
       <WaysToMeet ways={content.ways} />
@@ -43,6 +43,6 @@ export default function HomePage() {
       <HappyFamiliesPreview family={content.family} />
       <FaqPreview faqs={content.faqs} />
       <FinalCallToAction />
-    </>
+    </div>
   );
 }

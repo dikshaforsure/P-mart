@@ -365,3 +365,11 @@ GitHub Actions [run #30](https://github.com/dikshaforsure/P-mart/actions/runs/45
 The directly inspected \`src/templates/contact.html\` shows \`+971 54 167 6733\` in its call and WhatsApp links; an earlier crawl note recorded \`+971 50 000 0000\` and a different provider-style WhatsApp link. The destination retains its pre-existing WhatsApp helper and does not show a phone number pending confirmation. The form remains an explicit WhatsApp handoff, not API submission or persistent contact delivery.
 
 No real-browser checks at the requested viewport sizes, screenshots, live media validation, manual message send, rights approval or deployment were performed.
+
+
+## Phase 6 — Homepage storybook refinement
+
+**Date:** 25 November 2026  
+**Scope:** Homepage visual refinement in the existing React/Vite application.
+
+Reused the existing puppy mascot, paw SVG, six featured puppy records, family preview assets, content service and WhatsApp helper. Updated the hero, breed ribbon, puppy showroom, two-path signpost, journey milestones, trust cards, family polaroids, FAQ preview and final CTA. Added two focused component tests. New CSS is scoped under `.home-page-storybook`; no new dependency was introduced. Automated CI and browser QA must be checked separately before marking the phase verified.
