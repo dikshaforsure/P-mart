@@ -397,51 +397,62 @@ Do not call the site pixel-perfect before this is performed and documented.
 
 ---
 
-## 9. Next planned phase — Phase 6: Homepage reference-fidelity refinement
+## 9. Next planned phase — Phase 7: Integrated browser and responsive QA
 
-Phase 5 is complete. The next implementation scope is a focused homepage comparison/refinement, not a redesign.
+Phase 6 homepage implementation is complete and committed. Do not restart or reimplement it unless a real-browser comparison demonstrates a specific defect.
 
-Before implementation, inspect the latest current homepage and matching source template/components. At minimum review:
+**Verified Phase 6 code commit:** `184424063be64b111b6c7bf763acff9a7a99075a`  
+**Phase 6 implementation CI:** [run #36](https://github.com/dikshaforsure/P-mart/actions/runs/45552850391) — passed focused public-page/route tests, full frontend suite and production build.  
+**Latest documented branch commit at this handoff update:** fetch the live `develop` head; never assume this historical value is still current.
 
-- frontend/src/pages/HomePage.jsx
-- All homepage sections under frontend/src/components/home/
-- frontend/src/data/siteContent.js
-- frontend/src/data/referenceAssets.js
-- frontend/src/styles/index.css
-- Source homepage template and reference homepage components/motion/CSS.
+### Phase 7 objective
 
-Preserve the existing homepage content/service boundaries and all working sections. Identify actual gaps in:
-- Hero composition and imagery.
-- Breed strip/marquee.
-- Featured puppy cards and CTA.
-- Two ways to meet.
-- Homepage journey.
-- WhatsApp-style enquiry illustration.
-- Trust highlights.
-- Happy Families preview.
-- FAQ preview.
-- Final CTA.
-- Homepage-only mascot/scroll scene interactions where source evidence confirms them.
+Perform real-browser visual, responsive, accessibility and interaction QA across every implemented public route. Compare the running destination application with the designated live reference site `https://puppy.instabizweb.com/`. Automated jsdom tests and a successful production build are not substitutes for this work.
 
-Do not confuse homepage-only motion modules with profile animations:
-- ReferencePuppyJourney is homepage-specific through the reference ScrollPuppy integration.
-- PuppyDriver is only initialized for explicitly selected reference routes.
-- Global pointer paw trail is separate.
-Do not copy motion systems blindly. Use scoped, cleanup-safe implementation and reduced-motion support.
+### Required viewports
 
-Do not change catalogue, profile or Phase 4/5 page implementations unless a clearly shared regression is proven and documented.
+- 1440 × 900
+- 1280 × 800
+- 1024 × 768
+- 768 × 1024
+- 390 × 844
+- 375 × 812
 
-### Phase 6 acceptance
+Use browser/device emulation or actual devices where possible. Record browser name/version, viewport, commit SHA, observed issue and evidence for each material finding. Capture screenshots for the clone and reference when permitted by the available tools.
 
-- Homepage section sequence and content are source-grounded.
-- Real imagery uses existing/verified supplied-host assets; no stock substitutions.
-- Composition, spacing, typography and responsive grid are compared against reference.
-- Existing links/CTAs resolve correctly.
-- Decorative interactions work, clean up observers/listeners/RAF and respect reduced motion.
-- Focused homepage tests and complete frontend suite pass.
-- Production build passes.
-- Browser comparison is recorded honestly.
+### Public routes and interactions to verify
 
+- `/`: hero, six-puppy portrait lineup, image crops/focal positions, quilt edge, mascot, breed ribbon, puppy-door focus/hover/touch behavior, signpost, four-step route, existing WhatsApp illustration, trust cards, family preview, FAQ preview and final CTA.
+- `/puppies`: catalogue listing, every supported filter, combined filters, query-string persistence, result count, reset and profile navigation.
+- `/puppies/:slug`: representative available and sold profiles; correct chapter counts/content; gallery navigation/lightbox/video fallback; available-only journey; adjacent puppy links; enquiry validation and WhatsApp handoff.
+- `/gone-home`: all sold puppy cards, order, image fallback and profile links.
+- `/happy-families`: all 64 family photos, captions, lightbox previous/next, close, Escape, arrow keys, touch swipe, backdrop, focus restoration and body-scroll lock.
+- `/how-it-works`: local/imported tabs, keyboard behavior, anchors, responsive cards and CTAs.
+- `/faq`: search, clear, live result count, accordion open/close and empty state.
+- `/contact`: field order, required/optional validation, selector, honeypot, showroom image fallback, responsive letter order and explicit WhatsApp handoff. Do not submit a real message without permission.
+- Shared header/mobile menu/footer, direct route loads, refresh/deep links, browser back/forward and not-found route.
+
+### Visual and technical checks
+
+- No unintended horizontal overflow at any required viewport or 200% browser zoom.
+- Check layout at orientation changes and tablet breakpoints; inspect sticky/fixed elements, image aspect ratios, typography wrapping, card gaps and CTA visibility.
+- Test keyboard-only navigation, visible focus, semantic headings/landmarks/labels, accessible names, dialog focus behavior and touch target usability.
+- Verify `prefers-reduced-motion`; decorative animation must not interfere with navigation or reading.
+- Inspect console errors, failed network requests and remote image/video loading when the browser environment allows it.
+- Do not claim that remote assets load correctly, that video playback works or that page motion is correct unless directly tested.
+
+### Work policy and exit criteria
+
+1. Fetch the current `develop` head and inspect the current code before testing.
+2. Use the live reference website as the designated external reference and the destination repository as the implementation source of truth.
+3. Create an issue/evidence list before editing. Separate real functional defects from subjective styling differences.
+4. Fix only verified defects with the smallest possible changes. Do not redesign completed pages or alter data, contact configuration, routes, content or shared components without clear evidence and justification.
+5. Add focused regression tests for defects where applicable; retain the full-suite and production-build workflow.
+6. Re-run focused tests, full `npm test`, and `npm run build`; inspect the exact diff.
+7. Update `AGENT.md`, `PROJECT_PROGRESS.md`, `TESTING.md`, `PROJECT_ANALYSIS.md` and/or `AI_PROMPT_LOG.md` as appropriate. Record all screenshots/manual checks and limitations.
+8. Commit only to `develop`, verify the remote commit, and confirm the corresponding CI result.
+
+If a real browser is unavailable, do not invent browser results or mark Phase 7 complete. Report the exact limitation and provide a precise manual QA checklist the user can execute.
 ---
 
 ## 10. Following phases
