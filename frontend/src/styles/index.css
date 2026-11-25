@@ -3363,20 +3363,25 @@ img, video { display: block; max-width: 100%; }
 
 
 /* Full-screen storybook curtain shown between public-page route changes. */
+
+.app-page-content {
+  min-height: 100vh;
+}
+
 .page-transition-curtain {
   position: fixed;
   z-index: 220;
   inset: 0;
   overflow: hidden;
-  border-top: 6px solid #2a170e;
   background-color: #ffe7bd;
   background-image:
-    radial-gradient(ellipse at 50% 47%, rgba(255,253,245,.98) 0%, rgba(255,249,232,.75) 28%, rgba(255,231,189,0) 61%),
+    radial-gradient(ellipse at 50% 47%, rgba(255,253,245,.98) 0%, rgba(255,249,232,.76) 28%, rgba(255,231,189,0) 62%),
     linear-gradient(45deg, transparent 48.7%, rgba(150,112,69,.16) 49.3%, rgba(150,112,69,.16) 50.2%, transparent 50.8%),
     linear-gradient(-45deg, transparent 48.7%, rgba(150,112,69,.16) 49.3%, rgba(150,112,69,.16) 50.2%, transparent 50.8%);
   background-size: auto, 96px 96px, 96px 96px;
   color: #8f4319;
   pointer-events: auto;
+  touch-action: none;
   will-change: transform;
 }
 .page-transition-curtain[data-phase="entering"] {
@@ -3404,19 +3409,23 @@ img, video { display: block; max-width: 100%; }
 }
 .page-transition-runner {
   position: absolute;
-  top: calc(50% - clamp(60px,4.8vw,90px));
+  top: calc(50% - 118px);
   left: 0;
-  width: clamp(100px,8.5vw,172px);
+  width: clamp(132px,10vw,190px);
   opacity: 0;
-  transform: translate3d(-110%,0,0);
+  transform: translate3d(-150%,0,0);
 }
 .page-transition-curtain[data-phase="running"] .page-transition-runner {
   opacity: 1;
-  animation: page-transition-run-across 3s linear both;
+  animation: page-transition-run-across 3.2s linear both;
+}
+.page-transition-curtain[data-phase="exiting"] .page-transition-runner {
+  opacity: 1;
+  transform: translate3d(50vw,0,0);
 }
 @keyframes page-transition-run-across {
-  from { transform: translate3d(-110%,0,0); }
-  to { transform: translate3d(58vw,0,0); }
+  from { transform: translate3d(-150%,0,0); }
+  to { transform: translate3d(50vw,0,0); }
 }
 .teddy-runner-svg {
   display: block;
@@ -3427,51 +3436,76 @@ img, video { display: block; max-width: 100%; }
 .page-transition-curtain[data-phase="running"] .teddy-runner-body {
   transform-box: fill-box;
   transform-origin: center;
-  animation: teddy-runner-bounce .36s ease-in-out infinite alternate;
+  animation: teddy-runner-bounce .34s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-head {
-  transform-box: view-box;
-  transform-origin: 212px 145px;
-  animation: teddy-runner-head-bob .44s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 68%;
+  animation: teddy-runner-head-bob .42s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-tail {
-  transform-box: view-box;
-  transform-origin: 84px 150px;
+  transform-box: fill-box;
+  transform-origin: 96% 90%;
   animation: teddy-runner-tail-wag .3s ease-in-out infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-ear--left {
+  transform-box: fill-box;
+  transform-origin: 82% 18%;
+  animation: teddy-runner-ear-flop-left .42s ease-in-out infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-ear--right {
+  transform-box: fill-box;
+  transform-origin: 18% 18%;
+  animation: teddy-runner-ear-flop-right .42s ease-in-out infinite alternate;
 }
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg {
   transform-box: fill-box;
-  transform-origin: center 10%;
+  transform-origin: center 5%;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-leg--rear-far {
   animation: teddy-runner-leg-cycle .34s ease-in-out infinite alternate;
 }
-.page-transition-curtain[data-phase="running"] .teddy-runner-leg--front-far,
+.page-transition-curtain[data-phase="running"] .teddy-runner-leg--front-far {
+  animation: teddy-runner-leg-cycle .34s ease-in-out -.17s infinite alternate;
+}
 .page-transition-curtain[data-phase="running"] .teddy-runner-leg--rear-near {
-  animation-delay: -.17s;
+  animation: teddy-runner-leg-cycle .38s ease-in-out -.095s infinite alternate;
+}
+.page-transition-curtain[data-phase="running"] .teddy-runner-leg--front-near {
+  animation: teddy-runner-leg-cycle .38s ease-in-out -.285s infinite alternate;
 }
 @keyframes teddy-runner-bounce {
-  from { transform: translateY(1px); }
-  to { transform: translateY(-3px); }
+  from { transform: translateY(1px) rotate(-.5deg); }
+  to { transform: translateY(-4px) rotate(.5deg); }
 }
 @keyframes teddy-runner-head-bob {
-  from { transform: rotate(-1.5deg); }
-  to { transform: rotate(1.5deg); }
+  from { transform: rotate(-1.8deg); }
+  to { transform: rotate(1.8deg); }
 }
 @keyframes teddy-runner-tail-wag {
   from { transform: rotate(-16deg); }
-  to { transform: rotate(16deg); }
+  to { transform: rotate(17deg); }
+}
+@keyframes teddy-runner-ear-flop-left {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(4deg); }
+}
+@keyframes teddy-runner-ear-flop-right {
+  from { transform: rotate(3deg); }
+  to { transform: rotate(-4deg); }
 }
 @keyframes teddy-runner-leg-cycle {
-  from { transform: rotate(-22deg) translateY(-1px); }
-  to { transform: rotate(22deg) translateY(1px); }
+  from { transform: rotate(-27deg) translateY(-1px); }
+  to { transform: rotate(27deg) translateY(2px); }
 }
 .page-transition-paw {
   position: absolute;
   display: block;
-  width: clamp(19px,1.6vw,27px);
+  width: clamp(17px,1.15vw,23px);
   height: auto;
   color: #c98251;
   opacity: 0;
-  transform: rotate(var(--paw-rotation)) scale(.55);
+  transform: rotate(var(--paw-rotation)) scale(.5);
   transform-origin: center;
 }
 .page-transition-paw svg {
@@ -3480,7 +3514,11 @@ img, video { display: block; max-width: 100%; }
   height: auto;
 }
 .page-transition-curtain[data-phase="running"] .page-transition-paw {
-  animation: page-transition-paw-step .28s ease-out var(--paw-delay) both;
+  animation: page-transition-paw-step .24s ease-out var(--paw-delay) both;
+}
+.page-transition-curtain[data-phase="exiting"] .page-transition-paw {
+  opacity: .88;
+  transform: rotate(var(--paw-rotation)) scale(1);
 }
 @keyframes page-transition-paw-step {
   from { opacity: 0; transform: rotate(var(--paw-rotation)) scale(.48); }
@@ -3488,37 +3526,34 @@ img, video { display: block; max-width: 100%; }
 }
 .page-transition-message {
   position: absolute;
-  top: 61%;
+  top: calc(50% + 39px);
   left: 50%;
   width: max-content;
   max-width: calc(100% - 36px);
   margin: 0;
   color: #994919;
   text-align: center;
-  font: 700 clamp(19px,2vw,28px)/1.25 'Comic Sans MS','Segoe Print','Bradley Hand',cursive;
+  font: 700 clamp(20px,2vw,28px)/1.25 'Comic Sans MS','Segoe Print','Bradley Hand',cursive;
   letter-spacing: .005em;
-  opacity: 0;
-  transform: translate(-50%,8px);
-}
-.page-transition-curtain[data-phase="running"] .page-transition-message {
-  animation: page-transition-message-in .4s ease-out .18s both;
-}
-@keyframes page-transition-message-in {
-  to { opacity: 1; transform: translate(-50%,0); }
+  opacity: 1;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 @media (max-width: 600px) {
   .page-transition-curtain {
     background-size: auto, 72px 72px, 72px 72px;
   }
   .page-transition-runner {
-    top: calc(50% - 60px);
+    top: calc(50% - 94px);
+    width: 140px;
   }
   .page-transition-message {
-    top: 61%;
-    font-size: clamp(17px,4.3vw,21px);
+    top: calc(50% + 40px);
+    max-width: calc(100% - 24px);
+    font-size: clamp(17px,4.4vw,21px);
   }
   .page-transition-paw {
-    width: 18px;
+    width: 17px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3526,10 +3561,10 @@ img, video { display: block; max-width: 100%; }
   .page-transition-curtain[data-phase="exiting"],
   .page-transition-curtain[data-phase="running"] .page-transition-runner,
   .page-transition-curtain[data-phase="running"] .page-transition-paw,
-  .page-transition-curtain[data-phase="running"] .page-transition-message,
   .page-transition-curtain[data-phase="running"] .teddy-runner-body,
   .page-transition-curtain[data-phase="running"] .teddy-runner-head,
   .page-transition-curtain[data-phase="running"] .teddy-runner-tail,
+  .page-transition-curtain[data-phase="running"] .teddy-runner-ear,
   .page-transition-curtain[data-phase="running"] .teddy-runner-leg {
     animation: none !important;
   }
@@ -3540,9 +3575,8 @@ img, video { display: block; max-width: 100%; }
     opacity: 1;
     transform: translate3d(0,0,0);
   }
-  .page-transition-curtain[data-phase="running"] .page-transition-paw,
-  .page-transition-curtain[data-phase="running"] .page-transition-message {
-    opacity: 1;
-    transform: none;
+  .page-transition-curtain[data-phase="running"] .page-transition-paw {
+    opacity: .88;
+    transform: rotate(var(--paw-rotation)) scale(1);
   }
 }

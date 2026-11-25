@@ -1,84 +1,103 @@
 export default function TeddyRunner() {
   return (
     <svg
-          className="teddy-runner-svg"
-          data-testid="teddy-runner-svg"
-          viewBox="45 25 245 210"
-          style={{ overflow: 'visible' }}
-          role="presentation"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <g data-p="root">
-            <ellipse data-p="shadow" className="teddy-runner-shadow" cx="150" cy="230" rx="92" ry="7" fill="#2a170e" opacity=".13" transform="translate(0 0) scale(1 1)" style={{ transformBox: 'fill-box', transformOrigin: 'center' }} />
-            <g data-p="body" className="teddy-runner-body" transform="translate(0 0) rotate(0 196 206) translate(196 0) scale(1 1) translate(-196 0)" opacity="1">
-              <g data-p="bf" className="teddy-runner-leg teddy-runner-leg--rear-far" transform="translate(94 192) rotate(0)" opacity="1">
-                <path d="M-14 -14 C-14 4 -12 18 -12 27 C-12 34 -7 36 0 36 C9 36 13 33 13 27 C13 18 14 4 14 -14Z" fill="#e4a352" />
-                <path d="M-14 -14 C-14 4 -12 18 -12 27 C-12 34 -7 36 0 36 C9 36 13 33 13 27 C13 18 14 4 14 -14" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-                <path d="M-3.5 29 v5 M4.5 29 v5" stroke="#2a170e" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-              </g>
-              <g data-p="ff" className="teddy-runner-leg teddy-runner-leg--front-far" transform="translate(168 192) rotate(0)">
-                <path d="M-11 -14 C-11 4 -12 18 -12 27 C-12 34 -7 36 0 36 C9 36 13 33 13 27 C13 18 11 4 11 -14Z" fill="#e4a352" />
-                <path d="M-11 -14 C-11 4 -12 18 -12 27 C-12 34 -7 36 0 36 C9 36 13 33 13 27 C13 18 11 4 11 -14" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-                <path d="M-3.5 29 v5 M4.5 29 v5" stroke="#2a170e" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-              </g>
-              <g data-p="tail" className="teddy-runner-tail" transform="rotate(-20 84 150)">
-                <path d="M86 152 C80 146 76 140 74 136" stroke="#2a170e" strokeWidth="9" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-                <path d="M86 152 C80 146 76 140 74 136" stroke="#f2be6b" strokeWidth="4" fill="none" strokeLinecap="round" />
-                <path d="M70.0 110.0Q78.1 105.0 80.9 113.7Q90.5 114.8 86.7 123.2Q93.4 129.9 84.7 134.0Q85.2 143.1 75.8 141.0Q70.0 148.3 64.2 141.0Q54.8 143.1 55.3 134.0Q46.6 129.9 53.3 123.2Q49.5 114.8 59.1 113.7Q61.9 105.0 70.0 110.0Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" />
-              </g>
-              <g data-p="bn" className="teddy-runner-leg teddy-runner-leg--rear-near" transform="translate(110 194) rotate(0)" opacity="1">
-                <path d="M-15 -14 C-15 4 -12 16 -12 25 C-12 32 -7 34 0 34 C9 34 13 31 13 25 C13 16 15 4 15 -14Z" fill="#f2be6b" />
-                <path d="M-15 -14 C-15 4 -12 16 -12 25 C-12 32 -7 34 0 34 C9 34 13 31 13 25 C13 16 15 4 15 -14" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-                <path d="M-3.5 27 v5 M4.5 27 v5" stroke="#2a170e" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-              </g>
-              <path d="M76.8 175.6Q69.0 167.9 78.2 160.7Q76.6 151.8 90.3 147.3Q95.2 138.9 110.9 137.9Q121.6 131.3 136.7 134.0Q151.1 130.5 162.9 136.4Q178.7 136.4 185.3 144.5Q199.7 148.2 199.7 157.1Q210.3 163.7 203.9 171.9Q208.7 180.4 197.0 186.3Q195.3 195.2 180.3 198.0Q172.3 205.7 156.6 204.8Q143.7 210.0 130.0 205.6Q114.5 207.4 105.1 200.2Q89.7 198.3 86.3 189.6Q73.6 184.3 76.8 175.6Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" />
-              <path d="M182.7 196.4Q169.4 196.9 166.6 183.0Q156.1 174.1 162.3 161.5Q159.6 147.6 171.9 142.2Q178.2 129.7 191.0 134.0Q203.3 128.7 210.5 140.8Q223.1 145.2 221.3 159.3Q228.4 171.5 218.5 181.0Q216.6 195.1 203.2 195.7Q193.3 205.1 182.7 196.4Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" />
-              <g data-p="fn" className="teddy-runner-leg teddy-runner-leg--front-near" transform="translate(186 194) rotate(0)">
-                <path d="M-12 -14 C-12 4 -12 16 -12 25 C-12 32 -7 34 0 34 C9 34 13 31 13 25 C13 16 12 4 12 -14Z" fill="#f2be6b" />
-                <path d="M-12 -14 C-12 4 -12 16 -12 25 C-12 32 -7 34 0 34 C9 34 13 31 13 25 C13 16 12 4 12 -14" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-                <path d="M-3.5 27 v5 M4.5 27 v5" stroke="#2a170e" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-              </g>
-            </g>
-            <g data-p="haunch" className="teddy-runner-haunch" opacity="1" transform="translate(0 0)">
-              <path d="M80.0 204.0Q75.1 194.9 85.7 189.9Q88.4 180.2 100.7 181.2Q110.0 174.6 119.3 181.2Q131.6 180.2 134.3 189.9Q144.9 194.9 140.0 204.0Q144.9 213.1 134.3 218.1Q131.6 227.8 119.3 226.8Q110.0 233.4 100.7 226.8Q88.4 227.8 85.7 218.1Q75.1 213.1 80.0 204.0Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" />
-              <path d="M112 214 C126 212 142 214 146 221 C148 226 144 229 136 229 L116 229 C108 229 104 224 106 219 Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" />
-              <path d="M132 222v5M139 222v5" stroke="#2a170e" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-            </g>
-            <g data-p="head" className="teddy-runner-head" transform="translate(0 4) rotate(0 212 100)">
-              <path d="M178 146 Q212 162 246 146 L246 154 Q212 170 178 154 Z" fill="#a24a1a" stroke="#2a170e" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
-              <path d="M212 160 C212 156 206 155 206 159.4 C206 163 212 166.6 212 168.4 C212 166.6 218 163 218 159.4 C218 155 212 156 212 160 Z" fill="#fbe3b4" stroke="#2a170e" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" />
-              <path data-p="earL" d="M177.1 78.7Q186.9 70.8 186.6 87.4Q196.0 89.9 189.9 105.5Q195.2 117.3 185.5 126.0Q184.7 142.8 175.2 141.2Q168.7 156.5 162.9 145.3Q153.1 153.2 153.4 136.6Q144.0 134.1 150.1 118.5Q144.8 106.7 154.5 98.0Q155.3 81.2 164.8 82.8Q171.3 67.5 177.1 78.7Z" fill="#e4a352" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" transform="rotate(-6 174 82)" />
-              <path data-p="earR" d="M246.9 78.7Q252.7 67.5 259.2 82.8Q268.7 81.2 269.5 98.0Q279.2 106.7 273.9 118.5Q280.0 134.1 270.6 136.6Q270.9 153.2 261.1 145.3Q255.3 156.5 248.8 141.2Q239.3 142.8 238.5 126.0Q228.8 117.3 234.1 105.5Q228.0 89.9 237.4 87.4Q237.1 70.8 246.9 78.7Z" fill="#e4a352" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" transform="rotate(6 250 82)" />
-              <path d="M212.0 54.0Q223.4 48.2 231.5 57.5Q244.5 56.1 248.1 67.5Q260.7 70.7 259.1 82.4Q269.4 89.7 263.0 100.0Q269.4 110.3 259.1 117.6Q260.7 129.3 248.1 132.5Q244.5 143.9 231.5 142.5Q223.4 151.8 212.0 146.0Q200.6 151.8 192.5 142.5Q179.5 143.9 175.9 132.5Q163.3 129.3 164.9 117.6Q154.6 110.3 161.0 100.0Q154.6 89.7 164.9 82.4Q163.3 70.7 175.9 67.5Q179.5 56.1 192.5 57.5Q200.6 52.0 212.0 54.0Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" />
-              <path d="M195.0 52.0Q190.7 45.8 200.0 43.5Q203.2 36.9 212.0 40.0Q220.8 36.9 224.0 43.5Q233.3 45.8 229.0 52.0Q233.3 58.2 224.0 60.5Q220.8 67.1 212.0 64.0Q203.2 67.1 200.0 60.5Q190.7 58.2 195.0 52.0Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
-              <path d="M188 120 C188 106 200 100 212 100 C224 100 236 106 236 120 C236 133 225 140 212 140 C199 140 188 133 188 120 Z" fill="#fbe3b4" />
-              <circle cx="181" cy="116" r="7" fill="#f9b9a6" opacity="0.85" />
-              <circle cx="243" cy="116" r="7" fill="#f9b9a6" opacity="0.85" />
-              <g data-p="eyes" transform="translate(0 0)">
-                <g data-p="open" opacity="0">
-                  <g data-p="blink" transform="translate(0 0) scale(1 1)">
-                    <ellipse cx="194" cy="98" rx="7.4" ry="8.6" fill="#2a170e" />
-                    <ellipse cx="230" cy="98" rx="7.4" ry="8.6" fill="#2a170e" />
-                    <circle cx="196.6" cy="94.6" r="2.7" fill="#fff" />
-                    <circle cx="232.6" cy="94.6" r="2.7" fill="#fff" />
-                    <circle cx="192" cy="101.2" r="1.2" fill="#fff" />
-                    <circle cx="228" cy="101.2" r="1.2" fill="#fff" />
-                  </g>
-                </g>
-              </g>
-              <path data-p="happy" d="M186.5 101 Q194 91.5 201.5 101 M222.5 101 Q230 91.5 237.5 101" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" fill="none" opacity="1" />
-              <path data-p="shut" d="M186.5 97 Q194 103.5 201.5 97 M222.5 97 Q230 103.5 237.5 97" stroke="#2a170e" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round" fill="none" opacity="0" />
-              <path d="M204.5 111.5 Q212 107.2 219.5 111.5 Q218.2 118.4 212 120 Q205.8 118.4 204.5 111.5 Z" fill="#2a170e" />
-              <path d="M212 120 V124.5 M212 124.5 Q207.2 129.6 202.8 125.2 M212 124.5 Q216.8 129.6 221.2 125.2" stroke="#2a170e" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" fill="none" />
-              <path data-p="tongue" d="M207.6 127.4 Q212 136.6 216.4 127.4 Z" fill="#e98c8c" stroke="#2a170e" strokeWidth="2.2" strokeLinejoin="round" opacity="1" />
-              <g data-p="mouth" opacity="0">
-                <path d="M203 126 Q212 122 221 126 Q219 138 212 139 Q205 138 203 126 Z" fill="#6b2a1c" stroke="#2a170e" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round" />
-                <path d="M206.5 133.5 Q212 130 217.5 133.5 Q215 138 212 138 Q209 138 206.5 133.5 Z" fill="#e98c8c" />
-              </g>
-            </g>
-            
-          </g>
-        </svg>
+      className="teddy-runner-svg"
+      data-testid="teddy-runner-svg"
+      viewBox="0 0 300 240"
+      role="presentation"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <ellipse className="teddy-runner-shadow" data-part="ground-shadow" cx="151" cy="221" rx="105" ry="7" fill="#4b2b17" opacity=".13" />
+
+      <g className="teddy-runner-tail" data-part="tail">
+        <path d="M82 139 C65 132 57 119 56 105" fill="none" stroke="#2a170e" strokeWidth="13" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M82 139 C65 132 57 119 56 105" fill="none" stroke="#f2be6b" strokeWidth="7" strokeLinecap="round" />
+        <path d="M49 77 C57 71 65 76 66 85 C76 86 81 96 74 103 C77 113 68 120 59 115 C51 123 41 118 41 109 C30 107 28 97 35 91 C31 82 39 74 49 77Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round" />
+        <path d="M42 94 Q50 88 56 94 M58 82 Q64 88 63 94" fill="none" stroke="#f8d995" strokeWidth="3" strokeLinecap="round" />
+      </g>
+
+      <g transform="translate(103 151)">
+        <g className="teddy-runner-leg teddy-runner-leg--rear-far" data-part="rear-far-leg" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
+          <path d="M-11 -5 C-12 12 -15 29 -13 43 C-12 53 -5 57 3 56 C12 55 16 49 13 41 C10 27 12 10 10 -5Z" fill="#e7ad5e" />
+          <path d="M-12 43 C-9 49 9 49 13 41 C19 52 12 62 0 62 C-11 62 -18 55 -12 43Z" fill="#f2be6b" />
+          <path d="M-4 52 L-4 57 M4 52 L4 57" fill="none" strokeWidth="2.5" />
+        </g>
+      </g>
+
+      <g transform="translate(184 151)">
+        <g className="teddy-runner-leg teddy-runner-leg--front-far" data-part="front-far-leg" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
+          <path d="M-10 -6 C-11 11 -12 28 -10 43 C-9 53 -3 57 5 56 C14 55 18 49 14 41 C10 27 11 11 10 -6Z" fill="#e7ad5e" />
+          <path d="M-10 43 C-7 49 11 49 15 41 C21 52 14 62 2 62 C-9 62 -16 55 -10 43Z" fill="#f2be6b" />
+          <path d="M-2 52 L-2 57 M6 52 L6 57" fill="none" strokeWidth="2.5" />
+        </g>
+      </g>
+
+      <g className="teddy-runner-body" data-part="body">
+        <path d="M78 132 C72 120 80 106 94 103 C100 91 117 89 129 97 C141 89 158 92 169 100 C184 95 200 105 203 118 C214 127 209 145 198 151 C193 164 177 169 163 164 C151 172 135 169 125 161 C109 169 91 159 89 149 C79 147 73 139 78 132Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="4.5" strokeLinejoin="round" />
+        <path d="M91 109 Q98 98 109 102 M123 99 Q136 91 147 100 M161 102 Q176 96 185 108" fill="none" stroke="#f9d995" strokeWidth="4" strokeLinecap="round" opacity=".85" />
+        <path d="M88 135 Q95 127 103 133 M151 151 Q162 159 174 152" fill="none" stroke="#dfa04d" strokeWidth="3" strokeLinecap="round" opacity=".5" />
+      </g>
+
+      <g transform="translate(128 154)">
+        <g className="teddy-runner-leg teddy-runner-leg--rear-near" data-part="rear-near-leg" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
+          <path d="M-12 -6 C-12 12 -16 29 -14 44 C-13 54 -5 58 4 57 C13 56 17 50 13 42 C10 27 12 10 10 -6Z" fill="#f2be6b" />
+          <path d="M-13 44 C-9 50 10 50 14 42 C20 53 13 63 1 63 C-10 63 -18 56 -13 44Z" fill="#f7cb7a" />
+          <path d="M-4 53 L-4 58 M5 53 L5 58" fill="none" strokeWidth="2.5" />
+        </g>
+      </g>
+
+      <g transform="translate(205 154)">
+        <g className="teddy-runner-leg teddy-runner-leg--front-near" data-part="front-near-leg" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
+          <path d="M-11 -6 C-12 12 -13 29 -11 44 C-10 54 -3 58 5 57 C14 56 18 50 14 42 C11 27 12 10 10 -6Z" fill="#f2be6b" />
+          <path d="M-11 44 C-7 50 11 50 15 42 C21 53 14 63 2 63 C-9 63 -17 56 -11 44Z" fill="#f7cb7a" />
+          <path d="M-3 53 L-3 58 M6 53 L6 58" fill="none" strokeWidth="2.5" />
+        </g>
+      </g>
+
+      <g className="teddy-runner-collar" data-part="collar" stroke="#2a170e" strokeLinejoin="round">
+        <path d="M181 139 Q213 153 246 137 L242 151 Q213 166 185 151Z" fill="#a24a1a" strokeWidth="3.5" />
+        <path d="M185 143 Q213 157 243 142" fill="none" stroke="#f6c56f" strokeWidth="2.3" />
+      </g>
+
+      <g className="teddy-runner-head" data-part="head">
+        <g className="teddy-runner-ear teddy-runner-ear--left" data-part="left-ear" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round">
+          <path d="M178 71 C165 62 151 69 153 84 C143 92 148 107 159 111 C158 125 171 132 183 124 C193 119 193 101 187 91Z" fill="#e7a352" />
+          <path d="M164 83 C157 88 160 101 170 108 C178 113 183 105 181 96 C178 87 171 80 164 83Z" fill="#d99042" strokeWidth="2.5" />
+          <path d="M160 80 Q166 73 174 80" fill="none" stroke="#f6c879" strokeWidth="3" strokeLinecap="round" />
+        </g>
+        <g className="teddy-runner-ear teddy-runner-ear--right" data-part="right-ear" stroke="#2a170e" strokeWidth="4" strokeLinejoin="round">
+          <path d="M250 69 C265 61 278 70 276 85 C286 95 279 109 268 112 C270 126 256 133 245 124 C235 117 237 101 243 91Z" fill="#e7a352" />
+          <path d="M265 82 C273 88 269 102 259 109 C251 114 246 106 249 97 C252 88 258 79 265 82Z" fill="#d99042" strokeWidth="2.5" />
+          <path d="M269 80 Q262 73 254 80" fill="none" stroke="#f6c879" strokeWidth="3" strokeLinecap="round" />
+        </g>
+
+        <path d="M213 39 C224 32 237 39 240 50 C253 48 264 57 263 70 C277 75 282 88 274 100 C283 112 276 126 264 130 C261 143 247 148 236 140 C225 151 209 148 202 139 C188 143 176 133 178 120 C164 113 164 98 174 88 C170 75 180 63 193 64 C196 50 204 42 213 39Z" fill="#f2be6b" stroke="#2a170e" strokeWidth="4.5" strokeLinejoin="round" />
+        <path d="M194 52 C198 43 208 42 215 48 C222 41 233 44 235 54" fill="none" stroke="#f8d995" strokeWidth="4" strokeLinecap="round" />
+        <g className="teddy-runner-tuft" data-part="head-tuft" stroke="#2a170e" strokeWidth="3.5">
+          <path d="M194 47 C186 41 191 31 201 32 C203 21 217 20 222 30 C233 27 241 37 234 46 C228 53 205 54 194 47Z" fill="#f6c879" />
+          <path d="M201 34 Q208 27 215 34 M222 32 Q230 31 232 39" fill="none" stroke="#ffe0a0" strokeWidth="2.4" strokeLinecap="round" />
+        </g>
+
+        <path d="M189 104 C190 91 200 85 213 85 C226 85 238 92 238 105 C238 122 226 132 213 132 C200 132 188 120 189 104Z" fill="#fbe3b4" />
+        <g className="teddy-runner-eyes" data-part="eyes">
+          <ellipse cx="195" cy="91" rx="6" ry="8" fill="#2a170e" />
+          <ellipse cx="230" cy="91" rx="6" ry="8" fill="#2a170e" />
+          <circle cx="197" cy="88" r="2.2" fill="#fff" />
+          <circle cx="232" cy="88" r="2.2" fill="#fff" />
+        </g>
+        <g className="teddy-runner-cheeks" data-part="cheeks">
+          <circle cx="184" cy="110" r="7" fill="#f6ad92" opacity=".85" />
+          <circle cx="242" cy="110" r="7" fill="#f6ad92" opacity=".85" />
+        </g>
+        <path className="teddy-runner-nose" data-part="nose" d="M205 105 Q213 100 221 105 Q220 114 213 115 Q206 114 205 105Z" fill="#2a170e" />
+        <path className="teddy-runner-mouth" data-part="mouth" d="M213 115 L213 121 M213 121 Q207 127 202 121 M213 121 Q219 127 224 121" fill="none" stroke="#2a170e" strokeWidth="2.6" strokeLinecap="round" />
+        <path className="teddy-runner-tongue" data-part="tongue" d="M208 125 Q213 134 218 125Z" fill="#e98c8c" stroke="#2a170e" strokeWidth="1.8" />
+      </g>
+
+      <g className="teddy-runner-tag" data-part="heart-tag">
+        <path d="M213 157 C204 147 194 157 200 165 C204 171 213 176 213 176 C213 176 224 169 226 163 C230 153 219 148 213 157Z" fill="#fbe3b4" stroke="#2a170e" strokeWidth="2.5" strokeLinejoin="round" />
+      </g>
+    </svg>
   );
 }
