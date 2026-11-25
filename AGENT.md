@@ -1,0 +1,550 @@
+# AGENT.md — TeddyPups Clone Project Handoff
+
+> **Purpose:** Persistent operating guide for every AI coding agent working on this repository. Read it before inspecting or editing code. Keep it current whenever implementation, verification, scope or project status changes.
+>
+> **Last updated:** 25 November 2026  
+> **Destination repository:** https://github.com/dikshaforsure/P-mart  
+> **Working branch:** develop  
+> **Reference site:** https://puppy.instabizweb.com/  
+> **Reference source:** https://github.com/Khushiii720/TeddyPups-Clone
+
+---
+
+## 1. Instructions for every new agent
+
+You are joining an existing project. Do not treat this repository as a fresh scaffold and do not rely on a previous chat transcript as the source of truth.
+
+Before doing anything:
+
+1. Read this entire file.
+2. Fetch the latest remote develop branch and record its exact HEAD.
+3. Inspect recent commits and the current contents of all files relevant to the task.
+4. Read the corresponding project notes in PROJECT_PROGRESS.md, PROJECT_ANALYSIS.md, AI_PROMPT_LOG.md, TESTING.md and TECHNICAL_DOCUMENTATION.md as needed.
+5. Inspect the matching source templates/data in the reference repository.
+6. Distinguish completed work from unverified visual behaviour and unresolved scope.
+7. Continue from the repository's actual state. Never restart, overwrite or duplicate work merely because the chat context changed.
+
+If a task is already complete, audit it against its acceptance criteria and report evidence. Do not implement it again without a demonstrated gap.
+
+### After every meaningful task or phase
+
+- Update this file with the new phase status, commits, verification, remaining work and any newly discovered constraints.
+- Update the relevant project documentation files.
+- Commit changes only to develop.
+- Fetch the changed remote files/commit again and verify the saved state.
+- Report exact test/build/browser verification. Clearly separate automated tests from manual browser checks.
+- Preserve historical phase records and previous verification evidence.
+
+When a chat is approaching its context limit, leave the repository in a committed, documented state where possible. The next chat should be able to resume by reading this file and inspecting the latest branch.
+
+---
+
+## 2. Project goal
+
+Build a responsive, reference-faithful React clone of the TeddyPups public website for the Blutec AI technical assignment.
+
+The public reference is the supplied host:
+
+- Website: https://puppy.instabizweb.com/
+- Source repository: https://github.com/Khushiii720/TeddyPups-Clone
+
+The clone should preserve the reference's warm, playful, editorial/storybook identity, puppy/family content, navigation and customer-contact journeys while keeping data and application structure maintainable.
+
+The project is not a recreation of the reference site's private backend. Do not pretend private API contracts, CRM behaviour, enquiry persistence or internal administration functionality are known when they are not exposed.
+
+---
+
+## 3. Repository and technical constraints
+
+### Destination
+
+- GitHub repository: dikshaforsure/P-mart
+- Primary development branch: develop
+- Never commit or push this project work to main.
+- Before each task, fetch the latest develop HEAD. Do not use a hard-coded old SHA as the current baseline.
+
+### Frontend stack
+
+- React
+- JavaScript and JSX only
+- Vite
+- Tailwind CSS v4 through the existing Vite plugin
+- React Router DOM
+- Vitest
+- React Testing Library
+- jsdom
+
+The frontend package scripts are:
+
+- npm run dev
+- npm test
+- npm run test:watch
+- npm run build
+- npm run preview
+
+The package declares Node ^20.19.0 or >=22.12.0.
+
+### Hard restrictions
+
+- Do not introduce TypeScript, TSX, Angular or another framework.
+- Do not add dependencies for a small task that can be completed with existing React, CSS or browser-native APIs.
+- Do not alter package manifests/lockfiles unless required and explicitly justified.
+- Do not redesign completed pages to make a new task easier.
+- Do not silently change route names, slugs, puppy status, media URLs, source content, contact numbers or shared configuration.
+- Do not invent missing puppy names, family captions, testimonials, policies, business guarantees, contact details, API endpoints or successful submission states.
+- Do not replace source imagery with generic stock imagery.
+- Do not claim pixel-perfect visual fidelity from jsdom tests or a production build.
+
+---
+
+## 4. Source-of-truth and research rules
+
+1. Use puppy.instabizweb.com as the designated reference. Do not use teddypups.ae to overwrite content; it has previously shown conflicting origin/contact details.
+2. The original GitHub source repository is useful for templates, JSON, assets, CSS and component behaviour. Inspect the actual current files before implementing a page.
+3. A text extract or old screenshot cannot establish exact layout, responsive behaviour, animation timing or remote media availability.
+4. Use the source template/page data for structure, order, content and labels. If the source does not support a fact, say it is unknown rather than inventing one.
+5. Keep asset provenance in frontend/ASSET_SOURCES.md. Public accessibility does not establish permission to redistribute images or videos.
+6. Retain the source hostname in existing media references unless an approved asset migration is explicitly in scope.
+7. If a source URL, image or media item cannot be checked, record the limitation instead of substituting unrelated content.
+
+Useful reference paths include:
+
+- src/templates/ — page templates, including puppy profiles, Gone Home, Happy Families and Contact.
+- src/data/ — source page/family records.
+- src/components.tsx
+- src/Template.tsx
+- src/types.ts
+- src/app.css
+- src/reference.css
+- src/motion/ — reference animation modules.
+
+Paths may change; locate their current versions in the source repository.
+
+---
+
+## 5. Current project status
+
+### Current branch snapshot at creation of this handoff
+
+The latest remote develop HEAD inspected before creating this file was:
+
+1443b66d2679f035c97a658e4d947ef3f2a8245a
+
+Commit message: docs: record Phase 5 contact fidelity follow-up
+
+GitHub Actions run [#31](https://github.com/dikshaforsure/P-mart/actions/runs/45544612194) completed successfully against that exact HEAD.
+
+This SHA is a historical baseline for this handoff file, not a permanent current HEAD. Every new agent must fetch the branch again.
+
+### Phase completion overview
+
+| Phase | Scope | Status |
+|---|---|---|
+| 0 | Reference research and project documentation | Complete; source limitations documented |
+| 1 | Frontend foundation and initial homepage | Implemented; do not infer browser polish from code presence |
+| 2 | Available puppy catalogue, data layer and reusable puppy profiles | Implemented |
+| 3 | Puppy profile storybook close-out/corrections | Implemented; real-browser visual QA outstanding |
+| 4 | Shared header/footer, How It Works and FAQ | Implemented |
+| 5 | Gone Home, Happy Families and Contact | Implemented; real-browser visual QA and contact/backend limitations remain |
+| 6 | Homepage reference-fidelity refinement | **Next planned implementation phase** |
+| 7 | Integrated browser/responsive QA across all public routes | Not completed |
+| 8 | Backend enquiry persistence/notifications/admin scope decision and implementation if approved | Not completed / scope approval required |
+| 9 | Deployment, final security/configuration and handoff | Not completed |
+
+Do not call the entire project complete. Phases 0–5 public frontend page implementation is complete; visual QA, homepage refinement, backend scope and deployment remain open.
+
+---
+
+## 6. Completed implementation record
+
+Commit references below are historical evidence. Always fetch live files before making changes.
+
+### Phase 2 — Catalogue and reusable profiles
+
+- Destination branch: develop
+- Implementation commit: 0a1720104729a40fa770a7a849ee9ae7d9dcaa15
+- Documentation follow-up: ec630aae429d932730738710090b2986f2590cfc
+- Catalogue filters, cards and URL filter state were implemented and tested.
+- Existing 42 puppy records were retained: 15 available and 27 sold.
+- The reusable /puppies/:slug route supports exact-slug lookup, variable image/video galleries and existing WhatsApp enquiry handoff.
+- Historical sold profiles remain addressable.
+- Detailed historical CI results are recorded in PROJECT_PROGRESS.md; read that file before quoting a Phase 2 result.
+
+### Phase 3 — Puppy profile source-fidelity close-out
+
+- Initial profile implementation/fixes include 3ab43aa136fdf40c9dd3b2dd53fd6f60db9f9837.
+- Audit/refinement: 02be169ed8dd690840934f3994322683f6df9e49.
+- Final close-out code commit: 610ae3c4e703daeb199a5a8494cc644bf8f91194.
+- Documentation commit at the time: 2cf2501667568cff3553640b3d4c4840fbde5dfe.
+- Final code CI run #24: https://github.com/dikshaforsure/P-mart/actions/runs/45481254438
+- Verified on that run: focused 5 files / 38 tests; full 15 files / 74 tests; production build passed using Vite 8.3.8.
+
+Critical source hierarchy:
+
+**Available profile**
+1. Chapter 1: “hello, it’s me”
+2. Chapter 2: “what comes with [name]”
+3. Chapter 3: “the way home” with journey trail
+4. Chapter 4: “dear TeddyPups…” enquiry letter
+
+**Sold profile**
+1. Chapter 1: “the day they went home”
+2. Chapter 2: “what comes with [name]”
+3. Chapter 3: “dear TeddyPups…” enquiry letter
+
+Sold profiles do not show the journey chapter/trail. Both available and sold profiles have previous/next links. Available order follows available catalogue order; sold order follows the reference Gone Home archive order.
+
+Phase 3 features include:
+- Reusable source-style SVG mascot and hanging information-board treatment.
+- Paw-print journey connector for available profiles.
+- Keyed 0.42-second gallery page-turn wrapper.
+- RequestAnimationFrame-throttled profile ribbon progress.
+- Reduced-motion support and cleanup for observers/listeners/frames.
+- Existing gallery/lightbox, video, keyboard, touch, fallback, form validation and WhatsApp handoff retained.
+
+Do not add the homepage-only ReferencePuppyJourney, global pointer PawTrail or PuppyDriver to individual profile routes.
+
+**Known Phase 3 limitation:** no real-browser visual comparison at the requested viewports has been completed.
+
+### Phase 4 — Shared shell, How It Works and FAQ
+
+- Implementation commit: 86ae5779f79f51c14c09de950393d34c6660c7bc
+- Documentation follow-up: 4c2ad275b707139fdcfdee37cede3c36462f6d8c
+- CI run #15: https://github.com/dikshaforsure/P-mart/actions/runs/45474656254
+- Verified on that run: focused 4 files / 15 tests; full 14 files / 64 tests; Vite 8.3.8 production build passed.
+- Header/footer were refined while retaining navigation, focus, Escape, focus loop, route-close and body-scroll-lock behaviour.
+- /how-it-works supports the source's local/imported tabs, two four-step paths, section anchors and supporting content.
+- /faq uses the existing nine FAQ records, search, clear/reset, count, accordion semantics and no-result state.
+- Existing FAQ source JSON was retained.
+- Some unsupported guarantee/policy statements were qualified rather than promoted as unconditional promises.
+
+### Phase 5 — Gone Home, Happy Families and Contact
+
+- Initial implementation commit: 85a5a6fcd45b74aea661ffa57cebe41752d9dd39
+- Follow-up test correction: 0fec72305c72b09915fb4d453bacc205e38d9469
+- Phase 5 implementation record: a290f1ace5c17ac1d0480bb8d46901a343497235
+- Contact option/source clarification: c108eae1ea9f9977aff50a2fc8deb92bfeb1bc48
+- Contact fidelity correction code commit: bed9eeab2394292462e4dcb2820ddae27a32b59e
+- Latest Phase 5 documentation commit: 1443b66d2679f035c97a658e4d947ef3f2a8245a
+- Phase 5 CI run #27: https://github.com/dikshaforsure/P-mart/actions/runs/45543194059
+- Contact correction CI run #30: https://github.com/dikshaforsure/P-mart/actions/runs/45544244042
+- Latest docs-head CI run #31: https://github.com/dikshaforsure/P-mart/actions/runs/45544612194
+
+**Gone Home**
+- Dedicated page frontend/src/pages/GoneHomePage.jsx.
+- Uses existing goneHomePuppies, source ticket-card motif, 27 sold records in source order, puppy profile links and available-puppies CTA.
+- Unavailable image for one record gets a stable paw fallback.
+- Do not duplicate sold records in JSX or invent missing names.
+
+**Happy Families**
+- Dedicated page frontend/src/pages/HappyFamiliesPage.jsx.
+- Full 64-item page gallery comes from frontend/src/data/families.json.
+- Eight homepage preview moments in siteContent.js are separate and are not the full gallery.
+- Testimonial uses verified familyPreview.quote and familyPreview.author.
+- Full gallery preserves source order, IDs, captions, alt text, dimensions and focal points.
+- Accessible native-dialog lightbox includes close, previous/next, Escape, arrow-key, touch-swipe, backdrop, focus restoration and background-scroll locking.
+- Eight gallery entries have non-empty captions; others remain uncaptained as in the source data.
+
+**Contact**
+- Dedicated page frontend/src/pages/ContactPage.jsx.
+- Source field order: name, phone, email, area, puppy selector, message, website honeypot.
+- Name and phone required; email optional; puppy selector optional.
+- The 15 visible puppy choice labels/order match the source. Source private option UUIDs are not reused; stable local values are used.
+- Validation, inline feedback and honeypot exist.
+- Reuses existing PuppyMascot with contact-specific accessible label/facing/presentation.
+- Showroom image has a fixed-size fallback on image error.
+- Tablet/narrow layout below 1024px places the letter before contact details.
+- The destination does not have a verified contact API. Form submit prepares and opens the existing configured WhatsApp link; visitor must manually send. Do not claim backend delivery or successful persistence.
+- The source contact template's current number +971 54 167 6733 conflicts with an earlier crawl note that recorded +971 50 000 0000 and a provider-style link. Destination keeps its existing WhatsApp helper and does not print an unconfirmed phone number. Do not change the number/configuration without assignment-owner confirmation.
+
+Phase 5 CI run #30 verified:
+- Focused 5 files / 31 tests passed.
+- Full frontend suite 18 files / 97 tests passed.
+- Production build passed with Vite 8.3.8.
+
+Run #31 completed successfully on the latest Phase 5 documentation HEAD. The detailed 5/31 and 18/97 counts above are explicitly recorded for run #30 in project documentation.
+
+---
+
+## 7. Current architecture and important files
+
+### Application/routing
+
+- frontend/src/main.jsx — application entry.
+- frontend/src/app/App.jsx — React Router routes.
+- frontend/src/app/App.test.jsx — route integration tests.
+- frontend/src/components/layout/ — shared app layout, header and footer.
+
+Implemented public routes:
+- /
+- /puppies
+- /puppies/:slug
+- /gone-home
+- /happy-families
+- /how-it-works
+- /faq
+- /contact
+
+All three formerly placeholder routes for Gone Home, Happy Families and Contact now use dedicated page components.
+
+### Pages
+
+- frontend/src/pages/HomePage.jsx
+- frontend/src/pages/PuppiesPage.jsx
+- frontend/src/pages/PuppyProfilePage.jsx
+- frontend/src/pages/GoneHomePage.jsx
+- frontend/src/pages/HappyFamiliesPage.jsx
+- frontend/src/pages/HowItWorksPage.jsx
+- frontend/src/pages/FaqPage.jsx
+- frontend/src/pages/ContactPage.jsx
+- frontend/src/pages/NotFoundPage.jsx
+
+### Data and services
+
+- frontend/src/data/puppies.json — 42 records, 15 available and 27 sold.
+- frontend/src/data/puppyData.js — available/sold mapping, lookup and adjacent ordering.
+- frontend/src/data/breeds.json
+- frontend/src/data/families.json — complete 64-record family gallery.
+- frontend/src/data/home-families.json — source family/home data snapshot; inspect before reuse.
+- frontend/src/data/faq.json — nine FAQ records.
+- frontend/src/data/siteContent.js — shared site settings and homepage preview content.
+- frontend/src/data/howItWorksContent.js — How It Works page-specific data.
+- frontend/src/data/referenceAssets.js — homepage reference image assets.
+- frontend/src/services/contentService.js — Promise-based service boundary over current static data.
+
+Use the existing service/data patterns. Do not duplicate data inside page components.
+
+### Shared components
+
+- frontend/src/components/shared/ — PageIntro, SectionHeading, JourneyStep, PawMark and related shared pieces.
+- frontend/src/components/puppies/ — PuppyCard, PuppyGallery, PuppyNoteForm, PuppyMascot.
+- frontend/src/components/layout/ — SiteHeader, SiteFooter and AppLayout.
+
+### Utilities/styles
+
+- frontend/src/utils/whatsapp.js — single existing WhatsApp URL helper. Preserve configuration unless confirmed otherwise.
+- frontend/src/styles/index.css — global tokens and page-scoped CSS.
+
+### Documentation
+
+- PROJECT_PROGRESS.md — chronological implementation and verification history.
+- PROJECT_ANALYSIS.md — research/source comparisons and discrepancies.
+- AI_PROMPT_LOG.md — user/agent task history and implementation prompts.
+- TESTING.md — test instructions and recorded test evidence.
+- TECHNICAL_DOCUMENTATION.md — architecture and technical design.
+- frontend/ASSET_SOURCES.md — asset provenance, remote media and rights caveats.
+- This file, AGENT.md — standing rules, current snapshot and chat-to-chat handoff.
+
+---
+
+## 8. Unresolved constraints and risks
+
+These are intentional known limitations, not permission to guess.
+
+### A. Real-browser responsive/visual QA is outstanding
+
+No full real-browser viewport pass, screenshots or screenshot-to-reference comparison has been completed for the public site.
+
+Required viewports for the final pass:
+- 1440 × 900
+- 1280 × 800
+- 1024 × 768
+- 768 × 1024
+- 390 × 844
+- 375 × 812
+
+At minimum inspect:
+- Homepage hero, sections, images and any decorative motion.
+- Available catalogue and filters.
+- Available and sold profiles, including mascot, hanging board, gallery page-turn, paw connector, ribbon, enquiry and adjacent cards.
+- Gone Home ticket grid.
+- Happy Families full photo wall and lightbox.
+- How It Works tabs, anchors and responsive state.
+- FAQ search and accordion.
+- Contact form, validation, mascot, showroom card and WhatsApp handoff.
+- Header mobile menu, footer, direct routes and no horizontal overflow.
+- Browser console and network/media loading where possible.
+- prefers-reduced-motion.
+
+Do not call the site pixel-perfect before this is performed and documented.
+
+### B. Contact number / WhatsApp uncertainty
+
+- Contact source current template indicates +971 54 167 6733.
+- Earlier extracted crawl recorded +971 50 000 0000 and a different provider-style WhatsApp link.
+- Destination currently uses getWhatsAppUrl() reading siteSettings.whatsappNumber; current data value observed is 971500000000.
+- This value is not independently confirmed as the intended production destination.
+- Destination Contact does not display a disputed telephone number and does not change the configured helper.
+- Ask the assignment owner to confirm the public contact destination before changing any shared phone/WhatsApp configuration.
+
+### C. No enquiry backend or persistence
+
+- No verified destination contact/profile enquiry API is available in the frontend repository.
+- Contact and puppy profile forms use explicit WhatsApp handoffs.
+- Contact input is not persisted to MongoDB.
+- No email notification, enquiry dashboard or protected admin is implemented.
+- Never show a false successful-submission state. A prepared WhatsApp message is not the same as a sent message.
+- Backend persistence/admin/notifications require a separate scope decision and secure design.
+
+### D. Media reachability and rights
+
+- Puppy and family image URLs reference puppy.instabizweb.com.
+- The Contact showroom photograph is also remote from that host.
+- Remote media response/loading has not been audited across all routes in a real browser.
+- No asset-rights approval is documented.
+- Do not download/rehost assets or claim production usage rights without assignment/client approval.
+
+### E. Available puppy origin discrepancy
+
+- The 15 current available records in puppies.json use imported origin labels.
+- The alternate teddypups.ae host has previously shown the same puppy inventory as In Dubai.
+- That alternate host is not the designated reference.
+- Do not change origin labels based on it. Recheck the supplied host or ask the assignment owner if the distinction affects presentation.
+
+### F. Deployment
+
+- No deployment completion is documented.
+- Verify production environment, routes/deep links, asset delivery, contact destination, HTTPS and security before claiming deployment readiness.
+
+---
+
+## 9. Next planned phase — Phase 6: Homepage reference-fidelity refinement
+
+Phase 5 is complete. The next implementation scope is a focused homepage comparison/refinement, not a redesign.
+
+Before implementation, inspect the latest current homepage and matching source template/components. At minimum review:
+
+- frontend/src/pages/HomePage.jsx
+- All homepage sections under frontend/src/components/home/
+- frontend/src/data/siteContent.js
+- frontend/src/data/referenceAssets.js
+- frontend/src/styles/index.css
+- Source homepage template and reference homepage components/motion/CSS.
+
+Preserve the existing homepage content/service boundaries and all working sections. Identify actual gaps in:
+- Hero composition and imagery.
+- Breed strip/marquee.
+- Featured puppy cards and CTA.
+- Two ways to meet.
+- Homepage journey.
+- WhatsApp-style enquiry illustration.
+- Trust highlights.
+- Happy Families preview.
+- FAQ preview.
+- Final CTA.
+- Homepage-only mascot/scroll scene interactions where source evidence confirms them.
+
+Do not confuse homepage-only motion modules with profile animations:
+- ReferencePuppyJourney is homepage-specific through the reference ScrollPuppy integration.
+- PuppyDriver is only initialized for explicitly selected reference routes.
+- Global pointer paw trail is separate.
+Do not copy motion systems blindly. Use scoped, cleanup-safe implementation and reduced-motion support.
+
+Do not change catalogue, profile or Phase 4/5 page implementations unless a clearly shared regression is proven and documented.
+
+### Phase 6 acceptance
+
+- Homepage section sequence and content are source-grounded.
+- Real imagery uses existing/verified supplied-host assets; no stock substitutions.
+- Composition, spacing, typography and responsive grid are compared against reference.
+- Existing links/CTAs resolve correctly.
+- Decorative interactions work, clean up observers/listeners/RAF and respect reduced motion.
+- Focused homepage tests and complete frontend suite pass.
+- Production build passes.
+- Browser comparison is recorded honestly.
+
+---
+
+## 10. Following phases
+
+### Phase 7 — Integrated browser and responsive QA
+
+After Phase 6, audit every public route at the six viewport sizes listed above. Capture screenshots where tools permit. Check direct route loads, browser console, network errors, image/video handling, focus/keyboard/mobile interactions, reduced motion, overflow and page transitions.
+
+Fix only verified defects. Avoid redesigning already accepted pages. If the agent cannot operate a real browser, explicitly state that and provide a precise manual QA checklist rather than claiming visual checks were performed.
+
+### Phase 8 — Backend enquiry scope decision
+
+Before implementing, confirm whether the assignment requires actual persisted enquiries.
+
+If approved, design a secure backend contract first. Expected topics:
+- Node/Express application structure if absent.
+- MongoDB/Mongoose connection via environment variables.
+- Enquiry schema and input validation.
+- Honeypot/rate limiting and abuse protections.
+- Safe acknowledgement/error states.
+- Email notification only with configured provider credentials.
+- No exposed secrets or client-only authorization.
+- Separate testing with a test DB.
+- Do not build admin CRUD unless explicitly in scope.
+
+If the backend remains out of scope, document the frontend WhatsApp-only limitation.
+
+### Phase 9 — Deployment and handoff
+
+- Production build.
+- Environment variable inventory.
+- Deep-link fallback/routing.
+- HTTPS/CORS/security.
+- Database/media configuration if backend is added.
+- Contact number confirmation.
+- Asset-rights decision.
+- Smoke test every route.
+- Final project documentation and handoff.
+
+---
+
+## 11. Required engineering workflow
+
+For each change:
+
+1. **Inspect:** fetch exact current source files, data, tests and current branch.
+2. **Compare:** identify source-supported deltas before editing.
+3. **Plan minimally:** list files expected to change and why.
+4. **Implement:** preserve all unrelated logic, data, style and names.
+5. **Test:** add/update focused tests for new and existing behaviour.
+6. **Full verification:** run npm test and npm run build from the frontend directory.
+7. **Diff audit:** review changed files, accidental formatting/data drift, secrets, unrelated modifications and regressions.
+8. **Document:** update progress, analysis, prompt log, testing/assets and this AGENT file as appropriate.
+9. **Commit:** use a descriptive commit on develop.
+10. **Verify remote:** fetch commit and final file contents; check GitHub Actions result.
+11. **Report:** state exact facts and limitations. Do not imply browser checks occurred when only jsdom ran.
+
+### Testing commands
+
+From frontend/:
+
+- Focused tests, e.g. npx vitest run src/pages/SomePage.test.jsx
+- Full suite: npm test
+- Build: npm run build
+
+Do not modify the test workflow so it stops running the full suite/build. A focused phase test can be added while retaining full verification.
+
+If npm install/build/tests fail, capture exact command/error. Do not fabricate success.
+
+---
+
+## 12. Documentation maintenance contract
+
+This file is intended to survive chat limits and agent changes. Keep it operational and factual.
+
+At the end of every phase:
+- Update the status table.
+- Update current phase and next planned phase.
+- Replace the old baseline with the new latest verified commit, while retaining historical commit records.
+- Add implementation and documentation commit SHAs.
+- Record CI run links and exact test/build counts.
+- Record any unresolved issue or user decision.
+- Update the changed-file and architecture map if it materially changed.
+- Add new source discrepancies and asset provenance.
+- Keep browser/manual QA separate from CI/automated test claims.
+
+Do not delete earlier phase notes or rewrite old CI results. Add dated follow-up sections.
+
+---
+
+## 13. New-chat handoff prompt
+
+When starting a new chat, provide this message together with repository access:
+
+“Continue the TeddyPups project in dikshaforsure/P-mart. Read the root AGENT.md completely before acting. Fetch the latest develop branch and inspect recent commits and the current task state. Treat AGENT.md and the repository as the source of truth, not prior chat summaries. Preserve completed phases, work only on develop, inspect source before edits, continue only incomplete work, run tests/build, update AGENT.md and project docs, commit and verify remote state. Do not invent content or claim unperformed browser verification. First report the current state you found and the exact next action.”
