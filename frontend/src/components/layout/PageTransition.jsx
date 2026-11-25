@@ -4,7 +4,9 @@ import PawMark from '../shared/PawMark';
 import TeddyRunner from './TeddyRunner';
 
 const ENTRANCE_DURATION = 440;
-const RUN_DURATION = 3200;
+const DEFAULT_RUN_DURATION = 2700;
+const MIN_RUN_DURATION = 2200;
+const MAX_RUN_DURATION = 3200;
 const EXIT_DURATION = 540;
 
 const pawPrints = [
@@ -19,12 +21,59 @@ function prefersReducedMotion() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 }
 
-function getPawDelay(left, viewportWidth) {
-  const runnerWidth = Math.min(190, Math.max(132, viewportWidth * 0.1));
-  const trailingEdgeOffset = runnerWidth * 1.4;
-  const totalTravel = viewportWidth * 0.5 + runnerWidth * 1.5;
+function getRunDuration() {
+  const connection = typeof navigator === 'undefined'
+    ? undefined
+    : navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (!connection) return DEFAULT_RUN_DURATION;
+
+  const effectiveType = connection.effectiveType;
+  const downlink = Number(connection.downlink);
+
+  if (effectiveType === 'slow-2g') return MAX_RUN_DURATION;
+  if (effectiveType === '2g') return 3000;
+  if (effectiveType === '3g') return DEFAULT_RUN_DURATION;
+
+  if (effectiveType === '4g') {
+    if (Number.isFinite(downlink) && downlink > 0) {
+      const speedProgress = Math.min(1, Math.max(0, (downlink - 1) / 9));
+      return Math.round(2900 - speedProgress * 700);
+    }
+    return 2400;
+  }
+
+  if (Number.isFinite(downlink) && downlink > 0) {
+    const estimate = 3100 - Math.log2(1 + downlink) * 350;
+    return Math.round(Math.min(MAX_RUN_DURATION, Math.max(MIN_RUN_DURATION, estimate)));
+  }
+
+  return DEFAULT_RUN_DURATION;
+}
+
+function getRunnerWidth(viewportWidth) {
+  return Math.min(190, Math.max(132, viewportWidth * 0.1));
+}
+
+function getRunnerStartOffset(viewportWidth) {
+  return Math.round(Math.min(32, Math.max(18, viewportWidth * 0.025)) * 10) / 10;
+}
+
+function getStrideHalfDuration(viewportWidth, runDuration, startOffset) {
+  const runnerWidth = getRunnerWidth(viewportWidth);
+  const travelDistance = Math.max(1, viewportWidth * 0.5 - startOffset);
+  const referenceStrideDistance = (runnerWidth / 300) * 92;
+  const estimatedHalfDuration = (runDuration * referenceStrideDistance) / (travelDistance * 2);
+
+  return Math.round(Math.min(200, Math.max(90, estimatedHalfDuration)));
+}
+
+function getPawDelay(left, viewportWidth, runDuration, runnerStartOffset) {
+  const runnerWidth = getRunnerWidth(viewportWidth);
+  const trailingEdgeOffset = runnerWidth * 0.55;
+  const totalTravel = Math.max(1, viewportWidth * 0.5 - runnerStartOffset);
   const pawPosition = (viewportWidth * Number.parseFloat(left)) / 100;
-  const passedPositionTime = ((pawPosition + trailingEdgeOffset) / totalTravel) * RUN_DURATION;
+  const passedDistance = Math.max(0, pawPosition - trailingEdgeOffset - runnerStartOffset);
+  const passedPositionTime = Math.min(runDuration - 120, (passedDistance / totalTravel) * runDuration);
 
   return `${Math.round(passedPositionTime + 120)}ms`;
 }
@@ -38,12 +87,18 @@ export default function PageTransition({ onActiveChange }) {
   const phaseRef = useRef('entering');
   const [phase, setPhase] = useState('entering');
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth || 1280);
+  const [runDuration, setRunDuration] = useState(() => getRunDuration());
 
   const updatePhase = useCallback((nextPhase) => {
     phaseRef.current = nextPhase;
     setPhase(nextPhase);
     onActiveChange?.(nextPhase !== 'idle');
   }, [onActiveChange]);
+
+  const startTransition = useCallback(() => {
+    setRunDuration(getRunDuration());
+    updatePhase('entering');
+  }, [updatePhase]);
 
   useLayoutEffect(() => {
     const pathChanged = previousPath.current !== pathname;
@@ -70,8 +125,8 @@ export default function PageTransition({ onActiveChange }) {
     // Browser back/forward and programmatic navigation cannot be held before
     // the router commits; this layout effect covers the destination before paint.
     pendingNavigation.current = null;
-    updatePhase('entering');
-  }, [pathname, onActiveChange, updatePhase]);
+    startTransition();
+  }, [pathname, onActiveChange, startTransition]);
 
   useEffect(() => {
     const updateViewport = () => setViewportWidth(window.innerWidth || 1280);
@@ -115,12 +170,12 @@ export default function PageTransition({ onActiveChange }) {
 
       event.preventDefault();
       pendingNavigation.current = `${destination.pathname}${destination.search}${destination.hash}`;
-      updatePhase('entering');
+      startTransition();
     };
 
     document.addEventListener('click', handleDocumentClick, true);
     return () => document.removeEventListener('click', handleDocumentClick, true);
-  }, [navigate, pathname, updatePhase]);
+  }, [navigate, pathname, startTransition]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -167,20 +222,32 @@ export default function PageTransition({ onActiveChange }) {
     }
   };
 
+  const runnerStartOffset = getRunnerStartOffset(viewportWidth);
+  const strideHalfDuration = getStrideHalfDuration(viewportWidth, runDuration, runnerStartOffset);
+  const runnerStyle = {
+    '--runner-start-offset': `${runnerStartOffset}px`,
+    '--runner-run-duration': `${runDuration}ms`,
+    '--runner-stride-duration': `${strideHalfDuration}ms`,
+    '--runner-diagonal-offset': `-${strideHalfDuration}ms`,
+    '--runner-head-lag': `-${Math.max(14, Math.round(strideHalfDuration * 0.18))}ms`,
+    '--runner-tail-duration': `${Math.round(strideHalfDuration * 1.35)}ms`,
+  };
+
   if (phase === 'idle') return null;
 
   return (
     <div
       className="page-transition-curtain"
       data-phase={phase}
-      data-run-duration-ms={RUN_DURATION}
+      data-run-duration-ms={runDuration}
+      data-runner-start-offset-px={runnerStartOffset}
       data-testid="page-transition"
       aria-hidden="true"
       onAnimationEnd={handleCurtainAnimationEnd}
     >
       <div className="page-transition-track">
         {pawPrints.map((paw, index) => {
-          const delay = getPawDelay(paw.left, viewportWidth);
+          const delay = getPawDelay(paw.left, viewportWidth, runDuration, runnerStartOffset);
 
           return (
             <span
@@ -199,7 +266,12 @@ export default function PageTransition({ onActiveChange }) {
             </span>
           );
         })}
-        <div className="page-transition-runner" data-testid="page-transition-runner" onAnimationEnd={handleRunnerAnimationEnd}>
+        <div
+          className="page-transition-runner"
+          data-testid="page-transition-runner"
+          style={runnerStyle}
+          onAnimationEnd={handleRunnerAnimationEnd}
+        >
           <TeddyRunner />
         </div>
       </div>
