@@ -8,13 +8,24 @@ const RUN_DURATION = 1480;
 const EXIT_DURATION = 540;
 
 const pawPrints = [
-  { left: '12%', top: '49%', rotation: '-18deg', delay: '0.1s' },
-  { left: '23%', top: '53%', rotation: '14deg', delay: '0.27s' },
-  { left: '34%', top: '48%', rotation: '-15deg', delay: '0.44s' },
-  { left: '45%', top: '53%', rotation: '17deg', delay: '0.61s' },
-  { left: '56%', top: '48%', rotation: '-14deg', delay: '0.78s' },
-  { left: '67%', top: '53%', rotation: '16deg', delay: '0.95s' },
+  { left: '12%', top: '49%', rotation: '-18deg' },
+  { left: '23%', top: '53%', rotation: '14deg' },
+  { left: '34%', top: '48%', rotation: '-15deg' },
+  { left: '45%', top: '53%', rotation: '17deg' },
+  { left: '56%', top: '48%', rotation: '-14deg' },
+  { left: '67%', top: '53%', rotation: '16deg' },
 ];
+
+function getPawDelay(left) {
+  const viewportWidth = window.innerWidth || 1280;
+  const runnerWidth = Math.min(168, Math.max(112, viewportWidth * 0.095));
+  const startOffset = runnerWidth * 1.4;
+  const travelDistance = viewportWidth + runnerWidth * 2.8;
+  const pawPosition = (viewportWidth * Number.parseFloat(left)) / 100;
+  const passedPositionTime = ((pawPosition + startOffset) / travelDistance) * RUN_DURATION;
+
+  return Math.round((passedPositionTime + 0.045) * 1000) + 'ms';
+}
 
 export default function PageTransition() {
   const { pathname } = useLocation();
@@ -73,7 +84,7 @@ export default function PageTransition() {
               left: paw.left,
               top: paw.top,
               '--paw-rotation': paw.rotation,
-              '--paw-delay': paw.delay,
+              '--paw-delay': getPawDelay(paw.left),
             }}
           >
             <PawMark />
