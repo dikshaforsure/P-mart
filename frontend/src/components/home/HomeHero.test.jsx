@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { act, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import HomeHero from './HomeHero';
 
@@ -42,7 +42,7 @@ describe('HomeHero', () => {
     expect(teddyButton.querySelector('[data-p="paw-left"]')).toBeInTheDocument();
     expect(teddyButton.querySelector('[data-p="paw-right"]')).toBeInTheDocument();
 
-    teddyButton.click();
+    fireEvent.click(teddyButton);
     expect(screen.getByText('woof woof!')).toBeInTheDocument();
     expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('woof woof!');
 
@@ -52,7 +52,7 @@ describe('HomeHero', () => {
     act(() => { vi.advanceTimersByTime(980); });
     expect(teddyButton).not.toHaveClass('is-waving');
 
-    teddyButton.click();
+    fireEvent.click(teddyButton);
     expect(screen.getByText('ruff ruff!')).toBeInTheDocument();
     expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('ruff ruff!');
   });
