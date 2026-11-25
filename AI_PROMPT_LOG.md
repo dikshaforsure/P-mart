@@ -13,9 +13,60 @@ This log records AI-assisted work with factual limits. Add actual prompts, tools
 - Web browser: opened the supplied reference routes and representative puppy profiles.
 - No local terminal, IDE, package manager, database, browser automation or application runtime was used.
 
-### User prompt (faithful summary, not verbatim)
+### Filtered user prompt summary (structured; not verbatim)
 
-The user requested Phase 0 only: analyse the supplied TeddyPups site and repository, document page/listing/profile differences, interactions, animations, responsive gaps, propose MERN architecture and API/data models, create five Markdown documents, commit/push them, preserve existing content/history, install no dependencies and write no app code, then stop for review.
+The user requested a research, planning and documentation-only first phase for the P-mart website project. The objective was to understand the target website, establish a maintainable full-stack architecture and prepare a controlled implementation roadmap. Application development was explicitly out of scope for this phase.
+
+**1. Website and repository scope**
+
+- Analyse the target website at `https://puppy.instabizweb.com/` and the project repository `https://github.com/dikshaforsure/P-mart`.
+- Inspect the homepage, available-puppy catalogue, individual puppy profiles, Gone Home, Happy Families, How It Works, FAQ, and Visit & Contact pages.
+- Preserve repository history and existing content; inspect branch, README, tracked files, commit history and project structure before making documentation changes.
+
+**2. Website, content and interaction research**
+
+- Record page layouts and section order, typography, colours, spacing, imagery, navigation, controls and responsive behaviour.
+- Inspect individual profiles and document actual differences in puppy details, image/video galleries, enquiry actions and previous/next navigation.
+- Identify real listings, routes, filters and visible content. Do not invent missing information.
+- Inventory interactions and animations, including navigation/mobile menu, catalogue filters, galleries/lightboxes, FAQ search and accordions, How It Works tabs, forms, WhatsApp actions, scroll effects, transitions, hover states, mascot/puppy illustrations, SVG motion and cursor effects.
+- For each effect, describe its location, trigger, behaviour and a suitable implementation approach, including performance, cleanup, mobile behaviour and reduced-motion support.
+
+**3. Proposed full-stack and frontend architecture**
+
+- Plan a JavaScript-only MERN implementation: React with JSX, Tailwind CSS and React Router; Node.js, Express, MongoDB and Mongoose; REST APIs. Do not use TypeScript or unrelated frameworks.
+- Define frontend and backend responsibilities, routes, reusable components, hooks, service/API communication and an appropriately simple state-management approach.
+- Evaluate MongoDB collections for puppies, enquiries, FAQs, family entries/testimonials and administrators only where justified.
+- Specify REST endpoints with methods, routes, purposes, request data and response shapes.
+- Plan genuine enquiry persistence, server-side validation, useful errors and basic abuse protection.
+- Assess the need for an admin interface. Where justified, plan secure authentication, protected routes, password hashing and environment-variable handling.
+- Recommend suitable image/video storage and a deployment approach. Avoid unrelated payments or customer accounts unless supported by actual requirements.
+
+**4. Required documentation deliverables**
+
+- `PROJECT_ANALYSIS.md`: website overview, page inventory, section-level observations, interactions, animations, responsive findings, content requirements, assumptions and risks.
+- `TECHNICAL_DOCUMENTATION.md`: MERN architecture, frontend/backend responsibilities, proposed folder structure, components, database models, APIs, authentication, security, storage and deployment.
+- `PROJECT_PROGRESS.md`: objectives, scope, phase roadmap, deliverables, acceptance criteria, decisions, current status, pending work and risks.
+- `TESTING.md`: frontend, backend, database, API, responsive, security, browser and end-to-end test strategy. Tests must remain marked NOT RUN until executed.
+- `AI_PROMPT_LOG.md`: factual record of AI-assisted work, prompts, known tools/models, changed files and verifiable outcomes. Do not fabricate model identity, tool use or test results.
+
+**5. Implementation roadmap and working process**
+
+- Propose practical, sequential implementation phases for project foundation, backend/database, shared layout and homepage, catalogue/profiles, archive and family pages, informational/contact pages, enquiries/admin, animations/responsive refinement, integration, testing and deployment.
+- For every phase define scope, expected files, acceptance criteria, tests, manual checks and required documentation updates.
+- In later phases, inspect existing code before editing, implement only the requested scope, preserve unrelated work, run relevant tests/builds, report exact commands and results, explain manual checks, and identify unverified behaviour.
+
+**6. Phase 0 boundaries and completion report**
+
+- Create and commit the five documentation files with a meaningful message; push to the default branch only when permissions allow, and report blockers accurately.
+- Do not install dependencies, create application boilerplate or write frontend/backend implementation code.
+- Report website findings, inspected pages/interactions, functional and animation inventory, proposed architecture/data models/APIs, frontend routes/components, roadmap, documentation outputs, GitHub status, assumptions and open risks.
+- Stop after Phase 0 and wait for the user's next prompt before starting implementation.
+
+**Technology and quality constraints**
+
+- Use JavaScript and JSX only for application code (`.js` and `.jsx`); keep the architecture modular without unnecessary libraries or overengineering.
+- Prioritise visual fidelity, responsive behaviour, working backend integration, maintainability and honest verification.
+- Never claim tests, API operations, database actions, commits, pushes or deployments succeeded unless supported by actual evidence.
 
 ### Verified observations
 - Repository `dikshaforsure/P-mart`: default branch `main`; tracked tree initially contained only README.md; README had two duplicate `# P-mart` headings; two visible commits both titled `first commit`.
