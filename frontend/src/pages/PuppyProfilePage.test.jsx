@@ -34,7 +34,7 @@ describe('PuppyProfilePage', () => {
     expect(screen.getAllByText(puppy.breed, { exact: true })).toHaveLength(2);
     expect(await screen.findByText('1 / ' + (puppy.media.length || 1))).toBeInTheDocument();
     expect(screen.getByText('hello, it’s me')).toBeInTheDocument();
-    expect(screen.getByText(new RegExp('what comes with ' + displayName(puppy)))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp('what comes with this ' + displayName(puppy)))).toBeInTheDocument();
     expect(screen.getByText('the way home')).toBeInTheDocument();
     expect(screen.getByText('dear TeddyPups…')).toBeInTheDocument();
     expect(document.querySelectorAll('.tp-profile-chapter')).toHaveLength(4);
@@ -48,6 +48,9 @@ describe('PuppyProfilePage', () => {
     const carePanel = document.querySelector('.tp-profile-paper');
     expect(board).toContainElement(screen.getByRole('heading', { level: 1, name: displayName(puppy) }));
     expect(document.querySelector('.tp-profile-copy')).toContainElement(carePanel);
+    expect(within(carePanel).getByRole('heading', { level: 2, name: 'Every Teddy Pup comes' })).toBeInTheDocument();
+    expect(within(carePanel).getAllByRole('listitem')).toHaveLength(4);
+    expect(carePanel.querySelector('.tp-profile-paper-content p')).not.toBeInTheDocument();
     expect(board.querySelector('.tp-profile-tag-ring')).toBeInTheDocument();
     expect(board.querySelector('.pup-buddy svg')).toHaveAccessibleName(/Teddy, the TeddyPups puppy/);
     expect(document.querySelector('#puppy-note .tp-profile-letter-stamp')).toHaveAttribute('aria-hidden', 'true');
@@ -83,7 +86,11 @@ describe('PuppyProfilePage', () => {
     expect(await screen.findByRole('heading', { level: 1, name: displayName(puppy) })).toBeInTheDocument();
     expect(document.querySelector('.tp-profile-status')).toHaveTextContent('Gone home');
     expect(screen.getByText('the day they went home')).toBeInTheDocument();
-    expect(screen.getByText(new RegExp('what comes with ' + displayName(puppy)))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp('what comes with this ' + displayName(puppy)))).toBeInTheDocument();
+    const carePanel = document.querySelector('.tp-profile-paper');
+    expect(within(carePanel).getByRole('heading', { level: 2, name: 'Every Teddy Pup comes' })).toBeInTheDocument();
+    expect(within(carePanel).getAllByRole('listitem')).toHaveLength(4);
+    expect(carePanel.querySelector('.tp-profile-paper-content p')).not.toBeInTheDocument();
     expect(screen.getByText('dear TeddyPups…')).toBeInTheDocument();
     expect(document.querySelectorAll('.tp-profile-chapter')).toHaveLength(3);
     expect(document.querySelector('.tp-profile-journey')).not.toBeInTheDocument();

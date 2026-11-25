@@ -226,12 +226,9 @@ export default function PuppyProfilePage() {
             </div>
 
             <div className="tp-profile-paper">
-              <ChapterHeading number="2">what comes with {name}</ChapterHeading>
+              <ChapterHeading number="2">what comes with this {name}</ChapterHeading>
               <div className="tp-profile-paper-content">
-                <div>
-                  <h2>Every Teddy Pup comes</h2>
-                  <p>Every TeddyPups puppy is described as vaccinated, dewormed and checked before going home. Ask the team for this puppy’s individual health records.</p>
-                </div>
+                <h2>Every Teddy Pup comes</h2>
                 <ul>
                   {careItems.map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
                 </ul>

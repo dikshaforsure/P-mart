@@ -996,7 +996,7 @@ img, video { display: block; max-width: 100%; }
 /* A printed paper panel for the puppy-care promise. */
 .tp-profile-paper {
   position: relative;
-  padding: clamp(25px,4vw,48px);
+  padding: clamp(28px,3.2vw,42px);
   border: 3px solid var(--tp-cocoa);
   border-radius: 22px;
   background:
@@ -1019,27 +1019,21 @@ img, video { display: block; max-width: 100%; }
 }
 .tp-profile-paper-content {
   display: grid;
-  grid-template-columns: .85fr 1.15fr;
-  align-items: center;
-  gap: clamp(25px,5vw,65px);
-  margin-top: 24px;
+  grid-template-columns: minmax(0,1fr);
+  align-items: start;
+  gap: 17px;
+  margin-top: 20px;
 }
 .tp-profile-paper-content h2 {
   margin: 0;
   color: var(--tp-cocoa);
-  font: 400 clamp(30px,4vw,47px)/1.02 var(--serif);
-}
-.tp-profile-paper-content p {
-  max-width: 420px;
-  margin: 15px 0 0;
-  color: #806c5b;
-  font-size: 13px;
-  line-height: 1.8;
+  font: 400 clamp(34px,3.2vw,46px)/1.06 var(--serif);
+  letter-spacing: -.025em;
 }
 .tp-profile-paper-content ul {
   display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 16px 22px;
+  grid-template-columns: minmax(0,1fr);
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1047,9 +1041,9 @@ img, video { display: block; max-width: 100%; }
 .tp-profile-paper-content li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   color: var(--tp-cocoa);
-  font: 600 16px/1.45 var(--sans);
+  font: 600 clamp(16px,1.15vw,18px)/1.45 var(--sans);
 }
 .tp-profile-paper-content li span { flex: 0 0 auto; color: var(--tp-toffee); font-weight: 800; }
 .tp-profile-paper-note {
@@ -1311,7 +1305,8 @@ img, video { display: block; max-width: 100%; }
   .tp-profile-copy { padding-top: 5px; }
   .tp-profile-copy h1 { font-size: clamp(43px,11vw,62px); }
   .tp-profile-paper { rotate: 0deg; }
-  .tp-profile-paper-content ul { grid-template-columns: 1fr; gap: 12px; }
+  .tp-profile-paper-content { gap: 13px; }
+  .tp-profile-paper-content ul { gap: 10px; }
   .tp-profile-paper-note { right: 15px; bottom: 9px; font-size: 11px; }
   .tp-profile-journey { padding-block: 16px 58px; }
   .tp-profile-trail { grid-template-columns: 1fr; gap: 12px; }
