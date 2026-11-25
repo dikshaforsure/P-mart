@@ -6,7 +6,6 @@
 > **Destination repository:** https://github.com/dikshaforsure/P-mart  
 > **Working branch:** develop  
 > **Reference site:** https://puppy.instabizweb.com/  
-> **Reference source:** https://github.com/Khushiii720/TeddyPups-Clone
 
 ---
 
@@ -46,7 +45,6 @@ Build a responsive, reference-faithful React clone of the TeddyPups public websi
 The public reference is the supplied host:
 
 - Website: https://puppy.instabizweb.com/
-- Source repository: https://github.com/Khushiii720/TeddyPups-Clone
 
 The clone should preserve the reference's warm, playful, editorial/storybook identity, puppy/family content, navigation and customer-contact journeys while keeping data and application structure maintainable.
 
@@ -99,26 +97,17 @@ The package declares Node ^20.19.0 or >=22.12.0.
 
 ## 4. Source-of-truth and research rules
 
-1. Use puppy.instabizweb.com as the designated reference. Do not use teddypups.ae to overwrite content; it has previously shown conflicting origin/contact details.
-2. The original GitHub source repository is useful for templates, JSON, assets, CSS and component behaviour. Inspect the actual current files before implementing a page.
+1. Use only https://puppy.instabizweb.com/ as the designated external reference website. Do not use teddypups.ae to overwrite content; it has previously shown conflicting origin/contact details.
+2. Inspect the live reference pages, visible content, links, image behaviour and interactions directly when source comparison is needed. Use the destination repository's existing files, data, assets and project documentation to guide implementation.
 3. A text extract or old screenshot cannot establish exact layout, responsive behaviour, animation timing or remote media availability.
-4. Use the source template/page data for structure, order, content and labels. If the source does not support a fact, say it is unknown rather than inventing one.
+4. Follow what the designated reference website visibly supports. If a fact or behaviour cannot be verified from that website or the existing destination project, say it is unknown rather than inventing it.
 5. Keep asset provenance in frontend/ASSET_SOURCES.md. Public accessibility does not establish permission to redistribute images or videos.
 6. Retain the source hostname in existing media references unless an approved asset migration is explicitly in scope.
-7. If a source URL, image or media item cannot be checked, record the limitation instead of substituting unrelated content.
+7. If a page, URL, image or media item cannot be checked, record the limitation instead of substituting unrelated content.
 
-Useful reference paths include:
+Do not use or disclose any other code repository as the reference for this assignment. The designated public reference is the live website above; the destination repository and its existing project files are the implementation workspace.
 
-- src/templates/ — page templates, including puppy profiles, Gone Home, Happy Families and Contact.
-- src/data/ — source page/family records.
-- src/components.tsx
-- src/Template.tsx
-- src/types.ts
-- src/app.css
-- src/reference.css
-- src/motion/ — reference animation modules.
-
-Paths may change; locate their current versions in the source repository.
+Inspect current destination files rather than relying on external source-code paths or old snippets.
 
 ---
 
