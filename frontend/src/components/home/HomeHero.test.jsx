@@ -27,5 +27,9 @@ describe('HomeHero', () => {
     expect(within(lineup).getByRole('link', { name: /Meet Max/i })).toHaveAttribute('href', '/puppies/puppy-1');
     expect(within(lineup).getByRole('img', { name: 'Puppy 1 portrait' })).toHaveAttribute('src', '/puppy-1.jpg');
     expect(within(lineup).getByRole('link', { name: /Puppy breed 2/i })).toHaveAttribute('href', '/puppies/puppy-2');
+    const cards = within(lineup).getAllByRole('listitem');
+    expect(cards.map((card) => card.style.getPropertyValue('--hero-puppy-left'))).toEqual([
+      '7%', '22%', '36%', '64%', '78%', '93%',
+    ]);
   });
 });

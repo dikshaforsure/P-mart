@@ -5,7 +5,7 @@ import PuppyMascot from '../puppies/PuppyMascot';
 import PawMark from '../shared/PawMark';
 
 const puppyTilts = ['-5deg', '3deg', '-2deg', '2deg', '-3deg', '4deg'];
-const puppyPositions = [7, 24, 41, 59, 76, 93];
+const puppyPositions = [7, 22, 36, 64, 78, 93];
 
 export default function HomeHero({ puppies = [] }) {
   const mascotRef = useRef(null);

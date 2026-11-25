@@ -2857,3 +2857,135 @@ img, video { display: block; max-width: 100%; }
   .home-page-storybook .hero-stage { --hero-quilt-height:56px; }
   .home-page-storybook .hero-puppy-peek { height:136px; }
 }
+
+
+/* Phase 6 visual QA corrections — hero hover, outward door hinge and family photo sizing. */
+
+/* Keep a deliberate open space for Teddy between the six hero puppy portraits. */
+.home-page-storybook .hero-puppy-peek {
+  transition: transform .38s cubic-bezier(.22,1,.36,1), filter .38s ease;
+}
+.home-page-storybook .hero-puppy-peek:nth-child(1),
+.home-page-storybook .hero-puppy-peek:nth-child(6) {
+  height: clamp(136px,14vw,184px);
+}
+.home-page-storybook .hero-puppy-peek:nth-child(3) {
+  height: clamp(150px,15.5vw,194px);
+}
+.home-page-storybook .hero-puppy-peek:nth-child(4) {
+  height: clamp(156px,16vw,200px);
+}
+.home-page-storybook .hero-puppy-peek:hover,
+.home-page-storybook .hero-puppy-peek:focus-within {
+  z-index: 8;
+  transform: translateX(-50%) translateY(-15px) rotate(0deg) scale(1.035);
+  filter: drop-shadow(0 8px 7px rgba(42,23,14,.16));
+}
+.home-page-storybook .hero-puppy-peek .hero-puppy-photo img {
+  transition: transform .45s cubic-bezier(.22,1,.36,1);
+}
+.home-page-storybook .hero-puppy-peek:hover .hero-puppy-photo img,
+.home-page-storybook .hero-puppy-peek:focus-within .hero-puppy-photo img {
+  transform: scale(1.035);
+}
+
+@media (max-width:760px) {
+  .home-page-storybook .hero-puppy-peek:nth-child(1) { left: 6% !important; }
+  .home-page-storybook .hero-puppy-peek:nth-child(2) { left: 20% !important; }
+  .home-page-storybook .hero-puppy-peek:nth-child(3) { left: 30% !important; }
+  .home-page-storybook .hero-puppy-peek:nth-child(4) { left: 70% !important; }
+  .home-page-storybook .hero-puppy-peek:nth-child(5) { left: 80% !important; }
+  .home-page-storybook .hero-puppy-peek:nth-child(6) { left: 94% !important; }
+}
+@media (max-width:520px) {
+  .home-page-storybook .hero-mascot-anchor {
+    width: clamp(112px,34vw,130px);
+    height: 116px;
+  }
+}
+
+/* The right-hand door leaf is now hinged at its outside edge and swings outward. */
+.home-page-storybook .puppy-door-leaf {
+  right: 3px;
+  left: auto;
+  transform: perspective(700px) rotateY(0deg);
+  transform-origin: right center;
+  backface-visibility: hidden;
+}
+.home-page-storybook .puppy-door-card:hover .puppy-door-leaf,
+.home-page-storybook .puppy-door-card:focus-visible .puppy-door-leaf,
+.home-page-storybook .puppy-door-card:focus-within .puppy-door-leaf {
+  transform: perspective(700px) rotateY(105deg);
+}
+@media (max-width:760px) {
+  .home-page-storybook .puppy-door-leaf {
+    transform: perspective(700px) rotateY(105deg);
+  }
+}
+
+/* Restore the Polaroid image area: absolute children need a real card height. */
+.home-page-storybook .family-photo-wall {
+  align-items: start;
+}
+.home-page-storybook .family-photo {
+  display: block;
+  height: clamp(245px,22vw,300px);
+  min-height: 245px;
+  overflow: visible;
+  padding: 10px 10px 48px;
+}
+.home-page-storybook .family-photo img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: auto;
+  left: 10px;
+  display: block;
+  width: calc(100% - 20px);
+  height: calc(100% - 58px);
+  min-height: 0;
+  flex: 0 0 auto;
+  object-fit: cover;
+}
+.home-page-storybook .family-photo span:last-child {
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  display: block;
+  padding: 0 3px;
+  background: transparent;
+  color: var(--home-cocoa-soft);
+  font: italic 13px/1.25 var(--serif);
+  text-align: center;
+}
+@media (max-width:760px) {
+  .home-page-storybook .family-photo {
+    height: 230px;
+    min-height: 230px;
+  }
+}
+@media (max-width:520px) {
+  .home-page-storybook .family-photo {
+    height: 205px;
+    min-height: 205px;
+    padding: 7px 7px 42px;
+  }
+  .home-page-storybook .family-photo img {
+    top: 7px;
+    left: 7px;
+    width: calc(100% - 14px);
+    height: calc(100% - 49px);
+  }
+  .home-page-storybook .family-photo span:last-child {
+    right: 6px;
+    bottom: 7px;
+    left: 6px;
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page-storybook .hero-puppy-peek,
+  .home-page-storybook .hero-puppy-peek .hero-puppy-photo img {
+    transition: none;
+  }
+}
