@@ -1388,12 +1388,27 @@ img, video { display: block; max-width: 100%; }
   position: sticky;
   top: 0;
   z-index: 50;
+  isolation: isolate;
   background: rgba(255,253,248,.97);
-  border-bottom: 2px solid rgba(42,23,14,.15);
-  box-shadow: 0 4px 16px rgba(42,23,14,.05);
+  border-bottom: 0;
+  box-shadow: none;
   backdrop-filter: blur(12px);
 }
+.site-header::after {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  bottom: -15px;
+  left: 0;
+  height: 16px;
+  background: radial-gradient(ellipse 30px 15px at 50% 0%, rgba(255,253,248,.97) 98%, transparent 100%) 0 0 / 60px 16px repeat-x;
+  filter: drop-shadow(0 2px 1px rgba(42,23,14,.16));
+  content: "";
+  pointer-events: none;
+}
 .header-inner {
+  position: relative;
+  z-index: 1;
   width: min(110rem, calc(100% - 2 * clamp(20px,4vw,56px)));
   min-height: 82px;
   height: auto;

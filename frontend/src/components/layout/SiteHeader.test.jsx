@@ -21,6 +21,9 @@ describe('SiteHeader', () => {
   it('renders real route links and marks the current section active', () => {
     renderHeader('/puppies/example-puppy');
 
+    const banner = screen.getByRole('banner');
+    expect(banner).toHaveClass('site-header');
+
     const mainNavigation = screen.getByRole('navigation', { name: 'Main navigation' });
     const puppiesLink = within(mainNavigation).getByRole('link', { name: 'Puppies' });
 
