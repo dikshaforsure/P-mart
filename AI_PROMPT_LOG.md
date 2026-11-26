@@ -13,7 +13,7 @@ This log records AI-assisted work with factual limits. Add actual prompts, tools
 - Web browser: opened the supplied reference routes and representative puppy profiles.
 - No local terminal, IDE, package manager, database, browser automation or application runtime was used.
 
-### Filtered user prompt summary (structured; not verbatim)
+### Prompt
 
 The user requested a research, planning and documentation-only first phase for the P-mart website project. The objective was to understand the target website, establish a maintainable full-stack architecture and prepare a controlled implementation roadmap. Application development was explicitly out of scope for this phase.
 
@@ -102,7 +102,7 @@ No application code, components, services, API routes, models, dependencies, loc
 **Phase:** 1 — Frontend setup, shared layout, routes and homepage  
 **Assistant:** ChatGPT. A precise model/version identifier was not captured in the available execution metadata, so none is asserted.
 
-### Filtered user prompt summary (structured; not verbatim)
+### Prompt
 
 The user issued a Phase 1 delivery and repository-branch instruction after the frontend implementation had been completed. The task was to publish the existing Phase 1 source code to the repository's existing `develop` branch and establish that branch as the canonical working branch for all future project development.
 
@@ -171,7 +171,7 @@ No backend, MongoDB, API, catalogue, individual profile, gone-home, happy-famili
 **Date:** 24 November 2026  
 **Branch:** `develop`
 
-### Filtered user prompt summary (structured; not verbatim)
+### Prompt
 
 The user authorized Phase 2 implementation of the puppy catalogue and reusable individual puppy profile experience in the existing frontend. Work must continue from the established `develop` branch and build on the completed Phase 1 application rather than recreating it.
 
@@ -263,7 +263,7 @@ npm install was blocked by `EAI_AGAIN` to the npm registry. `npm run build` was 
 **Branch:** \`develop\`  
 **UI implementation commit:** \`0a1720104729a40fa770a7a849ee9ae7d9dcaa15\`
 
-### Reconstructed prompt summary (illustrative, not a historical verbatim prompt)
+### Prompt
 
 The following is a structured, source-neutral reconstruction of the requirements represented by this implementation. It is an explanatory summary, not the exact text of an earlier user message.
 
@@ -638,7 +638,7 @@ Initial implementation commit e8436485069ce54d952b098b86d791de227251db; jsdom na
 **Branch:** `develop`  
 **Documentation update only:** This entry records work already implemented and pushed by the project owner. It does not authorize or perform another implementation of the catalogue.
 
-### Filtered user prompt summary (structured; not verbatim)
+### Prompt
 
 The user reported completion of another catalogue refinement round and instructed that the existing implementation be treated as finished work. The task for this log entry is to preserve an accurate handoff for subsequent work without recreating, overwriting or unnecessarily modifying the catalogue.
 
