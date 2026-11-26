@@ -13,9 +13,60 @@ This log records AI-assisted work with factual limits. Add actual prompts, tools
 - Web browser: opened the supplied reference routes and representative puppy profiles.
 - No local terminal, IDE, package manager, database, browser automation or application runtime was used.
 
-### User prompt (faithful summary, not verbatim)
+### Filtered user prompt summary (structured; not verbatim)
 
-The user requested Phase 0 only: analyse the supplied TeddyPups site and repository, document page/listing/profile differences, interactions, animations, responsive gaps, propose MERN architecture and API/data models, create five Markdown documents, commit/push them, preserve existing content/history, install no dependencies and write no app code, then stop for review.
+The user requested a research, planning and documentation-only first phase for the P-mart website project. The objective was to understand the target website, establish a maintainable full-stack architecture and prepare a controlled implementation roadmap. Application development was explicitly out of scope for this phase.
+
+**1. Website and repository scope**
+
+- Analyse the target website at `https://puppy.instabizweb.com/` and the project repository `https://github.com/dikshaforsure/P-mart`.
+- Inspect the homepage, available-puppy catalogue, individual puppy profiles, Gone Home, Happy Families, How It Works, FAQ, and Visit & Contact pages.
+- Preserve repository history and existing content; inspect branch, README, tracked files, commit history and project structure before making documentation changes.
+
+**2. Website, content and interaction research**
+
+- Record page layouts and section order, typography, colours, spacing, imagery, navigation, controls and responsive behaviour.
+- Inspect individual profiles and document actual differences in puppy details, image/video galleries, enquiry actions and previous/next navigation.
+- Identify real listings, routes, filters and visible content. Do not invent missing information.
+- Inventory interactions and animations, including navigation/mobile menu, catalogue filters, galleries/lightboxes, FAQ search and accordions, How It Works tabs, forms, WhatsApp actions, scroll effects, transitions, hover states, mascot/puppy illustrations, SVG motion and cursor effects.
+- For each effect, describe its location, trigger, behaviour and a suitable implementation approach, including performance, cleanup, mobile behaviour and reduced-motion support.
+
+**3. Proposed full-stack and frontend architecture**
+
+- Plan a JavaScript-only MERN implementation: React with JSX, Tailwind CSS and React Router; Node.js, Express, MongoDB and Mongoose; REST APIs. Do not use TypeScript or unrelated frameworks.
+- Define frontend and backend responsibilities, routes, reusable components, hooks, service/API communication and an appropriately simple state-management approach.
+- Evaluate MongoDB collections for puppies, enquiries, FAQs, family entries/testimonials and administrators only where justified.
+- Specify REST endpoints with methods, routes, purposes, request data and response shapes.
+- Plan genuine enquiry persistence, server-side validation, useful errors and basic abuse protection.
+- Assess the need for an admin interface. Where justified, plan secure authentication, protected routes, password hashing and environment-variable handling.
+- Recommend suitable image/video storage and a deployment approach. Avoid unrelated payments or customer accounts unless supported by actual requirements.
+
+**4. Required documentation deliverables**
+
+- `PROJECT_ANALYSIS.md`: website overview, page inventory, section-level observations, interactions, animations, responsive findings, content requirements, assumptions and risks.
+- `TECHNICAL_DOCUMENTATION.md`: MERN architecture, frontend/backend responsibilities, proposed folder structure, components, database models, APIs, authentication, security, storage and deployment.
+- `PROJECT_PROGRESS.md`: objectives, scope, phase roadmap, deliverables, acceptance criteria, decisions, current status, pending work and risks.
+- `TESTING.md`: frontend, backend, database, API, responsive, security, browser and end-to-end test strategy. Tests must remain marked NOT RUN until executed.
+- `AI_PROMPT_LOG.md`: factual record of AI-assisted work, prompts, known tools/models, changed files and verifiable outcomes. Do not fabricate model identity, tool use or test results.
+
+**5. Implementation roadmap and working process**
+
+- Propose practical, sequential implementation phases for project foundation, backend/database, shared layout and homepage, catalogue/profiles, archive and family pages, informational/contact pages, enquiries/admin, animations/responsive refinement, integration, testing and deployment.
+- For every phase define scope, expected files, acceptance criteria, tests, manual checks and required documentation updates.
+- In later phases, inspect existing code before editing, implement only the requested scope, preserve unrelated work, run relevant tests/builds, report exact commands and results, explain manual checks, and identify unverified behaviour.
+
+**6. Phase 0 boundaries and completion report**
+
+- Create and commit the five documentation files with a meaningful message; push to the default branch only when permissions allow, and report blockers accurately.
+- Do not install dependencies, create application boilerplate or write frontend/backend implementation code.
+- Report website findings, inspected pages/interactions, functional and animation inventory, proposed architecture/data models/APIs, frontend routes/components, roadmap, documentation outputs, GitHub status, assumptions and open risks.
+- Stop after Phase 0 and wait for the user's next prompt before starting implementation.
+
+**Technology and quality constraints**
+
+- Use JavaScript and JSX only for application code (`.js` and `.jsx`); keep the architecture modular without unnecessary libraries or overengineering.
+- Prioritise visual fidelity, responsive behaviour, working backend integration, maintainability and honest verification.
+- Never claim tests, API operations, database actions, commits, pushes or deployments succeeded unless supported by actual evidence.
 
 ### Verified observations
 - Repository `dikshaforsure/P-mart`: default branch `main`; tracked tree initially contained only README.md; README had two duplicate `# P-mart` headings; two visible commits both titled `first commit`.
@@ -51,8 +102,39 @@ No application code, components, services, API routes, models, dependencies, loc
 **Phase:** 1 — Frontend setup, shared layout, routes and homepage  
 **Assistant:** ChatGPT. A precise model/version identifier was not captured in the available execution metadata, so none is asserted.
 
-### User prompt (faithful summary, not verbatim)
-The user asked to inspect the current repository, create a self-contained `frontend/` folder with Vite, React, JavaScript/JSX, Tailwind CSS and React Router DOM, establish all public routes and shared layout, implement the homepage section-by-section, keep data access behind service functions for later Express integration, organise animation logic, test responsive behaviour/build and update project docs without starting catalogue/profile/other-page/backend implementation.
+### Filtered user prompt summary (structured; not verbatim)
+
+The user issued a Phase 1 delivery and repository-branch instruction after the frontend implementation had been completed. The task was to publish the existing Phase 1 source code to the repository's existing `develop` branch and establish that branch as the canonical working branch for all future project development.
+
+**1. Source preservation and delivery**
+
+- Use the already completed Phase 1 frontend files. Do not recreate the application, regenerate the source from scratch or provide only a ZIP archive.
+- Add the complete `frontend/` directory and its source/configuration/assets to the repository so the implementation is available directly on GitHub.
+- Preserve the Phase 0 documentation and all existing repository history and content. Avoid unrelated deletions, rewrites or restructuring.
+
+**2. Canonical branch policy**
+
+- Use the existing `develop` branch as the primary working branch for the project from this point forward.
+- Treat `develop` as the core branch for every subsequent development phase and related documentation changes.
+- Do not create additional branches for this workflow and do not push Phase 1 work to `main`.
+
+**3. Commit and push requirements**
+
+- Work directly on the existing `develop` branch and publish the complete Phase 1 frontend implementation to `origin/develop`.
+- Create a meaningful commit containing the Phase 1 source and required supporting files.
+- Do not force-push, rewrite history or require the user to perform manual Git operations.
+- The user authorized reasonable implementation and repository-handling decisions needed to complete this delivery.
+
+**4. Remote verification and completion report**
+
+- After the push, verify on GitHub that the expected frontend files and folder structure are present on `develop`.
+- Report the resulting commit SHA and provide the direct repository/branch link.
+- Be explicit about any permission, GitHub or verification blocker. Do not claim a successful push or remote file verification without evidence.
+
+**Scope boundary**
+
+- This instruction concerns delivery of the already completed Phase 1 frontend and future branch governance. It does not authorize recreating the frontend or expanding into later application phases.
+- Preserve the Phase 0 documentation and existing implementation records while making only the changes required for the Phase 1 branch delivery.
 
 ### Tools and actions actually used
 - GitHub connector to re-inspect the Phase 0 branch, tracked tree, README and existing documentation.
@@ -89,8 +171,72 @@ No backend, MongoDB, API, catalogue, individual profile, gone-home, happy-famili
 **Date:** 24 November 2026  
 **Branch:** `develop`
 
-### User request summary
-Inspect existing source and all six JSON datasets; verify puppy availability, slugs and media; implement the actual catalogue and one reusable profile route; support mixed variable-length galleries and WhatsApp enquiry; preserve the Phase 1 homepage/design; update documentation; commit directly to `develop` without branching.
+### Filtered user prompt summary (structured; not verbatim)
+
+The user authorized Phase 2 implementation of the puppy catalogue and reusable individual puppy profile experience in the existing frontend. Work must continue from the established `develop` branch and build on the completed Phase 1 application rather than recreating it.
+
+**1. Inspect and preserve the existing project**
+
+- Inspect the latest `develop` branch and the complete existing frontend before editing, including routing, components, styles, services, utilities and data modules.
+- Review all six structured datasets: `puppies.json`, `breeds.json`, `pages.json`, `faq.json`, `families.json` and `home-families.json`.
+- Understand `siteContent.js`, `referenceAssets.js` and `contentService.js`, along with the Phase 0 and Phase 1 documentation.
+- Preserve the homepage, shared layout, navigation, design language and completed work. Make only changes required for the catalogue/profile scope; do not create another branch.
+
+**2. Verify source data against the live website**
+
+- Inspect the current live puppy catalogue and individual profile URLs at `https://puppy.instabizweb.com/`.
+- Verify current availability, exact names, breeds, gender, age, canonical slugs/URLs, local or imported status, gallery media and profile content/order.
+- Use the live website as the reference for current availability, page structure and canonical URLs, and treat the committed JSON as the existing structured dataset.
+- Preserve historical/sold records and existing slugs. Do not invent or rename records. Where live content and JSON differ, make only a justified minimal correction and document the discrepancy.
+
+**3. Implement the available-puppy catalogue**
+
+- Build `/puppies` using the existing architecture and structured data. Display only currently available puppies with their correct cover image, name, breed, gender, age and availability state.
+- Link each card to its canonical individual profile. Use a responsive grid consistent with the current site, accessible image descriptions and keyboard-operable navigation.
+- Include appropriate loading, empty and missing-image states.
+- Do not add unsupported filters, sorting, search panels, badges or other catalogue controls that are not present in the reference. Do not duplicate puppy records inside React components.
+
+**4. Implement reusable dynamic puppy profiles**
+
+- Build one data-driven `/puppies/:slug` page that resolves the correct record using its canonical slug. Do not create separate hard-coded components for individual puppies.
+- Match the live profile's content and hierarchy where applicable: puppy identity and details, local/imported information, gallery, video, enquiry/WhatsApp actions, health and care information, delivery/import information, previous/next navigation and other profile-specific content supported by the source.
+- Support a variable number of media items. Use the existing metadata such as `kind`, `url`, `poster`, dimensions, alt text, caption, duration and focal-point data.
+- Provide working video posters and playback controls, render images and videos with the correct media element, and include sensible fallbacks for unavailable media and unknown slugs.
+
+**5. Integrate the existing JSON and service layers**
+
+- Keep the JSON datasets as the structured content source; do not copy their records into JSX or replace them with hard-coded arrays.
+- Add or extend service/data-access functions for available puppies, puppy-by-slug lookup, previous/next available puppies and breed information as needed.
+- Keep data mapping and filtering separate from presentation components, reuse the existing service layer where practical and avoid unnecessary dependencies or new state-management systems.
+- Treat media URLs as external assets hosted by the reference site. Verify loading where possible, do not describe them as local files, and do not download/duplicate media binaries. Record exact inaccessible puppy/media URLs and issues.
+
+**6. Enquiry behaviour and frontend-only boundary**
+
+- Generate puppy-specific WhatsApp enquiry messages using the existing utility where suitable, and preserve the site's contact/navigation conventions.
+- Validate any forms locally and provide useful feedback.
+- Do not claim enquiries are saved or sent to a backend. Do not add fake persistence, placeholder API calls, authentication, MongoDB or backend implementation in this phase.
+
+**7. Responsive quality and accessibility**
+
+- Keep catalogue and profile pages usable on desktop, tablet and mobile. Check image proportions, gallery behaviour, spacing, typography, overflow, navigation and touch interactions.
+- Reuse the Phase 1 shared components and styles rather than introducing an unrelated design system.
+- Use semantic HTML, meaningful alt text, keyboard-operable controls, visible focus states and appropriate labels.
+- Continue using React, JavaScript/JSX, Vite, Tailwind CSS and React Router DOM only; do not introduce TypeScript.
+
+**8. Testing, documentation and Git delivery**
+
+- Install dependencies using the existing configuration and run the production build. Resolve build errors.
+- Verify all 15 current available listings against the live site or state precisely which could not be checked. Test profile routes, invalid slugs, variable-length galleries, video playback, catalogue/profile/home navigation, desktop/mobile layouts, console errors and broken media requests where tooling permits.
+- Report only tests actually executed and distinguish verified results from unavailable checks.
+- Update `PROJECT_PROGRESS.md`, `TECHNICAL_DOCUMENTATION.md`, `TESTING.md` and `frontend/README.md`; update `PROJECT_ANALYSIS.md` only when findings change an earlier assumption. Preserve earlier Phase 0/Phase 1 content and append the Phase 2 outcomes, decisions, limitations and remaining work.
+- Review `git status` and the full diff, commit the complete scope with a meaningful message directly to `develop`, push to `origin/develop` and verify the remote commit/files. Never push to `main`, create another branch, force-push or rewrite history.
+
+**9. Completion report and phase boundary**
+
+- Report implemented catalogue/profile features and routes, number of puppies verified, JSON/service integration, gallery/video behaviour, build/test results, unavailable media, documentation changes, commit SHA and GitHub verification.
+- Complete the catalogue and dynamic puppy profile experience; do not stop at placeholders or a basic catalogue.
+- Do not begin the Happy Families gallery, full FAQ page, How It Works page, Contact redesign or backend. Those belong to later phases.
+- Work from the existing codebase, use engineering judgement and make only the changes necessary for this phase.
 
 ### Changes delivered
 - Added `puppyData.js` as the JSON-backed puppy/breed mapping layer and extended the existing `contentService.js`.
@@ -117,17 +263,31 @@ npm install was blocked by `EAI_AGAIN` to the npm registry. `npm run build` was 
 **Branch:** \`develop\`  
 **UI implementation commit:** \`0a1720104729a40fa770a7a849ee9ae7d9dcaa15\`
 
-### Reconstructed design brief (illustrative, not a historical verbatim prompt)
+### Reconstructed prompt summary (illustrative, not a historical verbatim prompt)
 
-The following prompt is a retrospective reconstruction written to explain the implemented work. It is not presented as the exact text of an earlier user message.
+The following is a structured, source-neutral reconstruction of the requirements represented by this implementation. It is an explanatory summary, not the exact text of an earlier user message.
 
-> Review the current puppy catalogue in my React application and compare its UI and interactions with the source implementation in \`Khushiii720/TeddyPups-Clone\`, particularly the catalogue-related components and reference styles under \`src/\`. The catalogue must make it obvious that visitors can filter puppies; do not leave the filter controls hidden or visually indistinguishable from ordinary text.
->
-> Rework the catalogue presentation to follow the source site's playful sketchbook direction: warm paper-like background, hand-drawn outlines, doodle details, pastel card surfaces, slightly irregular/tilted puppy cards, sticker-like labels and a filter board that looks like part of the same visual system. Keep the implementation native to this project's existing React + JavaScript/JSX + Tailwind/CSS stack; do not copy the source TypeScript architecture.
->
-> Add accessible, visibly interactive filters for the available data: origin/location where records support it, puppy breed, collection (including Korean Teacup), and gender. Filters should combine rather than overwrite one another, update the URL query string so selections can be shared or refreshed, and show an accurate result count. Derive available choices from the real puppy dataset; do not invent local puppies or unsupported filter options just to fill the UI.
->
-> Keep the existing data flow and routes intact, make the cards responsive, preserve meaningful image text and keyboard accessibility, and add/update focused component tests for filtering and card presentation. Do not redesign unrelated pages as part of this catalogue-only task.
+**Objective**
+
+Refine the existing React puppy catalogue so that its filtering capabilities are immediately visible and the catalogue has a cohesive, playful sketchbook visual direction.
+
+**Visual and interaction requirements**
+
+- Use a warm, paper-like visual treatment with hand-drawn outlines, doodle details, pastel card surfaces, slightly varied or tilted puppy cards, sticker-style labels and a filter board that belongs to the same design system.
+- Make filter controls prominent and clearly interactive rather than hidden or visually indistinguishable from ordinary text.
+- Keep the implementation within the project's existing React, JavaScript/JSX and Tailwind/CSS stack. Do not introduce a different application architecture.
+
+**Filtering and data requirements**
+
+- Provide accessible filters for origin/location when supported by the records, breed, collection (including Korean Teacup) and gender.
+- Allow filters to combine, preserve other active selections when one filter changes, and reflect the current selections in the URL query string so the view can be shared or refreshed.
+- Display an accurate result count and derive filter choices from the existing puppy dataset. Do not invent records or offer unsupported options.
+
+**Compatibility, accessibility and scope**
+
+- Preserve the existing data flow and routes.
+- Keep catalogue cards responsive, retain meaningful image text and keyboard accessibility, and add or update focused component tests for filtering and card presentation.
+- Limit the change to the catalogue. Do not redesign unrelated pages.
 
 ### Implementation actually committed
 
@@ -471,3 +631,65 @@ Owner provided a stricter source-fidelity specification. Inspected actual entry/
 Added an initial-load transition. For normal same-origin path links, the document capture listener keeps the current page mounted while the curtain drops; then navigates behind the full curtain, runs the dog and pawprints, then lifts. External, modified, new-tab and download clicks are excluded. Programmatic pathname changes and history back/forward are handled by a layout effect; query/hash-only changes are not animated. Shared content becomes inert while covered; overlay is aria-hidden. Reduced-motion, resizing and listener cleanup are covered. No libraries or unrelated page/content/config changes.
 
 Initial implementation commit e8436485069ce54d952b098b86d791de227251db; jsdom named animation-event test correction b541f6fcc27a3a8e342fb46d2554b6ad91680abf; responsive trailing-edge paw timing a587ded17471f27ede3c9c540129609baeda99c9. CI #73 passed 5 focused files/33 tests, full 24 files/126 tests, Vite build (68 modules). Browser visual verification is not available in this session.
+
+## Session 11 — Phase 2 catalogue sketchbook refinement
+
+**Date:** 25 November 2026  
+**Branch:** `develop`  
+**Documentation update only:** This entry records work already implemented and pushed by the project owner. It does not authorize or perform another implementation of the catalogue.
+
+### Filtered user prompt summary (structured; not verbatim)
+
+The user reported completion of another catalogue refinement round and instructed that the existing implementation be treated as finished work. The task for this log entry is to preserve an accurate handoff for subsequent work without recreating, overwriting or unnecessarily modifying the catalogue.
+
+**1. Completed catalogue UI/UX refinement**
+
+- The `/puppies` catalogue was restyled to follow the playful, cute, sketchbook-like visual direction of the supplied TeddyPups reference.
+- Added a paper-inspired catalogue background and heading treatment.
+- Added a visible filter board with sticker-like interactive controls.
+- Puppy cards now use pastel backgrounds, hand-drawn outlines, doodles, tilted-card styling and sticker-style labels.
+- Improved the presentation of puppy images, metadata and availability indicators.
+
+**2. Completed puppy filtering**
+
+- Added filters for the available dataset categories: origin/location, breed, collection (including Korean Teacup) and gender.
+- Selected filters are reflected in URL query parameters.
+- Multiple filters can be combined; changing one filter preserves the other selected filters.
+- Added a result count for the current filter combination.
+- Filter choices are derived from the actual dataset; no unsupported records or filter values should be invented.
+- All 15 currently available puppies are marked imported in the data. Do not add a fictitious local-puppy option.
+
+**3. Completed puppy-card refinement**
+
+- Updated `PuppyCard.jsx` with the sketch-inspired visual treatment, decorative SVG details, irregular framing, pastel styling and availability/video stickers.
+- Preserved puppy metadata and navigation to individual puppy profiles.
+
+**4. Files already changed for this completed implementation**
+
+- `frontend/src/pages/PuppiesPage.jsx`
+- `frontend/src/pages/PuppiesPage.test.jsx`
+- `frontend/src/components/puppies/PuppyCard.jsx`
+- `frontend/src/components/puppies/PuppyCard.test.jsx`
+- `frontend/src/styles/index.css`
+
+This list describes the owner's completed implementation. A documentation-only follow-up must not edit these files just to repeat the work.
+
+**5. Verification reported by the user**
+
+- The GitHub Actions workflow named **Phase 2 frontend tests** passed for the catalogue implementation commit `0a1720104729a40fa770a7a849ee9ae7d9dcaa15`.
+- The user identified `ec630aae429d932730738710090b2986f2590cfc` as the latest documentation commit before this log update.
+- Manual browser-based visual verification of the catalogue has not yet been completed. Do not describe the visual match as browser-verified.
+
+### Current project boundary and next handoff
+
+- Catalogue visual/filter/card implementation: **completed and pushed**. Preserve it.
+- Individual puppy profile page: not yet given the same sketchbook-style refinement.
+- Remaining website pages: not yet all given this same sketchbook-style refinement.
+- Continue the website-cloning work in later tasks by inspecting the latest `develop` branch and relevant source files first. Compare the remaining pages against their corresponding supplied reference implementation. Identify specific gaps before proposing edits.
+- Do not infer that the entire site is visually complete from the catalogue work.
+- Work incrementally, preserve existing working behaviour and do not refactor unrelated areas.
+- Continue using the existing React, JavaScript/JSX, Vite, Tailwind CSS and React Router stack. Do not introduce TypeScript.
+
+### Documentation and scope accuracy
+
+This entry records the user's report of already completed work; it is not an independent execution record. No application files, tests, styles, data, routes or dependencies were changed as part of this documentation update. The catalogue CI result and commit identifiers above are recorded as supplied by the user, not as newly rerun or independently verified by this log-only operation.
